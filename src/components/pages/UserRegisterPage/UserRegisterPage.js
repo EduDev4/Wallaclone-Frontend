@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Select, Slider, Input, Button } from 'antd';
+import { Input, Button } from 'antd';
 
 import MainLayout from '../../layout/MainLayout';
+
+import './UserRegisterPage.css';
 
 const UserRegisterPage = () => (
   <MainLayout title="User Register">
@@ -15,6 +17,9 @@ const UserRegisterPage = () => (
           <Input placeholder="Contraseña" />
         </div>
         <div className="form-field">
+          <Input placeholder="Confirma contraseña" />
+        </div>
+        <div className="form-field centered">
           <Button type="primary">Register</Button>
         </div>
       </form>
