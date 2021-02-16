@@ -14,6 +14,9 @@ const UserRegisterPage = () => (
           <Input placeholder="Nombre de usuario" />
         </div>
         <div className="form-field">
+          <Input type="email" placeholder="Email" />
+        </div>
+        <div className="form-field">
           <Input placeholder="Contraseña" />
         </div>
         <div className="form-field">
