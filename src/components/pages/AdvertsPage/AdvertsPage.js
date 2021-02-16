@@ -4,6 +4,8 @@ import { Select, Slider, Input, Button } from 'antd';
 
 import MainLayout from '../../layout/MainLayout';
 
+import './AdvertsPage.css';
+
 const AdvertsPage = () => {
   const { Option } = Select;
   const tags = ['electronics', 'sports', 'cars', 'hobbies'];
@@ -13,7 +15,7 @@ const AdvertsPage = () => {
         <aside className="advertsPage-aside">
           <form className="filter-form">
             <div className="form-title">
-              <h2>Busca por:</h2>
+              <h3>Busca por:</h3>
             </div>
             <div className="form-field">
               <Input placeholder="Nombre" />
@@ -28,8 +30,8 @@ const AdvertsPage = () => {
                 {tags && tags.map(tag => <Option key={tag}>{tag}</Option>)}
               </Select>
             </div>
-            <div className="form-field">
-              <Button>Filter</Button>
+            <div className="form-field centered">
+              <Button type="primary">Filter</Button>
             </div>
           </form>
         </aside>

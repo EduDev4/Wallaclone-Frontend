@@ -4,6 +4,8 @@ import classNames from 'classnames';
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 
+import './Header.css';
+
 const Header = ({ className }) => (
   <header className={classNames('header', className)}>
     <Link to="/">
@@ -13,16 +15,16 @@ const Header = ({ className }) => (
     </Link>
 
     <nav className="header-nav">
-      <Link to="/user/adverts">
+      <Link className="nav-button" to="/user/adverts">
         <Button type="primary">Mis Anuncios</Button>
       </Link>
-      <Link to="/user/data">
+      <Link className="nav-button" to="/user/data">
         <Button type="primary">Mis Datos</Button>
       </Link>
-      <Link to="/login">
+      <Link className="nav-button" to="/login">
         <Button type="primary">Login</Button>
       </Link>
-      <Link to="/logout">
+      <Link className="nav-button" to="/logout">
         <Button type="dashed">Logout</Button>
       </Link>
     </nav>

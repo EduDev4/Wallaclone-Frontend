@@ -5,6 +5,8 @@ import { Checkbox, Input, Button } from 'antd';
 
 import MainLayout from '../../layout/MainLayout';
 
+import './LoginPage.css';
+
 function LoginPage() {
   return (
     <MainLayout title="Login">
@@ -17,15 +19,13 @@ function LoginPage() {
             <Input placeholder="Contraseña" />
           </div>
           <div className="form-field">
-            <Checkbox style={{ color: 'white' }} name="remcredentials">
-              Rememberme
-            </Checkbox>
+            <Checkbox name="remcredentials">Remember</Checkbox>
           </div>
-          <div className="form-field">
+          <div className="form-field centered">
             <Button type="primary">Login</Button>
           </div>
-          <div className="form-field">
-            <span>Aún no tienes cuenta.</span>
+          <div className="form-field centered">
+            <span>Aún no tienes cuenta. </span>
             <Link to="/register">Regístrate</Link>
           </div>
         </form>
