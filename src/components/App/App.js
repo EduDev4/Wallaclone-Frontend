@@ -3,7 +3,7 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import AdvertsPage from '../pages/AdvertsPage';
 import LoginPage from '../auth/LoginPage';
-import UserRegisterPage from '../pages/UserRegisterPage';
+import SignupPage from '../pages/SignupPage';
 
 function App() {
   return (
@@ -15,8 +15,8 @@ function App() {
         <Route path="/adverts" exact>
           <AdvertsPage />
         </Route>
-        <Route path="/register" exact>
-          <UserRegisterPage />
+        <Route path="/signup" exact>
+          <SignupPage />
         </Route>
         <Route path="/login" exact>
           <LoginPage />
