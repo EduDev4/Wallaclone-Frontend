@@ -10,9 +10,12 @@ import App, { Root } from './components/App';
 
 import './index.css';
 
+// TODO: Cargar un estado de inicio por si tenemos datos de usuario en local storage
+const preloadedState = {};
+
 const render = () => {
   const history = createBrowserHistory();
-  const store = configureStore({ history });
+  const store = configureStore(preloadedState, { history });
 
   ReactDOM.render(
     <Root store={store} history={history}>
