@@ -1,9 +1,9 @@
-.registerPage {
+.signupPage {
   margin: 2rem auto 0 auto;
   width: 350px;
 }
 
-.register-form {
+.signup-form {
   display: flex;
   flex-direction: column;
   justify-content: center;

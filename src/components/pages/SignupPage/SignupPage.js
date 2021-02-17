@@ -4,12 +4,12 @@ import { Input, Button } from 'antd';
 
 import MainLayout from '../../layout/MainLayout';
 
-import './UserRegisterPage.css';
+import './SignupPage.css';
 
-const UserRegisterPage = () => (
-  <MainLayout title="User Register">
-    <div className="registerPage">
-      <form className="register-form">
+const SignupPage = () => (
+  <MainLayout title="User Sign up">
+    <div className="signupPage">
+      <form className="signup-form">
         <div className="form-field">
           <Input placeholder="Nombre de usuario" />
         </div>
@@ -23,11 +23,11 @@ const UserRegisterPage = () => (
           <Input placeholder="Confirma contraseña" />
         </div>
         <div className="form-field centered">
-          <Button type="primary">Register</Button>
+          <Button type="primary">Sign up</Button>
         </div>
       </form>
     </div>
   </MainLayout>
 );
 
-export default UserRegisterPage;
+export default SignupPage;

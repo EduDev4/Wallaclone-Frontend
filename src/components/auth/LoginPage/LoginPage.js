@@ -26,7 +26,7 @@ function LoginPage() {
           </div>
           <div className="form-field centered">
             <span>Aún no tienes cuenta. </span>
-            <Link to="/register">Regístrate</Link>
+            <Link to="/signup">Regístrate</Link>
           </div>
         </form>
       </div>

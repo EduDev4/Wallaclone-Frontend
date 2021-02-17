@@ -2,8 +2,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+
+import configureStore from './store';
 
 import App, { Root } from './components/App';
 
@@ -11,16 +12,12 @@ import './index.css';
 
 const render = () => {
   const history = createBrowserHistory();
-
-  // TODO: Crear store, importar configure store de redux
-  // const store = {};
-
-  // TODO: Sustituir BrowserRouter por Root cuando esté listo redux
+  const store = configureStore({ history });
 
   ReactDOM.render(
-    <BrowserRouter>
+    <Root store={store} history={history}>
       <App />
-    </BrowserRouter>,
+    </Root>,
     document.getElementById('root'),
   );
 };
