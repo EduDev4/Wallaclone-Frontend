@@ -1,4 +1,5 @@
 import { ADD_USER } from '../constants/action-types';
+import * as types from '../constants/action-types';
 
 const initialState = {
   auth: {
@@ -16,5 +17,16 @@ function rootReducer(state = initialState, action) {
   }
   return state;
 }
+
+export const auth = (state = initialState.auth, action) => {
+  switch (action.type) {
+    case types.AUTH_LOGIN_SUCCESS:
+      return action.payload;
+    case types.AUTH_LOGOUT_SUCCESS:
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
 export default rootReducer;
