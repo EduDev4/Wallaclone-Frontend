@@ -18,11 +18,12 @@ function rootReducer(state = initialState, action) {
   return state;
 }
 
+
 export const auth = (state = initialState.auth, action) => {
   switch (action.type) {
-    case types.AUTH_LOGIN_SUCCESS:
+    case types.AUTH_LOGIN:
       return action.payload;
-    case types.AUTH_LOGOUT_SUCCESS:
+    case types.AUTH_LOGOUT:
       return action.payload;
     default:
       return state;

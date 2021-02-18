@@ -2,6 +2,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { connectRouter, routerMiddleware } from 'connected-react-router';
 import thunk from 'redux-thunk';
+
 import rootReducer from './reducers/index';
 
 export default function configureStore(preloadedState, { history }) {
@@ -11,8 +12,6 @@ export default function configureStore(preloadedState, { history }) {
   });
 
   // TODO: Añadir metodos del api cuando esté finalizada
-
-  // TODO no se inyecta el api?
 
   const middlewares = [
     routerMiddleware(history),

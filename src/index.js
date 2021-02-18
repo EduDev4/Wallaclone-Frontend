@@ -1,11 +1,10 @@
 // TODO: Crear logo del proyecto, favicon y sustituir por el de CRA
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import storage from './utils/storage';
 import { configureClient } from './api/client';
-
-import configureStore from './store';
 
 import App, { Root } from './components/App';
 import './index.css';
@@ -19,13 +18,10 @@ const auth = storage.get('auth') || {
 configureClient(auth.tokenJWT);
 
 const render = () => {
-  const history = createBrowserHistory();
-  const store = configureStore({ history });
-
   ReactDOM.render(
-    <Root store={store} history={history}>
+    <BrowserRouter>
       <App initiallyLoggedUser={!!auth.username} />
-    </Root>,
+    </BrowserRouter>,
     document.getElementById('root'),
   );
 };

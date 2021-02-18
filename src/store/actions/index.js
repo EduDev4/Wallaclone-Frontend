@@ -2,6 +2,8 @@
 
 import {
   ADD_USER,
+  AUTH_LOGIN,
+  AUTH_LOGOUT,
   AUTH_LOGIN_REQUEST,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILURE,
@@ -22,65 +24,21 @@ export const addUser = payload => ({
 
 /** AUTH LOGIN ACTIONS */
 // TODO: crear acciones de login y logout
-export const authLoginRequest = () => ({
-  type: AUTH_LOGIN_REQUEST,
-});
-
-export const authLoginFailure = error => ({
-  type: AUTH_LOGIN_FAILURE,
-  error: true,
-  payload: error,
-});
-
-export const authLoginSuccess = isLogged => {
+export const auhtLogin = isLogged => {
   return {
-    type: AUTH_LOGIN_SUCCESS,
-    payload: isLogged,
-  };
-};
-
-export const login = (credentials) => {
-  return function (dispatch, getState, { api }) {
-    dispatch(authLoginRequest());
-    api.auth
-      .login(credentials)
-      .then(() => {
-        dispatch(authLoginSuccess(true));
-        history.replace(from);
-      })
-      .catch(error => {
-        dispatch(authLoginFailure(error));
-      });
+    type: AUTH_LOGIN,
+    payload: {
+      isLogged,
+      currentUsername,
+      currentEmail,
+    },
   };
 };
 
 /** AUTH LOGOUT ACTIONS */
-export const authLogoutRequest = () => ({
-  type: AUTH_LOGOUT_REQUEST,
-});
-
-export const authLogoutFailure = error => ({
-  type: AUTH_LOGOUT_FAILURE,
-  error: true,
-  payload: error,
-});
-
-export const authLogoutSuccess = () => {
+export const authLogout = () => {
   return {
-    type: AUTH_LOGOUT_SUCCESS,
-    payload: false,
-  };
-};
-
-export const logout = () => {
-  return function (dispatch, getState, { api }) {
-    dispatch(authLogoutRequest());
-    api.auth
-      .logout()
-      .then(() => {
-        dispatch(authLogoutSuccess());
-      })
-      .catch(error => dispatch(authLogoutFailure(error)));
+    type: AUTH_LOGOUT,
   };
 };
 
