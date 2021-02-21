@@ -89,7 +89,7 @@ export const logout = () =>
       .logout()
       .then(() => {
         dispatch(authLogoutSuccess());
-        history.push('/login');
+        history.push('/');
       })
       .catch(error => dispatch(authLogoutFailure(error)));
   };
