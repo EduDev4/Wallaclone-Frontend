@@ -1,22 +1,27 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Button } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
-import { AuthContext } from '../../App';
+import { useSelector, useDispatch, connect } from 'react-redux';
+import { getIsLoggedUser } from '../../../store/selectors';
+import { authLogout } from '../../../store/actions';
 
 import { logout } from '../../../api/auth';
 
 import './Header.css';
 
-function Header({ className }) {
-  const { isLogged, onLogout } = useContext(AuthContext);
+function Header({ className, isLogged, authLogoutD, ...props }) {
+  // const isLogged = useSelector(getIsLoggedUser);
+  // const dispatch = useDispatch();
   const history = useHistory();
+
+  // const onLogout = () => dispatch(authLogout());
 
   const handleLogout = () => {
     logout();
     history.push('/login');
-    onLogout();
+    authLogoutD();
   };
   return (
     <header className={classNames('header', className)}>
@@ -49,9 +54,23 @@ function Header({ className }) {
 
 Header.propTypes = {
   className: PropTypes.string,
+  isLogged: PropTypes.bool,
+  authLogoutD: PropTypes.func,
 };
 Header.defaultProps = {
   className: 'layout-header',
+  isLogged: false,
+  authLogoutD: PropTypes.func,
 };
 
-export default Header;
+const mapStateToProps = state => ({
+  isLogged: getIsLoggedUser(state),
+});
+
+const mapDispatchToProps = {
+  authLogoutD: authLogout,
+};
+
+const ConnectedHeader = connect(mapStateToProps, mapDispatchToProps)(Header);
+
+export default ConnectedHeader;

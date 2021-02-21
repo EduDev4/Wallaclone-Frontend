@@ -24,23 +24,38 @@ export const addUser = payload => ({
 
 /** AUTH LOGIN ACTIONS */
 // TODO: crear acciones de login y logout
-export const auhtLogin = isLogged => {
-  return {
-    type: AUTH_LOGIN,
-    payload: {
-      isLogged,
-      currentUsername,
-      currentEmail,
-    },
-  };
-};
+export const authLoginRequest = () => ({
+  type: AUTH_LOGIN_REQUEST,
+});
+
+export const authLoginFailure = error => ({
+  type: AUTH_LOGIN_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const authLoginSuccess = (isLogged, currentUsername, currentEmail) => ({
+  type: AUTH_LOGIN_SUCCESS,
+  payload: {
+    isLogged,
+    currentUsername,
+    currentEmail,
+  },
+});
+
+export const auhtLogin = (isLogged, currentUsername, currentEmail) => ({
+  type: AUTH_LOGIN,
+  payload: {
+    isLogged,
+    currentUsername,
+    currentEmail,
+  },
+});
 
 /** AUTH LOGOUT ACTIONS */
-export const authLogout = () => {
-  return {
-    type: AUTH_LOGOUT,
-  };
-};
+export const authLogout = () => ({
+  type: AUTH_LOGOUT,
+});
 
 /** ADVERT ACTIONS */
 // TODO: crear acciones de anuncios

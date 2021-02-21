@@ -1,37 +1,55 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
-import { Button } from 'antd';
+import { Button, Input, Checkbox } from 'antd';
+import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import login from '../../../api/auth';
 
 import MainLayout from '../../layout/MainLayout';
+import useForm from '../../../hooks/useForm';
+import {
+  authLoginRequest,
+  authLoginFailure,
+  authLoginSuccess,
+} from '../../../store/actions';
+import { getUi } from '../../../store/selectors';
 
 import './LoginPage.css';
 
-function LoginPage({ onLogin }) {
-  const [username, setUsername] = useState('');
-  const [passwd, setPasswd] = useState('');
-  const [remember, setRemember] = useState(false);
+function LoginPage({ onLoginRequest, onLoginFailure, onLoginSuccess }) {
+  const [form, onChangeForm] = useForm({
+    username: '',
+    passwd: '',
+    remember: false,
+  });
 
   const history = useHistory();
 
-  const handleChangeUsername = event => setUsername(event.target.value);
-  const handleChangePasswd = event => setPasswd(event.target.value);
-  const handleChangeCheckbox = event => setRemember(event.target.checked);
+  const { username, passwd, remember } = form;
 
   const handleSubmit = async event => {
     event.preventDefault();
-    const credentials = { username, passwd, remember };
+    onLoginRequest();
+    const credentials = form;
 
     try {
-      const status = await login(credentials);
-      onLogin(true);
-      if (status === 'success') {
-        console.log('usuario logado');
-        history.push('/adverts');
-      }
+      const auth = await login(credentials);
+
+      // console.log('auth.data en loginpage', auth.data);
+
+      // onLogin(auth.data);
+      // TODO preguntar si esta comprobación de status hace falta
+      // if (auth.status === 'success') {
+      const { tokenJWT, userEmail } = auth.data;
+      // console.log('isLogged en App:', !!tokenJWT);
+      onLoginSuccess(!!tokenJWT, username, userEmail);
+      // console.log('usuario logado');
+      history.push('/adverts');
+      // }
     } catch (error) {
       console.log(error.message);
+      onLoginFailure(error);
     }
   };
 
@@ -40,45 +58,39 @@ function LoginPage({ onLogin }) {
       <div className="loginPage">
         <form className="login-form" onSubmit={handleSubmit}>
           <div className="form-field">
-            <input
-              className="input-text"
-              type="name"
+            <Input
+              prefix={<UserOutlined className="site-form-item-icon" />}
+              placeholder="Username"
+              type="text"
               name="username"
               value={username}
-              onChange={handleChangeUsername}
-              required
+              onChange={onChangeForm}
             />
           </div>
           <div className="form-field">
-            <input
-              className="input-text"
+            <Input
+              prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
+              placeholder="Contraseña"
               name="passwd"
               value={passwd}
-              onChange={handleChangePasswd}
-              required
+              onChange={onChangeForm}
             />
           </div>
+
           <div className="form-field">
-            <label htmlFor="remember">
-              <input
-                type="checkbox"
-                id="remember"
-                name="remember"
-                checked={remember}
-                onChange={handleChangeCheckbox}
-              />
+            <Checkbox
+              onChange={onChangeForm}
+              name="remember"
+              valuePropName={remember}
+            >
               Remember me
-            </label>
+            </Checkbox>
           </div>
           <div className="form-field centered">
             <Button type="primary" htmlType="submit">
               Login
             </Button>
-          </div>
-          <div className="form-field centered">
-            <span>Aún no tienes cuenta. </span>
-            <Link to="/signup">Regístrate</Link>
           </div>
         </form>
       </div>
@@ -87,6 +99,22 @@ function LoginPage({ onLogin }) {
 }
 
 LoginPage.propTypes = {
-  onLogin: PropTypes.func.isRequired,
+  onLoginRequest: PropTypes.func.isRequired,
+  onLoginFailure: PropTypes.func.isRequired,
+  onLoginSuccess: PropTypes.func.isRequired,
 };
-export default LoginPage;
+
+const mapStateToProps = getUi;
+
+const mapDispatchToProps = {
+  onLoginRequest: authLoginRequest,
+  onLoginFailure: authLoginFailure,
+  onLoginSuccess: authLoginSuccess,
+};
+
+const ConnectedLoginPage = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(LoginPage);
+
+export default ConnectedLoginPage;

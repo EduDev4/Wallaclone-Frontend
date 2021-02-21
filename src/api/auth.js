@@ -12,7 +12,7 @@ const login = credentials =>
     }
     const { tokenJWT } = auth.data;
     setAuthorizationHeader(tokenJWT);
-    return auth.status;
+    return auth;
   });
 
 export const logout = () => {
