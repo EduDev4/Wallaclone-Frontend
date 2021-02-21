@@ -28,7 +28,7 @@ function Header({ className, isLogged, onLogout, ...props }) {
               <Button type="primary">Mis Anuncios</Button>
             </Link>
             <Link className="nav-button" to="/user/data">
-              <Button type="primary">Mis Datos</Button>
+              <Button type="primary">Mi Perfil</Button>
             </Link>
             <Button type="dashed" onClick={handleLogout}>
               Logout
