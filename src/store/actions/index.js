@@ -12,6 +12,8 @@ import {
   AUTH_LOGOUT_FAILURE,
 } from '../constants/action-types';
 
+import * as auth from '../../api/auth';
+
 /** UI ACTIONS */
 // TODO: crear acciones relacionadas con la interfaz de usuario
 
@@ -43,14 +45,19 @@ export const authLoginSuccess = (isLogged, currentUsername, currentEmail) => ({
   },
 });
 
-export const auhtLogin = (isLogged, currentUsername, currentEmail) => ({
-  type: AUTH_LOGIN,
-  payload: {
-    isLogged,
-    currentUsername,
-    currentEmail,
-  },
-});
+export const login = (credentials, history) =>
+  async function (dispatch) {
+    dispatch(authLoginRequest());
+    try {
+      const authD = await auth.login(credentials);
+      const { tokenJWT, username, userEmail } = authD.data;
+      dispatch(authLoginSuccess(!!tokenJWT, username, userEmail));
+      history.push('/adverts');
+    } catch (error) {
+      console.log(error.message);
+      dispatch(authLoginFailure(error));
+    }
+  };
 
 /** AUTH LOGOUT ACTIONS */
 export const authLogout = () => ({

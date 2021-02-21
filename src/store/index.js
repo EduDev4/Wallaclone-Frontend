@@ -10,7 +10,12 @@ import * as reducers from './reducers';
 const reducer = combineReducers(reducers);
 
 export default function configureStore(preloadedState) {
-  const store = createStore(reducer, preloadedState, composeWithDevTools());
+  const middlewares = [thunk];
+  const store = createStore(
+    reducer,
+    preloadedState,
+    composeWithDevTools(applyMiddleware(...middlewares)),
+  );
   return store;
 }
 

@@ -4,20 +4,16 @@ import PropTypes from 'prop-types';
 import { Link, useHistory } from 'react-router-dom';
 import { Button, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-import login from '../../../api/auth';
+// import login from '../../../api/auth';
 
 import MainLayout from '../../layout/MainLayout';
 import useForm from '../../../hooks/useForm';
-import {
-  authLoginRequest,
-  authLoginFailure,
-  authLoginSuccess,
-} from '../../../store/actions';
+import { login } from '../../../store/actions';
 import { getUi } from '../../../store/selectors';
 
 import './LoginPage.css';
 
-function LoginPage({ onLoginRequest, onLoginFailure, onLoginSuccess }) {
+function LoginPage({ onLogin }) {
   const [form, onChangeForm] = useForm({
     username: '',
     passwd: '',
@@ -28,29 +24,10 @@ function LoginPage({ onLoginRequest, onLoginFailure, onLoginSuccess }) {
 
   const { username, passwd, remember } = form;
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    onLoginRequest();
     const credentials = form;
-
-    try {
-      const auth = await login(credentials);
-
-      // console.log('auth.data en loginpage', auth.data);
-
-      // onLogin(auth.data);
-      // TODO preguntar si esta comprobación de status hace falta
-      // if (auth.status === 'success') {
-      const { tokenJWT, userEmail } = auth.data;
-      // console.log('isLogged en App:', !!tokenJWT);
-      onLoginSuccess(!!tokenJWT, username, userEmail);
-      // console.log('usuario logado');
-      history.push('/adverts');
-      // }
-    } catch (error) {
-      console.log(error.message);
-      onLoginFailure(error);
-    }
+    onLogin(credentials, history);
   };
 
   return (
@@ -99,17 +76,13 @@ function LoginPage({ onLoginRequest, onLoginFailure, onLoginSuccess }) {
 }
 
 LoginPage.propTypes = {
-  onLoginRequest: PropTypes.func.isRequired,
-  onLoginFailure: PropTypes.func.isRequired,
-  onLoginSuccess: PropTypes.func.isRequired,
+  onLogin: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = getUi;
 
 const mapDispatchToProps = {
-  onLoginRequest: authLoginRequest,
-  onLoginFailure: authLoginFailure,
-  onLoginSuccess: authLoginSuccess,
+  onLogin: login,
 };
 
 const ConnectedLoginPage = connect(

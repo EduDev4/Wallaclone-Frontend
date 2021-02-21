@@ -4,7 +4,7 @@ import client, {
 } from './client';
 import storage from '../utils/storage';
 
-const login = credentials =>
+export const login = credentials =>
   client.post('/apiv1/users/auth', credentials).then(auth => {
     const { remember } = credentials;
     if (remember) {
