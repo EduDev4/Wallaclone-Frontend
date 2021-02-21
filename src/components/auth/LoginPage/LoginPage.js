@@ -13,7 +13,7 @@ import { getUi } from '../../../store/selectors';
 
 import './LoginPage.css';
 
-function LoginPage({ onLogin }) {
+function LoginPage({ onLogin, loading, error }) {
   const [form, onChangeForm] = useForm({
     username: '',
     passwd: '',
@@ -29,6 +29,8 @@ function LoginPage({ onLogin }) {
     const credentials = form;
     onLogin(credentials);
   };
+
+  const IsSubmitting = () => !loading && username && passwd;
 
   return (
     <MainLayout title="Login">
@@ -65,11 +67,12 @@ function LoginPage({ onLogin }) {
             </Checkbox>
           </div>
           <div className="form-field centered">
-            <Button type="primary" htmlType="submit">
+            <Button type="primary" htmlType="submit" disabled={!IsSubmitting()}>
               Login
             </Button>
           </div>
         </form>
+        {error && <div className="loginPage-error">{error.message}</div>}
       </div>
     </MainLayout>
   );
@@ -77,6 +80,8 @@ function LoginPage({ onLogin }) {
 
 LoginPage.propTypes = {
   onLogin: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  error: PropTypes.bool.isRequired,
 };
 
 const mapStateToProps = getUi;
