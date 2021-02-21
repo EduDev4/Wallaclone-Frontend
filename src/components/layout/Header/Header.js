@@ -22,20 +22,27 @@ function Header({ className, isLogged, onLogout, ...props }) {
       </Link>
 
       <nav className="header-nav">
-        <Link className="nav-button" to="/user/adverts">
-          <Button type="primary">Mis Anuncios</Button>
-        </Link>
-        <Link className="nav-button" to="/user/data">
-          <Button type="primary">Mis Datos</Button>
-        </Link>
         {isLogged ? (
-          <Button type="dashed" onClick={handleLogout}>
-            Logout
-          </Button>
+          <>
+            <Link className="nav-button" to="/user/adverts">
+              <Button type="primary">Mis Anuncios</Button>
+            </Link>
+            <Link className="nav-button" to="/user/data">
+              <Button type="primary">Mis Datos</Button>
+            </Link>
+            <Button type="dashed" onClick={handleLogout}>
+              Logout
+            </Button>
+          </>
         ) : (
-          <Link className="nav-button" to="/login">
-            <Button type="primary">Login</Button>
-          </Link>
+          <>
+            <Link className="nav-button" to="/">
+              <Button type="primary">Anuncios</Button>
+            </Link>
+            <Link className="nav-button" to="/login">
+              <Button type="primary">Login</Button>
+            </Link>
+          </>
         )}
       </nav>
     </header>
