@@ -20,14 +20,14 @@ function LoginPage({ onLogin }) {
     remember: false,
   });
 
-  const history = useHistory();
+  // const history = useHistory();
 
   const { username, passwd, remember } = form;
 
   const handleSubmit = event => {
     event.preventDefault();
     const credentials = form;
-    onLogin(credentials, history);
+    onLogin(credentials);
   };
 
   return (

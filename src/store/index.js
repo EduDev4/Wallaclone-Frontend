@@ -6,11 +6,13 @@ import thunk from 'redux-thunk';
 // import rootReducer from './reducers/index';
 
 import * as reducers from './reducers';
+import * as api from '../api';
 
-const reducer = combineReducers(reducers);
+export default function configureStore(preloadedState, { history }) {
+  const reducer = combineReducers(reducers);
 
-export default function configureStore(preloadedState) {
-  const middlewares = [thunk];
+  const middlewares = [thunk.withExtraArgument({ history, api })];
+
   const store = createStore(
     reducer,
     preloadedState,

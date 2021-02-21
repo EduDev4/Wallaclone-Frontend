@@ -2,7 +2,6 @@
 
 import {
   ADD_USER,
-  AUTH_LOGIN,
   AUTH_LOGOUT,
   AUTH_LOGIN_REQUEST,
   AUTH_LOGIN_SUCCESS,
@@ -12,7 +11,7 @@ import {
   AUTH_LOGOUT_FAILURE,
 } from '../constants/action-types';
 
-import * as auth from '../../api/auth';
+// import * as auth from '../../api/auth';
 
 /** UI ACTIONS */
 // TODO: crear acciones relacionadas con la interfaz de usuario
@@ -45,11 +44,11 @@ export const authLoginSuccess = (isLogged, currentUsername, currentEmail) => ({
   },
 });
 
-export const login = (credentials, history) =>
-  async function (dispatch) {
+export const login = credentials =>
+  async function (dispatch, getstate, { history, api }) {
     dispatch(authLoginRequest());
     try {
-      const authD = await auth.login(credentials);
+      const authD = await api.auth.login(credentials);
       const { tokenJWT, username, userEmail } = authD.data;
       dispatch(authLoginSuccess(!!tokenJWT, username, userEmail));
       history.push('/adverts');

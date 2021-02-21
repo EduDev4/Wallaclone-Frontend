@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Router } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Provider } from 'react-redux';
@@ -11,16 +11,16 @@ import { ConnectedRouter } from 'connected-react-router';
 //   </Provider>
 // );
 
-const Root = ({ children, store }) => (
+const Root = ({ children, store, history }) => (
   <Provider store={store}>
-    <BrowserRouter>{children}</BrowserRouter>
+    <Router history={history}>{children}</Router>
   </Provider>
 );
 
 Root.propTypes = {
   children: PropTypes.node.isRequired,
   store: PropTypes.objectOf(PropTypes.any).isRequired,
-  // history: PropTypes.objectOf(PropTypes.any).isRequired,
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 export default Root;

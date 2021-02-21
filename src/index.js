@@ -17,22 +17,29 @@ const auth = storage.get('auth') || {
 };
 
 configureClient(auth.tokenJWT);
-console.log('auth en index:', auth);
-
-const logueado = auth.tokenJWT ? !!auth.tokenJWT : false;
-console.log('logueado:', logueado);
-const store = configureStore({
+// console.log('auth en index:', auth);
+//
+// const logueado = auth.tokenJWT ? !!auth.tokenJWT : false;
+// console.log('logueado:', logueado);
+const preloadedState = {
   auth: {
     isLogged: !!auth.tokenJWT,
     currentUsername: auth.username,
     currentEmail: auth.userEmail,
   },
-});
+};
+const history = createBrowserHistory();
+//
+console.log('history:', history);
+// console.log('preloadedState:', preloadedState);
+
+const store = configureStore(preloadedState, { history });
+
 console.log('getState:', store.getState());
 
 const render = () => {
   ReactDOM.render(
-    <Root store={store}>
+    <Root store={store} history={history}>
       <App />
     </Root>,
     document.getElementById('root'),
