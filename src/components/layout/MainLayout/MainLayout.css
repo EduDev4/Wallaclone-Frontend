@@ -6,8 +6,8 @@
 }
 
 .layout-header {
-  height: 80px;
-  background-color: gold;
+  height: var(--navbar-height);
+  background-color: var(--background-gold-color);
 }
 
 .layout-main {
@@ -26,7 +26,7 @@
 
 .layout-footer {
   height: 50px;
-  background-color: gold;
+  background-color: var(--background-gold-color);
   display: flex;
   align-items: center;
   justify-content: center;

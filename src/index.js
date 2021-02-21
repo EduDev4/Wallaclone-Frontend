@@ -1,22 +1,43 @@
 // TODO: Crear logo del proyecto, favicon y sustituir por el de CRA
-
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
-
-import configureStore from './store';
+import storage from './utils/storage';
+import { configureClient } from './api/client';
 
 import App, { Root } from './components/App';
-
 import './index.css';
+import configureStore from './store';
 
-// TODO: Cargar un estado de inicio por si tenemos datos de usuario en local storage
-const preloadedState = {};
+const auth = storage.get('auth') || {
+  tokenJWT: null,
+  userEmail: null,
+  username: null,
+};
+
+configureClient(auth.tokenJWT);
+// console.log('auth en index:', auth);
+//
+// const logueado = auth.tokenJWT ? !!auth.tokenJWT : false;
+// console.log('logueado:', logueado);
+const preloadedState = {
+  auth: {
+    isLogged: !!auth.tokenJWT,
+    currentUsername: auth.username,
+    currentEmail: auth.userEmail,
+  },
+};
+const history = createBrowserHistory();
+//
+console.log('history:', history);
+// console.log('preloadedState:', preloadedState);
+
+const store = configureStore(preloadedState, { history });
+
+console.log('getState:', store.getState());
 
 const render = () => {
-  const history = createBrowserHistory();
-  const store = configureStore(preloadedState, { history });
-
   ReactDOM.render(
     <Root store={store} history={history}>
       <App />

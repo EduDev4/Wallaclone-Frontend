@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const baseURL = process.env.REACT_APP_API_URL;
-
+const { REACT_APP_API_BASE_URL: baseURL } = process.env;
 const client = axios.create({
   baseURL,
 });
@@ -14,9 +13,11 @@ export const removeAuthorizationHeader = () => {
   delete client.defaults.headers.common.Authorization;
 };
 
-// TODO: client.login
-
-// TODO: client.logout
+export const configureClient = token => {
+  if (token) {
+    setAuthorizationHeader(token);
+  }
+};
 
 client.interceptors.response.use(
   response => {
