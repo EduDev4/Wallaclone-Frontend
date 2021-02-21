@@ -80,8 +80,13 @@ function LoginPage({ onLogin, loading, error }) {
 
 LoginPage.propTypes = {
   onLogin: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
-  error: PropTypes.bool.isRequired,
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
+};
+
+LoginPage.defaultProps = {
+  loading: false,
+  error: false,
 };
 
 const mapStateToProps = getUi;
