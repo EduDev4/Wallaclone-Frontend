@@ -15,9 +15,10 @@ export const login = credentials =>
     return auth;
   });
 
-export const logout = () => {
-  removeAuthorizationHeader();
-  storage.remove('auth');
-};
-
+export const logout = () =>
+  new Promise(resolve => {
+    removeAuthorizationHeader();
+    storage.remove('auth');
+    resolve();
+  });
 export default login;

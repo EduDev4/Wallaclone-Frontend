@@ -63,6 +63,37 @@ export const authLogout = () => ({
   type: AUTH_LOGOUT,
 });
 
+export const authLogoutRequest = () => ({
+  type: AUTH_LOGOUT_REQUEST,
+});
+
+export const authLogoutFailure = error => ({
+  type: AUTH_LOGOUT_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const authLogoutSuccess = () => ({
+  type: AUTH_LOGOUT_SUCCESS,
+  payload: {
+    isLogged: false,
+    currentUsername: null,
+    currentEmail: null,
+  },
+});
+
+export const logout = () =>
+  function (dispatch, getState, { history, api }) {
+    dispatch(authLogoutRequest());
+    api.auth
+      .logout()
+      .then(() => {
+        dispatch(authLogoutSuccess());
+        history.push('/login');
+      })
+      .catch(error => dispatch(authLogoutFailure(error)));
+  };
+
 /** ADVERT ACTIONS */
 // TODO: crear acciones de anuncios
 export default addUser;

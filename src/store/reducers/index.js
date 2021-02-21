@@ -27,7 +27,7 @@ export const auth = (state = initialState.auth, action) => {
   switch (action.type) {
     case types.AUTH_LOGIN_SUCCESS:
       return action.payload;
-    case types.AUTH_LOGOUT:
+    case types.AUTH_LOGOUT_SUCCESS:
       return initialState.auth;
     default:
       return state;

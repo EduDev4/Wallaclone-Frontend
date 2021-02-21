@@ -5,22 +5,12 @@ import { Button } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getIsLoggedUser } from '../../../store/selectors';
-import { authLogout } from '../../../store/actions';
-
-import { logout } from '../../../api/auth';
+import { logout } from '../../../store/actions';
 
 import './Header.css';
 
 function Header({ className, isLogged, onLogout, ...props }) {
-  // const isLogged = useSelector(getIsLoggedUser);
-  // const dispatch = useDispatch();
-  const history = useHistory();
-
-  // const onLogout = () => dispatch(authLogout());
-
   const handleLogout = () => {
-    logout();
-    history.push('/login');
     onLogout();
   };
   return (
@@ -68,7 +58,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  onLogout: authLogout,
+  onLogout: logout,
 };
 
 const ConnectedHeader = connect(mapStateToProps, mapDispatchToProps)(Header);
