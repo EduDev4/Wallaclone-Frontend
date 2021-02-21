@@ -19,20 +19,6 @@ export const configureClient = token => {
   }
 };
 
-client.interceptors.response.use(
-  response => {
-    // TODO: observar respuesta del api y devolver datos
-    // Example:
-    // if (response.status === 204) return 'deleted success';
-    // return response.data.data;
-  },
-  error => {
-    // TODO: observar respuesta si hay error y devolver datos
-    //  Example:
-    //  if (error.response) {
-    //    return Promise.reject(error.response.data);
-    //  }
-    //  return Promise.reject(error);
-  },
-);
+client.interceptors.response.use(response => response.data);
+
 export default client;

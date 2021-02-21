@@ -11,11 +11,8 @@ import {
   AUTH_LOGOUT_FAILURE,
 } from '../constants/action-types';
 
-<<<<<<< HEAD
-=======
 // import * as auth from '../../api/auth';
 
->>>>>>> feature/login
 /** UI ACTIONS */
 // TODO: crear acciones relacionadas con la interfaz de usuario
 
