@@ -5,10 +5,9 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 
 import AdvertsPage from '../pages/AdvertsPage';
 import LoginPage from '../auth/LoginPage';
-import SignupPage from '../pages/SignupPage';
+import { SignupPage, SignupConfirmPage } from '../pages/SignupPage';
 import ForgotPassPage from '../pages/ForgotPassPage';
 import ResetPassPage from '../pages/ResetPassPage';
-
 
 // import { auhtLogin, authLogout } from '../../store/actions';
 // import {
@@ -38,6 +37,7 @@ function App() {
         <Route path="/signup" exact>
           <SignupPage />
         </Route>
+        <Route path="/signup/confirm/:token" component={SignupConfirmPage} />
         <Route path="/login" exact>
           <LoginPage />
         </Route>

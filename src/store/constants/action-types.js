@@ -4,8 +4,12 @@
 
 // export const API_REQUEST = 'api/REQUEST';
 // export const API_FAILURE = 'api/FAILURE';
-export const ADD_USER = 'ADD_USER';
-export const REMOVE_USER = 'REMOVE_USER';
+export const USERS_SIGNUP_REQUEST = 'users/SIGNUP_REQUEST';
+export const USERS_SIGNUP_SUCCESS = 'users/SIGNUP_SUCCESS';
+export const USERS_SIGNUP_FAILURE = 'users/SIGNUP_FAILURE';
+export const USERS_SIGNUP_CONFIRM_REQUEST = 'users/SIGNUP_CONFIRM_REQUEST';
+export const USERS_SIGNUP_CONFIRM_SUCCESS = 'users/SIGNUP_CONFIRM_SUCCESS';
+export const USERS_SIGNUP_CONFIRM_FAILURE = 'users/SIGNUP_CONFIRM_FAILURE';
 
 export const AUTH_LOGIN_REQUEST = 'auth/LOGIN_REQUEST';
 export const AUTH_LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';

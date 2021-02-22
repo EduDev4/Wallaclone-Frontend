@@ -1,3 +1,5 @@
 import SignupPage from './SignupPage';
+import SignupConfirmPage from './SignupConfirmPage';
 
-export default SignupPage;
+export { SignupPage };
+export { SignupConfirmPage };
