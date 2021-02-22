@@ -77,7 +77,7 @@ const SignupPage = ({ onSignup, loading, error }) => {
           </div>
           <div className="form-field centered">
             <Button type="primary" htmlType="submit" disabled={!IsSubmitting()}>
-              Login
+              Sing up
             </Button>
           </div>
         </form>

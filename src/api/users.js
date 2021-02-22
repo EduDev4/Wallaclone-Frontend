@@ -36,3 +36,10 @@ export const signup = async data => {
   console.log(response);
   return response;
 };
+
+export const signupConfirm = async data => {
+  const url = `${usersBaseUrl}/users/confirm/${data}`;
+  const response = await client.get(url);
+  console.log(response);
+  return response;
+};
