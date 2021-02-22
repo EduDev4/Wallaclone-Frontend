@@ -66,6 +66,9 @@ function LoginPage({ onLogin, loading, error }) {
               Remember me
             </Checkbox>
           </div>
+          <div className="form-field">
+            <Link to="/forgotpass">Forgot Password?</Link>
+          </div>
           <div className="form-field centered">
             <Button type="primary" htmlType="submit" disabled={!IsSubmitting()}>
               Login
