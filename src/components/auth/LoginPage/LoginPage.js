@@ -68,6 +68,8 @@ function LoginPage({ onLogin, loading, error }) {
           </div>
           <div className="form-field">
             <Link to="/forgotpass">Forgot Password?</Link>
+            <br></br>
+            <Link to="/signup">New here? Sign Up</Link>
           </div>
           <div className="form-field centered">
             <Button type="primary" htmlType="submit" disabled={!IsSubmitting()}>

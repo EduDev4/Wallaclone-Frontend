@@ -1,4 +1,3 @@
-import { ADD_USER } from '../constants/action-types';
 import * as types from '../constants/action-types';
 
 export const initialState = {

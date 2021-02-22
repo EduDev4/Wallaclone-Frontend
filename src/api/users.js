@@ -16,6 +16,7 @@ export const resetPasswd = (passwd, hash) => {
     },
   });
 };
+
 export const forgotPasswd = email => {
   const url = `${usersBaseUrl}/users/forgotPass`;
   const params = JSON.stringify({
@@ -26,4 +27,12 @@ export const forgotPasswd = email => {
       'content-type': 'application/json',
     },
   });
+};
+
+export const signup = async data => {
+  const url = `${usersBaseUrl}/users`;
+  const headers = { 'Content-Type': 'multipart/form-data' };
+  const response = await client.post(url, data, headers);
+  console.log(response);
+  return response;
 };
