@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 import { Input, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { resetPasswd } from '../../../api/users';
@@ -15,7 +15,6 @@ class ResetPassPage extends React.Component {
       passwd1: '',
     },
   };
-
 
   handleChange = event => {
     this.setState(state => ({
@@ -61,7 +60,7 @@ class ResetPassPage extends React.Component {
                 as={Link}
                 to="/login"
                 type="primary"
-                onClick={() => resetPasswd(passwd,hash)}
+                onClick={() => resetPasswd(passwd, hash)}
                 disabled={!this.canSubmit(passwd, passwd1)}
               >
                 Submit
@@ -74,10 +73,10 @@ class ResetPassPage extends React.Component {
   }
 }
 
-resetPasswd.propTypes = {
+/*resetPasswd.propTypes = {
   passwd: PropTypes.string,
   passwd1: PropTypes.string,
   canSubmit: PropTypes.func,
   handleChange: PropTypes.func,
-};
+};*/
 export default ResetPassPage;

@@ -2,12 +2,12 @@ import React from 'react';
 // import { connect } from 'react-redux';
 // import PropTypes from 'prop-types';
 import { Redirect, Route, Switch } from 'react-router-dom';
-
+import ForgotPassPage from '../pages/ForgotPassPage';
 import AdvertsPage from '../pages/AdvertsPage';
 import LoginPage from '../auth/LoginPage';
 import SignupPage from '../pages/SignupPage';
-import ForgotPassPage from '../pages/ForgotPassPage';
 import ResetPassPage from '../pages/ResetPassPage';
+
 
 // import { auhtLogin, authLogout } from '../../store/actions';
 // import {
