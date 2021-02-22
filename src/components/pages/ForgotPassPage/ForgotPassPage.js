@@ -13,7 +13,7 @@ class ForgotPassPage extends React.Component {
     form: {
       email: '',
     },
-    submitting: false,
+    // submitting: false,
   };
 
   handleChange = event => {
@@ -28,24 +28,6 @@ class ForgotPassPage extends React.Component {
     } = this.state;
     return email;
   };
-
- /* handleSubmit = async event => {
-    const { history } = this.props;
-    const { form: email } = this.state;
-    event.preventDefault();
-    this.setState({ submitting: true });
-    try {
-        
-        await forgotPasswd(email);
-        this.setState({ submitting: false, error: null });
-        history.push('/login');
-      } catch (error) {
-        this.setState({ submitting: false, error });
-      }
-    };
-
-
-  resetError = () => this.setState({ error: null });*/
 
   render() {
     const {
@@ -72,7 +54,6 @@ class ForgotPassPage extends React.Component {
                 type="primary"
                 onClick={() => forgotPasswd(email)}
                 disabled={!this.canSubmit(email)}
-            
               >
                 Send
               </Button>
