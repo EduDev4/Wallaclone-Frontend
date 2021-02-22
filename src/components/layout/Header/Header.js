@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Button } from 'antd';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { getIsLoggedUser } from '../../../store/selectors';
 import { logout } from '../../../store/actions';
+import ConfirmButton from '../../shared/ConfirmButton';
 
 import './Header.css';
 
@@ -30,9 +31,17 @@ function Header({ className, isLogged, onLogout, ...props }) {
             <Link className="nav-button" to="/user/data">
               <Button type="primary">Mi Perfil</Button>
             </Link>
-            <Button type="dashed" onClick={handleLogout}>
+
+            <ConfirmButton
+              acceptAction={handleLogout}
+              confirmProps={{
+                title: 'Logout',
+                message: 'Are you sure you want to logout?',
+              }}
+              typeButton="dashed"
+            >
               Logout
-            </Button>
+            </ConfirmButton>
           </>
         ) : (
           <>

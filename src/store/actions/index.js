@@ -48,8 +48,8 @@ export const login = credentials =>
   async function (dispatch, getstate, { history, api }) {
     dispatch(authLoginRequest());
     try {
-      const authD = await api.auth.login(credentials);
-      const { tokenJWT, username, userEmail } = authD.data;
+      const authData = await api.auth.login(credentials);
+      const { tokenJWT, username, userEmail } = authData;
       dispatch(authLoginSuccess(!!tokenJWT, username, userEmail));
       history.push('/adverts');
     } catch (error) {

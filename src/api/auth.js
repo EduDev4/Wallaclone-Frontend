@@ -8,9 +8,9 @@ export const login = credentials =>
   client.post('/apiv1/users/auth', credentials).then(auth => {
     const { remember } = credentials;
     if (remember) {
-      storage.set('auth', auth.data);
+      storage.set('auth', auth);
     }
-    const { tokenJWT } = auth.data;
+    const { tokenJWT } = auth;
     setAuthorizationHeader(tokenJWT);
     return auth;
   });
