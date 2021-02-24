@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 // import login from '../../../api/auth';
@@ -89,7 +89,7 @@ LoginPage.propTypes = {
 
 LoginPage.defaultProps = {
   loading: false,
-  error: false,
+  error: null,
 };
 
 const mapStateToProps = getUi;

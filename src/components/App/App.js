@@ -9,7 +9,6 @@ import SignupPage from '../pages/SignupPage';
 import ForgotPassPage from '../pages/ForgotPassPage';
 import ResetPassPage from '../pages/ResetPassPage';
 
-
 // import { auhtLogin, authLogout } from '../../store/actions';
 // import {
 //   getIsLoggedUser,
@@ -45,6 +44,7 @@ function App() {
           <ForgotPassPage />
         </Route>
         <Route path="/resetpass/:hash" component={ResetPassPage} />
+
         <Route path="/404" exact>
           {/* <NotFoundPage /> */}
           <div className="errornotfound">
