@@ -1,15 +1,11 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Button, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
-// import login from '../../../api/auth';
 
 import MainLayout from '../../layout/MainLayout';
 import useForm from '../../../hooks/useForm';
-import { login } from '../../../store/actions';
-import { getUi } from '../../../store/selectors';
 
 import './LoginPage.css';
 
@@ -19,8 +15,6 @@ function LoginPage({ onLogin, loading, error }) {
     passwd: '',
     remember: false,
   });
-
-  // const history = useHistory();
 
   const { username, passwd, remember } = form;
 
@@ -68,7 +62,7 @@ function LoginPage({ onLogin, loading, error }) {
           </div>
           <div className="form-field">
             <Link to="/forgotpass">Forgot Password?</Link>
-            <br></br>
+            <br />
             <Link to="/signup">New here? Sign Up</Link>
           </div>
           <div className="form-field centered">
@@ -86,23 +80,12 @@ function LoginPage({ onLogin, loading, error }) {
 LoginPage.propTypes = {
   onLogin: PropTypes.func.isRequired,
   loading: PropTypes.bool,
-  error: PropTypes.bool,
+  error: PropTypes.objectOf(PropTypes.any),
 };
 
 LoginPage.defaultProps = {
   loading: false,
-  error: false,
+  error: null,
 };
 
-const mapStateToProps = getUi;
-
-const mapDispatchToProps = {
-  onLogin: login,
-};
-
-const ConnectedLoginPage = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(LoginPage);
-
-export default ConnectedLoginPage;
+export default LoginPage;

@@ -88,6 +88,7 @@ const SignupPage = ({ onSignup, loading, error }) => {
 };
 
 SignupPage.propTypes = {
+  loading: PropTypes.bool,
   error: PropTypes.objectOf(PropTypes.any),
   onSignup: PropTypes.func.isRequired,
 };

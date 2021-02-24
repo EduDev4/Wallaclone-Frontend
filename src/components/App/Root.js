@@ -3,13 +3,7 @@ import { BrowserRouter, Router } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Provider } from 'react-redux';
-import { ConnectedRouter } from 'connected-react-router';
-
-// const Root = ({ children, store, history }) => (
-//   <Provider store={store}>
-//     <ConnectedRouter history={history}>{children}</ConnectedRouter>
-//   </Provider>
-// );
+// import { ConnectedRouter } from 'connected-react-router';
 
 const Root = ({ children, store, history }) => (
   <Provider store={store}>

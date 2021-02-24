@@ -13,15 +13,6 @@ export const initialState = {
   },
 };
 
-// function rootReducer(state = initialState, action) {
-//   if (action.type === ADD_USER) {
-//     return {
-//       user: state.user.concat(action.payload),
-//     };
-//   }
-//   return state;
-// }
-
 export const auth = (state = initialState.auth, action) => {
   switch (action.type) {
     case types.AUTH_LOGIN_SUCCESS:
@@ -51,18 +42,3 @@ export const ui = (state = initialState.ui, action) => {
   }
   return state;
 };
-
-// export const reducer = (state = initialState, action) => {
-//   switch (action.type) {
-//     case types.AUTH_LOGIN:
-//       return { ...state, auth: action.payload };
-//     case types.AUTH_LOGOUT:
-//       return { ...state, auth: null };
-//     default:
-//       return state;
-//   }
-// };
-
-// export default reducer;
-
-// export default rootReducer;

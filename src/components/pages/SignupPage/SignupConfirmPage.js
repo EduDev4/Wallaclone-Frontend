@@ -10,8 +10,8 @@ import { signupConfirm } from '../../../store/actions';
 import { getUi } from '../../../store/selectors';
 
 const SignupConfirmPage = ({ onConfirm, loading, error }) => {
-  //TODO extraer email y usuario del estado (curentEmail y currentUsername con isLogged:false)
-  //TODO lanzar confirm al back
+  // TODO extraer email y usuario del estado (curentEmail y currentUsername con isLogged:false)
+  // TODO lanzar confirm al back
   const { token } = useParams();
 
   const handleConfirm = event => {
@@ -41,6 +41,7 @@ const SignupConfirmPage = ({ onConfirm, loading, error }) => {
 };
 
 SignupConfirmPage.propTypes = {
+  loading: PropTypes.bool,
   error: PropTypes.objectOf(PropTypes.any),
   onConfirm: PropTypes.func.isRequired,
 };

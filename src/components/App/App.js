@@ -4,27 +4,13 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import AdvertsPage from '../pages/AdvertsPage';
+import PrivateRoute from '../auth/PrivateRoute';
 import LoginPage from '../auth/LoginPage';
 import { SignupPage, SignupConfirmPage } from '../pages/SignupPage';
 import ForgotPassPage from '../pages/ForgotPassPage';
 import ResetPassPage from '../pages/ResetPassPage';
 
-// import { auhtLogin, authLogout } from '../../store/actions';
-// import {
-//   getIsLoggedUser,
-//   getUsername,
-//   getUserEmail,
-// } from '../../store/selectors';
-
 function App() {
-  // const handleLogin = data => {
-  //   console.log('data en App:', data);
-  //   const { tokenJWT, username, userEmail } = data;
-  //   console.log('isLogged en App:', !!tokenJWT);
-  //   authLoginD(!!tokenJWT, username, userEmail);
-  // };
-  // const handleLogout = () => authLogoutD();
-
   return (
     <div className="App">
       <Switch>

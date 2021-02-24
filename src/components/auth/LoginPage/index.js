@@ -1,3 +1,12 @@
-import LoginPage from './LoginPage';
+import { connect } from 'react-redux';
 
-export default LoginPage;
+import LoginPage from './LoginPage';
+import { login } from '../../../store/actions';
+import { getUi } from '../../../store/selectors';
+
+const mapStateToProps = getUi;
+const mapDispatchToProps = dispatch => ({
+  onLogin: credentials => dispatch(login(credentials)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);

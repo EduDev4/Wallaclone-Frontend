@@ -46,9 +46,10 @@ export const signup = data =>
     dispatch(usersSignupRequest());
     try {
       const response = await api.users.signup(data);
-      const { success, user } = response;
+      console.log(response);
+      const { user } = response;
       dispatch(usersSignupSuccess(user.username, user.email));
-      //TODO generar página estática solicitando que revise correo para verificar email
+      // TODO generar página estática solicitando que revise correo para verificar email
       history.push('/signup');
     } catch (error) {
       console.log(error.message);
@@ -76,12 +77,11 @@ export const signupConfirm = data =>
     dispatch(usersSignupConfirmRequest());
     try {
       const response = await api.users.signupConfirm(data);
-      const { success, message } = response;
       console.log(response);
-      dispatch(usersSignupConfirmSuccess(success, message));
+      dispatch(usersSignupConfirmSuccess());
       // TODO decidir a donde enviar tras confirmar
-      //history.push('/login');
-      //TODO se recarga la aplicación tras esto ?¿?
+      // history.push('/login');
+      // TODO se recarga la aplicación tras esto ?¿?
     } catch (error) {
       console.log(error.message);
       dispatch(usersSignupConfirmFailure(error));
@@ -114,7 +114,7 @@ export const login = credentials =>
     dispatch(authLoginRequest());
     try {
       const authD = await api.auth.login(credentials);
-      const { tokenJWT, username, userEmail } = authD.data;
+      const { tokenJWT, username, userEmail } = authD;
       dispatch(authLoginSuccess(!!tokenJWT, username, userEmail));
       history.push('/adverts');
     } catch (error) {

@@ -1,5 +1,5 @@
 import React from 'react';
-//import PropTypes from 'prop-types';
+import PropTypes from 'prop-types';
 import { Input, Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { resetPasswd } from '../../../api/users';
@@ -26,6 +26,7 @@ class ResetPassPage extends React.Component {
     passwd.length > 0 && passwd1.length > 0 && passwd === passwd1;
 
   render() {
+    // eslint-disable-next-line react/destructuring-assignment
     const { hash } = this.props.match.params;
     console.log(hash);
     const {
@@ -73,10 +74,8 @@ class ResetPassPage extends React.Component {
   }
 }
 
-/*resetPasswd.propTypes = {
-  passwd: PropTypes.string,
-  passwd1: PropTypes.string,
-  canSubmit: PropTypes.func,
-  handleChange: PropTypes.func,
-};*/
+ResetPassPage.propTypes = {
+  match: PropTypes.objectOf(PropTypes.any).isRequired,
+};
+
 export default ResetPassPage;
