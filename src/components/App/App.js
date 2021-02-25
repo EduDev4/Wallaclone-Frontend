@@ -11,6 +11,7 @@ import LoginPage from '../auth/LoginPage';
 import { SignupPage, SignupConfirmPage } from '../pages/SignupPage';
 import ForgotPassPage from '../pages/ForgotPassPage';
 import ResetPassPage from '../pages/ResetPassPage';
+import UserPage from '../pages/UserPage';
 
 function App() {
   return (
@@ -39,6 +40,9 @@ function App() {
         <PrivateRoute path="/adverts/edit/:id" exact>
           <EditAdvertPage />
         </PrivateRoute>
+
+        <Route path="/user/:username" exact component={UserPage} />
+
         <Route path="/404" exact>
           {/* <NotFoundPage /> */}
           <div className="errornotfound">

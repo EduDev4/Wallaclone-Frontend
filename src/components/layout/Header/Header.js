@@ -5,12 +5,13 @@ import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
-import { getIsLoggedUser } from '../../../store/selectors';
+import { getIsLoggedUser, getUsername } from '../../../store/selectors';
 import { logout } from '../../../store/actions';
+import ConfirmButton from '../../shared/ConfirmButton';
 
 import './Header.css';
 
-function Header({ className, isLogged, onLogout, ...props }) {
+function Header({ className, isLogged, onLogout, currentUser, ...props }) {
   const { t, i18n } = useTranslation(['header']);
   const handleLogout = () => {
     onLogout();
@@ -39,20 +40,24 @@ function Header({ className, isLogged, onLogout, ...props }) {
             <Link className="nav-button" to="/user/adverts">
               <Button type="primary">{t('Mis Anuncios')}</Button>
             </Link>
-            <Link className="nav-button" to="/user/data">
+            <Link className="nav-button" to={`/user/${currentUser}`}>
               <Button type="primary">{t('Mi Perfil')}</Button>
             </Link>
             <Link className="nav-button" to="/adverts/new">
               <Button type="primary">{t('Nuevo Anuncio')}</Button>
             </Link>
-            <Button
-              className="nav-button"
-              type="primary"
+
+            <ConfirmButton
+              acceptAction={handleLogout}
+              confirmProps={{
+                title: 'Logout',
+                message: 'Are you sure you want to logout?',
+              }}
+              typeButton="dashed"
               danger
-              onClick={handleLogout}
             >
               Logout
-            </Button>
+            </ConfirmButton>
           </>
         ) : (
           <>
@@ -74,15 +79,18 @@ Header.propTypes = {
   className: PropTypes.string,
   isLogged: PropTypes.bool,
   onLogout: PropTypes.func,
+  currentUser: PropTypes.string,
 };
 Header.defaultProps = {
   className: 'layout-header',
   isLogged: false,
   onLogout: PropTypes.func,
+  currentUser: '',
 };
 
 const mapStateToProps = state => ({
   isLogged: getIsLoggedUser(state),
+  currentUser: getUsername(state),
 });
 
 const mapDispatchToProps = {

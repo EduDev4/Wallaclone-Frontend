@@ -1,3 +1,5 @@
+/* eslint-disable react/destructuring-assignment */
+/* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Button } from 'antd';
@@ -74,8 +76,15 @@ class ResetPassPage extends React.Component {
   }
 }
 
-ResetPassPage.propTypes = {
-  match: PropTypes.objectOf(PropTypes.any).isRequired,
+resetPasswd.propTypes = {
+  passwd: PropTypes.string,
+  passwd1: PropTypes.string,
+  canSubmit: PropTypes.func,
+  handleChange: PropTypes.func,
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      hash: PropTypes.string.isRequired,
+    }),
+  }),
 };
-
 export default ResetPassPage;

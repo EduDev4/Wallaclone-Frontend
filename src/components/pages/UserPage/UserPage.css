@@ -1,0 +1,18 @@
+.userPage {
+  display: flex;
+}
+
+.userPage-aside {
+  max-width: 300px;
+  min-width: 150px;
+  border-right: 1px solid var(--logo-color);
+  padding-right: 10px;
+}
+
+.edit-button {
+  margin-bottom: 10px;
+}
+
+.userPage-content {
+  padding-left: 10px;
+}

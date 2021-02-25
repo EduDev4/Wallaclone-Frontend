@@ -7,7 +7,6 @@ import {
   USERS_SIGNUP_CONFIRM_REQUEST,
   USERS_SIGNUP_CONFIRM_SUCCESS,
   USERS_SIGNUP_CONFIRM_FAILURE,
-  AUTH_LOGOUT,
   AUTH_LOGIN_REQUEST,
   AUTH_LOGIN_SUCCESS,
   AUTH_LOGIN_FAILURE,
@@ -23,6 +22,9 @@ import {
   ADVERTS_UPDATE_REQUEST,
   ADVERTS_UPDATE_SUCCESS,
   ADVERTS_UPDATE_FAILURE,
+  USER_EDIT_REQUEST,
+  USER_EDIT_SUCCESS,
+  USER_EDIT_FAILURE,
 } from '../constants/action-types';
 
 /** UI ACTIONS */
@@ -97,9 +99,35 @@ export const signupConfirm = data =>
       dispatch(usersSignupConfirmFailure(error));
     }
   };
+/** EDIT USER */
+
+// export const userEditRequest = () =>({
+//   type: USER_EDIT_REQUEST
+// })
+//
+// export const userEditFailire = error => ({
+//   type: USER_EDIT_FAILURE,
+//   error: true,
+//   payload: error,
+// })
+//
+// export const userEditSuccess = (dataForUpdate) => ({
+//   type: USER_EDIT_SUCCESS,
+//   payload: {
+//
+//   }
+// })
+// export const editUser = dataForUpdate => async function (dispatch, getstate, { history, api }){
+//   dispatch(userEditRequest());
+//   try {
+//     const userUpdate = await api.user.
+//   } catch (error) {
+//     dispatch(authLoginFailure(error));
+//
+//   }
+// }
 
 /** AUTH LOGIN ACTIONS */
-// TODO: crear acciones de login y logout
 export const authLoginRequest = () => ({
   type: AUTH_LOGIN_REQUEST,
 });
@@ -123,21 +151,17 @@ export const login = credentials =>
   async function (dispatch, getstate, { history, api }) {
     dispatch(authLoginRequest());
     try {
-      const authD = await api.auth.login(credentials);
-      const { tokenJWT, username, userEmail } = authD;
+      const authData = await api.auth.login(credentials);
+      const { tokenJWT, username, userEmail } = authData;
       dispatch(authLoginSuccess(!!tokenJWT, username, userEmail));
       history.push('/adverts');
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       dispatch(authLoginFailure(error));
     }
   };
 
 /** AUTH LOGOUT ACTIONS */
-export const authLogout = () => ({
-  type: AUTH_LOGOUT,
-});
-
 export const authLogoutRequest = () => ({
   type: AUTH_LOGOUT_REQUEST,
 });

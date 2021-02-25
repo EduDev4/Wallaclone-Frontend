@@ -30,12 +30,12 @@ const preloadedState = {
 };
 const history = createBrowserHistory();
 //
-console.log('history:', history);
+// console.log('history:', history);
 // console.log('preloadedState:', preloadedState);
 
 const store = configureStore(preloadedState, { history });
 
-console.log('getState:', store.getState());
+// console.log('getState:', store.getState());
 
 const render = () => {
   ReactDOM.render(
