@@ -53,7 +53,7 @@ function Header({ className, isLogged, onLogout, currentUser, ...props }) {
                 title: 'Logout',
                 message: 'Are you sure you want to logout?',
               }}
-              typeButton="dashed"
+              typeButton="primary"
               danger
             >
               Logout
