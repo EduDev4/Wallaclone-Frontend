@@ -1,31 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import NewAdvertPage from '../NewAdvertPage';
-import { getAdvertDetail } from '../../../api/adverts';
 
 export default function EditAdvertPage() {
   const { id } = useParams();
-  const [advert, setAdvert] = useState(null);
+  const history = useHistory();
+
+  // TODO: pasar advert detail, desde redux, por props cuando esté hecho
+  const adDetail = {
+    name: 'Nuevo',
+    sale: true,
+    tags: ['work', 'mobile'],
+    price: 13,
+    description: 'fdfddfdfdfdfdfdfdfd',
+    createdBy: '60354991e7ba670c7aedb708',
+    _id: '60375db75538450811b9f11f',
+    image: '/img/adverts/60354991e7ba670c7aedb708/1614241207486_galaxytab.jpg',
+  };
 
   useEffect(() => {
-    getAdvertDetail(id)
-      .then(res => {
-        const { adv } = res;
-        setAdvert(adv);
-        console.log(advert);
-      })
-      .catch(err => console.log(err));
-    // Setear el form
-
-    return () => {
-      // eslint-disable-next-line no-console
-      // console.log('cleanup');
-    };
+    if (!adDetail) history.push('/404');
+    if (adDetail._id !== id) history.push('/404');
   }, []);
 
-  const renderContent = () => <NewAdvertPage mode="edit" />;
-
+  const renderContent = () => (
+    <NewAdvertPage
+      mode="edit"
+      initialForm={{
+        name: adDetail.name,
+        sale: adDetail.sale,
+        price: adDetail.price,
+        tags: adDetail.tags,
+        description: adDetail.description,
+        image: adDetail.image,
+      }}
+    />
+  );
   return renderContent();
 }

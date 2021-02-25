@@ -216,7 +216,7 @@ export const createAdvert = advertData =>
     try {
       const { advert } = await api.adverts.createAdvert(advertData);
       await dispatch(advertsCreateSuccess(advert));
-
+      // TODO: Redirigir a detalle
       // history.push(`/advert/${advert._id}`);
     } catch (error) {
       await dispatch(advertsCreateFailure(error));
@@ -229,9 +229,10 @@ export const updateAdvert = (adId, advertData) =>
     try {
       const { advert } = await api.adverts.updateAdvert(adId, advertData);
       await dispatch(advertsUpdateSuccess(advert));
-
+      // TODO: Redirigir a detalle
       // history.push(`/advert/${advert._id}`);
     } catch (error) {
+      console.log(error);
       await dispatch(advertsUpdateFailure(error));
     }
   };

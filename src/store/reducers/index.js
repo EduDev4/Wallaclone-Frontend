@@ -35,18 +35,15 @@ export const adverts = (state = initialState.adverts, action) => {
     case types.ADVERTS_LOAD_SUCCESS:
       return { ...state, ads: action.payload };
     case types.ADVERTS_CREATE_SUCCESS:
-      return { ...state, ads: [action.payload, ...state.ads] };
+      return {
+        ...state,
+        adDetail: action.payload,
+        ads: [action.payload, ...state.ads],
+      };
     case types.ADVERTS_UPDATE_SUCCESS:
       return {
         ...state,
-        ads: [
-          ...state.ads.map(ad => {
-            if (ad._id === action.payload._id) {
-              return action.payload;
-            }
-            return ad;
-          }),
-        ],
+        adDetail: action.payload,
       };
     default:
       return state;

@@ -4,6 +4,8 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import AdvertsPage from '../pages/AdvertsPage';
+import NewAdvertPage from '../pages/NewAdvertPage';
+import EditAdvertPage from '../pages/EditAdvertPage';
 import PrivateRoute from '../auth/PrivateRoute';
 import LoginPage from '../auth/LoginPage';
 import { SignupPage, SignupConfirmPage } from '../pages/SignupPage';
@@ -31,6 +33,12 @@ function App() {
           <ForgotPassPage />
         </Route>
         <Route path="/resetpass/:hash" component={ResetPassPage} />
+        <PrivateRoute path="/adverts/new" exact>
+          <NewAdvertPage />
+        </PrivateRoute>
+        <PrivateRoute path="/adverts/edit/:id" exact>
+          <EditAdvertPage />
+        </PrivateRoute>
         <Route path="/404" exact>
           {/* <NotFoundPage /> */}
           <div className="errornotfound">

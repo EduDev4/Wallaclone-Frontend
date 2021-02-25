@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Image, Button } from 'antd';
 import './FileImageLoad.css';
 
-const FileImageLoad = ({ onFileSelect, label }) => {
+const FileImageLoad = ({ onFileSelect, label, imgUrl }) => {
   const [file, setFile] = useState(null);
   const inputRef = createRef(null);
 
@@ -42,7 +42,7 @@ const FileImageLoad = ({ onFileSelect, label }) => {
           src={
             file
               ? URL.createObjectURL(file)
-              : 'http://via.placeholder.com/200x200?text=No+Image'
+              : `${process.env.REACT_APP_API_BASE_URL}${imgUrl}`
           }
         />
       </div>
@@ -53,6 +53,11 @@ const FileImageLoad = ({ onFileSelect, label }) => {
 FileImageLoad.propTypes = {
   onFileSelect: PropTypes.func.isRequired,
   label: PropTypes.string.isRequired,
+  imgUrl: PropTypes.string,
+};
+
+FileImageLoad.defaultProps = {
+  imgUrl: '',
 };
 
 export default FileImageLoad;
