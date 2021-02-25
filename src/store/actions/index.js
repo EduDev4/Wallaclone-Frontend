@@ -1,4 +1,4 @@
-// TODO: Creado un action como modelo, reemplazar por los nuevos actions
+// COMPLETE: Creado un action como modelo, reemplazar por los nuevos actions
 
 import {
   USERS_SIGNUP_REQUEST,
@@ -14,6 +14,15 @@ import {
   AUTH_LOGOUT_REQUEST,
   AUTH_LOGOUT_SUCCESS,
   AUTH_LOGOUT_FAILURE,
+  ADVERTS_LOAD_REQUEST,
+  ADVERTS_LOAD_SUCCESS,
+  ADVERTS_LOAD_FAILURE,
+  ADVERTS_CREATE_REQUEST,
+  ADVERTS_CREATE_SUCCESS,
+  ADVERTS_CREATE_FAILURE,
+  ADVERTS_UPDATE_REQUEST,
+  ADVERTS_UPDATE_SUCCESS,
+  ADVERTS_UPDATE_FAILURE,
 } from '../constants/action-types';
 
 /** UI ACTIONS */
@@ -42,6 +51,7 @@ export const usersSignupSuccess = (currentUsername, currentEmail) => ({
 });
 
 export const signup = data =>
+  // eslint-disable-next-line func-names
   async function (dispatch, getstate, { history, api }) {
     dispatch(usersSignupRequest());
     try {
@@ -161,3 +171,68 @@ export const logout = () =>
 
 /** ADVERT ACTIONS */
 // TODO: crear acciones de anuncios
+export const advertsLoadRequest = () => ({
+  type: ADVERTS_LOAD_REQUEST,
+});
+export const advertsCreateRequest = () => ({
+  type: ADVERTS_CREATE_REQUEST,
+});
+export const advertsUpdateRequest = () => ({
+  type: ADVERTS_UPDATE_REQUEST,
+});
+
+export const advertsLoadFailure = error => ({
+  type: ADVERTS_LOAD_FAILURE,
+  error: true,
+  payload: error,
+});
+export const advertsCreateFailure = error => ({
+  type: ADVERTS_CREATE_FAILURE,
+  error: true,
+  payload: error,
+});
+export const advertsUpdateFailure = error => ({
+  type: ADVERTS_UPDATE_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const advertsLoadSuccess = ads => ({
+  type: ADVERTS_LOAD_SUCCESS,
+  payload: ads,
+});
+export const advertsCreateSuccess = ad => ({
+  type: ADVERTS_CREATE_SUCCESS,
+  payload: ad,
+});
+export const advertsUpdateSuccess = ad => ({
+  type: ADVERTS_UPDATE_SUCCESS,
+  payload: ad,
+});
+
+export const createAdvert = advertData =>
+  async function (dispatch, getState, { history, api }) {
+    dispatch(advertsCreateRequest());
+    try {
+      const { advert } = await api.adverts.createAdvert(advertData);
+      await dispatch(advertsCreateSuccess(advert));
+      // TODO: Redirigir a detalle
+      // history.push(`/advert/${advert._id}`);
+    } catch (error) {
+      await dispatch(advertsCreateFailure(error));
+    }
+  };
+
+export const updateAdvert = (adId, advertData) =>
+  async function (dispatch, getState, { history, api }) {
+    dispatch(advertsUpdateRequest());
+    try {
+      const { advert } = await api.adverts.updateAdvert(adId, advertData);
+      await dispatch(advertsUpdateSuccess(advert));
+      // TODO: Redirigir a detalle
+      // history.push(`/advert/${advert._id}`);
+    } catch (error) {
+      console.log(error);
+      await dispatch(advertsUpdateFailure(error));
+    }
+  };

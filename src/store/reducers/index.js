@@ -6,7 +6,11 @@ export const initialState = {
     currentUsername: '',
     currentEmail: '',
   },
-  adverts: null,
+  adverts: {
+    tags: [],
+    ads: null,
+    adDetail: null,
+  },
   ui: {
     loading: false,
     error: null,
@@ -26,7 +30,25 @@ export const auth = (state = initialState.auth, action) => {
   }
 };
 
-export const adverts = (state = initialState.adverts, action) => state;
+export const adverts = (state = initialState.adverts, action) => {
+  switch (action.type) {
+    case types.ADVERTS_LOAD_SUCCESS:
+      return { ...state, ads: action.payload };
+    case types.ADVERTS_CREATE_SUCCESS:
+      return {
+        ...state,
+        adDetail: action.payload,
+        ads: [action.payload, ...state.ads],
+      };
+    case types.ADVERTS_UPDATE_SUCCESS:
+      return {
+        ...state,
+        adDetail: action.payload,
+      };
+    default:
+      return state;
+  }
+};
 
 export const ui = (state = initialState.ui, action) => {
   if (action.error) {

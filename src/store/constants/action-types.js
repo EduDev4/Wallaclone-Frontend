@@ -20,3 +20,13 @@ export const AUTH_LOGOUT = 'auth/LOGOUT';
 export const AUTH_LOGOUT_REQUEST = 'auth/LOGOUT_REQUEST';
 export const AUTH_LOGOUT_SUCCESS = 'auth/LOGOUT_SUCCESS';
 export const AUTH_LOGOUT_FAILURE = 'auth/LOGOUT_FAILURE';
+
+export const ADVERTS_LOAD_REQUEST = 'adverts/LOAD_REQUEST';
+export const ADVERTS_LOAD_SUCCESS = 'adverts/LOAD_SUCCESS';
+export const ADVERTS_LOAD_FAILURE = 'adverts/LOAD_FAILURE';
+export const ADVERTS_CREATE_REQUEST = 'adverts/CREATE_REQUEST';
+export const ADVERTS_CREATE_SUCCESS = 'adverts/CREATE_SUCCESS';
+export const ADVERTS_CREATE_FAILURE = 'adverts/CREATE_FAILURE';
+export const ADVERTS_UPDATE_REQUEST = 'adverts/UPDATE_REQUEST';
+export const ADVERTS_UPDATE_SUCCESS = 'adverts/UPDATE_SUCCESS';
+export const ADVERTS_UPDATE_FAILURE = 'adverts/UPDATE_FAILURE';

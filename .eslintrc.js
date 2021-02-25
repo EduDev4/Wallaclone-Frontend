@@ -36,5 +36,6 @@ module.exports = {
     'react/state-in-constructor': 'off',
     'no-unused-vars': 'warn',
     'no-underscore-dangle': 'off',
+    'func-names': 'off',
   },
 };
