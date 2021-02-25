@@ -4,13 +4,13 @@ import classNames from 'classnames';
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { getIsLoggedUser } from '../../../store/selectors';
+import { getIsLoggedUser, getUsername } from '../../../store/selectors';
 import { logout } from '../../../store/actions';
 import ConfirmButton from '../../shared/ConfirmButton';
 
 import './Header.css';
 
-function Header({ className, isLogged, onLogout, ...props }) {
+function Header({ className, isLogged, onLogout, currentUser, ...props }) {
   const handleLogout = () => {
     onLogout();
   };
@@ -28,7 +28,7 @@ function Header({ className, isLogged, onLogout, ...props }) {
             <Link className="nav-button" to="/user/adverts">
               <Button type="primary">Mis Anuncios</Button>
             </Link>
-            <Link className="nav-button" to="/user/data">
+            <Link className="nav-button" to={`/user/${currentUser}`}>
               <Button type="primary">Mi Perfil</Button>
             </Link>
 
@@ -62,15 +62,18 @@ Header.propTypes = {
   className: PropTypes.string,
   isLogged: PropTypes.bool,
   onLogout: PropTypes.func,
+  currentUser: PropTypes.string,
 };
 Header.defaultProps = {
   className: 'layout-header',
   isLogged: false,
   onLogout: PropTypes.func,
+  currentUser: '',
 };
 
 const mapStateToProps = state => ({
   isLogged: getIsLoggedUser(state),
+  currentUser: getUsername(state),
 });
 
 const mapDispatchToProps = {

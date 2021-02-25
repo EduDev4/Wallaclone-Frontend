@@ -8,6 +8,7 @@ import LoginPage from '../auth/LoginPage';
 import SignupPage from '../pages/SignupPage';
 import ForgotPassPage from '../pages/ForgotPassPage';
 import ResetPassPage from '../pages/ResetPassPage';
+import UserPage from '../pages/UserPage';
 
 // import { auhtLogin, authLogout } from '../../store/actions';
 // import {
@@ -44,6 +45,8 @@ function App() {
           <ForgotPassPage />
         </Route>
         <Route path="/resetpass/:hash" component={ResetPassPage} />
+
+        <Route path="/user/:username" component={UserPage} />
 
         <Route path="/404" exact>
           {/* <NotFoundPage /> */}

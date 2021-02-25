@@ -9,6 +9,9 @@ import {
   AUTH_LOGOUT_REQUEST,
   AUTH_LOGOUT_SUCCESS,
   AUTH_LOGOUT_FAILURE,
+  USER_EDIT_REQUEST,
+  USER_EDIT_SUCCESS,
+  USER_EDIT_FAILURE,
 } from '../constants/action-types';
 
 // import * as auth from '../../api/auth';
@@ -23,8 +26,35 @@ export const addUser = payload => ({
   payload,
 });
 
+/** EDIT USER */
+
+// export const userEditRequest = () =>({
+//   type: USER_EDIT_REQUEST
+// })
+//
+// export const userEditFailire = error => ({
+//   type: USER_EDIT_FAILURE,
+//   error: true,
+//   payload: error,
+// })
+//
+// export const userEditSuccess = (dataForUpdate) => ({
+//   type: USER_EDIT_SUCCESS,
+//   payload: {
+//
+//   }
+// })
+// export const editUser = dataForUpdate => async function (dispatch, getstate, { history, api }){
+//   dispatch(userEditRequest());
+//   try {
+//     const userUpdate = await api.user.
+//   } catch (error) {
+//     dispatch(authLoginFailure(error));
+//
+//   }
+// }
+
 /** AUTH LOGIN ACTIONS */
-// TODO: crear acciones de login y logout
 export const authLoginRequest = () => ({
   type: AUTH_LOGIN_REQUEST,
 });
@@ -53,16 +83,12 @@ export const login = credentials =>
       dispatch(authLoginSuccess(!!tokenJWT, username, userEmail));
       history.push('/adverts');
     } catch (error) {
-      console.log(error.message);
+      // console.log(error.message);
       dispatch(authLoginFailure(error));
     }
   };
 
 /** AUTH LOGOUT ACTIONS */
-export const authLogout = () => ({
-  type: AUTH_LOGOUT,
-});
-
 export const authLogoutRequest = () => ({
   type: AUTH_LOGOUT_REQUEST,
 });

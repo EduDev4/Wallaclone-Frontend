@@ -27,3 +27,14 @@ export const forgotPasswd = email => {
     },
   });
 };
+
+export const updateUser = (currentUsername, updateData) => {
+  console.log('updateData:', updateData);
+  client
+    .patch(`/apiv1/users/editUser/${currentUsername}`, updateData)
+    .then(user => {
+      const { username, userEmail } = user;
+
+      return { username, userEmail };
+    });
+};
