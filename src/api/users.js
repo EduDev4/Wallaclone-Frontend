@@ -43,3 +43,11 @@ export const signupConfirm = async data => {
   console.log(response);
   return response;
 };
+
+export const updateUser = async (currentUsername, updateData) => {
+  const response = await client.patch(
+    `/apiv1/users/editUser/${currentUsername}`,
+    updateData,
+  );
+  return response;
+};
