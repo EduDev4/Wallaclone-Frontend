@@ -95,6 +95,7 @@ UserPage.propTypes = {
   currentUsername: PropTypes.string,
   currentUserEmail: PropTypes.string,
   isLogged: PropTypes.bool,
+  match: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 UserPage.defaultProps = {
