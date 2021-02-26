@@ -23,3 +23,10 @@ export const getAdvertDetail = advertId => {
   const url = `${adverstUrl}/${advertId}`;
   return client.get(url);
 };
+
+export const getAdverts = filterObject => {
+  if (filterObject) {
+    return client.get(`${adverstUrl}?${filterObject}`);
+  }
+  return client.get(adverstUrl);
+};

@@ -1,9 +1,11 @@
-import React from 'react';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Input, Button } from 'antd';
+import { Input, Button, Col, Row } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import AdvertCard from '../../adverts';
 
 import MainLayout from '../../layout/MainLayout';
 import {
@@ -14,73 +16,48 @@ import {
 } from '../../../store/selectors';
 
 import './UserPage.css';
+import { getAdverts } from '../../../api/adverts';
+import UserPageAside from './UserPageAside';
 
-function UserPage({
-  loading,
-  error,
-  currentUsername,
-  currentUserEmail,
-  isLogged,
-  match,
-}) {
+function UserPage({ match }) {
   const handleDelete = () => {};
-  const handleEdit = () => {};
-  const url = `/user/edit/${currentUsername}`;
+  const [adverts, setAdverts] = useState(null);
+  const user = match.params.username;
+
+  useEffect(() => {
+    getAdverts(`username=${user}`).then(setAdverts);
+  }, []);
+
+  const renderAdverts = () => {
+    const advertsList = adverts.adverts;
+
+    console.log(advertsList);
+
+    if (advertsList.length === 0) {
+      return console.log('no hay anuncios');
+    }
+    return (
+      <Row>
+        {advertsList.map(advert => (
+          <Col span={8}>
+            <AdvertCard key={advert._id} {...advert} />
+          </Col>
+        ))}
+      </Row>
+    );
+  };
 
   return (
     <MainLayout title="My Profile">
       <div className="userPage">
         <aside className="userPage-aside">
-          <h2>{match.params.username}</h2>
-
-          {isLogged && currentUsername === match.params.username ? (
-            <>
-              <p>{currentUserEmail}</p>
-              <Link className="edit-link" to={url}>
-                <Button type="primary" className="edit-button">
-                  Editar mis datos{' '}
-                  <EditOutlined className="site-form-item-icon" />
-                </Button>
-              </Link>
-
-              <Button type="dashed" onClick={handleDelete} danger>
-                Darme de baja <DeleteOutlined className="site-form-item-icon" />
-              </Button>
-            </>
-          ) : (
-            <></>
-          )}
+          <UserPageAside user={user} onDelete={handleDelete} />
         </aside>
         <div className="userPage-content">
           <h2>Mis anuncios</h2>
           <div className="userPage-adswrapper">
             <div className="advert-card">
-              <p>
-                Chocolate oat cake marshmallow soufflé. Carrot cake muffin
-                dessert macaroon. Jujubes pudding jelly beans fruitcake cookie
-                cookie toffee cotton candy gingerbread. Candy
-              </p>
-            </div>
-            <div className="advert-card">
-              <p>
-                Chocolate oat cake marshmallow soufflé. Carrot cake muffin
-                dessert macaroon. Jujubes pudding jelly beans fruitcake cookie
-                cookie toffee cotton candy gingerbread. Candy
-              </p>
-            </div>
-            <div className="advert-card">
-              <p>
-                Chocolate oat cake marshmallow soufflé. Carrot cake muffin
-                dessert macaroon. Jujubes pudding jelly beans fruitcake cookie
-                cookie toffee cotton candy gingerbread. Candy
-              </p>
-            </div>
-            <div className="advert-card">
-              <p>
-                Chocolate oat cake marshmallow soufflé. Carrot cake muffin
-                dessert macaroon. Jujubes pudding jelly beans fruitcake cookie
-                cookie toffee cotton candy gingerbread. Candy
-              </p>
+              {!adverts ? <p>no hay anuncios</p> : renderAdverts()}
             </div>
           </div>
         </div>
@@ -90,19 +67,12 @@ function UserPage({
 }
 
 UserPage.propTypes = {
-  loading: PropTypes.bool,
-  error: PropTypes.bool,
-  currentUsername: PropTypes.string,
-  currentUserEmail: PropTypes.string,
-  isLogged: PropTypes.bool,
-};
-
-UserPage.defaultProps = {
-  loading: false,
-  error: null,
-  currentUsername: '',
-  currentUserEmail: '',
-  isLogged: false,
+  // eslint-disable-next-line react/require-default-props
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      username: PropTypes.string.isRequired,
+    }),
+  }),
 };
 
 const mapStateToProps = state => ({

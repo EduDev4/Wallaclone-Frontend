@@ -7,9 +7,15 @@ import { Input, Button } from 'antd';
 import MainLayout from '../../layout/MainLayout';
 import useForm from '../../../hooks/useForm';
 import { getUi, getUsername, getUserEmail } from '../../../store/selectors';
-import { updateUser } from '../../../api/users';
+import { editUser } from '../../../store/actions';
 
-function EditUserPage({ loading, error, currentUsername, currentUserEmail }) {
+function EditUserPage({
+  loading,
+  error,
+  currentUsername,
+  currentUserEmail,
+  onEditUser,
+}) {
   const [form, onChangeForm] = useForm({
     newUsername: '',
     newUserEmail: '',
@@ -18,22 +24,10 @@ function EditUserPage({ loading, error, currentUsername, currentUserEmail }) {
 
   const { newUsername, newUserEmail, newPasswd } = form;
 
-  const handleSubmit = async event => {
+  const handleSubmit = event => {
     event.preventDefault();
-    const credentials = form;
-    // onLogin(credentials);
-    console.log('credentals:', credentials);
-    try {
-      const { username, userEmail } = await updateUser(
-        currentUsername,
-        credentials,
-      );
-      console.log('user:', username, userEmail);
-        
-      // console.log('userEmail:', userEmail);
-    } catch (err) {
-      console.log(error);
-    }
+    const dataForUpdate = form;
+    onEditUser(currentUsername, dataForUpdate);
   };
 
   const IsSubmitting = () => !loading;
@@ -97,6 +91,7 @@ EditUserPage.propTypes = {
   error: PropTypes.bool,
   currentUsername: PropTypes.string.isRequired,
   currentUserEmail: PropTypes.string.isRequired,
+  onEditUser: PropTypes.func.isRequired,
 };
 
 EditUserPage.defaultProps = {
@@ -110,10 +105,13 @@ const mapStateToProps = state => ({
   currentUserEmail: getUserEmail(state),
 });
 
-// const mapDispatchToProps = {
-//   onLogin: login,
-// };
+const mapDispatchToProps = {
+  onEditUser: editUser,
+};
 
-const ConnectedEditUserPage = connect(mapStateToProps)(EditUserPage);
+const ConnectedEditUserPage = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(EditUserPage);
 
 export default ConnectedEditUserPage;

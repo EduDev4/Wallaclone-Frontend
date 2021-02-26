@@ -25,6 +25,8 @@ export const auth = (state = initialState.auth, action) => {
       return initialState.auth;
     case types.USERS_SIGNUP_SUCCESS:
       return action.payload;
+    case types.USER_EDIT_SUCCESS:
+      return action.payload;
     default:
       return state;
   }

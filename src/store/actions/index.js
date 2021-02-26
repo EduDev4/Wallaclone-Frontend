@@ -27,6 +27,8 @@ import {
   USER_EDIT_FAILURE,
 } from '../constants/action-types';
 
+import { getIsLoggedUser } from '../selectors';
+
 /** UI ACTIONS */
 // TODO: crear acciones relacionadas con la interfaz de usuario
 
@@ -101,31 +103,40 @@ export const signupConfirm = data =>
   };
 /** EDIT USER */
 
-// export const userEditRequest = () =>({
-//   type: USER_EDIT_REQUEST
-// })
-//
-// export const userEditFailire = error => ({
-//   type: USER_EDIT_FAILURE,
-//   error: true,
-//   payload: error,
-// })
-//
-// export const userEditSuccess = (dataForUpdate) => ({
-//   type: USER_EDIT_SUCCESS,
-//   payload: {
-//
-//   }
-// })
-// export const editUser = dataForUpdate => async function (dispatch, getstate, { history, api }){
-//   dispatch(userEditRequest());
-//   try {
-//     const userUpdate = await api.user.
-//   } catch (error) {
-//     dispatch(authLoginFailure(error));
-//
-//   }
-// }
+export const userEditRequest = () => ({
+  type: USER_EDIT_REQUEST,
+});
+export const userEditFailure = error => ({
+  type: USER_EDIT_FAILURE,
+  error: true,
+  payload: error,
+});
+export const userEditSuccess = (isLogged, currentUsername, currentEmail) => ({
+  type: USER_EDIT_SUCCESS,
+  payload: {
+    isLogged,
+    currentUsername,
+    currentEmail,
+  },
+});
+
+export const editUser = (currentUsername, dataForUpdate) =>
+  async function (dispatch, getstate, { history, api }) {
+    const state = getstate();
+    const isLogged = getIsLoggedUser(state);
+    dispatch(userEditRequest());
+    try {
+      const { username, userEmail } = await api.users.updateUser(
+        currentUsername,
+        dataForUpdate,
+      );
+      dispatch(userEditSuccess(isLogged, username, userEmail));
+
+      history.push(`/user/${username}`);
+    } catch (error) {
+      dispatch(userEditFailure(error));
+    }
+  };
 
 /** AUTH LOGIN ACTIONS */
 export const authLoginRequest = () => ({
@@ -156,7 +167,6 @@ export const login = credentials =>
       dispatch(authLoginSuccess(!!tokenJWT, username, userEmail));
       history.push('/adverts');
     } catch (error) {
-      // console.log(error.message);
       dispatch(authLoginFailure(error));
     }
   };
