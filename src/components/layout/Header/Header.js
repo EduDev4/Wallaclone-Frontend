@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Button } from 'antd';
@@ -13,6 +13,7 @@ import './Header.css';
 
 function Header({ className, isLogged, onLogout, currentUser, ...props }) {
   const { t, i18n } = useTranslation(['header']);
+  const [theme, setTheme] = useState(null);
   const handleLogout = () => {
     onLogout();
   };
@@ -64,6 +65,22 @@ function Header({ className, isLogged, onLogout, currentUser, ...props }) {
             <Link className="nav-button" to="/">
               <Button type="primary">{t('Anuncios')}</Button>
             </Link>
+            <Button
+              onClick={() => {
+                window.less
+                  .modifyVars({
+                    '@primary-color': '#52c41a',
+                  })
+                  .then(() => {
+                    // do other stuff here
+                  })
+                  .catch(error => {
+                    console.error(error);
+                  });
+              }}
+            >
+              Cambia color
+            </Button>
 
             <Link className="nav-button" to="/login">
               <Button type="primary">Login</Button>
