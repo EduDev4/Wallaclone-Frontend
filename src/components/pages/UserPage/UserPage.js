@@ -73,6 +73,7 @@ UserPage.propTypes = {
   currentUsername: PropTypes.string,
   currentUserEmail: PropTypes.string,
   isLogged: PropTypes.bool,
+  // eslint-disable-next-line react/require-default-props
   match: PropTypes.shape({
     params: PropTypes.shape({
       username: PropTypes.string.isRequired,
