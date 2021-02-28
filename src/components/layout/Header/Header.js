@@ -16,10 +16,10 @@ import UserTools from '../../auth/UserTools';
 import './Header.css';
 
 function Header({ className, isLogged, onLogout, currentUser, ...props }) {
-  const [isDesktop, setDesktop] = useState(window.innerWidth > 760);
+  const [isMobile, setMobile] = useState(window.innerWidth < 760);
 
   const updateMedia = () => {
-    setDesktop(window.innerWidth > 760);
+    setMobile(window.innerWidth < 760);
   };
 
   useEffect(() => {
@@ -62,7 +62,7 @@ function Header({ className, isLogged, onLogout, currentUser, ...props }) {
 
         {isLogged ? (
           <>
-            {isDesktop ? <UserTools /> : null}
+            {isMobile ? null : <UserTools />}
 
             <ConfirmButton
               acceptAction={handleLogout}

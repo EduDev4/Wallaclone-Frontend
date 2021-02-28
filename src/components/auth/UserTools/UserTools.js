@@ -1,6 +1,6 @@
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable react/style-prop-object */
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Button } from 'antd';
@@ -8,22 +8,10 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { getIsLoggedUser, getUsername } from '../../../store/selectors';
-import { logout } from '../../../store/actions';
 
 import './UserTools.css';
 
 function UserTools({ className, currentUser, ...props }) {
-  const [isDesktop, setDesktop] = useState(window.innerWidth > 1200);
-
-  const updateMedia = () => {
-    setDesktop(window.innerWidth > 1200);
-  };
-
-  useEffect(() => {
-    window.addEventListener('resize', updateMedia);
-    return () => window.removeEventListener('resize', updateMedia);
-  });
-
   const { t, i18n } = useTranslation(['header']);
 
   return (
@@ -58,13 +46,10 @@ const mapStateToProps = state => ({
   currentUser: getUsername(state),
 });
 
-const mapDispatchToProps = {
-  onLogout: logout,
-};
+// const mapDispatchToProps = {
+//   onLogout: logout,
+// };
 
-const ConnectedUserTools = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(UserTools);
+const ConnectedUserTools = connect(mapStateToProps, null)(UserTools);
 
 export default ConnectedUserTools;
