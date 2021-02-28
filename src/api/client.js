@@ -1,9 +1,21 @@
 import axios from 'axios';
+import i18n from 'i18next';
 
 const { REACT_APP_API_BASE_URL: baseURL } = process.env;
 
 const client = axios.create({
   baseURL,
+});
+
+// Interceptor request for language selection
+client.interceptors.request.use(req => {
+  if (req.url.includes('?')) {
+    req.url += `&lang=${i18n.language}`;
+  } else {
+    req.url += `?lang=${i18n.language}`;
+  }
+
+  return req;
 });
 
 export const setAuthorizationHeader = token => {

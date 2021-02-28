@@ -68,11 +68,24 @@ function UserPage({ match }) {
 
 UserPage.propTypes = {
   // eslint-disable-next-line react/require-default-props
+  loading: PropTypes.bool,
+  error: PropTypes.bool,
+  currentUsername: PropTypes.string,
+  currentUserEmail: PropTypes.string,
+  isLogged: PropTypes.bool,
   match: PropTypes.shape({
     params: PropTypes.shape({
       username: PropTypes.string.isRequired,
     }),
   }),
+};
+
+UserPage.defaultProps = {
+  loading: false,
+  error: null,
+  currentUsername: '',
+  currentUserEmail: '',
+  isLogged: false,
 };
 
 const mapStateToProps = state => ({
