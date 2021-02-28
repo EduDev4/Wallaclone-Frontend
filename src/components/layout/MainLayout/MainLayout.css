@@ -7,10 +7,11 @@
 
 .layout-header {
   height: var(--navbar-height);
-  background-color: var(--background-gold-color);
+  background-color: var(--bg-solid-color);
 }
 
 .layout-main {
+  max-width: var(--max-width);
   flex: 1;
   margin: 15px auto 20px auto;
   width: 100%;
@@ -27,7 +28,8 @@
 
 .layout-footer {
   height: 50px;
-  background-color: var(--background-gold-color);
+  background-color: var(--bg-solid-color);
+  color: var(--font-solid-color);
   display: flex;
   align-items: center;
   justify-content: center;

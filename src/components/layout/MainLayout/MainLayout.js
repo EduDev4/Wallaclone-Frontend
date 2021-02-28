@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import Header from '../Header';
+import Footer from '../Footer';
 
 import './MainLayout.css';
 
@@ -12,9 +13,7 @@ const MainLayout = ({ children, title }) => (
       <h2 className="layout-main--title">{title}</h2>
       <section className="layout-main--section">{children}</section>
     </main>
-    <footer className="layout-footer">
-      <p>&copy; Wallaclone Speedy Coders {new Date().getFullYear()}</p>
-    </footer>
+    <Footer className="layout-footer" />
   </div>
 );
 

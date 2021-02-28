@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Input, Button, Col, Row } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import AdvertCard from '../../adverts';
 
 import MainLayout from '../../layout/MainLayout';

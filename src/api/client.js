@@ -8,15 +8,15 @@ const client = axios.create({
 });
 
 // Interceptor request for language selection
-client.interceptors.request.use(req => {
-  if (req.url.includes('?')) {
-    req.url += `&lang=${i18n.language}`;
-  } else {
-    req.url += `?lang=${i18n.language}`;
-  }
-
-  return req;
-});
+// client.interceptors.request.use(req => {
+//   if (req.url.includes('?')) {
+//     req.url += `&lang=${i18n.language}`;
+//   } else {
+//     req.url += `?lang=${i18n.language}`;
+//   }
+//
+//   return req;
+// });
 
 export const setAuthorizationHeader = token => {
   client.defaults.headers.common.Authorization = `Bearer ${token}`;
