@@ -9,6 +9,5 @@
   justify-content: center;
   gap: 1rem;
   padding: 1rem;
-
-  background-color: rgb(255, 255, 160);
+  background-color: var(--grey2-color);
 }

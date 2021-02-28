@@ -1,11 +1,17 @@
 .header {
+}
+.header-wrapper {
+  max-width: var(--max-width);
+  margin: 15px auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 0.5rem 0 0.5rem;
 }
-.header-logo h1 {
+.header-logo .walla-logo {
+  font-family: 'Fredoka One', cursive;
   color: var(--logo-color);
+  margin: 0;
 }
 .header-nav .nav-button {
   margin-left: 2rem;
