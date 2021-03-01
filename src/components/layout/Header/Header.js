@@ -12,6 +12,7 @@ import { getIsLoggedUser, getUsername } from '../../../store/selectors';
 import { logout } from '../../../store/actions';
 import ConfirmButton from '../../shared/ConfirmButton';
 import UserTools from '../../auth/UserTools';
+import { setLocaleLanguageHeader } from '../../../api/client';
 
 import './Header.css';
 
@@ -43,13 +44,13 @@ function Header({ className, isLogged, onLogout, currentUser, ...props }) {
           <Search placeholder={t('Buscar...')} style={{ width: 200 }} />
         </form>
         <Select
-          defaultValue="es"
+          defaultValue={i18n.language}
           className="lang-select"
           style={{ width: 120 }}
           clearIcon
-          onChange={() => {
-            if (i18n.language === 'es') i18n.changeLanguage('en');
-            else if (i18n.language === 'en') i18n.changeLanguage('es');
+          onChange={lang => {
+            i18n.changeLanguage(lang);
+            setLocaleLanguageHeader(lang);
           }}
         >
           <Option value="en" clearIcon>

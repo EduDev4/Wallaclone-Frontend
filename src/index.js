@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
 import './config/i18n';
 import storage from './utils/storage';
-import { configureClient } from './api/client';
+import { configureClient, setLocaleLanguageHeader } from './api/client';
 
 import App, { Root } from './components/App';
 import './index.css';
@@ -17,6 +17,7 @@ const auth = storage.get('auth') || {
 };
 
 configureClient(auth.tokenJWT);
+setLocaleLanguageHeader('es');
 // console.log('auth en index:', auth);
 //
 // const logueado = auth.tokenJWT ? !!auth.tokenJWT : false;

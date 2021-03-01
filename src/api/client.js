@@ -7,16 +7,10 @@ const client = axios.create({
   baseURL,
 });
 
-// Interceptor request for language selection
-// client.interceptors.request.use(req => {
-//   if (req.url.includes('?')) {
-//     req.url += `&lang=${i18n.language}`;
-//   } else {
-//     req.url += `?lang=${i18n.language}`;
-//   }
-//
-//   return req;
-// });
+export const setLocaleLanguageHeader = lang => {
+  client.defaults.headers.common['Accept-Language'] =
+    lang === 'es' ? 'es-ES,es;q=0.9' : 'en-EN,en;q=0.9';
+};
 
 export const setAuthorizationHeader = token => {
   client.defaults.headers.common.Authorization = `Bearer ${token}`;
