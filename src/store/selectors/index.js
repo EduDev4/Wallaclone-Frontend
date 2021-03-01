@@ -7,3 +7,4 @@ export const getUserEmail = state => state.auth.currentEmail;
 export const getUi = state => state.ui;
 
 export const getAdvertDetail = state => state.adverts.adDetail;
+export const getTags = state => state.adverts.tags;

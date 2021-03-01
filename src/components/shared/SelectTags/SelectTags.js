@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Select } from 'antd';
 
 // import { getTags } from '../../../store/selectors';
 
-function SelectTags({ onChange, defaultTags, placeholder }) {
+function SelectTags({ tags, loadTags, onChange, defaultTags, placeholder }) {
   const { Option } = Select;
-  const tags = ['lifestyle', 'mobile', 'work', 'motor'];
+
+  useEffect(() => {
+    loadTags();
+    return () => {};
+  }, []);
 
   return (
     <Select
@@ -25,6 +29,8 @@ function SelectTags({ onChange, defaultTags, placeholder }) {
 }
 
 SelectTags.propTypes = {
+  tags: PropTypes.arrayOf(PropTypes.string),
+  loadTags: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
   defaultTags: PropTypes.arrayOf(PropTypes.string).isRequired,
   placeholder: PropTypes.string,
@@ -32,6 +38,7 @@ SelectTags.propTypes = {
 
 SelectTags.defaultProps = {
   placeholder: '',
+  tags: [],
 };
 
 export default SelectTags;

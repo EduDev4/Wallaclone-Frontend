@@ -32,3 +32,6 @@ export const ADVERTS_CREATE_FAILURE = 'adverts/CREATE_FAILURE';
 export const ADVERTS_UPDATE_REQUEST = 'adverts/UPDATE_REQUEST';
 export const ADVERTS_UPDATE_SUCCESS = 'adverts/UPDATE_SUCCESS';
 export const ADVERTS_UPDATE_FAILURE = 'adverts/UPDATE_FAILURE';
+export const ADVERTS_TAGS_REQUEST = 'adverts/TAGS_REQUEST';
+export const ADVERTS_TAGS_SUCCESS = 'adverts/TAGS_SUCCESS';
+export const ADVERTS_TAGS_FAILURE = 'adverts/TAGS_FAILURE';
