@@ -1,3 +1,17 @@
-import AdvertsPage from './AdvertsPage';
+import { connect } from 'react-redux';
 
-export default AdvertsPage;
+import AdvertsPage from './AdvertsPage';
+import { getUi, getAdverts } from '../../../store/selectors';
+import { loadAdverts } from '../../../store/actions';
+
+const mapStateToProps = state => ({
+  adverts: getAdverts(state),
+  loading: getUi(state).loading,
+  error: getUi(state).error,
+});
+
+const mapDispatchToProps = dispatch => ({
+  loadAdverts: form => dispatch(loadAdverts(form)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(AdvertsPage);

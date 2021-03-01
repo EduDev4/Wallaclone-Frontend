@@ -4,8 +4,6 @@ const usersBaseUrl = '/apiv1';
 
 export const resetPasswd = (passwd, hash) => {
   const url = `${usersBaseUrl}/users/forgotPass/confirmation`;
-  console.log(hash);
-  console.log(passwd);
   const params = JSON.stringify({
     passwd,
     hash,

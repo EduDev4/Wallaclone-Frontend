@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Button } from 'antd';
+import { Input, Button, Alert } from 'antd';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { forgotPasswd } from '../../../api/users';
 
 import MainLayout from '../../layout/MainLayout';
@@ -12,8 +13,9 @@ class ForgotPassPage extends React.Component {
   state = {
     form: {
       email: '',
+      error: null,
+      result: null,
     },
-    // submitting: false,
   };
 
   handleChange = event => {
@@ -55,7 +57,7 @@ class ForgotPassPage extends React.Component {
                 onClick={() => forgotPasswd(email)}
                 disabled={!this.canSubmit(email)}
               >
-                Send
+                Submit
               </Button>
             </div>
           </form>

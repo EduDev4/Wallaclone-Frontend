@@ -4,6 +4,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Input, Button } from 'antd';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { resetPasswd } from '../../../api/users';
 
 import MainLayout from '../../layout/MainLayout';
@@ -30,10 +31,10 @@ class ResetPassPage extends React.Component {
   render() {
     // eslint-disable-next-line react/destructuring-assignment
     const { hash } = this.props.match.params;
-    console.log(hash);
     const {
       form: { passwd, passwd1 },
     } = this.state;
+    // const { t } = useTranslation(['forgotpasswd']);
 
     return (
       <MainLayout title="New Password">
@@ -43,7 +44,7 @@ class ResetPassPage extends React.Component {
               <Input
                 name="passwd"
                 type="password"
-                placeholder="Contraseña"
+                placeholder="Password"
                 value={passwd}
                 onChange={this.handleChange}
               />
@@ -52,12 +53,12 @@ class ResetPassPage extends React.Component {
               <Input
                 name="passwd1"
                 type="password"
-                placeholder="Confirma contraseña"
+                placeholder="Password Confirmation"
                 value={passwd1}
                 onChange={this.handleChange}
               />
             </div>
-            <p>Passwords must be equal(min 6 characters )!</p>
+            <p>Passwords must be the same(min 6 char)!</p>
             <div className="form-field centered">
               <Button
                 as={Link}
