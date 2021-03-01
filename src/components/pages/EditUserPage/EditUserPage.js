@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Input, Button } from 'antd';
+import storage from '../../../utils/storage';
 
 import MainLayout from '../../layout/MainLayout';
 import useForm from '../../../hooks/useForm';
@@ -27,6 +28,7 @@ function EditUserPage({
   const handleSubmit = event => {
     event.preventDefault();
     const dataForUpdate = form;
+
     onEditUser(currentUsername, dataForUpdate);
   };
 
