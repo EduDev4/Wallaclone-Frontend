@@ -57,7 +57,7 @@ class ResetPassPage extends React.Component {
                 onChange={this.handleChange}
               />
             </div>
-            <p>Passwords must be equal(min 6 characters )!</p>
+            <p>Passwords must be the same(min 6 char. )</p>
             <div className="form-field centered">
               <Button
                 as={Link}

@@ -244,6 +244,18 @@ export const advertsUpdateSuccess = ad => ({
   payload: ad,
 });
 
+export const loadAdverts = formFilter =>
+  // eslint-disable-next-line func-names
+  async function (dispatch, getState, { api }) {
+    dispatch(advertsLoadRequest());
+    try {
+      const { adverts } = await api.adverts.getAdverts(formFilter);
+      dispatch(advertsLoadSuccess(adverts));
+    } catch (error) {
+      dispatch(advertsLoadFailure(error));
+    }
+  };
+
 export const createAdvert = advertData =>
   async function (dispatch, getState, { history, api }) {
     dispatch(advertsCreateRequest());
