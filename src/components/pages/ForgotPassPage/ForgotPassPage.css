@@ -1,15 +1,15 @@
 .forgotPage {
-    margin: 2rem auto 0 auto;
-    width: 350px;
-  }
-  
-  .forgot-form {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 1rem;
-    padding: 1rem;
-  
-    background-color: rgb(255, 255, 160);
-  }
-  
+  margin: 2rem auto 0 auto;
+  width: 350px;
+}
+
+.forgot-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  padding: 1rem;
+
+  background-color: var(--bg-solid-color);
+  box-shadow: 4px 4px 15px 1px #000000;
+}
