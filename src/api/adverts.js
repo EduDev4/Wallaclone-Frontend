@@ -30,3 +30,8 @@ export const getAdverts = filterObject => {
   }
   return client.get(adverstUrl);
 };
+
+export const getAllTags = () => {
+  const url = `${adverstUrl}/tags`;
+  return client.get(url);
+};

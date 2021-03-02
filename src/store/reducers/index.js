@@ -34,6 +34,8 @@ export const auth = (state = initialState.auth, action) => {
 
 export const adverts = (state = initialState.adverts, action) => {
   switch (action.type) {
+    case types.ADVERTS_TAGS_SUCCESS:
+      return { ...state, tags: action.payload };
     case types.ADVERTS_LOAD_SUCCESS:
       return { ...state, ads: action.payload };
     case types.ADVERTS_CREATE_SUCCESS:

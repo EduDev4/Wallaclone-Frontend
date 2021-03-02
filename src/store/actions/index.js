@@ -22,6 +22,9 @@ import {
   ADVERTS_UPDATE_REQUEST,
   ADVERTS_UPDATE_SUCCESS,
   ADVERTS_UPDATE_FAILURE,
+  ADVERTS_TAGS_REQUEST,
+  ADVERTS_TAGS_SUCCESS,
+  ADVERTS_TAGS_FAILURE,
   USER_EDIT_REQUEST,
   USER_EDIT_SUCCESS,
   USER_EDIT_FAILURE,
@@ -214,6 +217,9 @@ export const advertsCreateRequest = () => ({
 export const advertsUpdateRequest = () => ({
   type: ADVERTS_UPDATE_REQUEST,
 });
+export const advertsTagsRequest = () => ({
+  type: ADVERTS_TAGS_REQUEST,
+});
 
 export const advertsLoadFailure = error => ({
   type: ADVERTS_LOAD_FAILURE,
@@ -230,6 +236,11 @@ export const advertsUpdateFailure = error => ({
   error: true,
   payload: error,
 });
+export const advertsTagsFailure = error => ({
+  type: ADVERTS_TAGS_FAILURE,
+  error: true,
+  payload: error,
+});
 
 export const advertsLoadSuccess = ads => ({
   type: ADVERTS_LOAD_SUCCESS,
@@ -242,6 +253,10 @@ export const advertsCreateSuccess = ad => ({
 export const advertsUpdateSuccess = ad => ({
   type: ADVERTS_UPDATE_SUCCESS,
   payload: ad,
+});
+export const advertsTagsSuccess = tags => ({
+  type: ADVERTS_TAGS_SUCCESS,
+  payload: tags,
 });
 
 export const loadAdverts = formFilter =>
@@ -280,5 +295,19 @@ export const updateAdvert = (adId, advertData) =>
     } catch (error) {
       console.log(error);
       await dispatch(advertsUpdateFailure(error));
+    }
+  };
+
+export const loadTags = () =>
+  async function (dispatch, getState, { api }) {
+    const { adverts } = getState();
+    // If have tags, no make request to api
+    if (adverts.tags.length) return;
+    dispatch(advertsTagsRequest());
+    try {
+      const { tags } = await api.adverts.getAllTags();
+      dispatch(advertsTagsSuccess(tags));
+    } catch (error) {
+      dispatch(advertsTagsFailure(error));
     }
   };
