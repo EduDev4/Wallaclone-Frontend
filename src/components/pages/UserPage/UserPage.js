@@ -30,32 +30,26 @@ function UserPage({ match }) {
   const renderAdverts = () => {
     const advertsList = adverts.adverts;
 
-    console.log(advertsList);
+    // console.log(advertsList);
 
     if (advertsList.length === 0) {
       return console.log('no hay anuncios');
     }
-    return (
-      <Row>
-        {advertsList.map(advert => (
-          <Col span={8}>
-            <AdvertCard key={advert._id} {...advert} />
-          </Col>
-        ))}
-      </Row>
-    );
+    return advertsList.map(advert => (
+      <AdvertCard key={advert._id} {...advert} />
+    ));
   };
 
   return (
     <MainLayout title="My Profile">
-      <div className="userPage">
-        <aside className="userPage-aside">
-          <UserPageAside user={user} onDelete={handleDelete} />
-        </aside>
-        <div className="userPage-content">
-          <h2>Mis anuncios</h2>
-          <div className="userPage-adswrapper">
-            <div className="advert-card">
+      <div className="userPage container">
+        <div className="row">
+          <aside className="userPage-aside col-3">
+            <UserPageAside user={user} onDelete={handleDelete} />
+          </aside>
+          <div className="userPage-content col-9">
+            <h2>Mis anuncios</h2>
+            <div className="userPage-adswrapper row">
               {!adverts ? <p>no hay anuncios</p> : renderAdverts()}
             </div>
           </div>

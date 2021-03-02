@@ -9,18 +9,16 @@ import './AdvertCard.css';
 
 const AdvertCard = ({ _id, name, price, sale, tags }) => (
   <>
-    <article className="advert-card">
-      <Card title={name} hoverable="true" style={{ width: 270 }}>
-        <p>Precio: {price} €</p>
-        <p>{sale ? 'Se vende' : 'Se busca'}</p>
-        <div className="advert-tags">
-          {tags.map(tag => (
-            <Tag icon={<CheckCircleOutlined />} color="success" key={tag}>
-              {tag}
-            </Tag>
-          ))}
-        </div>
-      </Card>
+    <article className="advert-card col-sm-4">
+      <p>Precio: {price} €</p>
+      <p>{sale ? 'Se vende' : 'Se busca'}</p>
+      <div className="advert-tags">
+        {tags.map(tag => (
+          <Tag icon={<CheckCircleOutlined />} color="success" key={tag}>
+            {tag}
+          </Tag>
+        ))}
+      </div>
     </article>
   </>
 );
