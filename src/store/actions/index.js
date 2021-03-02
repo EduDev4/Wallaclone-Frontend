@@ -149,12 +149,18 @@ export const authLoginFailure = error => ({
   payload: error,
 });
 
-export const authLoginSuccess = (isLogged, currentUsername, currentEmail) => ({
+export const authLoginSuccess = (
+  isLogged,
+  currentUsername,
+  currentEmail,
+  currentUserId,
+) => ({
   type: AUTH_LOGIN_SUCCESS,
   payload: {
     isLogged,
     currentUsername,
     currentEmail,
+    currentUserId,
   },
 });
 
@@ -163,8 +169,8 @@ export const login = credentials =>
     dispatch(authLoginRequest());
     try {
       const authData = await api.auth.login(credentials);
-      const { tokenJWT, username, userEmail } = authData;
-      dispatch(authLoginSuccess(!!tokenJWT, username, userEmail));
+      const { tokenJWT, username, userEmail, _id } = authData;
+      dispatch(authLoginSuccess(!!tokenJWT, username, userEmail, _id));
       history.push('/adverts');
     } catch (error) {
       dispatch(authLoginFailure(error));

@@ -4,6 +4,7 @@ export const initialState = {
   auth: {
     isLogged: false,
     currentUsername: '',
+    currentUserId: '',
     currentEmail: '',
   },
   adverts: {

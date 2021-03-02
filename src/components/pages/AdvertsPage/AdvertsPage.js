@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 import { Select, Slider, Input, Button } from 'antd';
 
 import MainLayout from '../../layout/MainLayout';
 import AdvertCard from '../../adverts/AdvertCard';
 import Spinner from '../../shared/Spinner';
+import { getIsLoggedUser, getUserId } from '../../../store/selectors';
 import './AdvertsPage.css';
 
 const AdvertsPage = ({ adverts, loading, loadAdverts }) => {
   const { Option } = Select;
+  const isLogged = useSelector(getIsLoggedUser);
+  const userId = useSelector(getUserId);
   const tags = ['electronics', 'sports', 'cars', 'hobbies'];
   const [filter] = useState();
 
@@ -17,12 +21,22 @@ const AdvertsPage = ({ adverts, loading, loadAdverts }) => {
     loadAdverts(filter);
     return () => {
       // eslint-disable-next-line no-console
-      console.log('cleanup');
+      // console.log('cleanup');
     };
   }, []);
 
+  const isFav = ad => {
+    if (ad.isFavBy) {
+      if (ad.isFavBy[userId]) {
+        console.log(ad.isFavBy[userId]);
+        return ad.isFavBy[userId];
+      }
+    }
+    return false;
+  };
   const renderContent = () => {
     if (!adverts) return null;
+    console.log(adverts);
     return adverts.map(ad => (
       <AdvertCard
         key={ad._id}
@@ -31,6 +45,7 @@ const AdvertsPage = ({ adverts, loading, loadAdverts }) => {
         price={ad.price}
         sale={ad.sale}
         tags={ad.tags}
+        fav={isLogged ? isFav(ad) : false}
       />
     ));
   };
