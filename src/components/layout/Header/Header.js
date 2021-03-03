@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Button, Input, Select } from 'antd';
+import { Button, Input } from 'antd';
 import { UserOutlined, LogoutOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -11,8 +11,8 @@ import { useTranslation } from 'react-i18next';
 import { getIsLoggedUser, getUsername } from '../../../store/selectors';
 import { logout } from '../../../store/actions';
 import ConfirmButton from '../../shared/ConfirmButton';
+import LangButton from '../../shared/LangButton';
 import UserTools from '../../auth/UserTools';
-import { setLocaleLanguageHeader } from '../../../api/client';
 
 import './Header.css';
 
@@ -29,7 +29,6 @@ function Header({ className, isLogged, onLogout, currentUser, ...props }) {
   });
 
   const { Search } = Input;
-  const { Option } = Select;
   const { t, i18n } = useTranslation(['header']);
   const handleLogout = () => {
     onLogout();
@@ -43,23 +42,8 @@ function Header({ className, isLogged, onLogout, currentUser, ...props }) {
         <form>
           <Search placeholder={t('Buscar...')} style={{ width: 200 }} />
         </form>
-        <Select
-          defaultValue={i18n.language}
-          className="lang-select"
-          style={{ width: 120 }}
-          clearIcon
-          onChange={lang => {
-            i18n.changeLanguage(lang);
-            setLocaleLanguageHeader(lang);
-          }}
-        >
-          <Option value="en" clearIcon>
-            EN
-          </Option>
-          <Option value="es" clearIcon>
-            ES
-          </Option>
-        </Select>
+
+        <LangButton initialLang={i18n.language} />
 
         {isLogged ? (
           <>
