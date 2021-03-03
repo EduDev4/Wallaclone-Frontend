@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Input, Button } from 'antd';
@@ -7,8 +6,6 @@ import { Input, Button } from 'antd';
 import { useTranslation } from 'react-i18next';
 import MainLayout from '../../layout/MainLayout';
 import useForm from '../../../hooks/useForm';
-import { getUi, getUsername, getUserEmail } from '../../../store/selectors';
-import { editUser } from '../../../store/actions';
 
 import './EditUserPage.css';
 
@@ -107,19 +104,4 @@ EditUserPage.defaultProps = {
   error: null,
 };
 
-const mapStateToProps = state => ({
-  getUi,
-  currentUsername: getUsername(state),
-  currentUserEmail: getUserEmail(state),
-});
-
-const mapDispatchToProps = {
-  onEditUser: editUser,
-};
-
-const ConnectedEditUserPage = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(EditUserPage);
-
-export default ConnectedEditUserPage;
+export default EditUserPage;

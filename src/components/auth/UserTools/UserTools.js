@@ -19,13 +19,28 @@ function UserTools({ className, currentUser, ...props }) {
     <>
       <div className="usertools">
         <Link className="nav-button" to={`/user/${currentUser}`}>
-          <Button type="primary">{t('Mis Anuncios')}</Button>
+          <img
+            src={`${process.env.REACT_APP_PUBLIC_URL}/icons/noti-menu-hover-30.png`}
+            alt="fav"
+          />
         </Link>
         <Link className="nav-button" to={`/user/${currentUser}`}>
-          <Button type="primary">{t('Mi Perfil')}</Button>
+          <img
+            src={`${process.env.REACT_APP_PUBLIC_URL}/icons/chat-menu-30.png`}
+            alt="fav"
+          />
         </Link>
-        <Link className="nav-button" to="/adverts/new">
-          <Button type="primary">{t('Nuevo Anuncio')}</Button>
+        <Link className="nav-button" to={`/user/${currentUser}`}>
+          <img
+            src={`${process.env.REACT_APP_PUBLIC_URL}/icons/fav-filled-advert-30.png`}
+            alt="fav"
+          />
+        </Link>
+        <Link className="nav-button" to={`/user/${currentUser}`}>
+          <img
+            src={`${process.env.REACT_APP_PUBLIC_URL}/icons/add-menu-hover-30.png`}
+            alt="fav"
+          />
         </Link>
       </div>
     </>
