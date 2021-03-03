@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { Button, Input, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 
+import { useTranslation } from 'react-i18next';
 import MainLayout from '../../layout/MainLayout';
 import useForm from '../../../hooks/useForm';
 
@@ -17,6 +18,7 @@ function LoginPage({ onLogin, loading, error }) {
   });
 
   const { username, passwd, remember } = form;
+  const { t, i18n } = useTranslation(['login']);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -57,13 +59,21 @@ function LoginPage({ onLogin, loading, error }) {
               name="remember"
               valuePropName={remember}
             >
-              Remember me
+              {t('Recordarme')}
             </Checkbox>
           </div>
           <div className="form-field">
-            <Link to="/forgotpass">Forgot Password?</Link>
-            <br />
-            <Link to="/signup">New here? Sign Up</Link>
+            <p>
+              <Link to="/forgotpass" className="link">
+                {t('Olvidate tu contraseña?')}{' '}
+              </Link>
+            </p>
+
+            <p>
+              <Link to="/signup" className="link">
+                {t('Aún no tienes cuenta? Regístrate')}
+              </Link>
+            </p>
           </div>
           <div className="form-field centered">
             <Button type="primary" htmlType="submit" disabled={!IsSubmitting()}>

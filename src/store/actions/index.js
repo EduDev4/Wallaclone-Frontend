@@ -34,6 +34,7 @@ import {
 } from '../constants/action-types';
 
 import { getIsLoggedUser } from '../selectors';
+import storage from '../../utils/storage';
 
 /** UI ACTIONS */
 // TODO: crear acciones relacionadas con la interfaz de usuario
@@ -161,12 +162,18 @@ export const editUser = (currentUsername, dataForUpdate) =>
     const state = getstate();
     const isLogged = getIsLoggedUser(state);
     dispatch(userEditRequest());
+    const { tokenJWT } = storage.get('auth');
+
     try {
       const { username, userEmail } = await api.users.updateUser(
         currentUsername,
         dataForUpdate,
       );
+
       dispatch(userEditSuccess(isLogged, username, userEmail));
+
+      const auth = { tokenJWT, username, userEmail };
+      storage.set('auth', auth);
 
       history.push(`/user/${username}`);
     } catch (error) {

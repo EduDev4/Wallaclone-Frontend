@@ -9,5 +9,14 @@
   justify-content: center;
   gap: 1rem;
   padding: 1rem;
-  background-color: var(--grey2-color);
+
+  background-color: var(--grey1-color);
+  box-shadow: 4px 4px 15px 1px #000000;
+}
+
+.link:hover {
+  color: var(--success-color);
+}
+.link:hover::after {
+  content: ' >>';
 }
