@@ -32,6 +32,7 @@ const AdvertCard = ({
     }
     return false;
   };
+  const createdAtText = new Date().toLocaleDateString();
   const serverUrl = process.env.REACT_APP_API_BASE_URL_LOCAL;
   return (
     <>
@@ -58,16 +59,24 @@ const AdvertCard = ({
           </div>
           <div className="advert-price">{price} €</div>
           <div className="advert-tile-title">
-            <p>{name}</p>
+            <span>{name}</span>
+          </div>
+          <div className="tags">
+            <span className="tag">Motor</span>
+            <span className="tag">Motor</span>
+            <span className="tag">Motor</span>
+            <span className="tag">Motor</span>
+            <span className="tag">Motor</span>
+            <span className="tag">Motor</span>
           </div>
           <div className="advert-desc">
-            <p>{description}</p>
+            <span>{description}</span>
           </div>
 
           <div className={sale ? 'advert-sell' : 'advert-buy'}>
             {sale ? 'Se vende' : 'Se busca'}
           </div>
-          <div className="advert-created">{createdAt}</div>
+          <div className="advert-created">{createdAtText}</div>
         </div>
       </article>
     </>
