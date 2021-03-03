@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Input, Button, Col, Row } from 'antd';
+import { useTranslation } from 'react-i18next';
 import AdvertCard from '../../adverts';
 
 import MainLayout from '../../layout/MainLayout';
@@ -18,10 +18,11 @@ import './UserPage.css';
 import { getAdverts } from '../../../api/adverts';
 import UserPageAside from './UserPageAside';
 
-function UserPage({ match }) {
+function UserPage({ match, currentUsername, isLogged }) {
   const handleDelete = () => {};
   const [adverts, setAdverts] = useState(null);
   const user = match.params.username;
+  const { t, i18n } = useTranslation(['userpage']);
 
   useEffect(() => {
     getAdverts(`username=${user}`).then(setAdverts);
@@ -41,15 +42,17 @@ function UserPage({ match }) {
   };
 
   return (
-    <MainLayout title="My Profile">
-      <div className="userPage container">
-        <div className="row">
-          <aside className="userPage-aside col-3">
+    <MainLayout title="">
+      <div className="userPage">
+        <div className="row justify-content-center">
+          <aside className="userPage-aside col-sm-12 col-md-3">
             <UserPageAside user={user} onDelete={handleDelete} />
           </aside>
-          <div className="userPage-content col-9">
-            <h2>Mis anuncios</h2>
-            <div className="userPage-adswrapper row">
+          <div className="userPage-content col-sm-12 col-md-9">
+            {isLogged && currentUsername === user ? (
+              <h2>{t('Mis Anuncios')}</h2>
+            ) : null}
+            <div className="userPage-adswrapper row gx-3 gy-3">
               {!adverts ? <p>no hay anuncios</p> : renderAdverts()}
             </div>
           </div>

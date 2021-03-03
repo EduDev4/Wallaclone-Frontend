@@ -3,12 +3,14 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { Input, Button } from 'antd';
-import storage from '../../../utils/storage';
 
+import { useTranslation } from 'react-i18next';
 import MainLayout from '../../layout/MainLayout';
 import useForm from '../../../hooks/useForm';
 import { getUi, getUsername, getUserEmail } from '../../../store/selectors';
 import { editUser } from '../../../store/actions';
+
+import './EditUserPage.css';
 
 function EditUserPage({
   loading,
@@ -24,6 +26,7 @@ function EditUserPage({
   });
 
   const { newUsername, newUserEmail, newPasswd } = form;
+  const { t, i18n } = useTranslation(['userpage']);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -32,52 +35,55 @@ function EditUserPage({
     onEditUser(currentUsername, dataForUpdate);
   };
 
-  const IsSubmitting = () => !loading;
+  const IsSubmitting = () =>
+    !loading && (newUsername || newUserEmail || newPasswd);
 
   return (
     <MainLayout title="My Profile">
-      <div className="userPage">
-        <aside className="userPage-aside">
+      <div className="userPage row">
+        <aside className="userPage-aside col-sm-12 col-md-3">
           <h2>{currentUsername}</h2>
           <p>{currentUserEmail}</p>
         </aside>
-        <div className="userPage-content">
-          <h2>Editar mis datos</h2>
+        <div className="userPage-content col-sm-12 col-md-9">
+          <h2>{t('Editar mis datos')}</h2>
           <form className="edit-user-form" onSubmit={handleSubmit}>
+            <input
+              placeholder={currentUsername}
+              type="text"
+              name="newUsername"
+              value={newUsername}
+              onChange={onChangeForm}
+              className="editUserInput"
+            />
             <div className="form-field">
-              <Input
-                placeholder={currentUsername}
-                type="text"
-                name="newUsername"
-                value={newUsername}
-                onChange={onChangeForm}
-              />
-            </div>
-            <div className="form-field">
-              <Input
+              <input
                 placeholder={currentUserEmail}
                 type="email"
                 name="newUserEmail"
                 value={newUserEmail}
                 onChange={onChangeForm}
+                className="editUserInput"
               />
             </div>
             <div className="form-field">
-              <Input
+              <input
                 type="password"
                 placeholder="Contraseña"
                 name="newPasswd"
                 value={newPasswd}
                 onChange={onChangeForm}
+                className="editUserInput"
               />
             </div>
             <div className="form-field centered">
               <Button
                 type="primary"
                 htmlType="submit"
+                ghost
                 disabled={!IsSubmitting()}
               >
-                Enviar
+                {t('Enviar')}
               </Button>
             </div>
           </form>

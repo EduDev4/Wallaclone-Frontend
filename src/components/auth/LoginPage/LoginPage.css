@@ -10,7 +10,7 @@
   gap: 1rem;
   padding: 1rem;
 
-  background-color: var(--bg-solid-color);
+  background-color: var(--grey1-color);
   box-shadow: 4px 4px 15px 1px #000000;
 }
 
