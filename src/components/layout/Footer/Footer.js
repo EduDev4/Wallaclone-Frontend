@@ -10,10 +10,10 @@ import UserTools from '../../auth/UserTools';
 import './Footer.css';
 
 function Footer({ className, isLogged, currentUser, ...props }) {
-  const [isMobile, setMobile] = useState(window.innerWidth < 760);
+  const [isMobile, setMobile] = useState(window.innerWidth < 768);
 
   const updateMedia = () => {
-    setMobile(window.innerWidth < 760);
+    setMobile(window.innerWidth < 768);
   };
 
   useEffect(() => {
@@ -22,13 +22,9 @@ function Footer({ className, isLogged, currentUser, ...props }) {
   });
 
   return (
-    <footer className={classNames('footer', className)}>
+    <footer className={classNames('footer', className, 'fixed-footer')}>
       <div className="footer-wrapper">
-        {isLogged && isMobile ? (
-          <div className="tools">
-            <UserTools />
-          </div>
-        ) : null}
+        {isLogged && isMobile ? <UserTools /> : null}
 
         <p className="copy">
           &copy; Wallaclone Speedy Coders {new Date().getFullYear()}
