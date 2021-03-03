@@ -52,6 +52,8 @@ export const updateUser = async (currentUsername, updateData) => {
   return response;
 };
 
+export const deleteUser = () => client.delete(usersBaseUrl);
+
 export const setUnsetFav = async adId => {
   const url = `${usersBaseUrl}/favs/${adId}`;
   await client.post(url);

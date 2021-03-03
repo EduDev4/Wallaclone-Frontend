@@ -38,8 +38,15 @@ function UserPage({ match }) {
     return (
       <Row>
         {advertsList.map(advert => (
-          <Col span={8}>
-            <AdvertCard key={advert._id} {...advert} />
+          <Col key={advert._id} span={8}>
+            <AdvertCard
+              id={advert._id}
+              name={advert.name}
+              price={advert.price}
+              sale={advert.sale}
+              tags={advert.tags}
+              isFavBy={advert.isFavBy}
+            />
           </Col>
         ))}
       </Row>
@@ -67,11 +74,11 @@ function UserPage({ match }) {
 
 UserPage.propTypes = {
   // eslint-disable-next-line react/require-default-props
-  loading: PropTypes.bool,
-  error: PropTypes.bool,
-  currentUsername: PropTypes.string,
-  currentUserEmail: PropTypes.string,
-  isLogged: PropTypes.bool,
+  // loading: PropTypes.bool,
+  // error: PropTypes.bool,
+  // currentUsername: PropTypes.string,
+  // currentUserEmail: PropTypes.string,
+  // isLogged: PropTypes.bool,
   // eslint-disable-next-line react/require-default-props
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -80,13 +87,13 @@ UserPage.propTypes = {
   }),
 };
 
-UserPage.defaultProps = {
-  loading: false,
-  error: null,
-  currentUsername: '',
-  currentUserEmail: '',
-  isLogged: false,
-};
+// UserPage.defaultProps = {
+//   loading: false,
+//   error: null,
+//   currentUsername: '',
+//   currentUserEmail: '',
+//   isLogged: false,
+// };
 
 const mapStateToProps = state => ({
   getUi,

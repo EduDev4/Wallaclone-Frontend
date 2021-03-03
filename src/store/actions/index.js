@@ -28,6 +28,9 @@ import {
   USER_EDIT_REQUEST,
   USER_EDIT_SUCCESS,
   USER_EDIT_FAILURE,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAILURE,
 } from '../constants/action-types';
 
 import { getIsLoggedUser } from '../selectors';
@@ -36,6 +39,36 @@ import { getIsLoggedUser } from '../selectors';
 // TODO: crear acciones relacionadas con la interfaz de usuario
 
 /** USER ACTIONS */
+export const userDeleteRequest = () => ({
+  type: USER_DELETE_REQUEST,
+});
+
+export const userDeleteFailure = error => ({
+  type: USER_DELETE_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const userDeleteSuccess = () => ({
+  type: USER_DELETE_SUCCESS,
+});
+
+export const deleteUser = () =>
+  async function (dispatch, getstate, { history, api }) {
+    dispatch(userDeleteRequest());
+    try {
+      const response = await api.users.deleteUser();
+      console.log(response);
+      dispatch(userDeleteSuccess());
+
+      // TODO: Mensaje de borrado de usuario
+      // eslint-disable-next-line no-use-before-define
+      await dispatch(logout());
+    } catch (error) {
+      console.log(error.message);
+      dispatch(userDeleteFailure(error));
+    }
+  };
 
 /** SIGNUP ACTIONS */
 export const usersSignupRequest = () => ({

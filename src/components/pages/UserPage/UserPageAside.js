@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Input, Button } from 'antd';
+import { Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
 
-import MainLayout from '../../layout/MainLayout';
+import ConfirmButton from '../../shared/ConfirmButton';
 
 import {
   getUi,
@@ -15,6 +16,7 @@ import {
 } from '../../../store/selectors';
 
 import './UserPage.css';
+import { deleteUser } from '../../../store/actions';
 
 function UserPageAside({
   loading,
@@ -23,8 +25,9 @@ function UserPageAside({
   currentUserEmail,
   isLogged,
   user,
+  onDeleteUser,
 }) {
-  const handleDelete = () => {};
+  const { t } = useTranslation(['userpage']);
   return (
     <>
       <h2>{user}</h2>
@@ -34,13 +37,23 @@ function UserPageAside({
           <p>{currentUserEmail}</p>
           <Link className="edit-link" to={`/user/edit/${currentUsername}`}>
             <Button type="primary" className="edit-button">
-              Editar mis datos <EditOutlined className="site-form-item-icon" />
+              {t('Editar mis datos')}
+              <EditOutlined className="site-form-item-icon" />
             </Button>
           </Link>
 
-          <Button type="dashed" onClick={handleDelete} danger>
-            Darme de baja <DeleteOutlined className="site-form-item-icon" />
-          </Button>
+          <ConfirmButton
+            acceptAction={onDeleteUser}
+            confirmProps={{
+              title: t('Eliminar Cuenta de Usuario'),
+              message: t('¿Estás seguro de eliminar tu cuenta?'),
+            }}
+            typeButton="dashed"
+            danger
+            icon={<DeleteOutlined className="site-form-item-icon" />}
+          >
+            {t('Eliminar Cuenta')}
+          </ConfirmButton>
         </>
       ) : (
         <></>
@@ -56,6 +69,7 @@ UserPageAside.propTypes = {
   currentUsername: PropTypes.string,
   currentUserEmail: PropTypes.string,
   isLogged: PropTypes.bool,
+  onDeleteUser: PropTypes.func.isRequired,
 };
 
 UserPageAside.defaultProps = {
@@ -72,5 +86,11 @@ const mapStateToProps = state => ({
   currentUserEmail: getUserEmail(state),
   isLogged: getIsLoggedUser(state),
 });
-const ConnectedUserPageAside = connect(mapStateToProps)(UserPageAside);
+
+const mapDispatchToProps = { onDeleteUser: deleteUser };
+
+const ConnectedUserPageAside = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(UserPageAside);
 export default ConnectedUserPageAside;

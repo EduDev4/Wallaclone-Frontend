@@ -14,6 +14,9 @@ export const USERS_SIGNUP_CONFIRM_FAILURE = 'users/SIGNUP_CONFIRM_FAILURE';
 export const USER_EDIT_REQUEST = 'user/EDIT_REQUEST';
 export const USER_EDIT_SUCCESS = 'user/EDIT_SUCCESS';
 export const USER_EDIT_FAILURE = 'user/EDIT_FAILURE';
+export const USER_DELETE_REQUEST = 'user/DELETE_REQUEST';
+export const USER_DELETE_SUCCESS = 'user/DELETE_SUCCESS';
+export const USER_DELETE_FAILURE = 'user/DELETE_FAILURE';
 
 export const AUTH_LOGIN_REQUEST = 'auth/LOGIN_REQUEST';
 export const AUTH_LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';

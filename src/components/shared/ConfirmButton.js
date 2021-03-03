@@ -43,8 +43,7 @@ export default function ConfirmButton({
 
 ConfirmButton.propTypes = {
   acceptAction: PropTypes.func.isRequired,
-  // eslint-disable-next-line react/forbid-prop-types
-  confirmProps: PropTypes.object.isRequired,
+  confirmProps: PropTypes.objectOf(PropTypes.any).isRequired,
   typeButton: PropTypes.string,
 };
 ConfirmButton.defaultProps = {
