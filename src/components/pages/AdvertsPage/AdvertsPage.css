@@ -1,4 +1,4 @@
-.advertsPage {
+/*.advertsPage {
   display: flex;
   gap: 3rem;
 }
@@ -9,7 +9,7 @@
 
 .advertsPage-content {
   flex: 1;
-}
+}*/
 
 .filter-form {
   display: flex;
