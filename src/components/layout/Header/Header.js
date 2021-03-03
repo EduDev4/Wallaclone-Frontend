@@ -17,10 +17,10 @@ import UserTools from '../../auth/UserTools';
 import './Header.css';
 
 function Header({ className, isLogged, onLogout, currentUser, ...props }) {
-  const [isMobile, setMobile] = useState(window.innerWidth < 760);
+  const [isMobile, setMobile] = useState(window.innerWidth < 768);
 
   const updateMedia = () => {
-    setMobile(window.innerWidth < 760);
+    setMobile(window.innerWidth < 768);
   };
 
   useEffect(() => {
@@ -55,10 +55,13 @@ function Header({ className, isLogged, onLogout, currentUser, ...props }) {
                 title: 'Logout',
                 message: 'Are you sure you want to logout?',
               }}
-              typeButton="primary"
-              danger
-              icon={<LogoutOutlined />}
-            />
+              typeButton="text"
+            >
+              <img
+                src={`${process.env.REACT_APP_PUBLIC_URL}/icons/profile-menu-30.png`}
+                alt="fav"
+              />
+            </ConfirmButton>
           </>
         ) : (
           <>

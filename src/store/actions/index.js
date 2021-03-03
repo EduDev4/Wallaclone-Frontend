@@ -148,11 +148,17 @@ export const userEditFailure = error => ({
   error: true,
   payload: error,
 });
-export const userEditSuccess = (isLogged, currentUsername, currentEmail) => ({
+export const userEditSuccess = (
+  isLogged,
+  currentUsername,
+  currentUserId,
+  currentEmail,
+) => ({
   type: USER_EDIT_SUCCESS,
   payload: {
     isLogged,
     currentUsername,
+    currentUserId,
     currentEmail,
   },
 });
@@ -162,7 +168,7 @@ export const editUser = (currentUsername, dataForUpdate) =>
     const state = getstate();
     const isLogged = getIsLoggedUser(state);
     dispatch(userEditRequest());
-    const { tokenJWT } = storage.get('auth');
+    const { tokenJWT, _id } = storage.get('auth');
 
     try {
       const { username, userEmail } = await api.users.updateUser(
@@ -172,7 +178,7 @@ export const editUser = (currentUsername, dataForUpdate) =>
 
       dispatch(userEditSuccess(isLogged, username, userEmail));
 
-      const auth = { tokenJWT, username, userEmail };
+      const auth = { tokenJWT, username, userEmail, _id };
       storage.set('auth', auth);
 
       history.push(`/user/${username}`);

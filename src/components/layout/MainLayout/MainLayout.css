@@ -26,10 +26,10 @@
 }
 
 .layout-footer {
-  height: 50px;
   background-color: var(--bg-solid-color);
   color: var(--font-solid-color);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding-top: 0.5rem;
 }
