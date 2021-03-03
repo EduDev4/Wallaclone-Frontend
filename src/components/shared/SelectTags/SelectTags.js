@@ -32,13 +32,14 @@ SelectTags.propTypes = {
   tags: PropTypes.arrayOf(PropTypes.string),
   loadTags: PropTypes.func.isRequired,
   onChange: PropTypes.func.isRequired,
-  defaultTags: PropTypes.arrayOf(PropTypes.string).isRequired,
+  defaultTags: PropTypes.arrayOf(PropTypes.string),
   placeholder: PropTypes.string,
 };
 
 SelectTags.defaultProps = {
   placeholder: '',
   tags: [],
+  defaultTags: [],
 };
 
 export default SelectTags;
