@@ -14,6 +14,7 @@ const auth = storage.get('auth') || {
   tokenJWT: null,
   userEmail: null,
   username: null,
+  _id: null,
 };
 
 configureClient(auth.tokenJWT);
@@ -27,6 +28,7 @@ const preloadedState = {
     isLogged: !!auth.tokenJWT,
     currentUsername: auth.username,
     currentEmail: auth.userEmail,
+    currentUserId: auth._id,
   },
 };
 const history = createBrowserHistory();

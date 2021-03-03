@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
 
 import { Select, Slider, Input, Button } from 'antd';
 
 import MainLayout from '../../layout/MainLayout';
 import AdvertCard from '../../adverts/AdvertCard';
 import Spinner from '../../shared/Spinner';
+import SelectTags from '../../shared/SelectTags';
+import { getIsLoggedUser, getUserId } from '../../../store/selectors';
 import './AdvertsPage.css';
 
 const AdvertsPage = ({ adverts, loading, loadAdverts }) => {
+  const { t } = useTranslation(['advertspage']);
   const { Option } = Select;
+  const isLogged = useSelector(getIsLoggedUser);
+  const userId = useSelector(getUserId);
   const tags = ['electronics', 'sports', 'cars', 'hobbies'];
   const [filter] = useState();
 
@@ -17,10 +24,18 @@ const AdvertsPage = ({ adverts, loading, loadAdverts }) => {
     loadAdverts(filter);
     return () => {
       // eslint-disable-next-line no-console
-      console.log('cleanup');
+      // console.log('cleanup');
     };
   }, []);
 
+  const isFav = ad => {
+    if (ad.isFavBy) {
+      if (ad.isFavBy[userId]) {
+        return ad.isFavBy[userId];
+      }
+    }
+    return false;
+  };
   const renderContent = () => {
     if (!adverts) return null;
     return adverts.map(ad => (
@@ -31,6 +46,7 @@ const AdvertsPage = ({ adverts, loading, loadAdverts }) => {
         price={ad.price}
         sale={ad.sale}
         tags={ad.tags}
+        fav={isLogged ? isFav(ad) : false}
       />
     ));
   };
@@ -52,9 +68,10 @@ const AdvertsPage = ({ adverts, loading, loadAdverts }) => {
             </div>
 
             <div className="form-field">
-              <Select mode="tags" style={{ width: '100%' }} placeholder="Tags">
-                {tags && tags.map(tag => <Option key={tag}>{tag}</Option>)}
-              </Select>
+              <SelectTags
+                placeholder={t('Selecciona tags')}
+                onChange={() => console.log()}
+              />
             </div>
             <div className="form-field centered">
               <Button type="primary">Filter</Button>
