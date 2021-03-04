@@ -31,6 +31,8 @@ import {
   USER_DELETE_REQUEST,
   USER_DELETE_SUCCESS,
   USER_DELETE_FAILURE,
+  UI_RESET,
+  UI_SET_ALERT,
 } from '../constants/action-types';
 
 import { getIsLoggedUser } from '../selectors';
@@ -38,6 +40,13 @@ import storage from '../../utils/storage';
 
 /** UI ACTIONS */
 // TODO: crear acciones relacionadas con la interfaz de usuario
+export const uiReset = () => ({
+  type: UI_RESET,
+});
+export const uiSetAlert = alert => ({
+  type: UI_SET_ALERT,
+  payload: alert,
+});
 
 /** USER ACTIONS */
 export const userDeleteRequest = () => ({
@@ -329,6 +338,7 @@ export const createAdvert = advertData =>
     try {
       const { advert } = await api.adverts.createAdvert(advertData);
       await dispatch(advertsCreateSuccess(advert));
+      dispatch(uiSetAlert({ type: 'success', message: 'Anuncio creado!' }));
       // TODO: Redirigir a detalle
       // history.push(`/advert/${advert._id}`);
     } catch (error) {

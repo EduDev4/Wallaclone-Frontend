@@ -38,3 +38,6 @@ export const ADVERTS_UPDATE_FAILURE = 'adverts/UPDATE_FAILURE';
 export const ADVERTS_TAGS_REQUEST = 'adverts/TAGS_REQUEST';
 export const ADVERTS_TAGS_SUCCESS = 'adverts/TAGS_SUCCESS';
 export const ADVERTS_TAGS_FAILURE = 'adverts/TAGS_FAILURE';
+
+export const UI_RESET = 'ui/RESET';
+export const UI_SET_ALERT = 'ui/SET_ALERT';

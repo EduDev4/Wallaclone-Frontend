@@ -11,23 +11,14 @@ import useForm from '../../../hooks/useForm';
 
 import './NewAdvertPage.css';
 
-const NewAdvertPage = ({
-  mode,
-  initialForm,
-  onCreate,
-  onUpdate,
-  loading,
-  error,
-}) => {
+const NewAdvertPage = ({ mode, initialForm, onCreate, onUpdate, loading }) => {
   const { t } = useTranslation(['newadvertpage']);
   const { id } = useParams();
   const { TextArea } = Input;
-  const [result, setResult] = useState(null);
   const [form, onChange] = useForm(initialForm);
 
   const handleSubmit = async ev => {
     ev.preventDefault();
-    setResult(null);
 
     const formData = new FormData();
     Object.keys(form).forEach(key => {
@@ -41,10 +32,8 @@ const NewAdvertPage = ({
 
     if (mode === 'new') {
       await onCreate(formData);
-      setResult({ type: 'success', message: t('Anuncio Creado!') });
     } else if (mode === 'edit') {
       await onUpdate(id, formData);
-      setResult({ type: 'success', message: t('Anuncio Editado!') });
     }
   };
 
@@ -142,16 +131,6 @@ const NewAdvertPage = ({
           </div>
         </form>
       </div>
-      {error && (
-        <div className="message-result">
-          <Alert message={error.message} type="error" />
-        </div>
-      )}
-      {result && (
-        <div className="message-result">
-          <Alert message={result.message} type={result.type} />
-        </div>
-      )}
     </MainLayout>
   );
 };
@@ -162,7 +141,6 @@ NewAdvertPage.propTypes = {
   onCreate: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.objectOf(PropTypes.any),
 };
 
 NewAdvertPage.defaultProps = {
@@ -176,7 +154,6 @@ NewAdvertPage.defaultProps = {
     image: '/img/adverts/noAdImage.jpg',
     file: null,
   },
-  error: null,
 };
 
 export default NewAdvertPage;
