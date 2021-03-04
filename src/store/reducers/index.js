@@ -15,6 +15,7 @@ export const initialState = {
   ui: {
     loading: false,
     error: null,
+    alert: null,
   },
 };
 
@@ -57,7 +58,12 @@ export const adverts = (state = initialState.adverts, action) => {
 
 export const ui = (state = initialState.ui, action) => {
   if (action.error) {
-    return { ...state, error: action.payload, loading: false };
+    return {
+      ...state,
+      loading: false,
+      error: action.payload,
+      alert: { type: 'error', message: action.payload.message },
+    };
   }
 
   if (/REQUEST/.test(action.type)) {
@@ -65,7 +71,27 @@ export const ui = (state = initialState.ui, action) => {
   }
 
   if (/SUCCESS/.test(action.type)) {
-    return { ...state, error: null, loading: false };
+    return {
+      ...state,
+      loading: false,
+      error: null,
+    };
+  }
+
+  if (action.type === types.UI_SET_ALERT) {
+    return {
+      ...state,
+      alert: action.payload,
+    };
+  }
+
+  if (action.type === types.UI_RESET) {
+    return {
+      ...state,
+      loading: false,
+      error: null,
+      alert: null,
+    };
   }
   return state;
 };
