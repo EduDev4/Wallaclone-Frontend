@@ -65,35 +65,47 @@ const NewAdvertPage = ({
               <div className="form-field">
                 <Input
                   name="name"
-                  placeholder={t('Nombre')}
+                  placeholder={`${t('Nombre del anuncio')}`}
                   onChange={onChange}
                   value={form.name}
+                  size="large"
                 />
               </div>
-              <div className="form-field">
-                <span className="form-field--label">{t('Precio')}: </span>
-                <InputNumber
-                  name="price"
-                  onChange={value => {
-                    onChange({ target: { value, name: 'price' } });
-                  }}
-                  min={0}
-                  max={20000}
-                  value={form.price}
-                />
+              <div className="form-field-twice">
+                <div className="form-field-price">
+                  <span className="form-field--label">{t('Precio')}: </span>
+                  <InputNumber
+                    name="price"
+                    onChange={value => {
+                      onChange({ target: { value, name: 'price' } });
+                    }}
+                    formatter={value => `${value} €`}
+                    parser={value => value.replace(' €', '')}
+                    min={0}
+                    max={20000}
+                    value={form.price}
+                    size="large"
+                  />
+                </div>
+                <div className="form-field-type">
+                  <span className="form-field--label">{t('Tipo')}: </span>
+                  <Radio.Group
+                    name="sale"
+                    onChange={onChange}
+                    value={form.sale}
+                  >
+                    <Radio value>{t('Venta')}</Radio>
+                    <Radio value={false}>{t('Compra')}</Radio>
+                  </Radio.Group>
+                </div>
               </div>
-              <div className="form-field">
-                <span className="form-field--label">{t('Tipo')}: </span>
-                <Radio.Group name="sale" onChange={onChange} value={form.sale}>
-                  <Radio value>{t('Venta')}</Radio>
-                  <Radio value={false}>{t('Compra')}</Radio>
-                </Radio.Group>
-              </div>
+
               <div className="form-field">
                 <SelectTags
                   defaultTags={form.tags}
                   placeholder={t('Selecciona tags')}
                   onChange={onChange}
+                  size="large"
                 />
               </div>
               <div className="form-field">
@@ -104,6 +116,7 @@ const NewAdvertPage = ({
                   onChange={onChange}
                   style={{ resize: 'none' }}
                   value={form.description}
+                  size="large"
                 />
               </div>
             </div>

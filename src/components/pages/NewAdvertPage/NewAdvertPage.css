@@ -2,25 +2,48 @@
   padding: 1rem;
   max-width: 700px;
   margin: 2rem auto 0 auto;
-  background-color: rgb(255, 255, 160);
+  background-color: var(--grey1-color);
+  border-radius: var(--forms-border-radius);
+  box-shadow: var(--forms-shadow);
 }
 
 .newad-form .button {
-  margin-top: 0.5rem;
-  text-align: center;
+  margin: 0.5rem auto 0 auto;
+  width: 200px;
 }
 
 .newad-form .fields-container {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
+  align-items: center;
   gap: 1rem;
 }
 
 .fields-container .field-group {
+  width: 90%;
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
-  flex: 1;
+}
+.fields-container .form-field-twice {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.newad-form .form-field--label {
+  font-size: 1.1rem;
+}
+
+@media (min-width: 768px) {
+  .fields-container .field-group {
+    width: 60%;
+  }
+  .newad-form .button {
+    width: unset;
+    text-align: center;
+  }
 }
 
 .message-result {
