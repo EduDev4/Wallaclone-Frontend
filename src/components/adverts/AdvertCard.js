@@ -17,6 +17,7 @@ const AdvertCard = ({
   price,
   sale,
   description,
+  state,
   tags,
   createdAt,
   image,
@@ -55,6 +56,12 @@ const AdvertCard = ({
               initialValue={isLogged ? isFav(isFavBy) : false}
               adId={_id}
             />
+            {state === 'Reserved' && (
+              <img
+                src={`${process.env.REACT_APP_PUBLIC_URL}/icons/reserved-30.png`}
+                alt="Reserved"
+              />
+            )}
           </div>
           <div className="advert-price">{price} €</div>
           <div className="advert-tile-title">
@@ -78,6 +85,7 @@ AdvertCard.propTypes = {
   _id: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
+  state: PropTypes.string.isRequired,
   sale: PropTypes.bool.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string),
   isFavBy: PropTypes.objectOf(PropTypes.any),
