@@ -3,3 +3,18 @@
   flex-direction: column;
   gap: 0.5rem;
 }
+
+.addimage-wrapper {
+  background-color: transparent;
+  border: none;
+  outline-style: none;
+}
+
+.addimage-wrapper .addimage-icon {
+  transition: transform 0.1s ease-in-out;
+}
+
+.addimage-wrapper:hover .addimage-icon {
+  cursor: pointer;
+  transform: scale(1.1);
+}

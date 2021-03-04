@@ -9,7 +9,7 @@ export const initialState = {
   },
   adverts: {
     tags: [],
-    ads: null,
+    ads: [],
     adDetail: null,
   },
   ui: {

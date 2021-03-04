@@ -24,6 +24,8 @@
   --stand-out-color: #e88873;
   --grey1-color: #c6c5b9;
   --grey2-color: #e2dadb;
+  --forms-border-radius: 0.5rem;
+  --forms-shadow: 3px 3px 5px -2px #000000;
 }
 
 body {
