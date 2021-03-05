@@ -1,3 +1,9 @@
+import { connect } from 'react-redux';
+
 import MainLayout from './MainLayout';
 
-export default MainLayout;
+import { getUi } from '../../../store/selectors';
+
+const mapStateToProps = getUi;
+
+export default connect(mapStateToProps)(MainLayout);

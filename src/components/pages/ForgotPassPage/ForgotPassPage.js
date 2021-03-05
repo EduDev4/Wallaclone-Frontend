@@ -13,7 +13,6 @@ class ForgotPassPage extends React.Component {
     form: {
       email: '',
     },
-    // submitting: false,
   };
 
   handleChange = event => {
@@ -55,7 +54,7 @@ class ForgotPassPage extends React.Component {
                 onClick={() => forgotPasswd(email)}
                 disabled={!this.canSubmit(email)}
               >
-                Send
+                Submit
               </Button>
             </div>
           </form>

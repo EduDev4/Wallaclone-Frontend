@@ -14,6 +14,9 @@ export const USERS_SIGNUP_CONFIRM_FAILURE = 'users/SIGNUP_CONFIRM_FAILURE';
 export const USER_EDIT_REQUEST = 'user/EDIT_REQUEST';
 export const USER_EDIT_SUCCESS = 'user/EDIT_SUCCESS';
 export const USER_EDIT_FAILURE = 'user/EDIT_FAILURE';
+export const USER_DELETE_REQUEST = 'user/DELETE_REQUEST';
+export const USER_DELETE_SUCCESS = 'user/DELETE_SUCCESS';
+export const USER_DELETE_FAILURE = 'user/DELETE_FAILURE';
 
 export const AUTH_LOGIN_REQUEST = 'auth/LOGIN_REQUEST';
 export const AUTH_LOGIN_SUCCESS = 'auth/LOGIN_SUCCESS';
@@ -32,3 +35,9 @@ export const ADVERTS_CREATE_FAILURE = 'adverts/CREATE_FAILURE';
 export const ADVERTS_UPDATE_REQUEST = 'adverts/UPDATE_REQUEST';
 export const ADVERTS_UPDATE_SUCCESS = 'adverts/UPDATE_SUCCESS';
 export const ADVERTS_UPDATE_FAILURE = 'adverts/UPDATE_FAILURE';
+export const ADVERTS_TAGS_REQUEST = 'adverts/TAGS_REQUEST';
+export const ADVERTS_TAGS_SUCCESS = 'adverts/TAGS_SUCCESS';
+export const ADVERTS_TAGS_FAILURE = 'adverts/TAGS_FAILURE';
+
+export const UI_RESET = 'ui/RESET';
+export const UI_SET_ALERT = 'ui/SET_ALERT';

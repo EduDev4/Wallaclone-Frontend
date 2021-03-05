@@ -22,15 +22,63 @@ import {
   ADVERTS_UPDATE_REQUEST,
   ADVERTS_UPDATE_SUCCESS,
   ADVERTS_UPDATE_FAILURE,
+  ADVERTS_TAGS_REQUEST,
+  ADVERTS_TAGS_SUCCESS,
+  ADVERTS_TAGS_FAILURE,
   USER_EDIT_REQUEST,
   USER_EDIT_SUCCESS,
   USER_EDIT_FAILURE,
+  USER_DELETE_REQUEST,
+  USER_DELETE_SUCCESS,
+  USER_DELETE_FAILURE,
+  UI_RESET,
+  UI_SET_ALERT,
 } from '../constants/action-types';
+
+import { getIsLoggedUser } from '../selectors';
+import storage from '../../utils/storage';
 
 /** UI ACTIONS */
 // TODO: crear acciones relacionadas con la interfaz de usuario
+export const uiReset = () => ({
+  type: UI_RESET,
+});
+export const uiSetAlert = alert => ({
+  type: UI_SET_ALERT,
+  payload: alert,
+});
 
 /** USER ACTIONS */
+export const userDeleteRequest = () => ({
+  type: USER_DELETE_REQUEST,
+});
+
+export const userDeleteFailure = error => ({
+  type: USER_DELETE_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const userDeleteSuccess = () => ({
+  type: USER_DELETE_SUCCESS,
+});
+
+export const deleteUser = () =>
+  async function (dispatch, getstate, { history, api }) {
+    dispatch(userDeleteRequest());
+    try {
+      const response = await api.users.deleteUser();
+      console.log(response);
+      dispatch(userDeleteSuccess());
+
+      // TODO: Mensaje de borrado de usuario
+      // eslint-disable-next-line no-use-before-define
+      await dispatch(logout());
+    } catch (error) {
+      console.log(error.message);
+      dispatch(userDeleteFailure(error));
+    }
+  };
 
 /** SIGNUP ACTIONS */
 export const usersSignupRequest = () => ({
@@ -101,31 +149,52 @@ export const signupConfirm = data =>
   };
 /** EDIT USER */
 
-// export const userEditRequest = () =>({
-//   type: USER_EDIT_REQUEST
-// })
-//
-// export const userEditFailire = error => ({
-//   type: USER_EDIT_FAILURE,
-//   error: true,
-//   payload: error,
-// })
-//
-// export const userEditSuccess = (dataForUpdate) => ({
-//   type: USER_EDIT_SUCCESS,
-//   payload: {
-//
-//   }
-// })
-// export const editUser = dataForUpdate => async function (dispatch, getstate, { history, api }){
-//   dispatch(userEditRequest());
-//   try {
-//     const userUpdate = await api.user.
-//   } catch (error) {
-//     dispatch(authLoginFailure(error));
-//
-//   }
-// }
+export const userEditRequest = () => ({
+  type: USER_EDIT_REQUEST,
+});
+export const userEditFailure = error => ({
+  type: USER_EDIT_FAILURE,
+  error: true,
+  payload: error,
+});
+export const userEditSuccess = (
+  isLogged,
+  currentUsername,
+  currentUserId,
+  currentEmail,
+) => ({
+  type: USER_EDIT_SUCCESS,
+  payload: {
+    isLogged,
+    currentUsername,
+    currentUserId,
+    currentEmail,
+  },
+});
+
+export const editUser = (currentUsername, dataForUpdate) =>
+  async function (dispatch, getstate, { history, api }) {
+    const state = getstate();
+    const isLogged = getIsLoggedUser(state);
+    dispatch(userEditRequest());
+    const { tokenJWT, _id } = storage.get('auth');
+
+    try {
+      const { username, userEmail } = await api.users.updateUser(
+        currentUsername,
+        dataForUpdate,
+      );
+
+      dispatch(userEditSuccess(isLogged, username, userEmail));
+
+      const auth = { tokenJWT, username, userEmail, _id };
+      storage.set('auth', auth);
+
+      history.push(`/user/${username}`);
+    } catch (error) {
+      dispatch(userEditFailure(error));
+    }
+  };
 
 /** AUTH LOGIN ACTIONS */
 export const authLoginRequest = () => ({
@@ -138,12 +207,18 @@ export const authLoginFailure = error => ({
   payload: error,
 });
 
-export const authLoginSuccess = (isLogged, currentUsername, currentEmail) => ({
+export const authLoginSuccess = (
+  isLogged,
+  currentUsername,
+  currentEmail,
+  currentUserId,
+) => ({
   type: AUTH_LOGIN_SUCCESS,
   payload: {
     isLogged,
     currentUsername,
     currentEmail,
+    currentUserId,
   },
 });
 
@@ -152,11 +227,10 @@ export const login = credentials =>
     dispatch(authLoginRequest());
     try {
       const authData = await api.auth.login(credentials);
-      const { tokenJWT, username, userEmail } = authData;
-      dispatch(authLoginSuccess(!!tokenJWT, username, userEmail));
+      const { tokenJWT, username, userEmail, _id } = authData;
+      dispatch(authLoginSuccess(!!tokenJWT, username, userEmail, _id));
       history.push('/adverts');
     } catch (error) {
-      // console.log(error.message);
       dispatch(authLoginFailure(error));
     }
   };
@@ -204,6 +278,9 @@ export const advertsCreateRequest = () => ({
 export const advertsUpdateRequest = () => ({
   type: ADVERTS_UPDATE_REQUEST,
 });
+export const advertsTagsRequest = () => ({
+  type: ADVERTS_TAGS_REQUEST,
+});
 
 export const advertsLoadFailure = error => ({
   type: ADVERTS_LOAD_FAILURE,
@@ -220,6 +297,11 @@ export const advertsUpdateFailure = error => ({
   error: true,
   payload: error,
 });
+export const advertsTagsFailure = error => ({
+  type: ADVERTS_TAGS_FAILURE,
+  error: true,
+  payload: error,
+});
 
 export const advertsLoadSuccess = ads => ({
   type: ADVERTS_LOAD_SUCCESS,
@@ -233,6 +315,22 @@ export const advertsUpdateSuccess = ad => ({
   type: ADVERTS_UPDATE_SUCCESS,
   payload: ad,
 });
+export const advertsTagsSuccess = tags => ({
+  type: ADVERTS_TAGS_SUCCESS,
+  payload: tags,
+});
+
+export const loadAdverts = formFilter =>
+  // eslint-disable-next-line func-names
+  async function (dispatch, getState, { api }) {
+    dispatch(advertsLoadRequest());
+    try {
+      const { adverts } = await api.adverts.getAdverts(formFilter);
+      dispatch(advertsLoadSuccess(adverts));
+    } catch (error) {
+      dispatch(advertsLoadFailure(error));
+    }
+  };
 
 export const createAdvert = advertData =>
   async function (dispatch, getState, { history, api }) {
@@ -240,6 +338,7 @@ export const createAdvert = advertData =>
     try {
       const { advert } = await api.adverts.createAdvert(advertData);
       await dispatch(advertsCreateSuccess(advert));
+      dispatch(uiSetAlert({ type: 'success', message: 'Anuncio creado!' }));
       // TODO: Redirigir a detalle
       // history.push(`/advert/${advert._id}`);
     } catch (error) {
@@ -258,5 +357,19 @@ export const updateAdvert = (adId, advertData) =>
     } catch (error) {
       console.log(error);
       await dispatch(advertsUpdateFailure(error));
+    }
+  };
+
+export const loadTags = () =>
+  async function (dispatch, getState, { api }) {
+    const { adverts } = getState();
+    // If have tags, no make request to api
+    if (adverts.tags.length) return;
+    dispatch(advertsTagsRequest());
+    try {
+      const { tags } = await api.adverts.getAllTags();
+      dispatch(advertsTagsSuccess(tags));
+    } catch (error) {
+      dispatch(advertsTagsFailure(error));
     }
   };

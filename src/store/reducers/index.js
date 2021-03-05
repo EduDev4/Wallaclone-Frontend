@@ -4,16 +4,18 @@ export const initialState = {
   auth: {
     isLogged: false,
     currentUsername: '',
+    currentUserId: '',
     currentEmail: '',
   },
   adverts: {
     tags: [],
-    ads: null,
+    ads: [],
     adDetail: null,
   },
   ui: {
     loading: false,
     error: null,
+    alert: null,
   },
 };
 
@@ -25,6 +27,8 @@ export const auth = (state = initialState.auth, action) => {
       return initialState.auth;
     case types.USERS_SIGNUP_SUCCESS:
       return action.payload;
+    case types.USER_EDIT_SUCCESS:
+      return action.payload;
     default:
       return state;
   }
@@ -32,6 +36,8 @@ export const auth = (state = initialState.auth, action) => {
 
 export const adverts = (state = initialState.adverts, action) => {
   switch (action.type) {
+    case types.ADVERTS_TAGS_SUCCESS:
+      return { ...state, tags: action.payload };
     case types.ADVERTS_LOAD_SUCCESS:
       return { ...state, ads: action.payload };
     case types.ADVERTS_CREATE_SUCCESS:
@@ -52,7 +58,12 @@ export const adverts = (state = initialState.adverts, action) => {
 
 export const ui = (state = initialState.ui, action) => {
   if (action.error) {
-    return { ...state, error: action.payload, loading: false };
+    return {
+      ...state,
+      loading: false,
+      error: action.payload,
+      alert: { type: 'error', message: action.payload.message },
+    };
   }
 
   if (/REQUEST/.test(action.type)) {
@@ -60,7 +71,27 @@ export const ui = (state = initialState.ui, action) => {
   }
 
   if (/SUCCESS/.test(action.type)) {
-    return { ...state, error: null, loading: false };
+    return {
+      ...state,
+      loading: false,
+      error: null,
+    };
+  }
+
+  if (action.type === types.UI_SET_ALERT) {
+    return {
+      ...state,
+      alert: action.payload,
+    };
+  }
+
+  if (action.type === types.UI_RESET) {
+    return {
+      ...state,
+      loading: false,
+      error: null,
+      alert: null,
+    };
   }
   return state;
 };

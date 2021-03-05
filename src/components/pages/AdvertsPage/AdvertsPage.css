@@ -1,4 +1,4 @@
-.advertsPage {
+/*.advertsPage {
   display: flex;
   gap: 3rem;
 }
@@ -9,7 +9,7 @@
 
 .advertsPage-content {
   flex: 1;
-}
+}*/
 
 .filter-form {
   display: flex;
@@ -18,7 +18,7 @@
   gap: 1rem;
   padding: 1rem;
 
-  background-color: rgb(255, 255, 160);
+  background-color: var(--grey1-color);
 }
 
 .filter-form button {

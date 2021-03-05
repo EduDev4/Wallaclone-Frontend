@@ -1,22 +1,15 @@
 import axios from 'axios';
-import i18n from 'i18next';
 
-const { REACT_APP_API_BASE_URL: baseURL } = process.env;
+const { REACT_APP_API_BASE_URL_LOCAL: baseURL } = process.env;
 
 const client = axios.create({
   baseURL,
 });
 
-// Interceptor request for language selection
-client.interceptors.request.use(req => {
-  if (req.url.includes('?')) {
-    req.url += `&lang=${i18n.language}`;
-  } else {
-    req.url += `?lang=${i18n.language}`;
-  }
-
-  return req;
-});
+export const setLocaleLanguageHeader = lang => {
+  client.defaults.headers.common['Accept-Language'] =
+    lang === 'es' ? 'es-ES,es;q=0.9' : 'en-EN,en;q=0.9';
+};
 
 export const setAuthorizationHeader = token => {
   client.defaults.headers.common.Authorization = `Bearer ${token}`;
@@ -34,6 +27,7 @@ export const configureClient = token => {
 
 client.interceptors.response.use(
   response => {
+    if (response.status === 204) return 'deleted';
     if (response.data.status !== 'success') {
       return Promise.reject(
         new Error(response.data.error.message || 'Something went wrong!!'),

@@ -1,9 +1,9 @@
 import React, { useState, createRef } from 'react';
 import PropTypes from 'prop-types';
-import { Image, Button } from 'antd';
+import { Image } from 'antd';
 import './FileImageLoad.css';
 
-const FileImageLoad = ({ onFileSelect, label, imgUrl }) => {
+const FileImageLoad = ({ onFileSelect, imgUrl }) => {
   const [file, setFile] = useState(null);
   const inputRef = createRef(null);
 
@@ -22,7 +22,17 @@ const FileImageLoad = ({ onFileSelect, label, imgUrl }) => {
   return (
     <div className="fileLoad">
       <div className="fileLoad-file">
-        <Button onClick={handleClick}>{label}</Button>
+        <button
+          type="button"
+          className="addimage-wrapper"
+          onClick={handleClick}
+        >
+          <img
+            className="addimage-icon"
+            src={`${process.env.REACT_APP_PUBLIC_URL}/icons/add-photo-80.png`}
+            alt="Add file"
+          />
+        </button>
         <input
           ref={inputRef}
           type="file"
@@ -52,7 +62,6 @@ const FileImageLoad = ({ onFileSelect, label, imgUrl }) => {
 
 FileImageLoad.propTypes = {
   onFileSelect: PropTypes.func.isRequired,
-  label: PropTypes.string.isRequired,
   imgUrl: PropTypes.string,
 };
 

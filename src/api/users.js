@@ -1,9 +1,9 @@
 import client from './client';
 
-const usersBaseUrl = '/apiv1';
+const usersBaseUrl = '/apiv1/users';
 
 export const resetPasswd = (passwd, hash) => {
-  const url = `${usersBaseUrl}/users/forgotPass/confirmation`;
+  const url = `${usersBaseUrl}/forgotPass/confirmation`;
   console.log(hash);
   console.log(passwd);
   const params = JSON.stringify({
@@ -18,7 +18,7 @@ export const resetPasswd = (passwd, hash) => {
 };
 
 export const forgotPasswd = email => {
-  const url = `${usersBaseUrl}/users/forgotPass`;
+  const url = `${usersBaseUrl}/forgotPass`;
   const params = JSON.stringify({
     email,
   });
@@ -30,7 +30,7 @@ export const forgotPasswd = email => {
 };
 
 export const signup = async data => {
-  const url = `${usersBaseUrl}/users`;
+  const url = `${usersBaseUrl}`;
   const headers = { 'Content-Type': 'multipart/form-data' };
   const response = await client.post(url, data, headers);
   console.log(response);
@@ -38,8 +38,23 @@ export const signup = async data => {
 };
 
 export const signupConfirm = async data => {
-  const url = `${usersBaseUrl}/users/confirm/${data}`;
+  const url = `${usersBaseUrl}/confirm/${data}`;
   const response = await client.get(url);
   console.log(response);
   return response;
+};
+
+export const updateUser = async (currentUsername, updateData) => {
+  const response = await client.patch(
+    `/apiv1/users/editUser/${currentUsername}`,
+    updateData,
+  );
+  return response;
+};
+
+export const deleteUser = () => client.delete(usersBaseUrl);
+
+export const setUnsetFav = async adId => {
+  const url = `${usersBaseUrl}/favs/${adId}`;
+  await client.post(url);
 };

@@ -11,23 +11,14 @@ import useForm from '../../../hooks/useForm';
 
 import './NewAdvertPage.css';
 
-const NewAdvertPage = ({
-  mode,
-  initialForm,
-  onCreate,
-  onUpdate,
-  loading,
-  error,
-}) => {
+const NewAdvertPage = ({ mode, initialForm, onCreate, onUpdate, loading }) => {
   const { t } = useTranslation(['newadvertpage']);
   const { id } = useParams();
   const { TextArea } = Input;
-  const [result, setResult] = useState(null);
   const [form, onChange] = useForm(initialForm);
 
   const handleSubmit = async ev => {
     ev.preventDefault();
-    setResult(null);
 
     const formData = new FormData();
     Object.keys(form).forEach(key => {
@@ -41,10 +32,8 @@ const NewAdvertPage = ({
 
     if (mode === 'new') {
       await onCreate(formData);
-      setResult({ type: 'success', message: t('Anuncio Creado!') });
     } else if (mode === 'edit') {
       await onUpdate(id, formData);
-      setResult({ type: 'success', message: t('Anuncio Editado!') });
     }
   };
 
@@ -65,35 +54,47 @@ const NewAdvertPage = ({
               <div className="form-field">
                 <Input
                   name="name"
-                  placeholder={t('Nombre')}
+                  placeholder={`${t('Nombre del anuncio')}`}
                   onChange={onChange}
                   value={form.name}
+                  size="large"
                 />
               </div>
-              <div className="form-field">
-                <span className="form-field--label">{t('Precio')}: </span>
-                <InputNumber
-                  name="price"
-                  onChange={value => {
-                    onChange({ target: { value, name: 'price' } });
-                  }}
-                  min={0}
-                  max={20000}
-                  value={form.price}
-                />
+              <div className="form-field-twice">
+                <div className="form-field-price">
+                  <span className="form-field--label">{t('Precio')}: </span>
+                  <InputNumber
+                    name="price"
+                    onChange={value => {
+                      onChange({ target: { value, name: 'price' } });
+                    }}
+                    formatter={value => `${value} €`}
+                    parser={value => value.replace(' €', '')}
+                    min={0}
+                    max={20000}
+                    value={form.price}
+                    size="large"
+                  />
+                </div>
+                <div className="form-field-type">
+                  <span className="form-field--label">{t('Tipo')}: </span>
+                  <Radio.Group
+                    name="sale"
+                    onChange={onChange}
+                    value={form.sale}
+                  >
+                    <Radio value>{t('Venta')}</Radio>
+                    <Radio value={false}>{t('Compra')}</Radio>
+                  </Radio.Group>
+                </div>
               </div>
-              <div className="form-field">
-                <span className="form-field--label">{t('Tipo')}: </span>
-                <Radio.Group name="sale" onChange={onChange} value={form.sale}>
-                  <Radio value>{t('Venta')}</Radio>
-                  <Radio value={false}>{t('Compra')}</Radio>
-                </Radio.Group>
-              </div>
+
               <div className="form-field">
                 <SelectTags
                   defaultTags={form.tags}
                   placeholder={t('Selecciona tags')}
                   onChange={onChange}
+                  size="large"
                 />
               </div>
               <div className="form-field">
@@ -104,6 +105,7 @@ const NewAdvertPage = ({
                   onChange={onChange}
                   style={{ resize: 'none' }}
                   value={form.description}
+                  size="large"
                 />
               </div>
             </div>
@@ -129,16 +131,6 @@ const NewAdvertPage = ({
           </div>
         </form>
       </div>
-      {error && (
-        <div className="message-result">
-          <Alert message={error.message} type="error" />
-        </div>
-      )}
-      {result && (
-        <div className="message-result">
-          <Alert message={result.message} type={result.type} />
-        </div>
-      )}
     </MainLayout>
   );
 };
@@ -149,7 +141,6 @@ NewAdvertPage.propTypes = {
   onCreate: PropTypes.func.isRequired,
   onUpdate: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.objectOf(PropTypes.any),
 };
 
 NewAdvertPage.defaultProps = {
@@ -163,7 +154,6 @@ NewAdvertPage.defaultProps = {
     image: '/img/adverts/noAdImage.jpg',
     file: null,
   },
-  error: null,
 };
 
 export default NewAdvertPage;

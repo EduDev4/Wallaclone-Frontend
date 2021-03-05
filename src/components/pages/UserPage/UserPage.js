@@ -1,86 +1,43 @@
-import React from 'react';
-import { connect } from 'react-redux';
+/* eslint-disable react/jsx-props-no-spreading */
+import React, { useEffect } from 'react';
+
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Input, Button } from 'antd';
-import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { useTranslation } from 'react-i18next';
+import AdvertCard from '../../adverts';
 
 import MainLayout from '../../layout/MainLayout';
-import {
-  getUi,
-  getUsername,
-  getUserEmail,
-  getIsLoggedUser,
-} from '../../../store/selectors';
 
 import './UserPage.css';
+import UserPageAside from './UserPageAside';
 
-function UserPage({
-  loading,
-  error,
-  currentUsername,
-  currentUserEmail,
-  isLogged,
-  match,
-}) {
+function UserPage({ match, currentUsername, isLogged, adverts, loadAdverts }) {
   const handleDelete = () => {};
-  const handleEdit = () => {};
-  const url = `/user/edit/${currentUsername}`;
+  const user = match.params.username;
+  const { t } = useTranslation(['userpage']);
+
+  useEffect(() => {
+    loadAdverts(`username=${user}`);
+  }, []);
+
+  const renderAdverts = () => {
+    if (!adverts) return null;
+    return adverts.map(ad => <AdvertCard key={ad._id} {...ad} />);
+  };
 
   return (
-    <MainLayout title="My Profile">
+    <MainLayout title="">
       <div className="userPage">
-        <aside className="userPage-aside">
-          <h2>{match.params.username}</h2>
-
-          {isLogged && currentUsername === match.params.username ? (
-            <>
-              <p>{currentUserEmail}</p>
-              <Link className="edit-link" to={url}>
-                <Button type="primary" className="edit-button">
-                  Editar mis datos{' '}
-                  <EditOutlined className="site-form-item-icon" />
-                </Button>
-              </Link>
-
-              <Button type="dashed" onClick={handleDelete} danger>
-                Darme de baja <DeleteOutlined className="site-form-item-icon" />
-              </Button>
-            </>
-          ) : (
-            <></>
-          )}
-        </aside>
-        <div className="userPage-content">
-          <h2>Mis anuncios</h2>
-          <div className="userPage-adswrapper">
-            <div className="advert-card">
-              <p>
-                Chocolate oat cake marshmallow soufflé. Carrot cake muffin
-                dessert macaroon. Jujubes pudding jelly beans fruitcake cookie
-                cookie toffee cotton candy gingerbread. Candy
-              </p>
-            </div>
-            <div className="advert-card">
-              <p>
-                Chocolate oat cake marshmallow soufflé. Carrot cake muffin
-                dessert macaroon. Jujubes pudding jelly beans fruitcake cookie
-                cookie toffee cotton candy gingerbread. Candy
-              </p>
-            </div>
-            <div className="advert-card">
-              <p>
-                Chocolate oat cake marshmallow soufflé. Carrot cake muffin
-                dessert macaroon. Jujubes pudding jelly beans fruitcake cookie
-                cookie toffee cotton candy gingerbread. Candy
-              </p>
-            </div>
-            <div className="advert-card">
-              <p>
-                Chocolate oat cake marshmallow soufflé. Carrot cake muffin
-                dessert macaroon. Jujubes pudding jelly beans fruitcake cookie
-                cookie toffee cotton candy gingerbread. Candy
-              </p>
+        <div className="row justify-content-center">
+          <aside className="userPage-aside col-sm-12 col-md-3">
+            <UserPageAside user={user} onDelete={handleDelete} />
+          </aside>
+          <div className="userPage-content col-sm-12 col-md-9">
+            {isLogged && currentUsername === user ? (
+              <h2>{t('Mis Anuncios')}</h2>
+            ) : null}
+            <div className="userPage-adswrapper row gx-3 gy-3">
+              {!adverts ? <p>no hay anuncios</p> : renderAdverts()}
             </div>
           </div>
         </div>
@@ -90,33 +47,29 @@ function UserPage({
 }
 
 UserPage.propTypes = {
-  loading: PropTypes.bool,
-  error: PropTypes.bool,
+  // eslint-disable-next-line react/require-default-props
+  // loading: PropTypes.bool,
+  // error: PropTypes.bool,
   currentUsername: PropTypes.string,
-  currentUserEmail: PropTypes.string,
+  // currentUserEmail: PropTypes.string,
   isLogged: PropTypes.bool,
-  match: PropTypes.objectOf(PropTypes.any).isRequired,
+  // eslint-disable-next-line react/require-default-props
+  match: PropTypes.shape({
+    params: PropTypes.shape({
+      username: PropTypes.string.isRequired,
+    }),
+  }),
+  loadAdverts: PropTypes.func.isRequired,
+  adverts: PropTypes.arrayOf(PropTypes.object),
 };
 
 UserPage.defaultProps = {
-  loading: false,
-  error: null,
+  //   loading: false,
+  //   error: null,
   currentUsername: '',
-  currentUserEmail: '',
+  //   currentUserEmail: '',
   isLogged: false,
+  adverts: null,
 };
 
-const mapStateToProps = state => ({
-  getUi,
-  currentUsername: getUsername(state),
-  currentUserEmail: getUserEmail(state),
-  isLogged: getIsLoggedUser(state),
-});
-
-// const mapDispatchToProps = {
-//   onLogin: login,
-// };
-
-const ConnectedUserPage = connect(mapStateToProps)(UserPage);
-
-export default ConnectedUserPage;
+export default UserPage;
