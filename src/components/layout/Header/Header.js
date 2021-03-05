@@ -65,23 +65,6 @@ function Header({ className, isLogged, onLogout, currentUser, ...props }) {
             <Link className="nav-button" to="/">
               <Button type="primary">{t('Anuncios')}</Button>
             </Link>
-            <Button
-              onClick={() => {
-                window.less
-                  .modifyVars({
-                    '@primary-color': '#52c41a',
-                  })
-                  .then(() => {
-                    // do other stuff here
-                  })
-                  .catch(error => {
-                    console.error(error);
-                  });
-              }}
-            >
-              Cambia color
-            </Button>
-
             <Link className="nav-button" to="/login">
               <Button type="primary">Login</Button>
             </Link>

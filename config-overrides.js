@@ -28,3 +28,16 @@ module.exports = override(
     },
   }),
 );
+
+// onClick={() => {
+//   window.less
+//     .modifyVars({
+//       '@primary-color': '#52c41a',
+//     })
+//     .then(() => {
+//       // do other stuff here
+//     })
+//     .catch(error => {
+//       console.error(error);
+//     });
+// }}
