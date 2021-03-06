@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Button, Menu, Dropdown } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ConfirmButton from '../../shared/ConfirmButton';
 import LangButton from '../../shared/LangButton';
@@ -35,10 +35,17 @@ function Header({
   });
 
   const [search, setSearch] = useState('');
+  const { username } = useParams();
 
   const handleSubmit = event => {
     event.preventDefault();
-    if (search) {
+    if (username) {
+      if (search) {
+        loadAdverts(`username=${username}&name=${search}`);
+      } else {
+        loadAdverts(`username=${username}`);
+      }
+    } else if (search) {
       loadAdverts(`name=${search}`);
     } else {
       loadAdverts();
