@@ -86,16 +86,30 @@ function Header({
             <h1 className="walla-logo">W</h1>
           )}
         </Link>
+
         <div className="header-search-input-wrapper">
           <form onSubmit={handleSubmitSearch}>
-            <input
-              type="text"
-              placeholder={t('Buscar...')}
-              name="search"
-              value={search}
-              onChange={ev => setSearch(ev.target.value)}
-              className="header-search-input"
-            />
+            <div className="searchContainer">
+              <div className="searchIcon">
+                <img
+                  alt="O"
+                  src={`${process.env.REACT_APP_PUBLIC_URL}/icons/search-icon.svg`}
+                />
+              </div>
+              <input
+                type="text"
+                placeholder={t('Buscar...')}
+                name="search"
+                value={search}
+                onChange={ev => setSearch(ev.target.value)}
+                className="searchBox"
+              />
+              <input
+                type="submit"
+                value="Search"
+                className="searchButton"
+              ></input>
+            </div>
           </form>
         </div>
         {isLogged ? (
@@ -114,7 +128,7 @@ function Header({
                 trigger={['click', 'hover']}
               >
                 <img
-                  src={`${process.env.REACT_APP_PUBLIC_URL}/icons/profile-menu-30.png`}
+                  src={`${process.env.REACT_APP_PUBLIC_URL}/icons/profile-menu-40.png`}
                   className="login-image"
                   alt="Profile"
                 />
@@ -126,7 +140,11 @@ function Header({
             <div className="language-profile-wrapper">
               <LangButton initialLang={i18n.language} />
               <Link className="nav-button" to="/login">
-                <Button type="default" shape="circle" icon={<UserOutlined />} />
+                <img
+                  src={`${process.env.REACT_APP_PUBLIC_URL}/icons/profile-menu-40.png`}
+                  className="login-image"
+                  alt="Profile"
+                />
               </Link>
             </div>
           </>

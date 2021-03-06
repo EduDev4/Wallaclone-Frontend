@@ -29,16 +29,37 @@
   flex: 1;
   padding: 0px 2em 0px 2em;
 }
-.header-search-input {
-  border: none;
+
+.searchContainer {
+  display: inline-flex;
   width: 100%;
-  padding: 0.5rem 2rem;
-  border-radius: 10px;
-  box-shadow: 4px 4px 4px 0px rgba(80, 77, 77, 0.75);
-  -webkit-box-shadow: 4px 4px 4px 0px rgba(80, 77, 77, 0.75);
-  -moz-box-shadow: 4px 4px 4px 0px rgba(80, 77, 77, 0.75);
+  background-color: #ccc;
+  border-radius: 20px;
+  overflow: hidden;
 }
 
-.header-search-input:focus {
+.searchIcon {
+  padding: 0.5rem;
+
+  background-color: rgba(250, 250, 250, 0.6);
+}
+
+.searchBox {
+  border: 0;
+  padding: 0.5rem 0.5rem 0.5rem 0;
+  flex: 1;
+  background-color: rgba(250, 250, 250, 0.6);
+}
+.searchBox:focus {
+  outline: none;
+}
+
+.searchButton {
+  background: var(--bg-button-main);
+  border: 0;
+  color: var(--color-button-main);
+  padding: 0.5rem;
+  border-radius: 0;
+  cursor: pointer;
   outline: none;
 }
