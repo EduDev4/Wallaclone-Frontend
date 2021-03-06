@@ -14,15 +14,31 @@
 .header-nav .nav-button {
   margin-left: 2rem;
 }
-
+.language-profile-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 70px;
+}
 .login-image:hover {
   cursor: pointer;
 }
+.user-tools-wrapper {
+  margin-right: 2em;
+}
+.header-search-input-wrapper {
+  flex: 1;
+  padding: 0px 2em 0px 2em;
+}
 .header-search-input {
   border: none;
-  padding: 0.3rem 0.5rem;
+  width: 100%;
+  padding: 0.5rem 2rem;
   border-radius: 10px;
   box-shadow: 4px 4px 4px 0px rgba(80, 77, 77, 0.75);
   -webkit-box-shadow: 4px 4px 4px 0px rgba(80, 77, 77, 0.75);
   -moz-box-shadow: 4px 4px 4px 0px rgba(80, 77, 77, 0.75);
+}
+
+.header-search-input:focus {
+  outline: none;
 }

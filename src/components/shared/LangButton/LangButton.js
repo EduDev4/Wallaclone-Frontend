@@ -20,8 +20,8 @@ const LangButton = ({ initialLang }) => {
       className="flag-icon"
       src={
         lang === 'es'
-          ? `${process.env.REACT_APP_PUBLIC_URL}/icons/lang-spanish-menu-60.png`
-          : `${process.env.REACT_APP_PUBLIC_URL}/icons/lang-english-menu-60.png`
+          ? `${process.env.REACT_APP_PUBLIC_URL}/icons/lang-spanish-menu-20.png`
+          : `${process.env.REACT_APP_PUBLIC_URL}/icons/lang-english-menu-20.png`
       }
       alt={lang === 'es' ? 'Spanish' : 'English'}
     />

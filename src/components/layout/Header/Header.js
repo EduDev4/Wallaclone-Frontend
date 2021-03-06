@@ -86,40 +86,49 @@ function Header({
             <h1 className="walla-logo">W</h1>
           )}
         </Link>
-        <form onSubmit={handleSubmitSearch}>
-          <input
-            type="text"
-            placeholder={t('Buscar...')}
-            name="search"
-            value={search}
-            onChange={ev => setSearch(ev.target.value)}
-            className="header-search-input"
-          />
-        </form>
-
-        <LangButton initialLang={i18n.language} />
-
+        <div className="header-search-input-wrapper">
+          <form onSubmit={handleSubmitSearch}>
+            <input
+              type="text"
+              placeholder={t('Buscar...')}
+              name="search"
+              value={search}
+              onChange={ev => setSearch(ev.target.value)}
+              className="header-search-input"
+            />
+          </form>
+        </div>
         {isLogged ? (
           <>
-            {isMobile ? null : <UserTools />}
-            <Dropdown
-              overlay={menuLogin}
-              placement="bottomRight"
-              arrow
-              trigger={['click', 'hover']}
-            >
-              <img
-                src={`${process.env.REACT_APP_PUBLIC_URL}/icons/profile-menu-30.png`}
-                className="login-image"
-                alt="Profile"
-              />
-            </Dropdown>
+            {isMobile ? null : (
+              <div className="user-tools-wrapper">
+                <UserTools />
+              </div>
+            )}
+            <div className="language-profile-wrapper">
+              <LangButton initialLang={i18n.language} />
+              <Dropdown
+                overlay={menuLogin}
+                placement="bottomRight"
+                arrow
+                trigger={['click', 'hover']}
+              >
+                <img
+                  src={`${process.env.REACT_APP_PUBLIC_URL}/icons/profile-menu-30.png`}
+                  className="login-image"
+                  alt="Profile"
+                />
+              </Dropdown>
+            </div>
           </>
         ) : (
           <>
-            <Link className="nav-button" to="/login">
-              <Button type="default" shape="circle" icon={<UserOutlined />} />
-            </Link>
+            <div className="language-profile-wrapper">
+              <LangButton initialLang={i18n.language} />
+              <Link className="nav-button" to="/login">
+                <Button type="default" shape="circle" icon={<UserOutlined />} />
+              </Link>
+            </div>
           </>
         )}
       </div>
