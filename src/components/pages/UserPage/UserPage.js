@@ -28,15 +28,15 @@ function UserPage({ match, currentUsername, isLogged, adverts, loadAdverts }) {
   return (
     <MainLayout title="">
       <div className="userPage">
-        <div className="row justify-content-center">
-          <aside className="userPage-aside col-sm-12 col-md-3">
+        <div className="grid-container">
+          <aside className="userPage-aside">
             <UserPageAside user={user} onDelete={handleDelete} />
           </aside>
-          <div className="userPage-content col-sm-12 col-md-9">
+          <div className="userPage-content">
             {isLogged && currentUsername === user ? (
               <h2>{t('Mis Anuncios')}</h2>
             ) : null}
-            <div className="userPage-adswrapper row gx-3 gy-3">
+            <div className="userPage-adswrapper flex-container">
               {!adverts ? <p>no hay anuncios</p> : renderAdverts()}
             </div>
           </div>

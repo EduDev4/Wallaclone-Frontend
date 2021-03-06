@@ -37,7 +37,7 @@ function Header({
   const [search, setSearch] = useState('');
   const { username } = useParams();
 
-  const handleSubmit = event => {
+  const handleSubmitSearch = event => {
     event.preventDefault();
     if (username) {
       if (search) {
@@ -86,7 +86,7 @@ function Header({
             <h1 className="walla-logo">W</h1>
           )}
         </Link>
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmitSearch}>
           <input
             type="text"
             placeholder={t('Buscar...')}

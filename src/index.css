@@ -64,3 +64,35 @@ code {
 .centered {
   text-align: center;
 }
+
+/* GRID AND FLEX CONTAINERS */
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+@media all and (min-width: 576px) {
+  .grid-container {
+    display: grid;
+    grid-template-columns: 35% auto;
+    column-gap: 30px;
+  }
+  .flex-container {
+    justify-content: flex-start;
+  }
+  .flex-item {
+    margin-right: 10px;
+  }
+}
+@media all and (min-width: 768px) {
+  .grid-container {
+    grid-template-columns: 30% auto;
+  }
+}
+@media all and (min-width: 980px) {
+  .grid-container {
+    grid-template-columns: 25% auto;
+  }
+}
