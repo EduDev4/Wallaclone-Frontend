@@ -110,8 +110,8 @@ function Header({
             >
               <img
                 src={`${process.env.REACT_APP_PUBLIC_URL}/icons/profile-menu-30.png`}
-                alt="fav"
                 className="login-image"
+                alt="Profile"
               />
             </Dropdown>
           </>
