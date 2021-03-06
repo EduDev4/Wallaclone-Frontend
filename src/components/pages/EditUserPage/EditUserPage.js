@@ -23,7 +23,7 @@ function EditUserPage({
   });
 
   const { newUsername, newUserEmail, newPasswd } = form;
-  const { t, i18n } = useTranslation(['userpage']);
+  const { t } = useTranslation(['userpage']);
 
   const handleSubmit = event => {
     event.preventDefault();

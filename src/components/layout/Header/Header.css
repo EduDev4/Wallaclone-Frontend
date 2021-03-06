@@ -14,3 +14,15 @@
 .header-nav .nav-button {
   margin-left: 2rem;
 }
+
+.login-image:hover {
+  cursor: pointer;
+}
+.header-search-input {
+  border: none;
+  padding: 0.3rem 0.5rem;
+  border-radius: 10px;
+  box-shadow: 4px 4px 4px 0px rgba(80, 77, 77, 0.75);
+  -webkit-box-shadow: 4px 4px 4px 0px rgba(80, 77, 77, 0.75);
+  -moz-box-shadow: 4px 4px 4px 0px rgba(80, 77, 77, 0.75);
+}

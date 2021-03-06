@@ -39,7 +39,7 @@ const AdvertCard = ({
     <>
       <article className="advert-tile hover-tile col-4">
         <div className="advert-author">
-          <Link className="nav-button" to="/adverts/new">
+          <Link className="nav-button author-name" to="/adverts/new">
             Autor
           </Link>
         </div>
