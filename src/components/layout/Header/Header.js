@@ -59,7 +59,7 @@ function Header({ className, isLogged, onLogout, currentUser, ...props }) {
             >
               <img
                 src={`${process.env.REACT_APP_PUBLIC_URL}/icons/profile-menu-30.png`}
-                alt="fav"
+                alt="Profile"
               />
             </ConfirmButton>
           </>
