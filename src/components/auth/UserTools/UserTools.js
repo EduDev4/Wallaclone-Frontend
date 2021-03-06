@@ -36,7 +36,7 @@ function UserTools({ className, currentUser, ...props }) {
             alt="fav"
           />
         </Link>
-        <Link className="nav-button" to={`/user/${currentUser}`}>
+        <Link className="nav-button" to="/adverts/new">
           <img
             src={`${process.env.REACT_APP_PUBLIC_URL}/icons/add-menu-hover-30.png`}
             alt="fav"
