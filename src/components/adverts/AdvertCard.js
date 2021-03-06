@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -10,6 +10,7 @@ import { CheckCircleOutlined } from '@ant-design/icons';
 import FavoriteButton from '../shared/FavoriteButton';
 import { getIsLoggedUser, getUserId } from '../../store/selectors';
 import './AdvertCard.css';
+import { getUsername } from '../../api/users';
 
 const AdvertCard = ({
   _id,
@@ -22,6 +23,7 @@ const AdvertCard = ({
   createdAt,
   image,
   isFavBy,
+  createdBy,
 }) => {
   const isLogged = useSelector(getIsLoggedUser);
   const userId = useSelector(getUserId);
@@ -35,12 +37,19 @@ const AdvertCard = ({
   };
   const createdAtText = new Date().toLocaleDateString();
   const serverUrl = process.env.REACT_APP_API_BASE_URL_LOCAL;
+
+  const [userFromId, setuserFromId] = useState('');
+
+  useEffect(() => {
+    getUsername(createdBy).then(username => setuserFromId(username));
+  }, []);
+
   return (
     <>
       <article className="advert-tile hover-tile flex-item">
         <div className="advert-author">
-          <Link className="nav-button author-name" to="/adverts/new">
-            Autor
+          <Link className="nav-button author-name" to={`/user/${userFromId}`}>
+            {userFromId}
           </Link>
         </div>
         <div className="advert-tile-top">
@@ -69,12 +78,11 @@ const AdvertCard = ({
             <span>{name}</span>
           </div>
           <div className="tags">
-            <span className="tag">Motor</span>
-            <span className="tag">Motor</span>
-            <span className="tag">Motor</span>
-            <span className="tag">Motor</span>
-            <span className="tag">Motor</span>
-            <span className="tag">Motor</span>
+            {tags.map(tag => (
+              <span className="tag" key={tag}>
+                {tag}
+              </span>
+            ))}
           </div>
           <div className="advert-desc">
             <span>{description}</span>
@@ -101,6 +109,7 @@ AdvertCard.propTypes = {
   description: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
+  createdBy: PropTypes.string.isRequired,
 };
 
 AdvertCard.defaultProps = {

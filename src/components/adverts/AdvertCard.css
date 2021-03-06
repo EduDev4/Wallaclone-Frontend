@@ -134,6 +134,7 @@
   float: left;
   display: block;
   position: relative;
+  z-index: 9999;
 }
 .icons img {
   width: 25px;
