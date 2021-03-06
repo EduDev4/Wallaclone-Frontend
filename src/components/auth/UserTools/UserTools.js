@@ -13,6 +13,7 @@ import './UserTools.css';
 
 function UserTools({ className, currentUser, ...props }) {
   const { t, i18n } = useTranslation(['header']);
+  const iconsSize = '25px';
 
   return (
     // TODO COMPONENTE CON LOS ENLACES DE NOTIFICACIONES QUE SE LLAMARÁ DESDE HEADER Y FOOTER
@@ -20,26 +21,34 @@ function UserTools({ className, currentUser, ...props }) {
       <div className="usertools">
         <Link className="nav-button" to={`/user/${currentUser}`}>
           <img
+            height={iconsSize}
+            width={iconsSize}
             src={`${process.env.REACT_APP_PUBLIC_URL}/icons/noti-menu-hover-30.png`}
-            alt="fav"
+            alt="Notifications"
           />
         </Link>
         <Link className="nav-button" to={`/user/${currentUser}`}>
           <img
+            height={iconsSize}
+            width={iconsSize}
             src={`${process.env.REACT_APP_PUBLIC_URL}/icons/chat-menu-30.png`}
-            alt="fav"
+            alt="Chat"
           />
         </Link>
         <Link className="nav-button" to={`/user/${currentUser}`}>
           <img
-            src={`${process.env.REACT_APP_PUBLIC_URL}/icons/fav-filled-advert-30.png`}
-            alt="fav"
+            height={iconsSize}
+            width={iconsSize}
+            src={`${process.env.REACT_APP_PUBLIC_URL}/icons/fav-menu-hover-30.png`}
+            alt="Favorites"
           />
         </Link>
         <Link className="nav-button" to={`/user/${currentUser}`}>
           <img
+            height={iconsSize}
+            width={iconsSize}
             src={`${process.env.REACT_APP_PUBLIC_URL}/icons/add-menu-hover-30.png`}
-            alt="fav"
+            alt="Create"
           />
         </Link>
       </div>
