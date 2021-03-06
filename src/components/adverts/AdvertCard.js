@@ -37,7 +37,7 @@ const AdvertCard = ({
   const serverUrl = process.env.REACT_APP_API_BASE_URL_LOCAL;
   return (
     <>
-      <article className="advert-tile hover-tile col-4">
+      <article className="advert-tile hover-tile flex-item">
         <div className="advert-author">
           <Link className="nav-button author-name" to="/adverts/new">
             Autor
