@@ -13,7 +13,6 @@ import './UserTools.css';
 
 function UserTools({ className, currentUser, ...props }) {
   const { t, i18n } = useTranslation(['header']);
-  const iconsSize = '25px';
 
   return (
     // TODO COMPONENTE CON LOS ENLACES DE NOTIFICACIONES QUE SE LLAMARÁ DESDE HEADER Y FOOTER
@@ -22,38 +21,30 @@ function UserTools({ className, currentUser, ...props }) {
         <div className="imgwrapper">
           <Link className="nav-button" to={`/user/${currentUser}`}>
             <img
-              height={iconsSize}
-              width={iconsSize}
               src={`${process.env.REACT_APP_PUBLIC_URL}/icons/noti-menu-hover-30.png`}
               alt="Notifications"
             />
           </Link>
         </div>
         <div className="imgwrapper">
-          <Link className="nav-button" to={`/user/${currentUser}`}>
+          <Link className="nav-button" to="/chat">
             <img
-              height={iconsSize}
-              width={iconsSize}
               src={`${process.env.REACT_APP_PUBLIC_URL}/icons/chat-menu-30.png`}
               alt="Chat"
             />
           </Link>
         </div>
         <div className="imgwrapper">
-          <Link className="nav-button" to={`/user/${currentUser}`}>
+          <Link className="nav-button" to={`/user/${currentUser}/favorites`}>
             <img
-              height={iconsSize}
-              width={iconsSize}
               src={`${process.env.REACT_APP_PUBLIC_URL}/icons/fav-menu-hover-30.png`}
               alt="Favorites"
             />
           </Link>
         </div>
         <div className="imgwrapper">
-          <Link className="nav-button" to={`/user/${currentUser}`}>
+          <Link className="nav-button" to="/adverts/new">
             <img
-              height={iconsSize}
-              width={iconsSize}
               src={`${process.env.REACT_APP_PUBLIC_URL}/icons/add-icon.svg`}
               alt="Create"
             />
