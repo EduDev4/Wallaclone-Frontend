@@ -119,13 +119,8 @@ const NewAdvertPage = ({ mode, initialForm, onCreate, onUpdate, loading }) => {
               />
             </div>
           </div>
-          <div className="button">
-            <Button
-              htmlType="submit"
-              className="button"
-              type="primary"
-              disabled={!canSubmit()}
-            >
+          <div className="button-new">
+            <Button htmlType="submit" type="primary" disabled={!canSubmit()}>
               {mode === 'edit' ? t('Editar') : t('Crear')}
             </Button>
           </div>

@@ -5,15 +5,18 @@
   background-color: var(--forms-bg-color);
   border-radius: var(--forms-border-radius);
 }
-
-.newad-form .button {
-  background-color: var(--bg-button-main);
+.button-new {
+  text-align: center;
+  margin-top: 1rem;
+}
+.button-new button {
   color: var(--color-button-main);
+  width: 90%;
   border-radius: 20px;
-  border: 0px;
+  border: none;
 }
 
-.newad-form button:hover {
+.button-new button:hover {
   background-color: var(--bg-solid-color);
 }
 
@@ -45,13 +48,7 @@
   .fields-container .field-group {
     width: 60%;
   }
-  .newad-form .button {
-    width: unset;
-    text-align: center;
+  .button-new button {
+    width: 150px;
   }
-}
-
-.message-result {
-  margin: 1rem auto;
-  max-width: 400px;
 }
