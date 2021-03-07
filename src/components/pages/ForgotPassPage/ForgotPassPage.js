@@ -37,6 +37,8 @@ class ForgotPassPage extends React.Component {
       <MainLayout title="Reset Password">
         <div className="forgotPage">
           <form className="forgot-form">
+            Introduce el email con el que te diste de alta para recuperar tu
+            contraseña:
             <div className="form-field">
               <Input
                 name="email"
