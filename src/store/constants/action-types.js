@@ -26,6 +26,10 @@ export const AUTH_LOGOUT_REQUEST = 'auth/LOGOUT_REQUEST';
 export const AUTH_LOGOUT_SUCCESS = 'auth/LOGOUT_SUCCESS';
 export const AUTH_LOGOUT_FAILURE = 'auth/LOGOUT_FAILURE';
 
+export const ADVERT_LOAD_REQUEST = 'advert/LOAD_REQUEST';
+export const ADVERT_LOAD_SUCCESS = 'advert/LOAD_SUCCESS';
+export const ADVERT_LOAD_FAILURE = 'advert/LOAD_FAILURE';
+
 export const ADVERTS_LOAD_REQUEST = 'adverts/LOAD_REQUEST';
 export const ADVERTS_LOAD_SUCCESS = 'adverts/LOAD_SUCCESS';
 export const ADVERTS_LOAD_FAILURE = 'adverts/LOAD_FAILURE';

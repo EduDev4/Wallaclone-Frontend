@@ -40,6 +40,8 @@ export const adverts = (state = initialState.adverts, action) => {
       return { ...state, tags: action.payload };
     case types.ADVERTS_LOAD_SUCCESS:
       return { ...state, ads: action.payload };
+    case types.ADVERT_LOAD_SUCCESS:
+      return { ...state, adDetail: action.payload };
     case types.ADVERTS_CREATE_SUCCESS:
       return {
         ...state,
