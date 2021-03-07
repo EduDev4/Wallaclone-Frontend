@@ -24,6 +24,7 @@ function Header({
   const [isMobile, setMobile] = useState(window.innerWidth < 768);
   const [isSmall, setSmall] = useState(window.innerWidth > 450);
 
+  // cmabio
   const updateMedia = () => {
     setMobile(window.innerWidth < 768);
     setSmall(window.innerWidth > 450);
