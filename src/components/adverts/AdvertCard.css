@@ -100,7 +100,7 @@
   overflow: hidden;
 }
 .advert-sell {
-  background-color: #94e0f7;
+  background-color: #d4ffdf;
   padding: 0.1rem 0.5rem;
   border-radius: 1rem;
   clear: both;
@@ -109,9 +109,10 @@
   position: relative;
   font-size: smaller;
   margin-top: 0.5rem;
+  color: #73b983;
 }
 .advert-buy {
-  background-color: #fff099;
+  background-color: #ffd7ce;
   padding: 0.1rem 0.5rem;
   border-radius: 1rem;
   clear: both;
@@ -120,6 +121,7 @@
   position: relative;
   font-size: smaller;
   margin-top: 0.5rem;
+  color: #d49588;
 }
 .advert-created {
   display: block;

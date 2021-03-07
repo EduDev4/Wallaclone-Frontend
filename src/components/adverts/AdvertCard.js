@@ -92,7 +92,10 @@ const AdvertCard = ({
             <span>{description}</span>
           </div>
 
-          <div className={sale ? 'advert-sell' : 'advert-buy'}>
+          <div
+            title={sale ? 'Se vende' : 'Se busca'}
+            className={sale ? 'advert-sell' : 'advert-buy'}
+          >
             {sale ? 'Se vende' : 'Se busca'}
           </div>
           <div className="advert-created">{createdAtText}</div>
