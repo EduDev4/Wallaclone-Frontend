@@ -1,7 +1,7 @@
 .advert-tile {
   width: 200px;
   border-radius: 5px;
-  margin-right: 0.5rem;
+  margin-bottom: 1rem;
 }
 .advert-tile-top {
   padding: 0;
@@ -10,7 +10,7 @@
   height: 120px;
   width: 100%;
   text-align: center;
-  background-color: #eee;
+  background-color: #f7f7f7;
   border-radius: 5px 5px 0 0;
 }
 
@@ -26,7 +26,7 @@
   max-height: 200px;
   min-height: 200px;
   margin: 0;
-  margin-bottom: 1rem;
+  /*margin-bottom: 1rem;*/
   font-size: 10pt;
   padding: 0.5rem;
   height: auto;
@@ -100,7 +100,7 @@
   overflow: hidden;
 }
 .advert-sell {
-  background-color: #94e0f7;
+  background-color: #d4ffdf;
   padding: 0.1rem 0.5rem;
   border-radius: 1rem;
   clear: both;
@@ -109,9 +109,10 @@
   position: relative;
   font-size: smaller;
   margin-top: 0.5rem;
+  color: #73b983;
 }
 .advert-buy {
-  background-color: #fff099;
+  background-color: #ffd7ce;
   padding: 0.1rem 0.5rem;
   border-radius: 1rem;
   clear: both;
@@ -120,6 +121,7 @@
   position: relative;
   font-size: smaller;
   margin-top: 0.5rem;
+  color: #d49588;
 }
 .advert-created {
   display: block;
@@ -134,6 +136,7 @@
   float: left;
   display: block;
   position: relative;
+  z-index: 9999;
 }
 .icons img {
   width: 25px;

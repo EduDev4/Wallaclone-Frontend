@@ -10,9 +10,21 @@
   gap: 1rem;
   padding: 1.5rem;
 
-  background-color: var(--bg-solid-color);
-  box-shadow: 4px 4px 15px 1px #000000;
+  background-color: var(--forms-bg-color);
+  border-radius: var(--forms-border-radius);
 }
 .form-field {
   margin: 0.2rem;
+}
+
+.signup-form button {
+  width: 100%;
+  background-color: var(--bg-button-main);
+  color: var(--color-button-main);
+  border-radius: 20px;
+  border: 0px;
+}
+
+.signup-form button:hover {
+  background-color: var(--bg-solid-color);
 }

@@ -31,8 +31,8 @@ const AdvertsPage = ({ adverts, loading, loadAdverts }) => {
   return (
     <MainLayout title="Adverts">
       <div className="advertsPage">
-        <div className="row justify-content-center">
-          <aside className="advertsPage-aside col-sm-12 col-md-3">
+        <div className="grid-container">
+          <aside className="advertsPage-aside">
             <form className="filter-form">
               <div className="form-title">
                 <h3>Busca por:</h3>
@@ -56,9 +56,9 @@ const AdvertsPage = ({ adverts, loading, loadAdverts }) => {
               </div>
             </form>
           </aside>
-          <div className="advertsPage-content col-sm-12 col-md-9">
-            <h2>Qué estás buscando?</h2>
-            <div className="advertsPage-adswrapper  row gx-3 gy-3">
+          <div className="advertsPage-content">
+            <h2>¿Qué estás buscando?</h2>
+            <div className="advertsPage-adswrapper flex-container">
               {loading ? <Spinner /> : renderContent()}
             </div>
           </div>

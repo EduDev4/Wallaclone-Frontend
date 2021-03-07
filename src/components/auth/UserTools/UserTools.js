@@ -18,30 +18,38 @@ function UserTools({ className, currentUser, ...props }) {
     // TODO COMPONENTE CON LOS ENLACES DE NOTIFICACIONES QUE SE LLAMARÁ DESDE HEADER Y FOOTER
     <>
       <div className="usertools">
-        <Link className="nav-button" to={`/user/${currentUser}`}>
-          <img
-            src={`${process.env.REACT_APP_PUBLIC_URL}/icons/noti-menu-hover-30.png`}
-            alt="fav"
-          />
-        </Link>
-        <Link className="nav-button" to={`/user/${currentUser}`}>
-          <img
-            src={`${process.env.REACT_APP_PUBLIC_URL}/icons/chat-menu-30.png`}
-            alt="fav"
-          />
-        </Link>
-        <Link className="nav-button" to={`/user/${currentUser}`}>
-          <img
-            src={`${process.env.REACT_APP_PUBLIC_URL}/icons/fav-filled-advert-30.png`}
-            alt="fav"
-          />
-        </Link>
-        <Link className="nav-button" to={`/user/${currentUser}`}>
-          <img
-            src={`${process.env.REACT_APP_PUBLIC_URL}/icons/add-menu-hover-30.png`}
-            alt="fav"
-          />
-        </Link>
+        <div className="imgwrapper">
+          <Link className="nav-button" to={`/user/${currentUser}`}>
+            <img
+              src={`${process.env.REACT_APP_PUBLIC_URL}/icons/noti-menu-hover-30.png`}
+              alt="Notifications"
+            />
+          </Link>
+        </div>
+        <div className="imgwrapper">
+          <Link className="nav-button" to="/chat">
+            <img
+              src={`${process.env.REACT_APP_PUBLIC_URL}/icons/chat-menu-30.png`}
+              alt="Chat"
+            />
+          </Link>
+        </div>
+        <div className="imgwrapper">
+          <Link className="nav-button" to={`/user/${currentUser}/favorites`}>
+            <img
+              src={`${process.env.REACT_APP_PUBLIC_URL}/icons/fav-menu-hover-30.png`}
+              alt="Favorites"
+            />
+          </Link>
+        </div>
+        <div className="imgwrapper">
+          <Link className="nav-button" to="/adverts/new">
+            <img
+              src={`${process.env.REACT_APP_PUBLIC_URL}/icons/add-icon.svg`}
+              alt="Create"
+            />
+          </Link>
+        </div>
       </div>
     </>
   );

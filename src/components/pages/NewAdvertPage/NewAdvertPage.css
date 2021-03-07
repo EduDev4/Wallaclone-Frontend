@@ -2,14 +2,19 @@
   padding: 1rem;
   max-width: 700px;
   margin: 2rem auto 0 auto;
-  background-color: var(--grey1-color);
+  background-color: var(--forms-bg-color);
   border-radius: var(--forms-border-radius);
-  box-shadow: var(--forms-shadow);
 }
 
 .newad-form .button {
-  margin: 0.5rem auto 0 auto;
-  width: 200px;
+  background-color: var(--bg-button-main);
+  color: var(--color-button-main);
+  border-radius: 20px;
+  border: 0px;
+}
+
+.newad-form button:hover {
+  background-color: var(--bg-solid-color);
 }
 
 .newad-form .fields-container {

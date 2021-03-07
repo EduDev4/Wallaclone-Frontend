@@ -10,6 +10,18 @@
   gap: 1rem;
   padding: 1rem;
 
+  background-color: var(--forms-bg-color);
+  border-radius: var(--forms-border-radius);
+}
+
+.forgotPage button {
+  width: 100%;
+  background-color: var(--bg-button-main);
+  color: var(--color-button-main);
+  border-radius: 20px;
+  border: 0px;
+}
+
+.forgotPage button:hover {
   background-color: var(--bg-solid-color);
-  box-shadow: 4px 4px 15px 1px #000000;
 }
