@@ -47,11 +47,15 @@ const AdvertCard = ({
   return (
     <>
       <article className="advert-tile hover-tile flex-item">
-        <div className="advert-author">
-          <Link className="nav-button author-name" to={`/user/${userFromId}`}>
-            {userFromId}
-          </Link>
-        </div>
+        {userFromId ? (
+          <div className="advert-author">
+            <Link className="nav-button author-name" to={`/user/${userFromId}`}>
+              {userFromId}
+            </Link>
+          </div>
+        ) : (
+          ''
+        )}
         <div className="advert-tile-top">
           <img
             src={`${serverUrl}${image}`}
