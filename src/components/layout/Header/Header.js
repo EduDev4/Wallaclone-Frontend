@@ -106,7 +106,7 @@ function Header({
               />
               <input
                 type="submit"
-                value="Search"
+                value={t('Buscar...')}
                 className="searchButton"
               ></input>
             </div>
