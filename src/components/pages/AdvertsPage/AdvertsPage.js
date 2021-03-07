@@ -57,7 +57,7 @@ const AdvertsPage = ({ adverts, loading, loadAdverts }) => {
             </form>
           </aside>
           <div className="advertsPage-content">
-            <h2>Qué estás buscando?</h2>
+            <h2>¿Qué estás buscando?</h2>
             <div className="advertsPage-adswrapper flex-container">
               {loading ? <Spinner /> : renderContent()}
             </div>

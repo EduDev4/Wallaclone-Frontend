@@ -17,10 +17,20 @@
   justify-content: center;
   gap: 1rem;
   padding: 1rem;
-
-  background-color: var(--grey1-color);
+  border-radius: 5px;
+  background-color: #fdfdff;
 }
-
+.filter-form input {
+  background-color: #fdfdff;
+}
 .filter-form button {
   width: 100%;
+  background-color: var(--bg-button-main);
+  color: var(--color-button-main);
+  border-radius: 20px;
+  border: 0px;
+}
+
+.filter-form button:hover {
+  background-color: var(--bg-solid-color);
 }
