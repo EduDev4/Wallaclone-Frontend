@@ -4,6 +4,7 @@ import React from 'react';
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import AdvertsPage from '../pages/AdvertsPage';
+import AdvertPage from '../pages/AdvertPage';
 import NewAdvertPage from '../pages/NewAdvertPage';
 import EditAdvertPage from '../pages/EditAdvertPage';
 import PrivateRoute from '../auth/PrivateRoute';
@@ -24,6 +25,7 @@ function App() {
         <Route path="/adverts" exact>
           <AdvertsPage />
         </Route>
+        <Route path="/adverts/:id" exact component={AdvertPage} />
         <Route path="/signup" exact>
           <SignupPage />
         </Route>
