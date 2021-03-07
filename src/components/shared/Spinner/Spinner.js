@@ -13,9 +13,9 @@ const spin = keyframes`
 const Spinner = styled.div`
   margin: 60px auto;
   border: ${({ size }) => (size === 'medium' ? '0.4rem' : '0.2rem')} solid
-    rgba(68, 197, 13, 0.2);
+    rgba(124, 142, 210, 0.6);
   border-top: ${({ size }) => (size === 'medium' ? '0.4rem' : '0.2rem')} solid
-    #8dc973;
+    #475a9e;
   border-radius: 50%;
   width: ${({ size }) => (size === 'medium' ? '5rem' : '2.5rem')};
   height: ${({ size }) => (size === 'medium' ? '5rem' : '2.5rem')};
