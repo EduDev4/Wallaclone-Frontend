@@ -35,7 +35,7 @@ const AdvertCard = ({
     }
     return false;
   };
-  const createdAtText = new Date().toLocaleDateString();
+  const createdAtText = new Date(createdAt).toLocaleDateString();
   const serverUrl = process.env.REACT_APP_API_BASE_URL_LOCAL;
 
   const [userFromId, setuserFromId] = useState('');
@@ -46,61 +46,66 @@ const AdvertCard = ({
 
   return (
     <>
-      <article className="advert-tile hover-tile flex-item">
-        {userFromId ? (
-          <div className="advert-author">
-            <Link className="nav-button author-name" to={`/user/${userFromId}`}>
-              {userFromId}
-            </Link>
-          </div>
-        ) : (
-          ''
-        )}
-        <div className="advert-tile-top">
-          <img
-            src={`${serverUrl}${image}`}
-            alt={name}
-            className="advert-photo"
-          />
-        </div>
-
-        <div itemProp="name" className="advert-tile-bottom">
-          <div className="icons">
-            <FavoriteButton
-              initialValue={isLogged ? isFav(isFavBy) : false}
-              adId={_id}
+      <Link className="card-link" to={`/adverts/${_id}`}>
+        <article className="advert-tile hover-tile flex-item">
+          {userFromId ? (
+            <div className="advert-author">
+              <Link
+                className="nav-button author-name"
+                to={`/user/${userFromId}`}
+              >
+                {userFromId}
+              </Link>
+            </div>
+          ) : (
+            ''
+          )}
+          <div className="advert-tile-top">
+            <img
+              src={`${serverUrl}${image}`}
+              alt={name}
+              className="advert-photo"
             />
-            {state === 'Reserved' && (
-              <img
-                src={`${process.env.REACT_APP_PUBLIC_URL}/icons/reserved-30.png`}
-                alt="Reserved"
-              />
-            )}
-          </div>
-          <div className="advert-price">{price} €</div>
-          <div className="advert-tile-title">
-            <span>{name}</span>
-          </div>
-          <div className="tags">
-            {tags.map(tag => (
-              <span className="tag" key={tag}>
-                {tag}
-              </span>
-            ))}
-          </div>
-          <div className="advert-desc">
-            <span>{description}</span>
           </div>
 
-          <div
-            title={sale ? 'Se vende' : 'Se busca'}
-            className={sale ? 'advert-sell' : 'advert-buy'}
-          >
-            {sale ? 'Se vende' : 'Se busca'}
+          <div itemProp="name" className="advert-tile-bottom">
+            <div className="icons">
+              <FavoriteButton
+                initialValue={isLogged ? isFav(isFavBy) : false}
+                adId={_id}
+              />
+              {state === 'Reserved' && (
+                <img
+                  src={`${process.env.REACT_APP_PUBLIC_URL}/icons/reserved-30.png`}
+                  alt="Reserved"
+                />
+              )}
+            </div>
+            <div className="advert-price">{price} €</div>
+            <div className="advert-tile-title">
+              <span>{name}</span>
+            </div>
+            <div className="tags">
+              {tags.map(tag => (
+                <span className="tag" key={tag}>
+                  {tag}
+                </span>
+              ))}
+            </div>
+            <div className="advert-desc">
+              <span>{description}</span>
+            </div>
+
+            <div
+              title={sale ? 'Se vende' : 'Se busca'}
+              className={sale ? 'advert-sell' : 'advert-buy'}
+            >
+              {sale ? 'Se vende' : 'Se busca'}
+            </div>
+            <div className="advert-created">{createdAtText}</div>
           </div>
-          <div className="advert-created">{createdAtText}</div>
-        </div>
-      </article>
+        </article>
+      </Link>
     </>
   );
 };
