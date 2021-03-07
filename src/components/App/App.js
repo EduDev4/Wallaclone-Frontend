@@ -25,7 +25,7 @@ function App() {
         <Route path="/adverts" exact>
           <AdvertsPage />
         </Route>
-        <Route path="/adverts/:id" exact component={AdvertPage} />
+        <Route path="/adverts/view/:id" exact component={AdvertPage} />
         <Route path="/signup" exact>
           <SignupPage />
         </Route>

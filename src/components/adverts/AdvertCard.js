@@ -46,7 +46,7 @@ const AdvertCard = ({
 
   return (
     <>
-      <Link className="card-link" to={`/adverts/${_id}`}>
+      <Link className="card-link" to={`/adverts/view/${_id}`}>
         <article className="advert-tile hover-tile flex-item">
           {userFromId ? (
             <div className="advert-author">
