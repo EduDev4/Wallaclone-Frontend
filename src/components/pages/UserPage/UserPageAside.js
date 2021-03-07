@@ -30,11 +30,12 @@ function UserPageAside({
   const { t } = useTranslation(['userpage']);
   return (
     <>
-      <h2>{user}</h2>
+      <span className="username">{user}</span>
 
       {isLogged && currentUsername === user ? (
         <>
           <p>{currentUserEmail}</p>
+
           <Link className="edit-link" to={`/user/edit/${currentUsername}`}>
             <Button type="primary" className="edit-button">
               {t('Editar mis datos')}
@@ -42,7 +43,13 @@ function UserPageAside({
             </Button>
           </Link>
 
+          <div className="tab active adverts">1 anuncio</div>
+          <div className="tab innactive reserved">2 reservados</div>
+          <div className="tab innactive favorites">5 favoritos</div>
+          <div className="tab innactive chats">7 chats</div>
+
           <ConfirmButton
+            className="delete-button"
             acceptAction={onDeleteUser}
             confirmProps={{
               title: t('Eliminar Cuenta de Usuario'),
