@@ -98,7 +98,7 @@ function Header({
               </div>
               <input
                 type="text"
-                placeholder={t('Buscar...')}
+                placeholder={t('Buscar-puntos')}
                 name="search"
                 value={search}
                 onChange={ev => setSearch(ev.target.value)}
@@ -106,7 +106,7 @@ function Header({
               />
               <input
                 type="submit"
-                value={t('Buscar...')}
+                value={t('Buscar')}
                 className="searchButton"
               ></input>
             </div>
