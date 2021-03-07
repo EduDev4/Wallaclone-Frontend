@@ -14,7 +14,8 @@ const FavoriteButton = ({ initialValue, adId }) => {
   const isLogged = useSelector(getIsLoggedUser);
   const history = useHistory();
 
-  const handleClick = async () => {
+  const handleClick = async e => {
+    e.preventDefault();
     if (!isLogged) {
       history.push('/login');
       return;

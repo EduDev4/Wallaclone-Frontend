@@ -13,6 +13,9 @@ import {
   AUTH_LOGOUT_REQUEST,
   AUTH_LOGOUT_SUCCESS,
   AUTH_LOGOUT_FAILURE,
+  ADVERT_LOAD_REQUEST,
+  ADVERT_LOAD_SUCCESS,
+  ADVERT_LOAD_FAILURE,
   ADVERTS_LOAD_REQUEST,
   ADVERTS_LOAD_SUCCESS,
   ADVERTS_LOAD_FAILURE,
@@ -303,6 +306,20 @@ export const advertsTagsFailure = error => ({
   payload: error,
 });
 
+// ADVERT BY ID
+export const advertLoadRequest = () => ({
+  type: ADVERT_LOAD_REQUEST,
+});
+export const advertLoadSuccess = adDetail => ({
+  type: ADVERT_LOAD_SUCCESS,
+  payload: adDetail,
+});
+export const advertLoadFailure = error => ({
+  type: ADVERT_LOAD_FAILURE,
+  error: true,
+  payload: error,
+});
+
 export const advertsLoadSuccess = ads => ({
   type: ADVERTS_LOAD_SUCCESS,
   payload: ads,
@@ -319,6 +336,19 @@ export const advertsTagsSuccess = tags => ({
   type: ADVERTS_TAGS_SUCCESS,
   payload: tags,
 });
+
+export const loadAdvertDetail = advertId =>
+  // eslint-disable-next-line func-names
+  async function (dispatch, getState, { api }) {
+    dispatch(advertLoadRequest());
+    try {
+      const { advert } = await api.adverts.getAdvertDetail(advertId);
+      console.log(advert);
+      dispatch(advertLoadSuccess(advert));
+    } catch (error) {
+      dispatch(advertLoadFailure(error));
+    }
+  };
 
 export const loadAdverts = formFilter =>
   // eslint-disable-next-line func-names

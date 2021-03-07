@@ -10,6 +10,7 @@
 }
 
 :root {
+  --advert-card-img-height: 120px;
   --navbar-height: 80px;
   --max-width: 1200px;
   --footer-height: 60px;
