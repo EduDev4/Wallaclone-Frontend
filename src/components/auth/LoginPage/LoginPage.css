@@ -9,14 +9,30 @@
   justify-content: center;
   gap: 1rem;
   padding: 1rem;
-  background-color: var(--grey1-color);
-  box-shadow: 4px 4px 15px 1px #000000;
-  color: black;
+  background-color: var(--forms-bg-color);
+  border-radius: var(--forms-border-radius);
+}
+
+.link {
+  color: #7c8ed2;
 }
 
 .link:hover {
-  color: var(--success-color);
+  color: #475a9e;
 }
+
 .link:hover::after {
   content: ' >>';
+}
+
+.login-form button {
+  width: 100%;
+  background-color: var(--bg-button-main);
+  color: var(--color-button-main);
+  border-radius: 20px;
+  border: 0px;
+}
+
+.login-form button:hover {
+  background-color: var(--bg-solid-color);
 }
