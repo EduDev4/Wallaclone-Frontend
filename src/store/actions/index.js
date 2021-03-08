@@ -54,6 +54,14 @@ export const uiSetAlert = alert => ({
   payload: alert,
 });
 
+export const showFlashAlert = (alert, timeout = 2000) => dispatch => {
+  dispatch(uiSetAlert(alert));
+
+  setTimeout(() => {
+    dispatch(uiReset());
+  }, timeout);
+};
+
 /** USER ACTIONS */
 export const userDeleteRequest = () => ({
   type: USER_DELETE_REQUEST,
@@ -235,8 +243,10 @@ export const login = credentials =>
       const authData = await api.auth.login(credentials);
       const { tokenJWT, username, userEmail, _id } = authData;
       dispatch(authLoginSuccess(!!tokenJWT, username, userEmail, _id));
+      dispatch(showFlashAlert({ type: 'success', message: 'Login correcto!' }));
       history.push('/adverts');
     } catch (error) {
+      dispatch(showFlashAlert({ type: 'error', message: error.message }));
       dispatch(authLoginFailure(error));
     }
   };
@@ -398,7 +408,6 @@ export const updateAdvert = (adId, advertData) =>
       await dispatch(advertsUpdateSuccess(advert));
       history.push(`/adverts/view/${advert._id}`);
     } catch (error) {
-      console.log(error);
       await dispatch(advertsUpdateFailure(error));
     }
   };
