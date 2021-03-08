@@ -11,6 +11,7 @@ import FavoriteButton from '../../shared/FavoriteButton';
 import MainLayout from '../../layout/MainLayout';
 
 import './AdvertPage.css';
+import { getApiBaseUrl, getPublicUrl } from '../../../config/envConfig';
 
 function AdvertPage({
   match,
@@ -70,10 +71,7 @@ function AdvertPage({
               </div>
             </div>
             <div className="advertpage-photo-container">
-              <img
-                alt="ad_photo"
-                src={`${process.env.REACT_APP_PUBLIC_URL}${advert.image}`}
-              />
+              <img alt="ad_photo" src={`${getApiBaseUrl()}${advert.image}`} />
             </div>
             <div className="advertpage-title-price">
               <div className="advertpage-title">{advert.name}</div>

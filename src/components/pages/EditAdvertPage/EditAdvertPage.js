@@ -1,42 +1,40 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import NewAdvertPage from '../NewAdvertPage';
 
-export default function EditAdvertPage() {
+export default function EditAdvertPage({ advert, loadAdvertDetail }) {
   const { id } = useParams();
   const history = useHistory();
-
-  // TODO: pasar advert detail, desde redux, por props cuando esté hecho
-  const adDetail = {
-    name: 'Nuevo',
-    sale: true,
-    tags: ['work', 'mobile'],
-    price: 13,
-    description: 'fdfddfdfdfdfdfdfdfd',
-    createdBy: '60354991e7ba670c7aedb708',
-    _id: '60375db75538450811b9f11f',
-    image: '/img/adverts/60354991e7ba670c7aedb708/1614241207486_galaxytab.jpg',
-  };
-
+  console.log(advert);
   useEffect(() => {
-    if (!adDetail) history.push('/404');
-    if (adDetail._id !== id) history.push('/404');
+    if (!advert) {
+      loadAdvertDetail(id);
+    }
+    // if (advert._id !== id) history.push('/404');
   }, []);
 
-  const renderContent = () => (
-    <NewAdvertPage
-      mode="edit"
-      initialForm={{
-        name: adDetail.name,
-        sale: adDetail.sale,
-        price: adDetail.price,
-        tags: adDetail.tags,
-        description: adDetail.description,
-        image: adDetail.image,
-      }}
-    />
-  );
+  const renderContent = () =>
+    advert && (
+      <NewAdvertPage
+        mode="edit"
+        initialForm={{
+          name: advert.name,
+          sale: advert.sale,
+          price: advert.price,
+          tags: advert.tags,
+          description: advert.description,
+          image: advert.image,
+        }}
+      />
+    );
   return renderContent();
 }
+EditAdvertPage.propTypes = {
+  advert: PropTypes.objectOf(PropTypes.any),
+};
+
+EditAdvertPage.defaultProps = {
+  advert: null,
+};

@@ -45,13 +45,20 @@ export const adverts = (state = initialState.adverts, action) => {
     case types.ADVERTS_CREATE_SUCCESS:
       return {
         ...state,
-        adDetail: action.payload,
         ads: [action.payload, ...state.ads],
+        adDetail: action.payload,
       };
     case types.ADVERTS_UPDATE_SUCCESS:
       return {
         ...state,
         adDetail: action.payload,
+      };
+    case types.ADVERTS_DELETE_SUCCESS:
+      if (!state.ads) return { ...state, adDetail: null };
+      return {
+        ...state,
+        ads: [...state.ads.filter(ad => ad._id !== action.payload)],
+        adDetail: null,
       };
     default:
       return state;

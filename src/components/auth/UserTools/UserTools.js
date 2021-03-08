@@ -10,6 +10,7 @@ import { useTranslation } from 'react-i18next';
 import { getIsLoggedUser, getUsername } from '../../../store/selectors';
 
 import './UserTools.css';
+import { getPublicUrl } from '../../../config/envConfig';
 
 function UserTools({ className, currentUser, ...props }) {
   const { t, i18n } = useTranslation(['header']);
@@ -21,33 +22,27 @@ function UserTools({ className, currentUser, ...props }) {
         <div className="imgwrapper">
           <Link className="nav-button" to={`/user/${currentUser}`}>
             <img
-              src={`${process.env.REACT_APP_PUBLIC_URL}/icons/noti-menu-hover-30.png`}
+              src={`${getPublicUrl()}/icons/noti-menu-hover-30.png`}
               alt="Notifications"
             />
           </Link>
         </div>
         <div className="imgwrapper">
           <Link className="nav-button" to="/chat">
-            <img
-              src={`${process.env.REACT_APP_PUBLIC_URL}/icons/chat-menu-30.png`}
-              alt="Chat"
-            />
+            <img src={`${getPublicUrl()}/icons/chat-menu-30.png`} alt="Chat" />
           </Link>
         </div>
         <div className="imgwrapper">
           <Link className="nav-button" to={`/user/${currentUser}/favorites`}>
             <img
-              src={`${process.env.REACT_APP_PUBLIC_URL}/icons/fav-menu-hover-30.png`}
+              src={`${getPublicUrl()}/icons/fav-menu-hover-30.png`}
               alt="Favorites"
             />
           </Link>
         </div>
         <div className="imgwrapper">
           <Link className="nav-button" to="/adverts/new">
-            <img
-              src={`${process.env.REACT_APP_PUBLIC_URL}/icons/add-icon.svg`}
-              alt="Create"
-            />
+            <img src={`${getPublicUrl()}/icons/add-icon.svg`} alt="Create" />
           </Link>
         </div>
       </div>

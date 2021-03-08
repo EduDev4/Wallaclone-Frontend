@@ -2,6 +2,7 @@ import React, { useState, createRef } from 'react';
 import PropTypes from 'prop-types';
 import { Image } from 'antd';
 import './FileImageLoad.css';
+import { getApiBaseUrl, getPublicUrl } from '../../../config/envConfig';
 
 const FileImageLoad = ({ onFileSelect, imgUrl }) => {
   const [file, setFile] = useState(null);
@@ -29,7 +30,7 @@ const FileImageLoad = ({ onFileSelect, imgUrl }) => {
         >
           <img
             className="addimage-icon"
-            src={`${process.env.REACT_APP_PUBLIC_URL}/icons/add-photo-80.png`}
+            src={`${getPublicUrl()}/icons/add-photo-80.png`}
             alt="Add file"
           />
         </button>
@@ -50,9 +51,7 @@ const FileImageLoad = ({ onFileSelect, imgUrl }) => {
           width={200}
           height={200}
           src={
-            file
-              ? URL.createObjectURL(file)
-              : `${process.env.REACT_APP_API_BASE_URL}${imgUrl}`
+            file ? URL.createObjectURL(file) : `${getApiBaseUrl()}/${imgUrl}`
           }
         />
       </div>

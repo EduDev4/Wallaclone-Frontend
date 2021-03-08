@@ -7,6 +7,8 @@ import { Button, Menu, Dropdown } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import { Link, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
+import { getPublicUrl } from '../../../config/envConfig';
 import ConfirmButton from '../../shared/ConfirmButton';
 import LangButton from '../../shared/LangButton';
 import UserTools from '../../auth/UserTools';
@@ -92,10 +94,7 @@ function Header({
           <form onSubmit={handleSubmitSearch}>
             <div className="searchContainer">
               <div className="searchIcon">
-                <img
-                  alt="O"
-                  src={`${process.env.REACT_APP_PUBLIC_URL}/icons/search-icon.svg`}
-                />
+                <img alt="O" src={`${getPublicUrl()}/icons/search-icon.svg`} />
               </div>
               <input
                 type="text"
@@ -129,7 +128,7 @@ function Header({
                 trigger={['click', 'hover']}
               >
                 <img
-                  src={`${process.env.REACT_APP_PUBLIC_URL}/icons/profile-menu-40.png`}
+                  src={`${getPublicUrl()}/icons/profile-menu-40.png`}
                   className="login-image"
                   alt="Profile"
                 />
@@ -142,7 +141,7 @@ function Header({
               <LangButton initialLang={i18n.language} />
               <Link className="nav-button" to="/login">
                 <img
-                  src={`${process.env.REACT_APP_PUBLIC_URL}/icons/profile-menu-40.png`}
+                  src={`${getPublicUrl()}/icons/profile-menu-40.png`}
                   className="login-image"
                   alt="Profile"
                 />

@@ -29,6 +29,7 @@ export default function ConfirmButton({
       <Button type={typeButton} onClick={showModal} {...buttonProps} />
 
       <Modal
+        style={{ zIndex: 9999 }}
         title="Delete Advert"
         visible={modalVisible}
         onOk={handleConfirm}

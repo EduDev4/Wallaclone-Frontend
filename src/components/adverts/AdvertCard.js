@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import 'antd/dist/antd.css';
 import { Tag } from 'antd';
@@ -11,6 +11,7 @@ import FavoriteButton from '../shared/FavoriteButton';
 import { getIsLoggedUser, getUserId } from '../../store/selectors';
 import './AdvertCard.css';
 import { getUsername } from '../../api/users';
+import { getApiBaseUrl, getPublicUrl } from '../../config/envConfig';
 
 const AdvertCard = ({
   _id,
@@ -27,6 +28,7 @@ const AdvertCard = ({
 }) => {
   const isLogged = useSelector(getIsLoggedUser);
   const userId = useSelector(getUserId);
+  const history = useHistory();
   const isFav = dataObj => {
     if (dataObj) {
       if (dataObj[userId]) {
@@ -36,12 +38,12 @@ const AdvertCard = ({
     return false;
   };
   const createdAtText = new Date(createdAt).toLocaleDateString();
-  const serverUrl = process.env.REACT_APP_API_BASE_URL_LOCAL;
 
   const [userFromId, setuserFromId] = useState('');
 
   useEffect(() => {
     getUsername(createdBy).then(username => setuserFromId(username));
+    return () => {};
   }, []);
 
   return (
@@ -50,19 +52,23 @@ const AdvertCard = ({
         <article className="advert-tile hover-tile flex-item">
           {userFromId ? (
             <div className="advert-author">
-              <Link
+              <button
+                type="button"
                 className="nav-button author-name"
-                to={`/user/${userFromId}`}
+                onClick={ev => {
+                  ev.preventDefault();
+                  history.push(`/user/${userFromId}`);
+                }}
               >
                 {userFromId}
-              </Link>
+              </button>
             </div>
           ) : (
             ''
           )}
           <div className="advert-tile-top">
             <img
-              src={`${serverUrl}${image}`}
+              src={`${getApiBaseUrl()}${image}`}
               alt={name}
               className="advert-photo"
             />
@@ -76,7 +82,7 @@ const AdvertCard = ({
               />
               {state === 'Reserved' && (
                 <img
-                  src={`${process.env.REACT_APP_PUBLIC_URL}/icons/reserved-30.png`}
+                  src={`${getPublicUrl()}/icons/reserved-30.png`}
                   alt="Reserved"
                 />
               )}
@@ -87,7 +93,7 @@ const AdvertCard = ({
             </div>
             <div className="tags">
               {tags.map(tag => (
-                <span className="tag" key={tag}>
+                <span className="tag" key={`${tag}${Date.now()}`}>
                   {tag}
                 </span>
               ))}
