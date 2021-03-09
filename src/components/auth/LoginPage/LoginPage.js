@@ -81,7 +81,6 @@ function LoginPage({ onLogin, loading, error }) {
             </Button>
           </div>
         </form>
-        {error && <div className="loginPage-error">{error.message}</div>}
       </div>
     </MainLayout>
   );
