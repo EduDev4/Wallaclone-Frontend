@@ -420,9 +420,12 @@ export const deleteAdvert = advertId =>
       await api.adverts.deleteAdvert(advertId);
 
       await dispatch(advertsDeleteSuccess(advertId));
-      dispatch(uiSetAlert({ type: 'success', message: 'Anuncio eliminado!' }));
+      dispatch(
+        showFlashAlert({ type: 'success', message: 'Anuncio eliminado!' }),
+      );
       history.push('/adverts');
     } catch (error) {
+      dispatch(showFlashAlert({ type: 'error', message: error.message }));
       await dispatch(advertsDeleteFailure(error));
     }
   };

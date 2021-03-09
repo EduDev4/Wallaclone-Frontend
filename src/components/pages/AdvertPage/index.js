@@ -9,7 +9,7 @@ import {
   getAdvertDetail,
 } from '../../../store/selectors';
 
-import { loadAdvertDetail } from '../../../store/actions';
+import { loadAdvertDetail, deleteAdvert } from '../../../store/actions';
 
 const mapStateToProps = state => ({
   getUi,
@@ -21,6 +21,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   loadAdvertDetail: id => dispatch(loadAdvertDetail(id)),
+  onDelete: advertId => dispatch(deleteAdvert(advertId)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(AdvertPage);

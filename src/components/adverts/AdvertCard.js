@@ -8,7 +8,6 @@ import { Tag } from 'antd';
 import { CheckCircleOutlined } from '@ant-design/icons';
 
 import FavoriteButton from '../shared/FavoriteButton';
-import SoldButton from '../shared/SoldButton';
 
 import { getIsLoggedUser, getUserId } from '../../store/selectors';
 import './AdvertCard.css';
@@ -26,7 +25,6 @@ const AdvertCard = ({
   createdAt,
   image,
   isFavBy,
-  isSoldBy,
   createdBy,
 }) => {
   const isLogged = useSelector(getIsLoggedUser);
@@ -40,14 +38,24 @@ const AdvertCard = ({
     }
     return false;
   };
-  const isSold = dataObj => {
-    if (dataObj) {
-      if (dataObj[userId]) {
-        return dataObj[userId];
-      }
+
+  const renderIcons = () => {
+    if (state === 'Reserved') {
+      return (
+        <img src={`${getPublicUrl()}/icons/reserved-30.png`} alt="Reserved" />
+      );
     }
-    return false;
+    if (state === 'Sold') {
+      return (
+        <img
+          src={`${getPublicUrl()}/icons/sold-filled-advert-50.png`}
+          alt="Sold"
+        />
+      );
+    }
+    return null;
   };
+
   const createdAtText = new Date(createdAt).toLocaleDateString();
 
   const [userFromId, setuserFromId] = useState('');
@@ -91,16 +99,7 @@ const AdvertCard = ({
                 initialValue={isLogged ? isFav(isFavBy) : false}
                 adId={_id}
               />
-              {state === 'Reserved' && (
-                <img
-                  src={`${getPublicUrl()}/icons/reserved-30.png`}
-                  alt="Reserved"
-                />
-              )}
-              <SoldButton
-                initialValue={isLogged ? isSold(isSoldBy) : false}
-                adId={_id}
-              />
+              {isLogged && renderIcons()}
             </div>
             <div className="advert-price">{price} €</div>
             <div className="advert-tile-title">
@@ -139,7 +138,6 @@ AdvertCard.propTypes = {
   sale: PropTypes.bool.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string),
   isFavBy: PropTypes.objectOf(PropTypes.any),
-  isSoldBy: PropTypes.objectOf(PropTypes.any),
   description: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
@@ -149,7 +147,6 @@ AdvertCard.propTypes = {
 AdvertCard.defaultProps = {
   tags: [],
   isFavBy: {},
-  isSoldBy: {},
 };
 
 export default AdvertCard;
