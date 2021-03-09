@@ -9,7 +9,6 @@ import FavoriteButton from '../shared/FavoriteButton';
 
 import { getIsLoggedUser, getUserId } from '../../store/selectors';
 import './AdvertCard.css';
-import { getUsername } from '../../api/users';
 import { getApiBaseUrl, getPublicUrl } from '../../config/envConfig';
 
 const AdvertCard = ({
@@ -56,28 +55,23 @@ const AdvertCard = ({
 
   const createdAtText = new Date(createdAt).toLocaleDateString();
 
-  const [userFromId, setuserFromId] = useState('');
-
-  useEffect(() => {
-    getUsername(createdBy).then(username => setuserFromId(username));
-    return () => {};
-  }, []);
+  const { username } = createdBy;
 
   return (
     <>
       <Link className="card-link" to={`/adverts/view/${_id}`}>
         <article className="advert-tile hover-tile flex-item">
-          {userFromId ? (
+          {username ? (
             <div className="advert-author">
               <button
                 type="button"
                 className="nav-button author-name"
                 onClick={ev => {
                   ev.preventDefault();
-                  history.push(`/user/${userFromId}`);
+                  history.push(`/user/${username}`);
                 }}
               >
-                {userFromId}
+                {username}
               </button>
             </div>
           ) : (
@@ -139,12 +133,13 @@ AdvertCard.propTypes = {
   description: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
-  createdBy: PropTypes.string.isRequired,
+  createdBy: PropTypes.objectOf(PropTypes.any),
 };
 
 AdvertCard.defaultProps = {
   tags: [],
   isFavBy: {},
+  createdBy: {},
 };
 
 export default AdvertCard;
