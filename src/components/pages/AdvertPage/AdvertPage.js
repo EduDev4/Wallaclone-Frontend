@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { getIsLoggedUser, getUserId } from '../../../store/selectors';
@@ -11,7 +11,7 @@ import FavoriteButton from '../../shared/FavoriteButton';
 import MainLayout from '../../layout/MainLayout';
 
 import './AdvertPage.css';
-import { getApiBaseUrl, getPublicUrl } from '../../../config/envConfig';
+import { getApiBaseUrl } from '../../../config/envConfig';
 
 function AdvertPage({
   match,
@@ -23,6 +23,7 @@ function AdvertPage({
 }) {
   const handleDelete = () => {};
   const { id } = match.params;
+  const history = useHistory();
   const { t } = useTranslation(['advertpage']);
 
   const userId = useSelector(getUserId);
@@ -33,6 +34,14 @@ function AdvertPage({
       }
     }
     return false;
+  };
+
+  const handleChatClick = () => {
+    const room = `${id.substr(id.length - 4)}${advert.createdBy.substr(
+      advert.createdBy.length - 4,
+    )}${userId.substr(userId.length - 4)}`;
+    console.log(id, advert.createdBy, userId, 'Room:', room);
+    history.push(`/chat?Rid=${room}&uId=${userId}`, { room, email: userId });
   };
 
   useEffect(() => {
@@ -67,7 +76,13 @@ function AdvertPage({
                     adId={advert._id}
                   />
                 </div>
-                <div className="advertpage-chatbutton">Chat</div>
+                <button
+                  type="button"
+                  onClick={handleChatClick}
+                  className="advertpage-chatbutton"
+                >
+                  Chat
+                </button>
               </div>
             </div>
             <div className="advertpage-photo-container">

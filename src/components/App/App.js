@@ -14,6 +14,7 @@ import ForgotPassPage from '../pages/ForgotPassPage';
 import ResetPassPage from '../pages/ResetPassPage';
 import UserPage from '../pages/UserPage';
 import EditUserPage from '../pages/EditUserPage';
+import ChatScreen from '../chat/ChatScreen';
 
 function App() {
   return (
@@ -40,8 +41,9 @@ function App() {
         <PrivateRoute path="/adverts/new" exact>
           <NewAdvertPage />
         </PrivateRoute>
-        <PrivateRoute path="/adverts/edit/:id" exact>
-          <EditAdvertPage />
+        <Route exact path="/chat" component={ChatScreen} />
+        <PrivateRoute path="/chat" exact>
+          <ChatScreen />
         </PrivateRoute>
 
         <Route path="/user/:username" exact component={UserPage} />
