@@ -4,8 +4,6 @@ import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import 'antd/dist/antd.css';
-import { Tag } from 'antd';
-import { CheckCircleOutlined } from '@ant-design/icons';
 
 import FavoriteButton from '../shared/FavoriteButton';
 import { getIsLoggedUser, getUserId } from '../../store/selectors';

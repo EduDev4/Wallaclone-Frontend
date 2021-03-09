@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
+import { useHistory } from 'react-router-dom';
 
 import { Slider, Input, Button } from 'antd';
 
@@ -14,9 +15,16 @@ import './AdvertsPage.css';
 const AdvertsPage = ({ adverts, loading, loadAdverts }) => {
   const { t } = useTranslation(['advertspage']);
   const [filter] = useState();
+  const history = useHistory();
+  const querySearch = history.location.search.substring(1);
 
   useEffect(() => {
-    loadAdverts(filter);
+    if (querySearch) {
+      loadAdverts(querySearch);
+    } else {
+      loadAdverts(filter);
+    }
+
     return () => {
       // eslint-disable-next-line no-console
       // console.log('cleanup');

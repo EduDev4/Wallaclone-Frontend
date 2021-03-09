@@ -4,8 +4,7 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Button, Menu, Dropdown } from 'antd';
-import { UserOutlined } from '@ant-design/icons';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ConfirmButton from '../../shared/ConfirmButton';
 import LangButton from '../../shared/LangButton';
@@ -24,7 +23,7 @@ function Header({
   const [isMobile, setMobile] = useState(window.innerWidth < 768);
   const [isSmall, setSmall] = useState(window.innerWidth > 450);
 
-  // cmabio
+  // cambio
   const updateMedia = () => {
     setMobile(window.innerWidth < 768);
     setSmall(window.innerWidth > 450);
@@ -36,21 +35,11 @@ function Header({
   });
 
   const [search, setSearch] = useState('');
-  const { username } = useParams();
+  const history = useHistory();
 
   const handleSubmitSearch = event => {
     event.preventDefault();
-    if (username) {
-      if (search) {
-        loadAdverts(`username=${username}&name=${search}`);
-      } else {
-        loadAdverts(`username=${username}`);
-      }
-    } else if (search) {
-      loadAdverts(`name=${search}`);
-    } else {
-      loadAdverts();
-    }
+    history.push(`/adverts?name=${search}`);
   };
 
   const { t, i18n } = useTranslation(['header']);
@@ -66,8 +55,8 @@ function Header({
         <ConfirmButton
           acceptAction={() => onLogout()}
           confirmProps={{
-            title: 'Logout',
-            message: 'Are you sure you want to logout?',
+            title: t('Cerrar sesión'),
+            message: t('¿Estás seguro que quieres salir?'),
           }}
           typeButton="text"
         >
@@ -126,7 +115,7 @@ function Header({
                 overlay={menuLogin}
                 placement="bottomRight"
                 arrow
-                trigger={['click', 'hover']}
+                trigger={['click']}
               >
                 <img
                   src={`${process.env.REACT_APP_PUBLIC_URL}/icons/profile-menu-40.png`}
