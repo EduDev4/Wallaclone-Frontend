@@ -5,10 +5,14 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { Button } from 'antd';
+import { DeleteOutlined } from '@ant-design/icons';
 import { getIsLoggedUser, getUserId } from '../../../store/selectors';
 import FavoriteButton from '../../shared/FavoriteButton';
+import ReserveButton from '../../shared/ReserveButton';
 
 import MainLayout from '../../layout/MainLayout';
+import ConfirmButton from '../../shared/ConfirmButton';
 
 import './AdvertPage.css';
 import { getApiBaseUrl, getPublicUrl } from '../../../config/envConfig';
@@ -18,10 +22,10 @@ function AdvertPage({
   currentUsername,
   isLogged,
   advert,
+  onDelete,
   loadAdvertDetail,
   error,
 }) {
-  const handleDelete = () => {};
   const { id } = match.params;
   const { t } = useTranslation(['advertpage']);
 
@@ -67,7 +71,34 @@ function AdvertPage({
                     adId={advert._id}
                   />
                 </div>
-                <div className="advertpage-chatbutton">Chat</div>
+                {advert.createdBy === userId ? (
+                  <>
+                    <div className="advertpage-favorite">
+                      <ReserveButton
+                        initialValue={advert.state === 'Reserved'}
+                        adId={advert._id}
+                      />
+                    </div>
+                    <div className="advertpage-deletebutton">
+                      <ConfirmButton
+                        acceptAction={() => onDelete(id)}
+                        confirmProps={{
+                          title: t('Eliminar Anuncio'),
+                          message: t('¿Estás seguro de eliminar el anuncio?'),
+                        }}
+                        typeButton="primary"
+                        icon={
+                          <DeleteOutlined className="site-form-item-icon" />
+                        }
+                        danger
+                      >
+                        {t('Eliminar')}
+                      </ConfirmButton>
+                    </div>
+                  </>
+                ) : (
+                  <Button type="primary">{t('Chat')}</Button>
+                )}
               </div>
             </div>
             <div className="advertpage-photo-container">
@@ -115,6 +146,7 @@ AdvertPage.propTypes = {
   }),
   advert: PropTypes.objectOf(PropTypes.any),
   loadAdvertDetail: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   error: PropTypes.bool,
 };
 

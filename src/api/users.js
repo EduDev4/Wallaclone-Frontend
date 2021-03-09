@@ -59,6 +59,11 @@ export const setUnsetFav = async adId => {
   await client.post(url);
 };
 
+export const setUnsetReserved = async adId => {
+  const url = `${usersBaseUrl}/reservation/${adId}`;
+  await client.post(url);
+};
+
 export const getUsername = async userId => {
   const { username } = await client.get(`/apiv1/users/${userId}`);
   return username;
