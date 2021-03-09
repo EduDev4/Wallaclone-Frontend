@@ -4,8 +4,14 @@ import EditAdvertPage from './EditAdvertPage';
 
 import { getAdvertDetail } from '../../../store/selectors';
 
+import { loadAdvertDetail } from '../../../store/actions';
+
 const mapStateToProps = state => ({
   advert: getAdvertDetail(state),
 });
 
-export default connect(mapStateToProps)(EditAdvertPage);
+const mapDispatchToProps = dispatch => ({
+  loadAdvertDetail: id => dispatch(loadAdvertDetail(id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(EditAdvertPage);

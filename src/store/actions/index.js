@@ -28,6 +28,9 @@ import {
   ADVERTS_TAGS_REQUEST,
   ADVERTS_TAGS_SUCCESS,
   ADVERTS_TAGS_FAILURE,
+  ADVERTS_DELETE_REQUEST,
+  ADVERTS_DELETE_SUCCESS,
+  ADVERTS_DELETE_FAILURE,
   USER_EDIT_REQUEST,
   USER_EDIT_SUCCESS,
   USER_EDIT_FAILURE,
@@ -50,6 +53,14 @@ export const uiSetAlert = alert => ({
   type: UI_SET_ALERT,
   payload: alert,
 });
+
+export const showFlashAlert = (alert, timeout = 2000) => dispatch => {
+  dispatch(uiSetAlert(alert));
+
+  setTimeout(() => {
+    dispatch(uiReset());
+  }, timeout);
+};
 
 /** USER ACTIONS */
 export const userDeleteRequest = () => ({
@@ -232,8 +243,10 @@ export const login = credentials =>
       const authData = await api.auth.login(credentials);
       const { tokenJWT, username, userEmail, _id } = authData;
       dispatch(authLoginSuccess(!!tokenJWT, username, userEmail, _id));
+      dispatch(showFlashAlert({ type: 'success', message: 'Login correcto!' }));
       history.push('/adverts');
     } catch (error) {
+      dispatch(showFlashAlert({ type: 'error', message: error.message }));
       dispatch(authLoginFailure(error));
     }
   };
@@ -281,6 +294,9 @@ export const advertsCreateRequest = () => ({
 export const advertsUpdateRequest = () => ({
   type: ADVERTS_UPDATE_REQUEST,
 });
+export const advertsDeleteRequest = () => ({
+  type: ADVERTS_DELETE_REQUEST,
+});
 export const advertsTagsRequest = () => ({
   type: ADVERTS_TAGS_REQUEST,
 });
@@ -297,6 +313,11 @@ export const advertsCreateFailure = error => ({
 });
 export const advertsUpdateFailure = error => ({
   type: ADVERTS_UPDATE_FAILURE,
+  error: true,
+  payload: error,
+});
+export const advertsDeleteFailure = error => ({
+  type: ADVERTS_DELETE_FAILURE,
   error: true,
   payload: error,
 });
@@ -331,6 +352,10 @@ export const advertsCreateSuccess = ad => ({
 export const advertsUpdateSuccess = ad => ({
   type: ADVERTS_UPDATE_SUCCESS,
   payload: ad,
+});
+export const advertsDeleteSuccess = adId => ({
+  type: ADVERTS_DELETE_SUCCESS,
+  payload: adId,
 });
 export const advertsTagsSuccess = tags => ({
   type: ADVERTS_TAGS_SUCCESS,
@@ -369,8 +394,7 @@ export const createAdvert = advertData =>
       const { advert } = await api.adverts.createAdvert(advertData);
       await dispatch(advertsCreateSuccess(advert));
       dispatch(uiSetAlert({ type: 'success', message: 'Anuncio creado!' }));
-      // TODO: Redirigir a detalle
-      // history.push(`/advert/${advert._id}`);
+      history.push(`/adverts/view/${advert._id}`);
     } catch (error) {
       await dispatch(advertsCreateFailure(error));
     }
@@ -382,11 +406,27 @@ export const updateAdvert = (adId, advertData) =>
     try {
       const { advert } = await api.adverts.updateAdvert(adId, advertData);
       await dispatch(advertsUpdateSuccess(advert));
-      // TODO: Redirigir a detalle
-      // history.push(`/advert/${advert._id}`);
+      history.push(`/adverts/view/${advert._id}`);
     } catch (error) {
-      console.log(error);
       await dispatch(advertsUpdateFailure(error));
+    }
+  };
+
+export const deleteAdvert = advertId =>
+  // eslint-disable-next-line func-names
+  async function (dispatch, getState, { history, api }) {
+    dispatch(advertsDeleteRequest());
+    try {
+      await api.adverts.deleteAdvert(advertId);
+
+      await dispatch(advertsDeleteSuccess(advertId));
+      dispatch(
+        showFlashAlert({ type: 'success', message: 'Anuncio eliminado!' }),
+      );
+      history.push('/adverts');
+    } catch (error) {
+      dispatch(showFlashAlert({ type: 'error', message: error.message }));
+      await dispatch(advertsDeleteFailure(error));
     }
   };
 

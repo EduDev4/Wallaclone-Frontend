@@ -4,6 +4,7 @@
 
 .card-link:hover {
   color: inherit;
+  cursor: pointer;
 }
 
 .advert-tile {
@@ -96,7 +97,20 @@
 }
 .advert-author {
   padding: 0.2rem;
+  margin-left: 0.5rem;
 }
+.advert-author button {
+  border: none;
+  outline: none;
+  display: block;
+  transition: transform 0.1s ease-in-out;
+}
+.advert-author button:hover {
+  color: var(--bg-solid-color);
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
 .advert-desc {
   display: block;
   float: left;
@@ -146,7 +160,7 @@
   float: left;
   display: block;
   position: relative;
-  z-index: 9999;
+  /* z-index: 9998; */
 }
 .icons img {
   width: 25px;

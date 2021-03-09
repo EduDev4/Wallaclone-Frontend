@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 import { setLocaleLanguageHeader } from '../../../api/client';
 
+import { getPublicUrl } from '../../../config/envConfig';
 import './LangButton.css';
 
 const LangButton = ({ initialLang }) => {
@@ -20,8 +21,8 @@ const LangButton = ({ initialLang }) => {
       className="flag-icon"
       src={
         lang === 'es'
-          ? `${process.env.REACT_APP_PUBLIC_URL}/icons/lang-spanish-menu-20.png`
-          : `${process.env.REACT_APP_PUBLIC_URL}/icons/lang-english-menu-20.png`
+          ? `${getPublicUrl()}/icons/lang-spanish-menu-20.png`
+          : `${getPublicUrl()}/icons/lang-english-menu-20.png`
       }
       alt={lang === 'es' ? 'Spanish' : 'English'}
     />
