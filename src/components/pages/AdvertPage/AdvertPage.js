@@ -10,6 +10,7 @@ import { DeleteOutlined } from '@ant-design/icons';
 import { getIsLoggedUser, getUserId } from '../../../store/selectors';
 import FavoriteButton from '../../shared/FavoriteButton';
 import ReserveButton from '../../shared/ReserveButton';
+import SoldButton from '../../shared/SoldButton';
 
 import MainLayout from '../../layout/MainLayout';
 import ConfirmButton from '../../shared/ConfirmButton';
@@ -31,6 +32,14 @@ function AdvertPage({
 
   const userId = useSelector(getUserId);
   const isFav = dataObj => {
+    if (dataObj) {
+      if (dataObj[userId]) {
+        return dataObj[userId];
+      }
+    }
+    return false;
+  };
+  const isSold = dataObj => {
     if (dataObj) {
       if (dataObj[userId]) {
         return dataObj[userId];
@@ -79,6 +88,14 @@ function AdvertPage({
                         adId={advert._id}
                       />
                     </div>
+                    <div className="advertpage-sold">
+                      <SoldButton
+                        initialValue={
+                          isLogged ? isSold(advert.isSoldBy) : false
+                        }
+                        adId={advert._id}
+                      />
+                    </div>
                     <div className="advertpage-deletebutton">
                       <ConfirmButton
                         acceptAction={() => onDelete(id)}
@@ -99,6 +116,8 @@ function AdvertPage({
                 ) : (
                   <Button type="primary">{t('Chat')}</Button>
                 )}
+
+                <div className="advertpage-chatbutton">Chat</div>
               </div>
             </div>
             <div className="advertpage-photo-container">
