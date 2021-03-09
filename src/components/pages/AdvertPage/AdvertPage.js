@@ -39,14 +39,6 @@ function AdvertPage({
     }
     return false;
   };
-  const isSold = dataObj => {
-    if (dataObj) {
-      if (dataObj[userId]) {
-        return dataObj[userId];
-      }
-    }
-    return false;
-  };
 
   useEffect(() => {
     loadAdvertDetail(id);
@@ -90,9 +82,7 @@ function AdvertPage({
                     </div>
                     <div className="advertpage-sold">
                       <SoldButton
-                        initialValue={
-                          isLogged ? isSold(advert.isSoldBy) : false
-                        }
+                        initialValue={advert.state === 'Sold'}
                         adId={advert._id}
                       />
                     </div>
@@ -116,8 +106,6 @@ function AdvertPage({
                 ) : (
                   <Button type="primary">{t('Chat')}</Button>
                 )}
-
-                <div className="advertpage-chatbutton">Chat</div>
               </div>
             </div>
             <div className="advertpage-photo-container">
