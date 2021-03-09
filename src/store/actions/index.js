@@ -393,9 +393,10 @@ export const createAdvert = advertData =>
     try {
       const { advert } = await api.adverts.createAdvert(advertData);
       await dispatch(advertsCreateSuccess(advert));
-      dispatch(uiSetAlert({ type: 'success', message: 'Anuncio creado!' }));
+      dispatch(showFlashAlert({ type: 'success', message: 'Anuncio creado!' }));
       history.push(`/adverts/view/${advert._id}`);
     } catch (error) {
+      dispatch(showFlashAlert({ type: 'error', message: error.message }));
       await dispatch(advertsCreateFailure(error));
     }
   };
@@ -406,8 +407,12 @@ export const updateAdvert = (adId, advertData) =>
     try {
       const { advert } = await api.adverts.updateAdvert(adId, advertData);
       await dispatch(advertsUpdateSuccess(advert));
+      dispatch(
+        showFlashAlert({ type: 'success', message: 'Anuncio editado!' }),
+      );
       history.push(`/adverts/view/${advert._id}`);
     } catch (error) {
+      dispatch(showFlashAlert({ type: 'error', message: error.message }));
       await dispatch(advertsUpdateFailure(error));
     }
   };
