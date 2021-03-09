@@ -8,6 +8,8 @@ import { Tag } from 'antd';
 import { CheckCircleOutlined } from '@ant-design/icons';
 
 import FavoriteButton from '../shared/FavoriteButton';
+import SoldButton from '../shared/SoldButton';
+
 import { getIsLoggedUser, getUserId } from '../../store/selectors';
 import './AdvertCard.css';
 import { getUsername } from '../../api/users';
@@ -24,12 +26,21 @@ const AdvertCard = ({
   createdAt,
   image,
   isFavBy,
+  isSoldBy,
   createdBy,
 }) => {
   const isLogged = useSelector(getIsLoggedUser);
   const userId = useSelector(getUserId);
   const history = useHistory();
   const isFav = dataObj => {
+    if (dataObj) {
+      if (dataObj[userId]) {
+        return dataObj[userId];
+      }
+    }
+    return false;
+  };
+  const isSold = dataObj => {
     if (dataObj) {
       if (dataObj[userId]) {
         return dataObj[userId];
@@ -86,6 +97,10 @@ const AdvertCard = ({
                   alt="Reserved"
                 />
               )}
+              <SoldButton
+                initialValue={isLogged ? isSold(isSoldBy) : false}
+                adId={_id}
+              />
             </div>
             <div className="advert-price">{price} €</div>
             <div className="advert-tile-title">
@@ -124,6 +139,7 @@ AdvertCard.propTypes = {
   sale: PropTypes.bool.isRequired,
   tags: PropTypes.arrayOf(PropTypes.string),
   isFavBy: PropTypes.objectOf(PropTypes.any),
+  isSoldBy: PropTypes.objectOf(PropTypes.any),
   description: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
   image: PropTypes.string.isRequired,
@@ -133,6 +149,7 @@ AdvertCard.propTypes = {
 AdvertCard.defaultProps = {
   tags: [],
   isFavBy: {},
+  isSoldBy: {},
 };
 
 export default AdvertCard;
