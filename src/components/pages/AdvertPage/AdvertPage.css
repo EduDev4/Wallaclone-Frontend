@@ -61,17 +61,12 @@
 
 .advertpage-actions {
   display: flex;
-  gap: 0.5rem;
   align-items: center;
 }
-.advertpage-actions button {
-  border-radius: 20px;
-  border: none;
-}
 .advertpage-chatbutton {
-  /* position: relative;
+  position: relative;
   float: right;
-  margin: 0 0 0 1rem; */
+  margin: 0 0 0 1rem;
   background-color: var(--bg-button-main);
   color: var(--color-button-main);
   padding: 0.2rem;
