@@ -146,7 +146,7 @@ NewAdvertPage.defaultProps = {
     tags: [],
     price: 0,
     description: '',
-    image: '/img/adverts/noAdImage.jpg',
+    image: '',
     file: null,
   },
 };
