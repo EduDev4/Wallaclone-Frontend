@@ -41,7 +41,11 @@ function Header({
 
   const handleSubmitSearch = event => {
     event.preventDefault();
-    history.push(`/adverts?name=${search}`);
+    if (search !== '') {
+      history.push(`/adverts?name=${search}`);
+    } else {
+      history.push(`/adverts`);
+    }
   };
 
   const { t, i18n } = useTranslation(['header']);
