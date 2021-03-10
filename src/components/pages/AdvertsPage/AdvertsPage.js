@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import { Slider, Input, Button, Radio } from 'antd';
-import ReactPaginate from 'react-paginate';
 import useForm from '../../../hooks/useForm';
+
 import MainLayout from '../../layout/MainLayout';
 import AdvertCard from '../../adverts';
 import Spinner from '../../shared/Spinner';
@@ -14,16 +14,8 @@ import './AdvertsPage.css';
 
 const AdvertsPage = ({ adverts, loading, initialForm, loadAdverts }) => {
   const { t } = useTranslation(['advertspage']);
+  // const [filters] = useState();
   const [form, onChange] = useForm(initialForm);
-  const [pageCount] = useState(2);
-
-  const handlePageClick = async e => {
-    const selectedPage = e.selected;
-    const selectAdverts = new URLSearchParams();
-    const start = selectedPage + 1;
-    selectAdverts.append('start', start);
-    await loadAdverts(selectAdverts.toString());
-  };
 
   const handleSubmit = async ev => {
     ev.preventDefault();
@@ -39,6 +31,7 @@ const AdvertsPage = ({ adverts, loading, initialForm, loadAdverts }) => {
     if (form.sale !== '') searchParams.append('sale', form.sale);
     if (form.sort) searchParams.append('sort', -form.sort);
     if (form.tags.length !== 0) searchParams.append('tags', form.tags);
+
     await loadAdverts(searchParams.toString());
   };
 
@@ -117,19 +110,6 @@ const AdvertsPage = ({ adverts, loading, initialForm, loadAdverts }) => {
             <div className="advertsPage-adswrapper flex-container">
               {loading ? <Spinner /> : renderContent()}
             </div>
-            <ReactPaginate
-              previousLabel="<<"
-              nextLabel=">>"
-              breakLabel="..."
-              breakClassName="break-me"
-              pageCount={pageCount}
-              marginPagesDisplayed={2}
-              pageRangeDisplayed={5}
-              onPageChange={handlePageClick}
-              containerClassName="pagination"
-              subContainerClassName="pages pagination"
-              activeClassName="active"
-            />
           </div>
         </div>
       </div>
