@@ -37,54 +37,56 @@ function EditUserPage({
 
   return (
     <MainLayout title="My Profile">
-      <div className="userPage row">
-        <aside className="userPage-aside col-sm-12 col-md-3">
-          <h2>{currentUsername}</h2>
-          <p>{currentUserEmail}</p>
-        </aside>
-        <div className="userPage-content col-sm-12 col-md-9">
-          <h2>{t('Editar mis datos')}</h2>
-          <form className="edit-user-form" onSubmit={handleSubmit}>
-            <input
-              placeholder={currentUsername}
-              type="text"
-              name="newUsername"
-              value={newUsername}
-              onChange={onChangeForm}
-              className="editUserInput"
-            />
-            <div className="form-field">
+      <div className="userPage ">
+        <div className="grid-container">
+          <aside className="userPage-aside ">
+            <h2>{currentUsername}</h2>
+            <p>{currentUserEmail}</p>
+          </aside>
+          <div className="userPage-content ">
+            <h2>{t('Editar mis datos')}</h2>
+            <form className="edit-user-form" onSubmit={handleSubmit}>
               <input
-                placeholder={currentUserEmail}
-                type="email"
-                name="newUserEmail"
-                value={newUserEmail}
+                placeholder={currentUsername}
+                type="text"
+                name="newUsername"
+                value={newUsername}
                 onChange={onChangeForm}
                 className="editUserInput"
               />
-            </div>
-            <div className="form-field">
-              <input
-                type="password"
-                placeholder="Contraseña"
-                name="newPasswd"
-                value={newPasswd}
-                onChange={onChangeForm}
-                className="editUserInput"
-              />
-            </div>
-            <div className="form-field centered">
-              <Button
-                type="primary"
-                htmlType="submit"
-                ghost
-                disabled={!IsSubmitting()}
-              >
-                {t('Enviar')}
-              </Button>
-            </div>
-          </form>
-          {error && <div className="loginPage-error">{error.message}</div>}
+              <div className="form-field">
+                <input
+                  placeholder={currentUserEmail}
+                  type="email"
+                  name="newUserEmail"
+                  value={newUserEmail}
+                  onChange={onChangeForm}
+                  className="editUserInput"
+                />
+              </div>
+              <div className="form-field">
+                <input
+                  type="password"
+                  placeholder="Contraseña"
+                  name="newPasswd"
+                  value={newPasswd}
+                  onChange={onChangeForm}
+                  className="editUserInput"
+                />
+              </div>
+              <div className="form-field centered">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  ghost
+                  disabled={!IsSubmitting()}
+                >
+                  {t('Enviar')}
+                </Button>
+              </div>
+            </form>
+            {error && <div className="loginPage-error">{error.message}</div>}
+          </div>
         </div>
       </div>
     </MainLayout>

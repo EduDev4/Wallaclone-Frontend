@@ -68,7 +68,7 @@ export const setUnsetReserved = async adId => {
   await client.post(url);
 };
 
-export const getUsername = async userId => {
-  const { username } = await client.get(`/apiv1/users/${userId}`);
-  return username;
-};
+// export const getUsername = async userId => {
+//   const { username } = await client.get(`/apiv1/users/${userId}`);
+//   return username;
+// };
