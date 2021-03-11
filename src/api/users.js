@@ -56,7 +56,7 @@ export const deleteUser = () => client.delete(usersBaseUrl);
 
 export const setUnsetFav = async adId => {
   const url = `${usersBaseUrl}/favs/${adId}`;
-  await client.post(url);
+  return client.post(url);
 };
 export const setUnsetSold = async adId => {
   const url = `${usersBaseUrl}/sold/${adId}`;

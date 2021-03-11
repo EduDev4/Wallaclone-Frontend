@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 import favEmptyIcon from '../../../assets/fav-empty-advert-30.png';
 import favFilledIcon from '../../../assets/fav-filled-advert-30.png';
 import { setUnsetFav } from '../../../api/users';
 import { getIsLoggedUser } from '../../../store/selectors';
+import { advertsSetAdFav } from '../../../store/actions';
 import './FavoriteButton.css';
 
 const FavoriteButton = ({ initialValue, adId }) => {
   const [fav, setFav] = useState(initialValue);
   const isLogged = useSelector(getIsLoggedUser);
   const history = useHistory();
+  const dispatch = useDispatch();
 
   const handleClick = async e => {
     e.preventDefault();
@@ -21,8 +23,9 @@ const FavoriteButton = ({ initialValue, adId }) => {
       return;
     }
     try {
-      await setUnsetFav(adId);
+      const { isFavBy } = await setUnsetFav(adId);
       setFav(!fav);
+      dispatch(advertsSetAdFav(isFavBy));
     } catch (err) {
       console.log(err);
     }
