@@ -152,7 +152,7 @@ function AdvertPage({
                 : ''}
             </div>
             <div className="advertpage-description">{advert.description}</div>
-            <div className="AdvertDetail__ShareSocial">
+            <div className="advertpage-social">
               <FacebookShareButton
                 url={window.location.href}
                 quote={advert.name}

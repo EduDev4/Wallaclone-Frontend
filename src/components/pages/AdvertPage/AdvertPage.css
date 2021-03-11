@@ -37,6 +37,13 @@
   margin: 0 1rem;
 }
 
+.advertpage-social {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: left;
+  width: 50%;
+}
+
 .advertpage-status-Reserved::before {
   content: 'Reservado';
 }
