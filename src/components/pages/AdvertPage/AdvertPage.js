@@ -2,11 +2,11 @@
 import React, { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Button } from 'antd';
-import { DeleteOutlined } from '@ant-design/icons';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { getIsLoggedUser, getUserId } from '../../../store/selectors';
 import FavoriteButton from '../../shared/FavoriteButton';
 import ReserveButton from '../../shared/ReserveButton';
@@ -28,12 +28,13 @@ function AdvertPage({
   error,
 }) {
   const { id } = match.params;
+  const history = useHistory();
   const { t } = useTranslation(['advertpage']);
 
   const userId = useSelector(getUserId);
   const isFav = dataObj => {
     if (dataObj) {
-      if (dataObj[userId]) {
+      if (typeof dataObj[userId] === 'boolean') {
         return dataObj[userId];
       }
     }
@@ -63,7 +64,9 @@ function AdvertPage({
         {advert ? (
           <div className="advertpage-container">
             <div className="advertpage-advert-header">
-              <div className="advertpage-author">{advert.createdBy}</div>
+              <div className="advertpage-author">
+                {advert.createdBy.username}
+              </div>
 
               <div className="advertpage-actions">
                 <div className="advertpage-favorite">
@@ -72,7 +75,7 @@ function AdvertPage({
                     adId={advert._id}
                   />
                 </div>
-                {advert.createdBy === userId ? (
+                {advert.createdBy._id === userId ? (
                   <>
                     <div className="advertpage-favorite">
                       <ReserveButton
@@ -85,6 +88,17 @@ function AdvertPage({
                         initialValue={advert.state === 'Sold'}
                         adId={advert._id}
                       />
+                    </div>
+                    <div className="advertpage-edit">
+                      <Button
+                        type="dashed"
+                        onClick={() =>
+                          history.push(`/adverts/edit/${advert._id}`)
+                        }
+                        icon={<EditOutlined className="site-form-item-icon" />}
+                      >
+                        {t('Editar')}
+                      </Button>
                     </div>
                     <div className="advertpage-deletebutton">
                       <ConfirmButton
