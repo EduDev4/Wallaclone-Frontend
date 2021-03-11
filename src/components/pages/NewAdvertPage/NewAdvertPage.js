@@ -69,7 +69,6 @@ const NewAdvertPage = ({ mode, initialForm, onCreate, onUpdate, loading }) => {
                       onChange({ target: { value, name: 'price' } });
                     }}
                     formatter={value => `${value} €`}
-                    parser={value => value.replace(' €', '')}
                     min={0}
                     max={20000}
                     value={form.price}

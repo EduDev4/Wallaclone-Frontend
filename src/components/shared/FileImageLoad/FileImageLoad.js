@@ -24,7 +24,6 @@ const FileImageLoad = ({ onFileSelect, imgUrl }) => {
   };
 
   const renderImage = () => (
-    // if (initialImg) setInitialImg(null);
     <div className="fileLoad-image-container">
       <Image
         width={200}
@@ -34,7 +33,11 @@ const FileImageLoad = ({ onFileSelect, imgUrl }) => {
       <button
         type="button"
         className="deleteimage-wrapper"
-        onClick={() => setFile(null)}
+        onClick={() => {
+          setFile(null);
+          setInitialImg(null);
+          onFileSelect(null);
+        }}
       >
         <img
           className="deleteimage-icon"
