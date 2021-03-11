@@ -46,6 +46,7 @@ export const ADVERTS_TAGS_REQUEST = 'adverts/TAGS_REQUEST';
 export const ADVERTS_TAGS_SUCCESS = 'adverts/TAGS_SUCCESS';
 export const ADVERTS_TAGS_FAILURE = 'adverts/TAGS_FAILURE';
 export const ADVERTS_SET_AD_STATE = 'adverts/SET_AD_STATE';
+export const ADVERTS_SET_AD_FAV = 'adverts/SET_AD_FAV';
 
 export const UI_RESET = 'ui/RESET';
 export const UI_SET_ALERT = 'ui/SET_ALERT';

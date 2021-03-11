@@ -40,6 +40,7 @@ import {
   UI_RESET,
   UI_SET_ALERT,
   ADVERTS_SET_AD_STATE,
+  ADVERTS_SET_AD_FAV,
 } from '../constants/action-types';
 
 import { getIsLoggedUser } from '../selectors';
@@ -365,6 +366,10 @@ export const advertsTagsSuccess = tags => ({
 export const advertsSetAdState = state => ({
   type: ADVERTS_SET_AD_STATE,
   payload: state,
+});
+export const advertsSetAdFav = isFavBy => ({
+  type: ADVERTS_SET_AD_FAV,
+  payload: isFavBy,
 });
 
 export const loadAdvertDetail = advertId =>
