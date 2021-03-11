@@ -56,10 +56,19 @@ export const deleteUser = () => client.delete(usersBaseUrl);
 
 export const setUnsetFav = async adId => {
   const url = `${usersBaseUrl}/favs/${adId}`;
-  await client.post(url);
+  return client.post(url);
+};
+export const setUnsetSold = async adId => {
+  const url = `${usersBaseUrl}/sold/${adId}`;
+  return client.post(url);
 };
 
-export const getUsername = async userId => {
-  const { username } = await client.get(`/apiv1/users/${userId}`);
-  return username;
+export const setUnsetReserved = async adId => {
+  const url = `${usersBaseUrl}/reservation/${adId}`;
+  return client.post(url);
 };
+
+// export const getUsername = async userId => {
+//   const { username } = await client.get(`/apiv1/users/${userId}`);
+//   return username;
+// };

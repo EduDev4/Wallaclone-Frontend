@@ -39,6 +39,8 @@ import {
   USER_DELETE_FAILURE,
   UI_RESET,
   UI_SET_ALERT,
+  ADVERTS_SET_AD_STATE,
+  ADVERTS_SET_AD_FAV,
 } from '../constants/action-types';
 
 import { getIsLoggedUser } from '../selectors';
@@ -361,6 +363,14 @@ export const advertsTagsSuccess = tags => ({
   type: ADVERTS_TAGS_SUCCESS,
   payload: tags,
 });
+export const advertsSetAdState = state => ({
+  type: ADVERTS_SET_AD_STATE,
+  payload: state,
+});
+export const advertsSetAdFav = isFavBy => ({
+  type: ADVERTS_SET_AD_FAV,
+  payload: isFavBy,
+});
 
 export const loadAdvertDetail = advertId =>
   // eslint-disable-next-line func-names
@@ -393,9 +403,10 @@ export const createAdvert = advertData =>
     try {
       const { advert } = await api.adverts.createAdvert(advertData);
       await dispatch(advertsCreateSuccess(advert));
-      dispatch(uiSetAlert({ type: 'success', message: 'Anuncio creado!' }));
+      dispatch(showFlashAlert({ type: 'success', message: 'Anuncio creado!' }));
       history.push(`/adverts/view/${advert._id}`);
     } catch (error) {
+      dispatch(showFlashAlert({ type: 'error', message: error.message }));
       await dispatch(advertsCreateFailure(error));
     }
   };
@@ -406,8 +417,12 @@ export const updateAdvert = (adId, advertData) =>
     try {
       const { advert } = await api.adverts.updateAdvert(adId, advertData);
       await dispatch(advertsUpdateSuccess(advert));
+      dispatch(
+        showFlashAlert({ type: 'success', message: 'Anuncio editado!' }),
+      );
       history.push(`/adverts/view/${advert._id}`);
     } catch (error) {
+      dispatch(showFlashAlert({ type: 'error', message: error.message }));
       await dispatch(advertsUpdateFailure(error));
     }
   };
@@ -420,9 +435,12 @@ export const deleteAdvert = advertId =>
       await api.adverts.deleteAdvert(advertId);
 
       await dispatch(advertsDeleteSuccess(advertId));
-      dispatch(uiSetAlert({ type: 'success', message: 'Anuncio eliminado!' }));
+      dispatch(
+        showFlashAlert({ type: 'success', message: 'Anuncio eliminado!' }),
+      );
       history.push('/adverts');
     } catch (error) {
+      dispatch(showFlashAlert({ type: 'error', message: error.message }));
       await dispatch(advertsDeleteFailure(error));
     }
   };

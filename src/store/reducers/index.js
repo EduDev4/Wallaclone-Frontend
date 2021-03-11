@@ -53,6 +53,16 @@ export const adverts = (state = initialState.adverts, action) => {
         ...state,
         adDetail: action.payload,
       };
+    case types.ADVERTS_SET_AD_STATE:
+      return {
+        ...state,
+        adDetail: { ...state.adDetail, state: action.payload },
+      };
+    case types.ADVERTS_SET_AD_FAV:
+      return {
+        ...state,
+        adDetail: { ...state.adDetail, isFavBy: action.payload },
+      };
     case types.ADVERTS_DELETE_SUCCESS:
       if (!state.ads) return { ...state, adDetail: null };
       return {
@@ -71,7 +81,6 @@ export const ui = (state = initialState.ui, action) => {
       ...state,
       loading: false,
       error: action.payload,
-      alert: { type: 'error', message: action.payload.message },
     };
   }
 

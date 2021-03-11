@@ -37,6 +37,13 @@
   margin: 0 1rem;
 }
 
+.advertpage-social {
+  margin-top: 0.5rem;
+  display: flex;
+  justify-content: left;
+  width: 50%;
+}
+
 .advertpage-status-Reserved::before {
   content: 'Reservado';
 }
@@ -61,12 +68,17 @@
 
 .advertpage-actions {
   display: flex;
+  gap: 0.5rem;
   align-items: center;
 }
+.advertpage-actions button {
+  border-radius: 20px;
+  border: none;
+}
 .advertpage-chatbutton {
-  position: relative;
+  /* position: relative;
   float: right;
-  margin: 0 0 0 1rem;
+  margin: 0 0 0 1rem; */
   background-color: var(--bg-button-main);
   color: var(--color-button-main);
   padding: 0.2rem;
@@ -80,6 +92,10 @@
   background-color: var(--bg-solid-color);
 }
 
+.advertpage-edit .ant-btn-dashed {
+  border: solid 2px;
+  color: var(--warning-color);
+}
 .advertpage-photo-container {
   height: 300px;
   width: 100%;

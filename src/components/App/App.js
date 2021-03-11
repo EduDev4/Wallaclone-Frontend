@@ -23,9 +23,8 @@ function App() {
         <Route path="/" exact>
           <Redirect to="/adverts" />
         </Route>
-        <Route path="/adverts" exact>
-          <AdvertsPage />
-        </Route>
+        <Route path="/adverts" exact component={AdvertsPage} />
+
         <Route path="/adverts/view/:id" exact component={AdvertPage} />
         <Route path="/signup" exact>
           <SignupPage />

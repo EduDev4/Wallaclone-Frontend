@@ -4,13 +4,11 @@ import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
 
 import 'antd/dist/antd.css';
-import { Tag } from 'antd';
-import { CheckCircleOutlined } from '@ant-design/icons';
 
 import FavoriteButton from '../shared/FavoriteButton';
+
 import { getIsLoggedUser, getUserId } from '../../store/selectors';
 import './AdvertCard.css';
-import { getUsername } from '../../api/users';
 import { getApiBaseUrl, getPublicUrl } from '../../config/envConfig';
 
 const AdvertCard = ({
@@ -22,7 +20,7 @@ const AdvertCard = ({
   state,
   tags,
   createdAt,
-  image,
+  thumb,
   isFavBy,
   createdBy,
 }) => {
@@ -31,36 +29,49 @@ const AdvertCard = ({
   const history = useHistory();
   const isFav = dataObj => {
     if (dataObj) {
-      if (dataObj[userId]) {
+      if (typeof dataObj[userId] === 'boolean') {
         return dataObj[userId];
       }
     }
     return false;
   };
+
+  const renderIcons = () => {
+    if (state === 'Reserved') {
+      return (
+        <img src={`${getPublicUrl()}/icons/reserved-30.png`} alt="Reserved" />
+      );
+    }
+    if (state === 'Sold') {
+      return (
+        <img
+          src={`${getPublicUrl()}/icons/sold-filled-advert-50.png`}
+          alt="Sold"
+        />
+      );
+    }
+    return null;
+  };
+
   const createdAtText = new Date(createdAt).toLocaleDateString();
 
-  const [userFromId, setuserFromId] = useState('');
-
-  useEffect(() => {
-    getUsername(createdBy).then(username => setuserFromId(username));
-    return () => {};
-  }, []);
+  const { username } = createdBy;
 
   return (
     <>
       <Link className="card-link" to={`/adverts/view/${_id}`}>
         <article className="advert-tile hover-tile flex-item">
-          {userFromId ? (
+          {username ? (
             <div className="advert-author">
               <button
                 type="button"
                 className="nav-button author-name"
                 onClick={ev => {
                   ev.preventDefault();
-                  history.push(`/user/${userFromId}`);
+                  history.push(`/user/${username}`);
                 }}
               >
-                {userFromId}
+                {username}
               </button>
             </div>
           ) : (
@@ -68,7 +79,11 @@ const AdvertCard = ({
           )}
           <div className="advert-tile-top">
             <img
-              src={`${getApiBaseUrl()}${image}`}
+              src={
+                thumb
+                  ? `${getApiBaseUrl()}${thumb}`
+                  : `${getApiBaseUrl()}/img/adverts/noAdImage.jpg`
+              }
               alt={name}
               className="advert-photo"
             />
@@ -80,12 +95,7 @@ const AdvertCard = ({
                 initialValue={isLogged ? isFav(isFavBy) : false}
                 adId={_id}
               />
-              {state === 'Reserved' && (
-                <img
-                  src={`${getPublicUrl()}/icons/reserved-30.png`}
-                  alt="Reserved"
-                />
-              )}
+              {isLogged && renderIcons()}
             </div>
             <div className="advert-price">{price} €</div>
             <div className="advert-tile-title">
@@ -126,13 +136,14 @@ AdvertCard.propTypes = {
   isFavBy: PropTypes.objectOf(PropTypes.any),
   description: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
-  createdBy: PropTypes.string.isRequired,
+  thumb: PropTypes.string.isRequired,
+  createdBy: PropTypes.objectOf(PropTypes.any),
 };
 
 AdvertCard.defaultProps = {
   tags: [],
   isFavBy: {},
+  createdBy: {},
 };
 
 export default AdvertCard;

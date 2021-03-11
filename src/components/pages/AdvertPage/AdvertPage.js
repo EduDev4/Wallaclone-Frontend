@@ -2,13 +2,27 @@
 import React, { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from 'react-share';
+
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
+import { Button } from 'antd';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
 import { getIsLoggedUser, getUserId } from '../../../store/selectors';
 import FavoriteButton from '../../shared/FavoriteButton';
+import ReserveButton from '../../shared/ReserveButton';
+import SoldButton from '../../shared/SoldButton';
 
 import MainLayout from '../../layout/MainLayout';
+import ConfirmButton from '../../shared/ConfirmButton';
 
 import './AdvertPage.css';
 import { getApiBaseUrl } from '../../../config/envConfig';
@@ -18,10 +32,10 @@ function AdvertPage({
   currentUsername,
   isLogged,
   advert,
+  onDelete,
   loadAdvertDetail,
   error,
 }) {
-  const handleDelete = () => {};
   const { id } = match.params;
   const history = useHistory();
   const { t } = useTranslation(['advertpage']);
@@ -29,7 +43,7 @@ function AdvertPage({
   const userId = useSelector(getUserId);
   const isFav = dataObj => {
     if (dataObj) {
-      if (dataObj[userId]) {
+      if (typeof dataObj[userId] === 'boolean') {
         return dataObj[userId];
       }
     }
@@ -67,7 +81,9 @@ function AdvertPage({
         {advert ? (
           <div className="advertpage-container">
             <div className="advertpage-advert-header">
-              <div className="advertpage-author">{advert.createdBy}</div>
+              <div className="advertpage-author">
+                {advert.createdBy.username}
+              </div>
 
               <div className="advertpage-actions">
                 <div className="advertpage-favorite">
@@ -76,13 +92,51 @@ function AdvertPage({
                     adId={advert._id}
                   />
                 </div>
-                <button
-                  type="button"
-                  onClick={handleChatClick}
-                  className="advertpage-chatbutton"
-                >
-                  Chat
-                </button>
+                {advert.createdBy._id === userId ? (
+                  <>
+                    <div className="advertpage-favorite">
+                      <ReserveButton
+                        initialValue={advert.state === 'Reserved'}
+                        adId={advert._id}
+                      />
+                    </div>
+                    <div className="advertpage-sold">
+                      <SoldButton
+                        initialValue={advert.state === 'Sold'}
+                        adId={advert._id}
+                      />
+                    </div>
+                    <div className="advertpage-edit">
+                      <Button
+                        type="dashed"
+                        onClick={() =>
+                          history.push(`/adverts/edit/${advert._id}`)
+                        }
+                        icon={<EditOutlined className="site-form-item-icon" />}
+                      >
+                        {t('Editar')}
+                      </Button>
+                    </div>
+                    <div className="advertpage-deletebutton">
+                      <ConfirmButton
+                        acceptAction={() => onDelete(id)}
+                        confirmProps={{
+                          title: t('Eliminar Anuncio'),
+                          message: t('¿Estás seguro de eliminar el anuncio?'),
+                        }}
+                        typeButton="primary"
+                        icon={
+                          <DeleteOutlined className="site-form-item-icon" />
+                        }
+                        danger
+                      >
+                        {t('Eliminar')}
+                      </ConfirmButton>
+                    </div>
+                  </>
+                ) : (
+                  <Button type="primary">{t('Chat')}</Button>
+                )}
               </div>
             </div>
             <div className="advertpage-photo-container">
@@ -106,6 +160,24 @@ function AdvertPage({
                 : ''}
             </div>
             <div className="advertpage-description">{advert.description}</div>
+            <div className="advertpage-social">
+              <FacebookShareButton
+                url={window.location.href}
+                quote={advert.name}
+              >
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+              <TwitterShareButton
+                url={window.location.href}
+                title={advert.name}
+                hashtags={advert.tags}
+              >
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
+              <WhatsappShareButton url={window.location.href}>
+                <WhatsappIcon size={32} round />
+              </WhatsappShareButton>
+            </div>
             <div className="advertpage-footer">
               <div className="advertpage-created">
                 {new Date(advert.createdAt).toLocaleDateString()}
@@ -130,6 +202,7 @@ AdvertPage.propTypes = {
   }),
   advert: PropTypes.objectOf(PropTypes.any),
   loadAdvertDetail: PropTypes.func.isRequired,
+  onDelete: PropTypes.func.isRequired,
   error: PropTypes.bool,
 };
 

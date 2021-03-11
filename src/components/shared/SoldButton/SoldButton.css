@@ -1,0 +1,15 @@
+.sold-wrapper {
+  background-color: transparent;
+  border: none;
+  outline-style: none;
+}
+
+.sold-wrapper .sold-icon {
+  transition: transform 0.1s ease-in-out;
+  height: 30px;
+}
+
+.sold-wrapper:hover .sold-icon {
+  cursor: pointer;
+  transform: scale(1.1);
+}
