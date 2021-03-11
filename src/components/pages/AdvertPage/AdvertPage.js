@@ -2,6 +2,15 @@
 import React, { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
+import {
+  FacebookShareButton,
+  TwitterShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  TwitterIcon,
+  WhatsappIcon,
+} from 'react-share';
+
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
@@ -143,6 +152,24 @@ function AdvertPage({
                 : ''}
             </div>
             <div className="advertpage-description">{advert.description}</div>
+            <div className="AdvertDetail__ShareSocial">
+              <FacebookShareButton
+                url={window.location.href}
+                quote={advert.name}
+              >
+                <FacebookIcon size={32} round />
+              </FacebookShareButton>
+              <TwitterShareButton
+                url={window.location.href}
+                title={advert.name}
+                hashtags={advert.tags}
+              >
+                <TwitterIcon size={32} round />
+              </TwitterShareButton>
+              <WhatsappShareButton url={window.location.href}>
+                <WhatsappIcon size={32} round />
+              </WhatsappShareButton>
+            </div>
             <div className="advertpage-footer">
               <div className="advertpage-created">
                 {new Date(advert.createdAt).toLocaleDateString()}
