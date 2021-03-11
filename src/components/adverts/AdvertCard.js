@@ -20,7 +20,7 @@ const AdvertCard = ({
   state,
   tags,
   createdAt,
-  image,
+  thumb,
   isFavBy,
   createdBy,
 }) => {
@@ -29,7 +29,7 @@ const AdvertCard = ({
   const history = useHistory();
   const isFav = dataObj => {
     if (dataObj) {
-      if (dataObj[userId]) {
+      if (typeof dataObj[userId] === 'boolean') {
         return dataObj[userId];
       }
     }
@@ -79,7 +79,11 @@ const AdvertCard = ({
           )}
           <div className="advert-tile-top">
             <img
-              src={`${getApiBaseUrl()}${image}`}
+              src={
+                thumb
+                  ? `${getApiBaseUrl()}${thumb}`
+                  : `${getApiBaseUrl()}/img/adverts/noAdImage.jpg`
+              }
               alt={name}
               className="advert-photo"
             />
@@ -132,7 +136,7 @@ AdvertCard.propTypes = {
   isFavBy: PropTypes.objectOf(PropTypes.any),
   description: PropTypes.string.isRequired,
   createdAt: PropTypes.string.isRequired,
-  image: PropTypes.string.isRequired,
+  thumb: PropTypes.string.isRequired,
   createdBy: PropTypes.objectOf(PropTypes.any),
 };
 

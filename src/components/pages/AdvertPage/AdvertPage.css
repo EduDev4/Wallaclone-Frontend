@@ -85,6 +85,10 @@
   background-color: var(--bg-solid-color);
 }
 
+.advertpage-edit .ant-btn-dashed {
+  border: solid 2px;
+  color: var(--warning-color);
+}
 .advertpage-photo-container {
   height: 300px;
   width: 100%;

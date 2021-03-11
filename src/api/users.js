@@ -60,12 +60,12 @@ export const setUnsetFav = async adId => {
 };
 export const setUnsetSold = async adId => {
   const url = `${usersBaseUrl}/sold/${adId}`;
-  await client.post(url);
+  return client.post(url);
 };
 
 export const setUnsetReserved = async adId => {
   const url = `${usersBaseUrl}/reservation/${adId}`;
-  await client.post(url);
+  return client.post(url);
 };
 
 // export const getUsername = async userId => {

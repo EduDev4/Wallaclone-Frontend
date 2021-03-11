@@ -39,6 +39,7 @@ import {
   USER_DELETE_FAILURE,
   UI_RESET,
   UI_SET_ALERT,
+  ADVERTS_SET_AD_STATE,
 } from '../constants/action-types';
 
 import { getIsLoggedUser } from '../selectors';
@@ -360,6 +361,10 @@ export const advertsDeleteSuccess = adId => ({
 export const advertsTagsSuccess = tags => ({
   type: ADVERTS_TAGS_SUCCESS,
   payload: tags,
+});
+export const advertsSetAdState = state => ({
+  type: ADVERTS_SET_AD_STATE,
+  payload: state,
 });
 
 export const loadAdvertDetail = advertId =>
