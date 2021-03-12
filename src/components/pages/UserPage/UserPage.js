@@ -11,7 +11,14 @@ import MainLayout from '../../layout/MainLayout';
 import './UserPage.css';
 import UserPageAside from './UserPageAside';
 
-function UserPage({ match, currentUsername, isLogged, adverts, loadAdverts }) {
+function UserPage({
+  match,
+  currentUsername,
+  isLogged,
+  adverts,
+  loadAdverts,
+  mode,
+}) {
   const handleDelete = () => {};
   const user = match.params.username;
   const { t } = useTranslation(['userpage']);
@@ -34,7 +41,7 @@ function UserPage({ match, currentUsername, isLogged, adverts, loadAdverts }) {
           </aside>
           <div className="userPage-content">
             {isLogged && currentUsername === user ? (
-              <h2>{t('Mis Anuncios')}</h2>
+              <h2>{mode === 'chats' ? t('Mis Chats') : t('Mis Anuncios')}</h2>
             ) : null}
             <div className="userPage-adswrapper flex-container">
               {!adverts ? <p>no hay anuncios</p> : renderAdverts()}
@@ -61,6 +68,7 @@ UserPage.propTypes = {
   }),
   loadAdverts: PropTypes.func.isRequired,
   adverts: PropTypes.arrayOf(PropTypes.object),
+  mode: PropTypes.string,
 };
 
 UserPage.defaultProps = {
@@ -70,6 +78,7 @@ UserPage.defaultProps = {
   //   currentUserEmail: '',
   isLogged: false,
   adverts: null,
+  mode: '',
 };
 
 export default UserPage;

@@ -17,6 +17,7 @@ import {
 import { Send } from '@material-ui/icons';
 import axios from 'axios';
 import ChatItem from './ChatItem';
+import { initChatClient } from '../../api/chat';
 
 const Chat = require('twilio-chat');
 
@@ -47,11 +48,11 @@ class ChatScreen extends React.Component {
     this.scrollDiv = React.createRef();
   }
 
-  getToken = async email => {
-    const response = await axios.get(`http://localhost:3005/token/${email}`);
-    const { data } = response;
-    return data.token;
-  };
+  // getToken = async email => {
+  //   const response = await axios.get(`http://localhost:3005/token/${email}`);
+  //   const { data } = response;
+  //   return data.token;
+  // };
 
   componentWillUnmount = () => {
     this._isMounted = false;
@@ -62,7 +63,7 @@ class ChatScreen extends React.Component {
     const { location } = this.props;
     const { state } = location || {};
     const { email, room } = state || {};
-    let token = '';
+    const token = '';
 
     if (!email || !room) {
       this._isMounted = false;
@@ -71,31 +72,37 @@ class ChatScreen extends React.Component {
 
     if (this._isMounted) {
       this.setState({ loading: true });
-      try {
-        token = await this.getToken(email);
-      } catch {
-        throw new Error('unable to get token, please reload this page');
-      }
+      // try {
+      //   token = await this.getToken(email);
+      // } catch (err) {
+      //   throw new Error(err.message);
+      // }
 
-      const client = await Chat.Client.create(token);
+      // const client = await Chat.Client.create(token);
 
-      client.on('tokenAboutToExpire', async () => {
-        token = await this.getToken(email);
-        client.updateToken(token);
-      });
+      // client.on('tokenAboutToExpire', async () => {
+      //   token = await this.getToken(email);
+      //   client.updateToken(token);
+      // });
 
-      client.on('tokenExpired', async () => {
-        token = await this.getToken(email);
-        client.updateToken(token);
-      });
+      // client.on('tokenExpired', async () => {
+      //   token = await this.getToken(email);
+      //   client.updateToken(token);
+      // });
 
+      // client.on('channelJoined', async channel => {
+      //   // getting list of all messages since this is an existing channel
+      //   const messages = await channel.getMessages();
+      //   this.setState({ messages: messages.items || [] });
+      //   this.scrollToBottom();
+      // });
+      const client = await initChatClient(email);
       client.on('channelJoined', async channel => {
         // getting list of all messages since this is an existing channel
         const messages = await channel.getMessages();
         this.setState({ messages: messages.items || [] });
         this.scrollToBottom();
       });
-
       try {
         const channel = await client.getChannelByUniqueName(room);
         await this.joinChannel(channel);

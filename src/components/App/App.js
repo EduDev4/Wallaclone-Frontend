@@ -46,6 +46,12 @@ function App() {
         </PrivateRoute>
 
         <Route path="/user/:username" exact component={UserPage} />
+        <Route
+          path="/user/:username/chats"
+          exact
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          render={props => <UserPage {...props} mode="chats" />}
+        />
         <Route path="/user/edit/:username" exact component={EditUserPage} />
 
         <Route path="/404" exact>

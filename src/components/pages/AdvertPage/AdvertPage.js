@@ -51,11 +51,12 @@ function AdvertPage({
   };
 
   const handleChatClick = () => {
-    const room = `${id.substr(id.length - 4)}${advert.createdBy.substr(
-      advert.createdBy.length - 4,
-    )}${userId.substr(userId.length - 4)}`;
-    console.log(id, advert.createdBy, userId, 'Room:', room);
-    history.push(`/chat?Rid=${room}&uId=${userId}`, { room, email: userId });
+    const room = `${id}-${advert.createdBy._id}-${userId}`;
+    console.log('Room:', room);
+    history.push(`/chat?owner=${advert.createdBy.username}`, {
+      room,
+      email: userId,
+    });
   };
 
   useEffect(() => {
@@ -135,7 +136,9 @@ function AdvertPage({
                     </div>
                   </>
                 ) : (
-                  <Button type="primary">{t('Chat')}</Button>
+                  <Button onClick={handleChatClick} type="primary">
+                    {t('Chat')}
+                  </Button>
                 )}
               </div>
             </div>
