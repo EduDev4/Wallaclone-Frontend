@@ -43,12 +43,7 @@ const AdvertCard = ({
       );
     }
     if (state === 'Sold') {
-      return (
-        <img
-          src={`${getPublicUrl()}/icons/sold-filled-advert-50.png`}
-          alt="Sold"
-        />
-      );
+      return <img src={`${getPublicUrl()}/icons/sold-30.png`} alt="Sold" />;
     }
     return null;
   };
@@ -61,73 +56,79 @@ const AdvertCard = ({
     <>
       <Link className="card-link" to={`/adverts/view/${_id}`}>
         <article className="advert-tile hover-tile flex-item">
-          {username ? (
-            <div className="advert-header">
-              <div className="advert-author">
-                <button
-                  type="button"
-                  className="nav-button author-name"
-                  onClick={ev => {
-                    ev.preventDefault();
-                    history.push(`/user/${username}`);
-                  }}
-                >
-                  {username}
-                </button>
-              </div>
+          <div
+            className={`advert-tile-container ${
+              state === 'Sold' ? 'advertcard-sold' : ''
+            }`}
+          >
+            {username ? (
+              <div className="advert-header">
+                <div className="advert-author">
+                  <button
+                    type="button"
+                    className="nav-button author-name"
+                    onClick={ev => {
+                      ev.preventDefault();
+                      history.push(`/user/${username}`);
+                    }}
+                  >
+                    {username}
+                  </button>
+                </div>
 
-              <div className="icons">
-                <FavoriteButton
-                  initialValue={isLogged ? isFav(isFavBy) : false}
-                  adId={_id}
-                />
+                <div className="icons">
+                  <FavoriteButton
+                    initialValue={isLogged ? isFav(isFavBy) : false}
+                    adId={_id}
+                  />
+                </div>
               </div>
-            </div>
-          ) : (
-            ''
-          )}
-          <div className="advert-tile-top">
-            <div className="pod">
-              {/* TODO Poner -higer-than-wider si el alto es mayor que el ancho. Poner -wider-than-higher si el ancho es mayor que el alto. */}
-              {/* TODO Por defecto usar: container-higher-than-wider (para que el placeholder se vea bien) */}
-              <div className="container-higher-than-wider">
-                <img
-                  src={
-                    thumb
-                      ? `${getApiBaseUrl()}${thumb}`
-                      : `${getApiBaseUrl()}/img/adverts/noAdImage.jpg`
-                  }
-                  alt={name}
-                  className="advert-photo"
-                />
+            ) : (
+              ''
+            )}
+            <div className="advert-tile-top">
+              <div className="pod">
+                {/* TODO Poner -higer-than-wider si el alto es mayor que el ancho. Poner -wider-than-higher si el ancho es mayor que el alto. */}
+                {/* TODO Por defecto usar: container-higher-than-wider (para que el placeholder se vea bien) */}
+                <div className="container-higher-than-wider">
+                  <img
+                    src={
+                      thumb
+                        ? `${getApiBaseUrl()}${thumb}`
+                        : `${getApiBaseUrl()}/img/adverts/noAdImage.jpg`
+                    }
+                    alt={name}
+                    className="advert-photo"
+                  />
+                </div>
               </div>
-            </div>
-          </div>
-
-          <div itemProp="name" className="advert-tile-bottom">
-            <div className="icons">{isLogged && renderIcons()}</div>
-            <div className="advert-price">{price} €</div>
-            <div className="advert-tile-title">
-              <span>{name}</span>
-            </div>
-            <div className="tags">
-              {tags.map(tag => (
-                <span className="tag" key={`${tag}${Date.now()}`}>
-                  {tag}
-                </span>
-              ))}
-            </div>
-            <div className="advert-desc">
-              <span>{description}</span>
             </div>
 
-            <div
-              title={sale ? 'Se vende' : 'Se busca'}
-              className={sale ? 'advert-sell' : 'advert-buy'}
-            >
-              {sale ? 'Se vende' : 'Se busca'}
+            <div itemProp="name" className="advert-tile-bottom">
+              <div className="icons">{isLogged && renderIcons()}</div>
+              <div className="advert-price">{price} €</div>
+              <div className="advert-tile-title">
+                <span>{name}</span>
+              </div>
+              <div className="tags">
+                {tags.map(tag => (
+                  <span className="tag" key={`${tag}${Date.now()}`}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <div className="advert-desc">
+                <span>{description}</span>
+              </div>
+
+              <div
+                title={sale ? 'Se vende' : 'Se busca'}
+                className={sale ? 'advert-sell' : 'advert-buy'}
+              >
+                {sale ? 'Se vende' : 'Se busca'}
+              </div>
+              <div className="advert-created">{createdAtText}</div>
             </div>
-            <div className="advert-created">{createdAtText}</div>
           </div>
         </article>
       </Link>
