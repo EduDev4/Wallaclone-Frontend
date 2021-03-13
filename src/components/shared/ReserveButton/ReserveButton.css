@@ -1,14 +1,33 @@
-.favorite-wrapper {
+.reserved-wrapper {
   background-color: transparent;
   border: none;
   outline-style: none;
-}
-
-.favorite-wrapper .favorite-icon {
-  transition: transform 0.1s ease-in-out;
-}
-
-.favorite-wrapper:hover .favorite-icon {
+  border-radius: 30px;
+  padding: 0.4rem 1rem;
+  font-size: smaller;
   cursor: pointer;
-  transform: scale(1.1);
+}
+
+.reserved-wrapper-available {
+  border: none;
+  outline-style: none;
+  border-radius: 30px;
+  padding: 0.4rem 1rem;
+  font-size: smaller;
+  cursor: pointer;
+  color: rgb(163, 101, 30);
+  background-color: rgb(255, 187, 110);
+  width: 100%;
+}
+
+.reserved-wrapper-reserved {
+  border: none;
+  outline-style: none;
+  border-radius: 30px;
+  padding: 0.4rem 1rem;
+  font-size: smaller;
+  cursor: pointer;
+  background-color: #5dc19d;
+  color: #27664f;
+  width: 100%;
 }

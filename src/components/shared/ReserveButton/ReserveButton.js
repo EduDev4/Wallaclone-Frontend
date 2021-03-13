@@ -22,19 +22,17 @@ const ReserveButton = ({ initialValue, adId }) => {
     }
   };
   const renderContent = () => (
-    <img
-      className="favorite-icon"
-      src={
-        reserved
-          ? `${getPublicUrl()}/icons/reserved-30.png`
-          : `${getPublicUrl()}/icons/unreserved-30.png`
-      }
-      alt={reserved ? 'Reserved' : 'No reserved'}
-    />
+    <span>{reserved ? 'Poner disponible' : 'Reservar'}</span>
   );
 
   return (
-    <button type="button" className="favorite-wrapper" onClick={handleClick}>
+    <button
+      type="button"
+      className={
+        reserved ? 'reserved-wrapper-reserved' : 'reserved-wrapper-available'
+      }
+      onClick={handleClick}
+    >
       {renderContent()}
     </button>
   );
