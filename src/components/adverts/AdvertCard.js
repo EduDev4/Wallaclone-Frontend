@@ -39,11 +39,21 @@ const AdvertCard = ({
   const renderIcons = () => {
     if (state === 'Reserved') {
       return (
-        <img src={`${getPublicUrl()}/icons/reserved-30.png`} alt="Reserved" />
+        <img
+          title="Reservado"
+          src={`${getPublicUrl()}/icons/reserved-30.png`}
+          alt="Reserved"
+        />
       );
     }
     if (state === 'Sold') {
-      return <img src={`${getPublicUrl()}/icons/sold-30.png`} alt="Sold" />;
+      return (
+        <img
+          title="Vendido"
+          src={`${getPublicUrl()}/icons/sold-30.png`}
+          alt="Sold"
+        />
+      );
     }
     return null;
   };
@@ -105,7 +115,7 @@ const AdvertCard = ({
             </div>
 
             <div itemProp="name" className="advert-tile-bottom">
-              <div className="icons">{isLogged && renderIcons()}</div>
+              <div className="icons">{renderIcons()}</div>
               <div className="advert-price">{price} €</div>
               <div className="advert-tile-title">
                 <span>{name}</span>
@@ -120,13 +130,21 @@ const AdvertCard = ({
               <div className="advert-desc">
                 <span>{description}</span>
               </div>
-
-              <div
-                title={sale ? 'Se vende' : 'Se busca'}
-                className={sale ? 'advert-sell' : 'advert-buy'}
-              >
-                {sale ? 'Se vende' : 'Se busca'}
-              </div>
+              {state !== 'Sold' ? (
+                <div
+                  title={sale ? 'Se vende' : 'Se busca'}
+                  className={sale ? 'advert-sell' : 'advert-buy'}
+                >
+                  {sale ? 'Se vende' : 'Se busca'}
+                </div>
+              ) : (
+                <div
+                  title={sale ? 'Vendido' : 'Encontrado'}
+                  className="advert-sold"
+                >
+                  {sale ? 'Vendido' : 'Encontrado'}
+                </div>
+              )}
               <div className="advert-created">{createdAtText}</div>
             </div>
           </div>
