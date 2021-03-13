@@ -194,7 +194,7 @@ function AdvertPage({
               ) : (
                 <div
                   title={advert.sale ? 'Vendido' : 'Encontrado'}
-                  className="advertpage-sold"
+                  className="advertpage-sold-footer"
                 >
                   {advert.sale ? 'Vendido' : 'Encontrado'}
                 </div>
