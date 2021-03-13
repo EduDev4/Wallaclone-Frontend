@@ -62,19 +62,6 @@ function AdvertPage({
   useEffect(() => {
     loadAdvertDetail(id);
   }, []);
-  /*
-    advert.createdAt        "2021-03-01T22:35:41.762Z"
-    advert.createdBy        "603d6a44ff30d20d8034b971"
-    advert.description          "222"
-    advert.image        "\img\adverts\603d6a44ff30d20d8034b971\1614638141752_f.png"
-    advert.isFavBy          {6043daf0d806c7f080306489: true}
-    advert.name         "Avocado"
-    advert.price        2
-    advert.sale         true
-    advert.state        "Available"
-    advert.tags         ["mobile"]
-    advert.updatedAt        "2021-03-07T13:18:30.444Z"
-*/
 
   return (
     <MainLayout title={t('Detalle del Anuncio')}>
@@ -95,18 +82,6 @@ function AdvertPage({
                 </div>
                 {advert.createdBy._id === userId ? (
                   <>
-                    <div className="advertpage-favorite">
-                      <ReserveButton
-                        initialValue={advert.state === 'Reserved'}
-                        adId={advert._id}
-                      />
-                    </div>
-                    <div className="advertpage-sold">
-                      <SoldButton
-                        initialValue={advert.state === 'Sold'}
-                        adId={advert._id}
-                      />
-                    </div>
                     <div className="advertpage-edit">
                       <Button
                         type="dashed"
@@ -115,7 +90,7 @@ function AdvertPage({
                         }
                         icon={<EditOutlined className="site-form-item-icon" />}
                       >
-                        {t('Editar')}
+                        <span className="button-text">{t('Editar')}</span>
                       </Button>
                     </div>
                     <div className="advertpage-deletebutton">
@@ -131,7 +106,7 @@ function AdvertPage({
                         }
                         danger
                       >
-                        {t('Eliminar')}
+                        <span className="button-text">{t('Eliminar')}</span>
                       </ConfirmButton>
                     </div>
                   </>
@@ -145,12 +120,60 @@ function AdvertPage({
             <div className="advertpage-photo-container">
               <img alt="ad_photo" src={`${getApiBaseUrl()}${advert.image}`} />
             </div>
+            <div className="advertpage-reserved-sold">
+              {advert.createdBy._id === userId ? (
+                <>
+                  <div className="advertpage-reserved">
+                    {advert.state !== 'Sold' ? (
+                      <ReserveButton
+                        initialValue={advert.state === 'Reserved'}
+                        adId={advert._id}
+                      />
+                    ) : (
+                      ''
+                    )}
+                  </div>
+                  <div className="advertpage-sold">
+                    <SoldButton
+                      initialValue={advert.state === 'Sold'}
+                      adId={advert._id}
+                    />
+                  </div>
+                </>
+              ) : (
+                ''
+              )}
+            </div>
+            <div className="advertpage-status-tags">
+              <div className={`advertpage-status-${advert.state}`}>
+                {advert.state === 'Reserved' ? (
+                  <>
+                    <img
+                      className="favorite-icon"
+                      src={`${getPublicUrl()}/icons/reserved-30.png`}
+                      alt={advert.state}
+                    />{' '}
+                    Reservado{' '}
+                  </>
+                ) : (
+                  ''
+                )}
+                {advert.state === 'Sold' ? (
+                  <>
+                    <img
+                      className="favorite-icon"
+                      src={`${getPublicUrl()}/icons/sold-x-30.png`}
+                      alt={advert.state}
+                    />{' '}
+                    {advert.sale ? 'Vendido' : 'Encontrado'}{' '}
+                  </>
+                ) : (
+                  ''
+                )}
+              </div>
+            </div>
             <div className="advertpage-title-price">
               <div className="advertpage-title">{advert.name}</div>
-              <div className={`advertpage-status-${advert.state}`}>&nbsp;</div>
-              <div className="advertpage-sell">
-                {advert.sale ? 'Se vende' : 'Se busca'}
-              </div>
               <div className="advertpage-price">{advert.price} €</div>
             </div>
             <div className="advertpage-tags">
@@ -162,28 +185,58 @@ function AdvertPage({
                   ))
                 : ''}
             </div>
-            <div className="advertpage-description">{advert.description}</div>
-            <div className="advertpage-social">
-              <FacebookShareButton
-                url={window.location.href}
-                quote={advert.name}
-              >
-                <FacebookIcon size={32} round />
-              </FacebookShareButton>
-              <TwitterShareButton
-                url={window.location.href}
-                title={advert.name}
-                hashtags={advert.tags}
-              >
-                <TwitterIcon size={32} round />
-              </TwitterShareButton>
-              <WhatsappShareButton url={window.location.href}>
-                <WhatsappIcon size={32} round />
-              </WhatsappShareButton>
+            <div
+              className={
+                advert.description
+                  ? 'advertpage-description'
+                  : 'advertpage-description-none'
+              }
+            >
+              {advert.description ? advert.description : 'Sin descripción'}
             </div>
+
             <div className="advertpage-footer">
+              {advert.state !== 'Sold' ? (
+                <div
+                  className={advert.sale ? 'advertpage-sell' : 'advertpage-buy'}
+                >
+                  {advert.sale ? 'Se vende' : 'Se busca'}
+                </div>
+              ) : (
+                <div
+                  title={advert.sale ? 'Vendido' : 'Encontrado'}
+                  className="advertpage-sold-footer"
+                >
+                  {advert.sale ? 'Vendido' : 'Encontrado'}
+                </div>
+              )}
+
               <div className="advertpage-created">
                 {new Date(advert.createdAt).toLocaleDateString()}
+              </div>
+            </div>
+            <div className="advertpage-social">
+              <div className="item">
+                <FacebookShareButton
+                  url={window.location.href}
+                  quote={advert.name}
+                >
+                  <FacebookIcon size={32} round />
+                </FacebookShareButton>
+              </div>
+              <div className="item">
+                <TwitterShareButton
+                  url={window.location.href}
+                  title={advert.name}
+                  hashtags={advert.tags}
+                >
+                  <TwitterIcon size={32} round />
+                </TwitterShareButton>
+              </div>
+              <div className="item">
+                <WhatsappShareButton url={window.location.href}>
+                  <WhatsappIcon size={32} round />
+                </WhatsappShareButton>
               </div>
             </div>
           </div>

@@ -24,15 +24,15 @@ const SoldButton = ({ initialValue, adId }) => {
     }
   };
   const renderContent = () => (
-    <img
-      className="sold-icon"
-      src={sold ? soldFilledIcon : soldEmptyIcon}
-      alt={sold ? 'Sold' : 'No sold'}
-    />
+    <span>{sold ? 'Poner a la venta' : 'Vendido'}</span>
   );
 
   return (
-    <button type="button" className="sold-wrapper" onClick={handleClick}>
+    <button
+      type="button"
+      className={sold ? 'sold-wrapper-sold' : 'sold-wrapper-available'}
+      onClick={handleClick}
+    >
       {renderContent()}
     </button>
   );
