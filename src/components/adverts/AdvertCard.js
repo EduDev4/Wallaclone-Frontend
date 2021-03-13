@@ -62,41 +62,50 @@ const AdvertCard = ({
       <Link className="card-link" to={`/adverts/view/${_id}`}>
         <article className="advert-tile hover-tile flex-item">
           {username ? (
-            <div className="advert-author">
-              <button
-                type="button"
-                className="nav-button author-name"
-                onClick={ev => {
-                  ev.preventDefault();
-                  history.push(`/user/${username}`);
-                }}
-              >
-                {username}
-              </button>
+            <div className="advert-header">
+              <div className="advert-author">
+                <button
+                  type="button"
+                  className="nav-button author-name"
+                  onClick={ev => {
+                    ev.preventDefault();
+                    history.push(`/user/${username}`);
+                  }}
+                >
+                  {username}
+                </button>
+              </div>
+
+              <div className="icons">
+                <FavoriteButton
+                  initialValue={isLogged ? isFav(isFavBy) : false}
+                  adId={_id}
+                />
+              </div>
             </div>
           ) : (
             ''
           )}
           <div className="advert-tile-top">
-            <img
-              src={
-                thumb
-                  ? `${getApiBaseUrl()}${thumb}`
-                  : `${getApiBaseUrl()}/img/adverts/noAdImage.jpg`
-              }
-              alt={name}
-              className="advert-photo"
-            />
+            <div className="pod">
+              {/* TODO Poner -higer-than-wider si el alto es mayor que el ancho. Poner -wider-than-higher si el ancho es mayor que el alto. */}
+              {/* TODO Por defecto usar: container-higher-than-wider (para que el placeholder se vea bien) */}
+              <div className="container-higher-than-wider">
+                <img
+                  src={
+                    thumb
+                      ? `${getApiBaseUrl()}${thumb}`
+                      : `${getApiBaseUrl()}/img/adverts/noAdImage.jpg`
+                  }
+                  alt={name}
+                  className="advert-photo"
+                />
+              </div>
+            </div>
           </div>
 
           <div itemProp="name" className="advert-tile-bottom">
-            <div className="icons">
-              <FavoriteButton
-                initialValue={isLogged ? isFav(isFavBy) : false}
-                adId={_id}
-              />
-              {isLogged && renderIcons()}
-            </div>
+            <div className="icons">{isLogged && renderIcons()}</div>
             <div className="advert-price">{price} €</div>
             <div className="advert-tile-title">
               <span>{name}</span>
