@@ -50,7 +50,7 @@ const AdvertCard = ({
       return (
         <img
           title="Vendido"
-          src={`${getPublicUrl()}/icons/sold-30.png`}
+          src={`${getPublicUrl()}/icons/sold-x-30.png`}
           alt="Sold"
         />
       );

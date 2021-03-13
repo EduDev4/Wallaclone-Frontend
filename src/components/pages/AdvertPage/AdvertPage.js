@@ -151,10 +151,10 @@ function AdvertPage({
                   <>
                     <img
                       className="favorite-icon"
-                      src={`${getPublicUrl()}/icons/sold-30.png`}
+                      src={`${getPublicUrl()}/icons/sold-x-30.png`}
                       alt={advert.state}
                     />{' '}
-                    Vendido{' '}
+                    {advert.sale ? 'Vendido' : 'Encontrado'}{' '}
                   </>
                 ) : (
                   ''
@@ -185,11 +185,21 @@ function AdvertPage({
             </div>
 
             <div className="advertpage-footer">
-              <div
-                className={advert.sale ? 'advertpage-sell' : 'advertpage-buy'}
-              >
-                {advert.sale ? 'Se vende' : 'Se busca'}
-              </div>
+              {advert.state !== 'Sold' ? (
+                <div
+                  className={advert.sale ? 'advertpage-sell' : 'advertpage-buy'}
+                >
+                  {advert.sale ? 'Se vende' : 'Se busca'}
+                </div>
+              ) : (
+                <div
+                  title={advert.sale ? 'Vendido' : 'Encontrado'}
+                  className="advertpage-sold"
+                >
+                  {advert.sale ? 'Vendido' : 'Encontrado'}
+                </div>
+              )}
+
               <div className="advertpage-created">
                 {new Date(advert.createdAt).toLocaleDateString()}
               </div>
