@@ -17,6 +17,7 @@ function UserFavsPage({
   isLogged,
   adverts,
   onLoadFavAdverts,
+  favsAdverts,
 }) {
   const handleDelete = () => {};
   const user = match.params.username;
@@ -24,7 +25,7 @@ function UserFavsPage({
 
   useEffect(() => {
     onLoadFavAdverts();
-  }, []);
+  }, [favsAdverts]);
 
   const renderAdverts = () => {
     if (!adverts) return null;
@@ -66,12 +67,14 @@ UserFavsPage.propTypes = {
   }),
   onLoadFavAdverts: PropTypes.func.isRequired,
   adverts: PropTypes.arrayOf(PropTypes.object),
+  favsAdverts: PropTypes.string,
 };
 
 UserFavsPage.defaultProps = {
   currentUsername: '',
   isLogged: false,
   adverts: null,
+  favsAdverts: '',
 };
 
 export default UserFavsPage;

@@ -10,3 +10,8 @@ export const getAdverts = state => state.adverts.ads;
 
 export const getAdvertDetail = state => state.adverts.adDetail;
 export const getTags = state => state.adverts.tags;
+
+export const getIsFavAdvert = state => {
+  if (state.adverts.adDetail) return state.adverts.adDetail.isFavBy;
+  return '';
+};

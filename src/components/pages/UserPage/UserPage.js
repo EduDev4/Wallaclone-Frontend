@@ -18,7 +18,7 @@ function UserPage({ match, currentUsername, isLogged, adverts, loadAdverts }) {
 
   useEffect(() => {
     loadAdverts(`username=${user}`);
-  }, []);
+  }, [user]);
 
   const renderAdverts = () => {
     if (!adverts) return null;
