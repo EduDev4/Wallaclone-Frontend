@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
-import { advertsSetAdState } from '../../../store/actions';
+import { advertsSetAdState } from '../../../store/actions/adverts-actions';
 import soldEmptyIcon from '../../../assets/sold-empty-advert-50.png';
 import soldFilledIcon from '../../../assets/sold-filled-advert-50.png';
 import { setUnsetSold } from '../../../api/users';

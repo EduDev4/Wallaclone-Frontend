@@ -17,7 +17,8 @@ import {
 } from '../../../store/selectors';
 
 import './UserPage.css';
-import { deleteUser, loadAdverts } from '../../../store/actions';
+import { deleteUser } from '../../../store/actions/user-actions';
+import { loadAdverts } from '../../../store/actions/adverts-actions';
 
 function UserPageAside({
   loading,

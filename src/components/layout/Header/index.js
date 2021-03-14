@@ -6,7 +6,8 @@ import {
   getIsLoggedUser,
   getUsername,
 } from '../../../store/selectors';
-import { loadAdverts, logout } from '../../../store/actions';
+import { logout } from '../../../store/actions/auth-actions';
+import { loadAdverts } from '../../../store/actions/adverts-actions';
 
 const mapStateToProps = state => ({
   isLogged: getIsLoggedUser(state),

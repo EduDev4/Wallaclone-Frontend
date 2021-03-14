@@ -9,7 +9,10 @@ import {
   getAdvertDetail,
 } from '../../../store/selectors';
 
-import { loadAdvertDetail, deleteAdvert } from '../../../store/actions';
+import {
+  loadAdvertDetail,
+  deleteAdvert,
+} from '../../../store/actions/adverts-actions';
 
 const mapStateToProps = state => ({
   getUi,

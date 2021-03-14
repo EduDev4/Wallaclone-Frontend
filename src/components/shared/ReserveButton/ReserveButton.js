@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
-import { advertsSetAdState } from '../../../store/actions';
+import { advertsSetAdState } from '../../../store/actions/adverts-actions';
 import { getPublicUrl } from '../../../config/envConfig';
 import { setUnsetReserved } from '../../../api/users';
 import './ReserveButton.css';
