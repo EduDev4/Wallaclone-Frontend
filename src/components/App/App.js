@@ -14,6 +14,7 @@ import ForgotPassPage from '../pages/ForgotPassPage';
 import ResetPassPage from '../pages/ResetPassPage';
 import UserPage from '../pages/UserPage';
 import EditUserPage from '../pages/EditUserPage';
+import UserFavsPage from '../pages/UserFavsPage';
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
         </PrivateRoute>
 
         <Route path="/user/:username" exact component={UserPage} />
+        <Route path="/user/:username/favs" exact component={UserFavsPage} />
         <Route path="/user/edit/:username" exact component={EditUserPage} />
 
         <Route path="/404" exact>

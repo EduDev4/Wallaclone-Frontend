@@ -1,0 +1,72 @@
+.userPage-aside {
+  max-width: 300px;
+  min-width: 150px;
+  border-right: 1px solid var(--logo-color);
+  padding-top: 2rem;
+  /*padding-right: 0px;*/
+  background-color: var(--forms-bg-color);
+  border-radius: var(--forms-border-radius);
+  border: 0px;
+}
+
+.userPage-aside .username {
+  font-size: 20pt;
+  font-weight: bold;
+  padding: 1rem;
+}
+
+.userPage-aside .tab {
+  border-radius: 15px 0px 0px 15px;
+  font-size: 1rem;
+  color: #7c8ed2;
+  padding: 0.5rem;
+  margin: 1rem 0rem 1rem 0rem;
+  border: 1px solid #7c8ed2;
+  border-right: none;
+  width: 150px;
+  position: relative;
+  float: right;
+  clear: both;
+  cursor: pointer;
+}
+
+.userPage-aside .tab.innactive:hover {
+  background-color: #7c8ed2;
+  color: #ececec;
+}
+
+.userPage-aside .tab.active {
+  background-color: #ececec;
+  border-color: var(--bg-button-main);
+  color: var(--bg-button-main);
+  font-weight: bold;
+  border-width: 3px;
+}
+
+.delete-button {
+  margin: auto;
+  margin-top: 5rem;
+  border-radius: 20px;
+}
+
+.edit-button {
+  margin-bottom: 10px;
+  width: 90%;
+}
+
+.edit-button {
+  background-color: var(--bg-button-main);
+  color: var(--color-button-main);
+  border-radius: 20px;
+  border: 0px;
+  margin: auto;
+  margin-bottom: 1.5rem;
+}
+
+.edit-button:hover {
+  background-color: var(--bg-solid-color);
+}
+
+.userPage-content {
+  padding-left: 10px;
+}

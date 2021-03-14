@@ -41,6 +41,9 @@ import {
   UI_SET_ALERT,
   ADVERTS_SET_AD_STATE,
   ADVERTS_SET_AD_FAV,
+  USER_FAV_ADVERTS_REQUEST,
+  USER_FAV_ADVERTS_SUCCESS,
+  USER_FAV_ADVERTS_FAILURE,
 } from '../constants/action-types';
 
 import { getIsLoggedUser } from '../selectors';
@@ -456,5 +459,32 @@ export const loadTags = () =>
       dispatch(advertsTagsSuccess(tags));
     } catch (error) {
       dispatch(advertsTagsFailure(error));
+    }
+  };
+
+// USER ADVERTS
+
+export const favUserAdvertsLoadRequest = () => ({
+  type: USER_FAV_ADVERTS_REQUEST,
+});
+export const favUserAdvertsLoadSuccess = ads => ({
+  type: USER_FAV_ADVERTS_SUCCESS,
+  payload: ads,
+});
+export const favUserAdvertsLoadFailure = error => ({
+  type: USER_FAV_ADVERTS_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const loadFavAdverts = () =>
+  // eslint-disable-next-line func-names
+  async function (dispatch, getState, { api }) {
+    dispatch(favUserAdvertsLoadRequest());
+    try {
+      const { adverts } = await api.users.getUserFavs();
+      dispatch(favUserAdvertsLoadSuccess(adverts));
+    } catch (error) {
+      dispatch(favUserAdvertsLoadFailure(error));
     }
   };
