@@ -72,6 +72,8 @@ export const adverts = (state = initialState.adverts, action) => {
       };
     case types.USER_FAV_ADVERTS_SUCCESS:
       return { ...state, ads: action.payload };
+    case types.USER_SOLD_ADVERTS_SUCCESS:
+      return { ...state, ads: action.payload };
     default:
       return state;
   }

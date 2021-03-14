@@ -73,3 +73,9 @@ export const getUserFavs = async () => {
   const response = await client.get(url);
   return response;
 };
+
+export const getUserSoldAdverts = async () => {
+  const url = `${usersBaseUrl}/sold`;
+  const response = await client.get(url);
+  return response;
+};

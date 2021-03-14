@@ -11,19 +11,19 @@ import MainLayout from '../../layout/MainLayout';
 import '../UserPage/UserPage.css';
 import UserPageAside from '../UserPage/UserPageAside';
 
-function UserFavsPage({
+function UserSoldPage({
   match,
   currentUsername,
   isLogged,
   adverts,
-  onLoadFavAdverts,
+  onLoadSoldAdverts,
 }) {
   const handleDelete = () => {};
   const user = match.params.username;
   const { t } = useTranslation(['userpage']);
 
   useEffect(() => {
-    onLoadFavAdverts();
+    onLoadSoldAdverts();
   }, []);
 
   const renderAdverts = () => {
@@ -52,7 +52,7 @@ function UserFavsPage({
   );
 }
 
-UserFavsPage.propTypes = {
+UserSoldPage.propTypes = {
   // eslint-disable-next-line react/require-default-props
 
   currentUsername: PropTypes.string,
@@ -64,14 +64,14 @@ UserFavsPage.propTypes = {
       username: PropTypes.string.isRequired,
     }),
   }),
-  onLoadFavAdverts: PropTypes.func.isRequired,
+  onLoadSoldAdverts: PropTypes.func.isRequired,
   adverts: PropTypes.arrayOf(PropTypes.object),
 };
 
-UserFavsPage.defaultProps = {
+UserSoldPage.defaultProps = {
   currentUsername: '',
   isLogged: false,
   adverts: null,
 };
 
-export default UserFavsPage;
+export default UserSoldPage;
