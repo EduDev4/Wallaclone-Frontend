@@ -7,6 +7,7 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
 import ConfirmButton from '../../shared/ConfirmButton';
+import FiltersForm from '../../shared/FiltersForm';
 
 import {
   getUi,
@@ -16,7 +17,7 @@ import {
 } from '../../../store/selectors';
 
 import './UserPage.css';
-import { deleteUser } from '../../../store/actions';
+import { deleteUser, loadAdverts } from '../../../store/actions';
 
 function UserPageAside({
   loading,
@@ -26,8 +27,13 @@ function UserPageAside({
   isLogged,
   user,
   onDeleteUser,
+  onLoadAdverts,
 }) {
   const { t } = useTranslation(['userpage']);
+
+  const handleSubmit = params => {
+    onLoadAdverts(`username=${user}&${params}`);
+  };
   return (
     <>
       <span className="username">{user}</span>
@@ -43,10 +49,30 @@ function UserPageAside({
             </Button>
           </Link>
 
-          <div className="tab active adverts">1 anuncio</div>
-          <div className="tab innactive reserved">2 reservados</div>
-          <div className="tab innactive favorites">5 favoritos</div>
-          <div className="tab innactive chats">7 chats</div>
+          <Link className="tab active adverts" to={`/user/${currentUsername}`}>
+            1 anuncio
+          </Link>
+
+          <Link
+            className="tab innactive reserved"
+            to={`/user/${currentUsername}/reserved`}
+          >
+            2 reservados
+          </Link>
+
+          <Link
+            className="tab innactive favorites"
+            to={`/user/${currentUsername}/favs`}
+          >
+            5 favoritos
+          </Link>
+
+          <Link
+            className="tab innactive sold"
+            to={`/user/${currentUsername}/sold`}
+          >
+            7 vendidos
+          </Link>
 
           <ConfirmButton
             className="delete-button"
@@ -63,7 +89,7 @@ function UserPageAside({
           </ConfirmButton>
         </>
       ) : (
-        <></>
+        <FiltersForm onSubmit={handleSubmit} />
       )}
     </>
   );
@@ -77,6 +103,7 @@ UserPageAside.propTypes = {
   currentUserEmail: PropTypes.string,
   isLogged: PropTypes.bool,
   onDeleteUser: PropTypes.func.isRequired,
+  onLoadAdverts: PropTypes.func.isRequired,
 };
 
 UserPageAside.defaultProps = {
@@ -94,7 +121,10 @@ const mapStateToProps = state => ({
   isLogged: getIsLoggedUser(state),
 });
 
-const mapDispatchToProps = { onDeleteUser: deleteUser };
+const mapDispatchToProps = {
+  onDeleteUser: deleteUser,
+  onLoadAdverts: form => loadAdverts(form),
+};
 
 const ConnectedUserPageAside = connect(
   mapStateToProps,

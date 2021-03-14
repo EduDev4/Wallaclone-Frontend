@@ -2,8 +2,8 @@
   max-width: 300px;
   min-width: 150px;
   border-right: 1px solid var(--logo-color);
-  padding: 2rem;
-  padding-right: 0px;
+  padding-top: 2rem;
+  /*padding-right: 0px;*/
   background-color: var(--forms-bg-color);
   border-radius: var(--forms-border-radius);
   border: 0px;
@@ -12,6 +12,7 @@
 .userPage-aside .username {
   font-size: 20pt;
   font-weight: bold;
+  padding: 1rem;
 }
 
 .userPage-aside .tab {
