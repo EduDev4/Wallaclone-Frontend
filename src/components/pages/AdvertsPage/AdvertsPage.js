@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { useHistory } from 'react-router-dom';
 import ReactPaginate from 'react-paginate';
 import MainLayout from '../../layout/MainLayout';
 import AdvertCard from '../../adverts';

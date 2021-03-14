@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect } from 'react';
-
 import PropTypes from 'prop-types';
 import {
   FacebookShareButton,
@@ -10,13 +9,12 @@ import {
   TwitterIcon,
   WhatsappIcon,
 } from 'react-share';
-
-import { Link, useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Button } from 'antd';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons';
-import { getIsLoggedUser, getUserId } from '../../../store/selectors';
+import { getUserId } from '../../../store/selectors';
 import FavoriteButton from '../../shared/FavoriteButton';
 import ReserveButton from '../../shared/ReserveButton';
 import SoldButton from '../../shared/SoldButton';

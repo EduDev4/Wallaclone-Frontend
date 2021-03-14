@@ -68,7 +68,14 @@ export const setUnsetReserved = async adId => {
   return client.post(url);
 };
 
-// export const getUsername = async userId => {
-//   const { username } = await client.get(`/apiv1/users/${userId}`);
-//   return username;
-// };
+export const getUserFavs = async () => {
+  const url = `${usersBaseUrl}/favs`;
+  const response = await client.get(url);
+  return response;
+};
+
+export const getUserSoldAdverts = async () => {
+  const url = `${usersBaseUrl}/sold`;
+  const response = await client.get(url);
+  return response;
+};

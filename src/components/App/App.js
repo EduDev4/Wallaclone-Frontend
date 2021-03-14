@@ -14,7 +14,8 @@ import ForgotPassPage from '../pages/ForgotPassPage';
 import ResetPassPage from '../pages/ResetPassPage';
 import UserPage from '../pages/UserPage';
 import EditUserPage from '../pages/EditUserPage';
-import ChatScreen from '../chat/ChatScreen';
+import UserFavsPage from '../pages/UserFavsPage';
+import UserSoldPage from '../pages/UserSoldPage';
 
 function App() {
   return (
@@ -40,18 +41,14 @@ function App() {
         <PrivateRoute path="/adverts/new" exact>
           <NewAdvertPage />
         </PrivateRoute>
-        <Route exact path="/chat" component={ChatScreen} />
+        {/* <Route exact path="/chat" component={ChatScreen} />
         <PrivateRoute path="/chat" exact>
           <ChatScreen />
-        </PrivateRoute>
+        </PrivateRoute> */}
 
         <Route path="/user/:username" exact component={UserPage} />
-        <Route
-          path="/user/:username/chats"
-          exact
-          // eslint-disable-next-line react/jsx-props-no-spreading
-          render={props => <UserPage {...props} mode="chats" />}
-        />
+        <Route path="/user/:username/favs" exact component={UserFavsPage} />
+        <Route path="/user/:username/sold" exact component={UserSoldPage} />
         <Route path="/user/edit/:username" exact component={EditUserPage} />
 
         <Route path="/404" exact>

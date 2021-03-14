@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-props-no-spreading */
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -8,24 +8,24 @@ import AdvertCard from '../../adverts';
 
 import MainLayout from '../../layout/MainLayout';
 
-import './UserPage.css';
-import UserPageAside from './UserPageAside';
+import '../UserPage/UserPage.css';
+import UserPageAside from '../UserPage/UserPageAside';
 
-function UserPage({
+function UserFavsPage({
   match,
   currentUsername,
   isLogged,
   adverts,
-  loadAdverts,
-  mode,
+  onLoadFavAdverts,
+  favsAdverts,
 }) {
   const handleDelete = () => {};
   const user = match.params.username;
   const { t } = useTranslation(['userpage']);
 
   useEffect(() => {
-    loadAdverts(`username=${user}`);
-  }, [user]);
+    onLoadFavAdverts();
+  }, [favsAdverts]);
 
   const renderAdverts = () => {
     if (!adverts) return null;
@@ -41,7 +41,7 @@ function UserPage({
           </aside>
           <div className="userPage-content">
             {isLogged && currentUsername === user ? (
-              <h2>{mode === 'chats' ? t('Mis Chats') : t('Mis Anuncios')}</h2>
+              <h2>{t('Mis Anuncios Favoritos')}</h2>
             ) : null}
             <div className="userPage-adswrapper flex-container">
               {!adverts ? <p>no hay anuncios</p> : renderAdverts()}
@@ -53,10 +53,9 @@ function UserPage({
   );
 }
 
-UserPage.propTypes = {
+UserFavsPage.propTypes = {
   // eslint-disable-next-line react/require-default-props
-  // loading: PropTypes.bool,
-  // error: PropTypes.bool,
+
   currentUsername: PropTypes.string,
   // currentUserEmail: PropTypes.string,
   isLogged: PropTypes.bool,
@@ -66,19 +65,16 @@ UserPage.propTypes = {
       username: PropTypes.string.isRequired,
     }),
   }),
-  loadAdverts: PropTypes.func.isRequired,
+  onLoadFavAdverts: PropTypes.func.isRequired,
   adverts: PropTypes.arrayOf(PropTypes.object),
-  mode: PropTypes.string,
+  favsAdverts: PropTypes.string,
 };
 
-UserPage.defaultProps = {
-  //   loading: false,
-  //   error: null,
+UserFavsPage.defaultProps = {
   currentUsername: '',
-  //   currentUserEmail: '',
   isLogged: false,
   adverts: null,
-  mode: '',
+  favsAdverts: '',
 };
 
-export default UserPage;
+export default UserFavsPage;

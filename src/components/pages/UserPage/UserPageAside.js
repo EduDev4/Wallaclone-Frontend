@@ -1,12 +1,13 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useRouteMatch } from 'react-router-dom';
 import { Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
 import ConfirmButton from '../../shared/ConfirmButton';
+import FiltersForm from '../../shared/FiltersForm';
 
 import {
   getUi,
@@ -16,7 +17,7 @@ import {
 } from '../../../store/selectors';
 
 import './UserPage.css';
-import { deleteUser } from '../../../store/actions';
+import { deleteUser, loadAdverts } from '../../../store/actions';
 
 function UserPageAside({
   loading,
@@ -26,8 +27,16 @@ function UserPageAside({
   isLogged,
   user,
   onDeleteUser,
+  onLoadAdverts,
 }) {
   const { t } = useTranslation(['userpage']);
+
+  // TODO cambiar activo/inactivo la className des aside según donde estemos
+  const { url } = useRouteMatch();
+
+  const handleSubmit = params => {
+    onLoadAdverts(`username=${user}&${params}`);
+  };
   return (
     <>
       <span className="username">{user}</span>
@@ -43,10 +52,30 @@ function UserPageAside({
             </Button>
           </Link>
 
-          <div className="tab active adverts">1 anuncio</div>
-          <div className="tab innactive reserved">2 reservados</div>
-          <div className="tab innactive favorites">5 favoritos</div>
-          <div className="tab innactive chats">7 chats</div>
+          <Link className="tab active adverts" to={`/user/${currentUsername}`}>
+            Anuncios
+          </Link>
+
+          <Link
+            className="tab innactive reserved"
+            to={`/user/${currentUsername}/reserved`}
+          >
+            Reservados
+          </Link>
+
+          <Link
+            className="tab innactive favorites"
+            to={`/user/${currentUsername}/favs`}
+          >
+            Favoritos
+          </Link>
+
+          <Link
+            className="tab innactive sold"
+            to={`/user/${currentUsername}/sold`}
+          >
+            Vendidos
+          </Link>
 
           <ConfirmButton
             className="delete-button"
@@ -63,7 +92,7 @@ function UserPageAside({
           </ConfirmButton>
         </>
       ) : (
-        <></>
+        <FiltersForm onSubmit={handleSubmit} />
       )}
     </>
   );
@@ -77,6 +106,7 @@ UserPageAside.propTypes = {
   currentUserEmail: PropTypes.string,
   isLogged: PropTypes.bool,
   onDeleteUser: PropTypes.func.isRequired,
+  onLoadAdverts: PropTypes.func.isRequired,
 };
 
 UserPageAside.defaultProps = {
@@ -94,7 +124,10 @@ const mapStateToProps = state => ({
   isLogged: getIsLoggedUser(state),
 });
 
-const mapDispatchToProps = { onDeleteUser: deleteUser };
+const mapDispatchToProps = {
+  onDeleteUser: deleteUser,
+  onLoadAdverts: form => loadAdverts(form),
+};
 
 const ConnectedUserPageAside = connect(
   mapStateToProps,

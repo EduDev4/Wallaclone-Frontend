@@ -50,3 +50,11 @@ export const ADVERTS_SET_AD_FAV = 'adverts/SET_AD_FAV';
 
 export const UI_RESET = 'ui/RESET';
 export const UI_SET_ALERT = 'ui/SET_ALERT';
+
+export const USER_FAV_ADVERTS_REQUEST = 'user/FAV_ADVERT_REQUEST';
+export const USER_FAV_ADVERTS_SUCCESS = 'user/FAV_ADVERT_SUCCESS';
+export const USER_FAV_ADVERTS_FAILURE = 'user/FAV_ADVERT_FAILURE';
+
+export const USER_SOLD_ADVERTS_REQUEST = 'user/SOLD_ADVERT_REQUEST';
+export const USER_SOLD_ADVERTS_SUCCESS = 'user/SOLD_ADVERT_SUCCESS';
+export const USER_SOLD_ADVERTS_FAILURE = 'user/SOLD_ADVERT_FAILURE';
