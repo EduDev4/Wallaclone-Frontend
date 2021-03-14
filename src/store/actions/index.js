@@ -49,7 +49,7 @@ import {
   USER_SOLD_ADVERTS_FAILURE,
 } from '../constants/action-types';
 
-import { getIsLoggedUser } from '../selectors';
+import { getIsLoggedUser, getUsername } from '../selectors';
 import storage from '../../utils/storage';
 
 /** UI ACTIONS */
@@ -436,6 +436,8 @@ export const updateAdvert = (adId, advertData) =>
 export const deleteAdvert = advertId =>
   // eslint-disable-next-line func-names
   async function (dispatch, getState, { history, api }) {
+    const state = getState();
+    const user = getUsername(state);
     dispatch(advertsDeleteRequest());
     try {
       await api.adverts.deleteAdvert(advertId);
@@ -444,7 +446,7 @@ export const deleteAdvert = advertId =>
       dispatch(
         showFlashAlert({ type: 'success', message: 'Anuncio eliminado!' }),
       );
-      history.push('/adverts');
+      history.push(`/user/${user}`);
     } catch (error) {
       dispatch(showFlashAlert({ type: 'error', message: error.message }));
       await dispatch(advertsDeleteFailure(error));
