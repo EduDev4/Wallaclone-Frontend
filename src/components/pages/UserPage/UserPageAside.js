@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useRouteMatch } from 'react-router-dom';
 import { Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
@@ -31,6 +31,9 @@ function UserPageAside({
 }) {
   const { t } = useTranslation(['userpage']);
 
+  // TODO cambiar activo/inactivo la className des aside según donde estemos
+  const { url } = useRouteMatch();
+
   const handleSubmit = params => {
     onLoadAdverts(`username=${user}&${params}`);
   };
@@ -50,28 +53,28 @@ function UserPageAside({
           </Link>
 
           <Link className="tab active adverts" to={`/user/${currentUsername}`}>
-            1 anuncio
+            Anuncios
           </Link>
 
           <Link
             className="tab innactive reserved"
             to={`/user/${currentUsername}/reserved`}
           >
-            2 reservados
+            Reservados
           </Link>
 
           <Link
             className="tab innactive favorites"
             to={`/user/${currentUsername}/favs`}
           >
-            5 favoritos
+            Favoritos
           </Link>
 
           <Link
             className="tab innactive sold"
             to={`/user/${currentUsername}/sold`}
           >
-            7 vendidos
+            Vendidos
           </Link>
 
           <ConfirmButton
