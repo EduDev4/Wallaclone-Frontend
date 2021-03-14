@@ -4,7 +4,7 @@ import EditAdvertPage from './EditAdvertPage';
 
 import { getAdvertDetail } from '../../../store/selectors';
 
-import { loadAdvertDetail } from '../../../store/actions';
+import { loadAdvertDetail } from '../../../store/actions/adverts-actions';
 
 const mapStateToProps = state => ({
   advert: getAdvertDetail(state),

@@ -7,7 +7,7 @@ import favEmptyIcon from '../../../assets/fav-empty-advert-30.png';
 import favFilledIcon from '../../../assets/fav-filled-advert-30.png';
 import { setUnsetFav } from '../../../api/users';
 import { getIsLoggedUser } from '../../../store/selectors';
-import { advertsSetAdFav } from '../../../store/actions';
+import { advertsSetAdFav } from '../../../store/actions/adverts-actions';
 import './FavoriteButton.css';
 
 const FavoriteButton = ({ initialValue, adId }) => {

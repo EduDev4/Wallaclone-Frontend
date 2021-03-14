@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import AdvertsPage from './AdvertsPage';
 import { getUi, getAdverts } from '../../../store/selectors';
-import { loadAdverts } from '../../../store/actions';
+import { loadAdverts } from '../../../store/actions/adverts-actions';
 
 const mapStateToProps = state => ({
   adverts: getAdverts(state),

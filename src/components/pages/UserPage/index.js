@@ -9,7 +9,7 @@ import {
   getAdverts,
 } from '../../../store/selectors';
 
-import { loadAdverts } from '../../../store/actions';
+import { loadAdverts } from '../../../store/actions/adverts-actions';
 
 const mapStateToProps = state => ({
   getUi,
