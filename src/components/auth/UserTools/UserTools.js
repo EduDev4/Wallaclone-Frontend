@@ -28,7 +28,7 @@ function UserTools({ className, currentUser, ...props }) {
           </Link>
         </div>
         <div className="imgwrapper">
-          <Link className="nav-button" to="/chat">
+          <Link className="nav-button" to={`/user/${currentUser}/chats`}>
             <img src={`${getPublicUrl()}/icons/chat-menu-30.png`} alt="Chat" />
           </Link>
         </div>

@@ -11,8 +11,14 @@ import MainLayout from '../../layout/MainLayout';
 import './UserPage.css';
 import UserPageAside from './UserPageAside';
 
-function UserPage({ match, currentUsername, isLogged, adverts, loadAdverts }) {
-  const handleDelete = () => {};
+function UserPage({
+  match,
+  currentUsername,
+  isLogged,
+  adverts,
+  loadAdverts,
+  mode,
+}) {
   const user = match.params.username;
   const { t } = useTranslation(['userpage']);
 
@@ -30,7 +36,7 @@ function UserPage({ match, currentUsername, isLogged, adverts, loadAdverts }) {
       <div className="userPage">
         <div className="grid-container">
           <aside className="userPage-aside">
-            <UserPageAside user={user} onDelete={handleDelete} />
+            <UserPageAside user={user} />
           </aside>
           <div className="userPage-content">
             {isLogged && currentUsername === user ? (
@@ -47,29 +53,21 @@ function UserPage({ match, currentUsername, isLogged, adverts, loadAdverts }) {
 }
 
 UserPage.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-  // loading: PropTypes.bool,
-  // error: PropTypes.bool,
   currentUsername: PropTypes.string,
   // currentUserEmail: PropTypes.string,
   isLogged: PropTypes.bool,
-  // eslint-disable-next-line react/require-default-props
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      username: PropTypes.string.isRequired,
-    }),
-  }),
+  match: PropTypes.objectOf(PropTypes.any).isRequired,
   loadAdverts: PropTypes.func.isRequired,
   adverts: PropTypes.arrayOf(PropTypes.object),
+  mode: PropTypes.string,
 };
 
 UserPage.defaultProps = {
-  //   loading: false,
-  //   error: null,
   currentUsername: '',
   //   currentUserEmail: '',
   isLogged: false,
   adverts: null,
+  mode: '',
 };
 
 export default UserPage;
