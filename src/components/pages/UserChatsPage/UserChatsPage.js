@@ -13,6 +13,7 @@ import { getUserId } from '../../../store/selectors';
 
 import '../UserPage/UserPage.css';
 import UserPageAside from '../UserPage/UserPageAside';
+import './UserChatsPage.css';
 import Spinner from '../../shared/Spinner';
 
 function UserChatsPage({ match, currentUsername, currentUserId, isLogged }) {
