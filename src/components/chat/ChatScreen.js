@@ -15,11 +15,9 @@ import {
   Typography,
 } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
-import axios from 'axios';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import ChatItem from './ChatItem';
 import { initChatClient } from '../../api/chat';
-
-const Chat = require('twilio-chat');
 
 const styles = {
   textField: { width: '100%', borderWidth: 0, borderColor: 'transparent' },
@@ -48,12 +46,6 @@ class ChatScreen extends React.Component {
     this.scrollDiv = React.createRef();
   }
 
-  // getToken = async email => {
-  //   const response = await axios.get(`http://localhost:3005/token/${email}`);
-  //   const { data } = response;
-  //   return data.token;
-  // };
-
   componentWillUnmount = () => {
     this._isMounted = false;
   };
@@ -63,7 +55,6 @@ class ChatScreen extends React.Component {
     const { location } = this.props;
     const { state } = location || {};
     const { email, room } = state || {};
-    const token = '';
 
     if (!email || !room) {
       this._isMounted = false;
@@ -72,36 +63,16 @@ class ChatScreen extends React.Component {
 
     if (this._isMounted) {
       this.setState({ loading: true });
-      // try {
-      //   token = await this.getToken(email);
-      // } catch (err) {
-      //   throw new Error(err.message);
-      // }
 
-      // const client = await Chat.Client.create(token);
-
-      // client.on('tokenAboutToExpire', async () => {
-      //   token = await this.getToken(email);
-      //   client.updateToken(token);
-      // });
-
-      // client.on('tokenExpired', async () => {
-      //   token = await this.getToken(email);
-      //   client.updateToken(token);
-      // });
-
-      // client.on('channelJoined', async channel => {
-      //   // getting list of all messages since this is an existing channel
-      //   const messages = await channel.getMessages();
-      //   this.setState({ messages: messages.items || [] });
-      //   this.scrollToBottom();
-      // });
       const client = await initChatClient(email);
+
       client.on('channelJoined', async channel => {
         // getting list of all messages since this is an existing channel
-        const messages = await channel.getMessages();
-        this.setState({ messages: messages.items || [] });
-        this.scrollToBottom();
+        if (channel.channelState.friendlyName === room) {
+          const messages = await channel.getMessages();
+          this.setState({ messages: messages.items || [] });
+          this.scrollToBottom();
+        }
       });
       try {
         const channel = await client.getChannelByUniqueName(room);
@@ -137,7 +108,7 @@ class ChatScreen extends React.Component {
       {
         messages: messages ? [...messages, message] : [message],
       },
-      this.scrollToBottom,
+      this.scrollToBottom(),
     );
   };
 
@@ -157,11 +128,16 @@ class ChatScreen extends React.Component {
     }
   };
 
+  previousPage = () => {
+    this.props.history.goBack();
+    // this.props.history.replace('/');
+  };
+
   render() {
     const { loading, text, messages, channel } = this.state;
     const { location } = this.props;
     const { state } = location || {};
-    const { email, room } = state || {};
+    const { email, adName, owner } = state || {};
 
     return (
       <Container component="main" maxWidth="md">
@@ -170,9 +146,21 @@ class ChatScreen extends React.Component {
         </Backdrop>
         <AppBar elevation={10}>
           <Toolbar>
-            <Typography variant="h6">
-              {`Room: ${room}, User: ${email}`}
-            </Typography>
+            <div
+              style={{
+                width: '100%',
+                display: 'flex',
+                justifyContent: 'flex-end',
+                alignItems: 'center',
+              }}
+            >
+              <Typography variant="h6">
+                {`Advert: ${adName}, Owner: ${owner}`}
+              </Typography>
+              <IconButton onClick={this.previousPage}>
+                <ExitToAppIcon style={{ color: 'white' }} />
+              </IconButton>
+            </div>
           </Toolbar>
         </AppBar>
         <CssBaseline />

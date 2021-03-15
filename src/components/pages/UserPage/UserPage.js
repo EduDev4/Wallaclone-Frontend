@@ -19,7 +19,6 @@ function UserPage({
   loadAdverts,
   mode,
 }) {
-  const handleDelete = () => {};
   const user = match.params.username;
   const { t } = useTranslation(['userpage']);
 
@@ -37,7 +36,7 @@ function UserPage({
       <div className="userPage">
         <div className="grid-container">
           <aside className="userPage-aside">
-            <UserPageAside user={user} onDelete={handleDelete} />
+            <UserPageAside user={user} />
           </aside>
           <div className="userPage-content">
             {isLogged && currentUsername === user ? (

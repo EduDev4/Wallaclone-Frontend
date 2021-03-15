@@ -16,6 +16,8 @@ import UserPage from '../pages/UserPage';
 import EditUserPage from '../pages/EditUserPage';
 import UserFavsPage from '../pages/UserFavsPage';
 import UserSoldPage from '../pages/UserSoldPage';
+import UserChatsPage from '../pages/UserChatsPage';
+import ChatScreen from '../chat/ChatScreen';
 
 function App() {
   return (
@@ -41,14 +43,15 @@ function App() {
         <PrivateRoute path="/adverts/new" exact>
           <NewAdvertPage />
         </PrivateRoute>
-        {/* <Route exact path="/chat" component={ChatScreen} />
-        <PrivateRoute path="/chat" exact>
-          <ChatScreen />
-        </PrivateRoute> */}
+        <PrivateRoute path="/adverts/edit/:id" exact>
+          <EditAdvertPage />
+        </PrivateRoute>
+        <Route exact path="/chat" component={ChatScreen} />
 
         <Route path="/user/:username" exact component={UserPage} />
         <Route path="/user/:username/favs" exact component={UserFavsPage} />
         <Route path="/user/:username/sold" exact component={UserSoldPage} />
+        <Route path="/user/:username/chats" exact component={UserChatsPage} />
         <Route path="/user/edit/:username" exact component={EditUserPage} />
 
         <Route path="/404" exact>
