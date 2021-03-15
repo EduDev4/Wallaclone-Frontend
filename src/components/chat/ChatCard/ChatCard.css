@@ -49,16 +49,25 @@
   border-radius: var(--border-radius-left) !important;
 }
 .chat-card-name-username {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
   flex: 1;
-  width: 100%;
+  max-width: 400px;
+  min-width: 100px;
+  height: 100px;
   text-align: left;
 }
 .chat-card-name {
   font-weight: bold;
   font-size: 18pt;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  overflow: hidden;
 }
 .chat-card-other-username {
-  font-size: 9pt;
+  font-size: 12pt;
   font-style: italic;
   color: grey;
 }
@@ -67,8 +76,10 @@
 }
 
 .chat-card-photo-container img {
-  height: 100px;
-  width: 100px;
+  max-height: 100px;
+  min-height: 100px;
+  max-width: 100px;
+  min-width: 100px;
   overflow: hidden;
   text-align: center;
   margin: 0 auto;
@@ -76,8 +87,13 @@
 }
 .chat-card-deletebutton-container {
   align-self: flex-end;
-  height: 100%;
-  width: 10%;
+  height: 100px;
+  width: 100px;
+  max-height: 100px;
+  min-height: 100px;
+  max-width: 100px;
+  min-width: 100px;
+
   min-width: 2rem;
   border-radius: var(--border-radius-right);
 }
