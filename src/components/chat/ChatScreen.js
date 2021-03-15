@@ -42,8 +42,8 @@ class ChatScreen extends React.Component {
     };
 
     this._isMounted = false;
-
-    this.scrollDiv = React.createRef();
+    this.messagesEndRef = React.createRef();
+    // this.scrollDiv = React.createRef();
   }
 
   componentWillUnmount = () => {
@@ -104,19 +104,14 @@ class ChatScreen extends React.Component {
 
   handleMessageAdded = message => {
     const { messages } = this.state;
-    this.setState(
-      {
-        messages: messages ? [...messages, message] : [message],
-      },
-      this.scrollToBottom(),
-    );
+    this.setState({
+      messages: messages ? [...messages, message] : [message],
+    });
+    this.scrollToBottom();
   };
 
   scrollToBottom = () => {
-    const { scrollHeight } = this.scrollDiv.current;
-    const height = this.scrollDiv.current.clientHeight;
-    const maxScrollTop = scrollHeight - height;
-    this.scrollDiv.current.scrollTop = maxScrollTop > 0 ? maxScrollTop : 0;
+    this.messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
   sendMessage = () => {
@@ -130,7 +125,6 @@ class ChatScreen extends React.Component {
 
   previousPage = () => {
     this.props.history.goBack();
-    // this.props.history.replace('/');
   };
 
   render() {
@@ -176,6 +170,10 @@ class ChatScreen extends React.Component {
                   />
                 ))}
             </List>
+            <div
+              style={{ float: 'left', clear: 'both' }}
+              ref={this.messagesEndRef}
+            />
           </Grid>
           <Grid item style={styles.gridItemMessage}>
             <Grid

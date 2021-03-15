@@ -10,7 +10,7 @@ import { getApiBaseUrl } from '../../../config/envConfig';
 import { getAdvertDetail } from '../../../api/adverts';
 import { getUserNameFromId } from '../../../api/users';
 
-const ChatCard = ({ adId, otherUserId, room }) => {
+const ChatCard = ({ adId, otherUserId, room, onDelete }) => {
   const { t } = useTranslation(['chat']);
   const history = useHistory();
   const userId = useSelector(getUserId);
@@ -48,7 +48,10 @@ const ChatCard = ({ adId, otherUserId, room }) => {
         />
         <p>{ad.name}</p>
         <Button type="primary" onClick={handleClick}>
-          Chat
+          Entrar
+        </Button>
+        <Button type="primary" danger onClick={onDelete}>
+          Eliminar
         </Button>
       </article>
     )
@@ -58,6 +61,7 @@ ChatCard.propTypes = {
   otherUserId: PropTypes.string.isRequired,
   adId: PropTypes.string.isRequired,
   room: PropTypes.string.isRequired,
+  onDelete: PropTypes.func.isRequired,
 };
 
 export default ChatCard;

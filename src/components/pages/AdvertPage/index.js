@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 
 import AdvertPage from './AdvertPage';
 import {
-  getUi,
+  getUiLoading,
   getUsername,
   getUserEmail,
   getIsLoggedUser,
@@ -15,7 +15,7 @@ import {
 } from '../../../store/actions/adverts-actions';
 
 const mapStateToProps = state => ({
-  getUi,
+  loading: getUiLoading(state),
   currentUsername: getUsername(state),
   currentUserEmail: getUserEmail(state),
   isLogged: getIsLoggedUser(state),
