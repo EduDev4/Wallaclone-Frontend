@@ -3,7 +3,9 @@ import axios from 'axios';
 const Chat = require('twilio-chat');
 
 export const getToken = async email => {
-  const response = await axios.get(`http://localhost:3005/token/${email}`);
+  const response = await axios.get(
+    `${process.env.REACT_APP_CHAT_BASE_URL}/token/${email}`,
+  );
   const { data } = response;
   return data.token;
 };
