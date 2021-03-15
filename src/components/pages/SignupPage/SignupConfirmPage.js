@@ -6,7 +6,7 @@ import { Alert } from 'antd';
 
 import MainLayout from '../../layout/MainLayout';
 
-import { signupConfirm } from '../../../store/actions';
+import { signupConfirm } from '../../../store/actions/user-actions';
 import { getUi } from '../../../store/selectors';
 
 const SignupConfirmPage = ({ onConfirm, loading, error }) => {

@@ -10,7 +10,7 @@ import {
   getIsFavAdvert,
 } from '../../../store/selectors';
 
-import { loadFavAdverts } from '../../../store/actions';
+import { loadFavAdverts } from '../../../store/actions/user-adverts-actions';
 
 const mapStateToProps = state => ({
   getUi,

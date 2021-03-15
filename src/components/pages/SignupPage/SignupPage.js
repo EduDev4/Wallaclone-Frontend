@@ -8,7 +8,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import useForm from '../../../hooks/useForm';
 import MainLayout from '../../layout/MainLayout';
 
-import { signup } from '../../../store/actions';
+import { signup } from '../../../store/actions/user-actions';
 import { getUi, getUsername, getUserEmail } from '../../../store/selectors';
 
 import './SignupPage.css';
