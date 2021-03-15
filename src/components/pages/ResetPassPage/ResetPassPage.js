@@ -2,79 +2,83 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Button } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { Input, Button, Alert } from 'antd';
 import { Link } from 'react-router-dom';
 import { resetPasswd } from '../../../api/users';
-
+import useForm from '../../../hooks/useForm';
 import MainLayout from '../../layout/MainLayout';
 
 import './ResetPassPage.css';
 
-class ResetPassPage extends React.Component {
-  state = {
-    form: {
-      passwd: '',
-      passwd1: '',
-    },
-  };
+function ResetPassPage({ match, error }) {
+  const [form, onChangeForm] = useForm({
+    passwd: '',
+    passwd1: '',
+  });
 
-  handleChange = event => {
-    this.setState(state => ({
-      form: { ...state.form, [event.target.name]: event.target.value },
-    }));
-  };
+  const { t } = useTranslation(['resetpass']);
+  const { passwd, passwd1 } = form;
 
-  canSubmit = (passwd, passwd1) =>
+  const IsSubmitting = () =>
     passwd.length > 0 && passwd1.length > 0 && passwd === passwd1;
 
-  render() {
-    // eslint-disable-next-line react/destructuring-assignment
-    const { hash } = this.props.match.params;
-    console.log(hash);
-    const {
-      form: { passwd, passwd1 },
-    } = this.state;
+  // eslint-disable-next-line react/destructuring-assignment
+  const { hash } = match.params;
 
-    return (
-      <MainLayout title="New Password">
-        <div className="resetPage">
-          <form className="reset-form">
-            <div className="form-field">
-              <Input
-                name="passwd"
-                type="password"
-                placeholder="Contraseña"
-                value={passwd}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-field">
-              <Input
-                name="passwd1"
-                type="password"
-                placeholder="Confirma contraseña"
-                value={passwd1}
-                onChange={this.handleChange}
-              />
-            </div>
-            <p>Passwords must be the same(min 6 char. )</p>
-            <div className="form-field centered">
-              <Button
-                as={Link}
-                to="/login"
-                type="primary"
-                onClick={() => resetPasswd(passwd, hash)}
-                disabled={!this.canSubmit(passwd, passwd1)}
-              >
-                Submit
-              </Button>
-            </div>
-          </form>
-        </div>
-      </MainLayout>
-    );
-  }
+  return (
+    <MainLayout title={t('Nueva Contraseña')}>
+      <div className="resetPage">
+        <form className="reset-form">
+          <div className="form-field">
+            <Input
+              name="passwd"
+              type="password"
+              placeholder={t('Contraseña')}
+              value={passwd}
+              onChange={onChangeForm}
+            />
+          </div>
+          <div className="form-field">
+            <Input
+              name="passwd1"
+              type="password"
+              placeholder={t('Confirma Contraseña')}
+              value={passwd1}
+              onChange={onChangeForm}
+            />
+          </div>
+          <p>{t('Contraseñas tienen que ser iguales(min 6 car)')}</p>
+          <div className="form-field centered">
+            <Button
+              as={Link}
+              to="/login"
+              type="primary"
+              onClick={() => resetPasswd(passwd, hash)}
+              disabled={!IsSubmitting(passwd, passwd1)}
+            >
+              {t('Enviar')}
+            </Button>
+          </div>
+        </form>
+        {error && (
+          <Alert
+            message="Error"
+            description={error.message}
+            type="error"
+            showIcon
+          />
+        )}
+      </div>
+    </MainLayout>
+  );
 }
+ResetPassPage.propTypes = {
+  error: PropTypes.objectOf(PropTypes.any),
+};
+ResetPassPage.defaultProps = {
+  error: null,
+};
 
 resetPasswd.propTypes = {
   passwd: PropTypes.string,

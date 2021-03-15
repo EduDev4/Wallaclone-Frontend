@@ -33,7 +33,7 @@ const FiltersForm = ({ onSubmit, initialForm }) => {
   return (
     <form className="filter-form" onSubmit={handleSubmit}>
       <div className="form-title">
-        <h3>Busca por:</h3>
+        <h3>{t('Busca por')}</h3>
       </div>
       <div className="form-field">
         <Input
@@ -60,7 +60,7 @@ const FiltersForm = ({ onSubmit, initialForm }) => {
       <div className="form-field">
         <SelectTags
           defaultTags={form.tags}
-          placeholder={t('Selecciona tags')}
+          placeholder={t('Etiquetas')}
           onChange={onChange}
           size="large"
         />
@@ -76,8 +76,8 @@ const FiltersForm = ({ onSubmit, initialForm }) => {
       <div className="form-field-type">
         <span className="form-field--label">{t('Ordenar')}: </span>
         <Radio.Group name="sort" onChange={onChange} value={form.sort}>
-          <Radio value>{t('Asc')}</Radio>
-          <Radio value={false}>{t('Desc')}</Radio>
+          <Radio value>{t('Ascendente')}</Radio>
+          <Radio value={false}>{t('Descendente')}</Radio>
         </Radio.Group>
       </div>
       <div className="form-field centered">
