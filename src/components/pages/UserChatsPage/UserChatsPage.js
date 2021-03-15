@@ -19,19 +19,30 @@ function UserChatsPage({ match, currentUsername, currentUserId, isLogged }) {
   const handleDelete = () => {};
   const [userChannels, setUserChannels] = useState([]);
   const [loadingChats, setLoadingChats] = useState(true);
+  const [userClient, setUserClient] = useState(null);
   const user = match.params.username;
   const userId = useSelector(getUserId);
   const { t } = useTranslation(['userpage']);
 
-  useEffect(async () => {
-    const client = await initChatClient(currentUserId);
-    const { state } = await client.getPublicChannelDescriptors();
-    const uCh = await state.items.filter(
+  const getUserChannels = async client => {
+    const chan = await client.getSubscribedChannels();
+    const uCh = chan.items.filter(
       ch =>
         typeof ch.friendlyName === 'string' && ch.friendlyName.includes(userId),
     );
     setUserChannels(uCh);
     setLoadingChats(false);
+  };
+
+  const handleDeleteChat = async ch => {
+    setLoadingChats(true);
+    await ch.leave();
+    await getUserChannels(userClient);
+  };
+  useEffect(async () => {
+    const client = await initChatClient(currentUserId);
+    setUserClient(client);
+    getUserChannels(client);
   }, []);
 
   const renderChats = () => {
@@ -47,6 +58,7 @@ function UserChatsPage({ match, currentUsername, currentUserId, isLogged }) {
             ? ch.friendlyName.split('-')[2]
             : ch.friendlyName.split('-')[1]
         }
+        onDelete={() => handleDeleteChat(ch)}
       />
     ));
   };
