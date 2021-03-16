@@ -4,7 +4,6 @@ import { useSelector } from 'react-redux';
 
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
-import { Button } from 'antd';
 
 import MainLayout from '../../layout/MainLayout';
 import ChatCard from '../../chat/ChatCard';
@@ -17,7 +16,6 @@ import './UserChatsPage.css';
 import Spinner from '../../shared/Spinner';
 
 function UserChatsPage({ match, currentUsername, currentUserId, isLogged }) {
-  const handleDelete = () => {};
   const [userChannels, setUserChannels] = useState([]);
   const [loadingChats, setLoadingChats] = useState(true);
   const [userClient, setUserClient] = useState(null);
@@ -26,18 +24,21 @@ function UserChatsPage({ match, currentUsername, currentUserId, isLogged }) {
   const { t } = useTranslation(['userpage']);
 
   const getUserChannels = async client => {
-    const chan = await client.getSubscribedChannels();
-    const uCh = chan.items.filter(
+    const { items } = await client.getPublicChannelDescriptors();
+    // console.log(items);
+    const uCh = items.filter(
       ch =>
         typeof ch.friendlyName === 'string' && ch.friendlyName.includes(userId),
     );
+    console.log(uCh);
     setUserChannels(uCh);
     setLoadingChats(false);
   };
 
-  const handleDeleteChat = async ch => {
+  const handleDeleteChat = async chDesc => {
     setLoadingChats(true);
-    await ch.leave();
+    const channel = await chDesc.getChannel();
+    await channel.leave();
     await getUserChannels(userClient);
   };
   useEffect(async () => {
@@ -69,7 +70,7 @@ function UserChatsPage({ match, currentUsername, currentUserId, isLogged }) {
       <div className="userPage">
         <div className="grid-container">
           <aside className="userPage-aside">
-            <UserPageAside user={user} onDelete={handleDelete} />
+            <UserPageAside user={user} />
           </aside>
           <div className="userPage-content">
             {isLogged && currentUsername === user ? (
