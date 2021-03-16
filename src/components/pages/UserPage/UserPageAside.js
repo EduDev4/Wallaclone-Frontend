@@ -35,13 +35,17 @@ function UserPageAside({
   const { url } = useRouteMatch();
   const classAdverts =
     url.includes('favs') || url.includes('reserved') || url.includes('sold')
-      ? 'tab innactive'
-      : 'tab active';
+      ? 'tab innactive adverts'
+      : 'tab active adverts';
   const classReserved = url.includes('reserved')
-    ? 'tab active'
-    : 'tab innactive';
-  const classFavourites = url.includes('favs') ? 'tab active' : 'tab innactive';
-  const classSold = url.includes('sold') ? 'tab active' : 'tab innactive';
+    ? 'tab active reserved'
+    : 'tab innactive reserved';
+  const classFavourites = url.includes('favs')
+    ? 'tab active favorites'
+    : 'tab innactive favorites';
+  const classSold = url.includes('sold')
+    ? 'tab active sold'
+    : 'tab innactive sold';
 
   const handleSubmit = params => {
     onLoadAdverts(`username=${user}&${params}`);
@@ -61,7 +65,7 @@ function UserPageAside({
             </Button>
           </Link>
 
-          <Link className="tab active adverts" to={`/user/${currentUsername}`}>
+          <Link className={classAdverts} to={`/user/${currentUsername}`}>
             {t('Anuncios')}
           </Link>
 
@@ -79,10 +83,7 @@ function UserPageAside({
             {t('Favoritos')}
           </Link>
 
-          <Link
-            className="tab innactive sold"
-            to={`/user/${currentUsername}/sold`}
-          >
+          <Link className={classSold} to={`/user/${currentUsername}/sold`}>
             {t('Vendidos')}
           </Link>
 
