@@ -28,7 +28,9 @@ const ChatCard = ({ adId, otherUserId, room, onDelete }) => {
       room,
       email: userId,
       adName: ad.name,
-      owner: ad.createdBy.username,
+      owner: ad.createdBy,
+      userToJoin:
+        userId === room.split('-')[1] ? room.split('-')[2] : room.split('-')[1],
     });
   };
 
