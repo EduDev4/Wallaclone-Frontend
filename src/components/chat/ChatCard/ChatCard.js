@@ -22,7 +22,7 @@ const ChatCard = ({ adId, otherUserId, room, onDelete }) => {
       room,
       email: userId,
       adName: ad.name,
-      owner: ad.createdBy.username,
+      owner: ad.createdBy,
     });
   };
 

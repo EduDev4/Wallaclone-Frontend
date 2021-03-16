@@ -54,7 +54,12 @@ class ChatScreen extends React.Component {
     this._isMounted = true;
     const { location } = this.props;
     const { state } = location || {};
-    const { email, room } = state || {};
+    const {
+      email,
+      room,
+      owner: { _id },
+      userToJoin,
+    } = state || {};
 
     if (!email || !room) {
       this._isMounted = false;
@@ -65,6 +70,7 @@ class ChatScreen extends React.Component {
       this.setState({ loading: true });
 
       const client = await initChatClient(email);
+      // const clientOwner = await initChatClient(_id);
 
       client.on('channelJoined', async channel => {
         // getting list of all messages since this is an existing channel
@@ -77,6 +83,7 @@ class ChatScreen extends React.Component {
       try {
         const channel = await client.getChannelByUniqueName(room);
         await this.joinChannel(channel);
+        // await channel.invite(_id);
         console.log('Canal encontrado:', channel);
         this.setState({ channel, loading: false });
       } catch {
@@ -86,6 +93,14 @@ class ChatScreen extends React.Component {
             friendlyName: room,
           });
           await this.joinChannel(channel);
+          if (userToJoin) {
+            const clientToJoin = await initChatClient(userToJoin);
+            const channelToJoin = await clientToJoin.getChannelByUniqueName(
+              room,
+            );
+            await channelToJoin.join();
+            console.log('Propietario unido al canal');
+          }
           console.log('Canal creado:', channel);
           this.setState({ channel, loading: false });
         } catch {
@@ -131,7 +146,11 @@ class ChatScreen extends React.Component {
     const { loading, text, messages, channel } = this.state;
     const { location } = this.props;
     const { state } = location || {};
-    const { email, adName, owner } = state || {};
+    const {
+      email,
+      adName,
+      owner: { username },
+    } = state || {};
 
     return (
       <Container component="main" maxWidth="md">
@@ -149,7 +168,7 @@ class ChatScreen extends React.Component {
               }}
             >
               <Typography variant="h6">
-                {`Advert: ${adName}, Owner: ${owner}`}
+                {`Advert: ${adName}, Owner: ${username}`}
               </Typography>
               <IconButton onClick={this.previousPage}>
                 <ExitToAppIcon style={{ color: 'white' }} />
