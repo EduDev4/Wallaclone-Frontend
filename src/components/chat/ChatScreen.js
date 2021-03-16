@@ -83,7 +83,16 @@ class ChatScreen extends React.Component {
       try {
         const channel = await client.getChannelByUniqueName(room);
         await this.joinChannel(channel);
-        // await channel.invite(_id);
+
+        if (userToJoin) {
+          const clientToJoin = await initChatClient(userToJoin);
+          const channelToJoin = await clientToJoin.getChannelByUniqueName(room);
+          if (channelToJoin.channelState.status !== 'joined') {
+            await channelToJoin.join();
+            console.log(`${userToJoin} unido de nuevo al canal`);
+          }
+        }
+
         console.log('Canal encontrado:', channel);
         this.setState({ channel, loading: false });
       } catch {
@@ -99,7 +108,7 @@ class ChatScreen extends React.Component {
               room,
             );
             await channelToJoin.join();
-            console.log('Propietario unido al canal');
+            console.log(`${userToJoin} unido al canal`);
           }
           console.log('Canal creado:', channel);
           this.setState({ channel, loading: false });
