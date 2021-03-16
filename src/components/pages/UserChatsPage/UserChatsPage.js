@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
+import { useParams } from 'react-router-dom';
 import MainLayout from '../../layout/MainLayout';
 import ChatCard from '../../chat/ChatCard';
 import { initChatClient } from '../../../api/chat';
@@ -12,33 +13,29 @@ import { getUserId } from '../../../store/selectors';
 
 import '../UserPage/UserPage.css';
 import UserPageAside from '../UserPage/UserPageAside';
-import './UserChatsPage.css';
 import Spinner from '../../shared/Spinner';
 
-function UserChatsPage({ match, currentUsername, currentUserId, isLogged }) {
+function UserChatsPage({ currentUsername, currentUserId, isLogged }) {
   const [userChannels, setUserChannels] = useState([]);
   const [loadingChats, setLoadingChats] = useState(true);
   const [userClient, setUserClient] = useState(null);
-  const user = match.params.username;
+  const { username } = useParams();
   const userId = useSelector(getUserId);
   const { t } = useTranslation(['userpage']);
 
   const getUserChannels = async client => {
-    const { items } = await client.getPublicChannelDescriptors();
-    // console.log(items);
-    const uCh = items.filter(
+    const chan = await client.getSubscribedChannels();
+    const uCh = chan.items.filter(
       ch =>
         typeof ch.friendlyName === 'string' && ch.friendlyName.includes(userId),
     );
-    console.log(uCh);
     setUserChannels(uCh);
     setLoadingChats(false);
   };
 
-  const handleDeleteChat = async chDesc => {
+  const handleDeleteChat = async ch => {
     setLoadingChats(true);
-    const channel = await chDesc.getChannel();
-    await channel.leave();
+    await ch.leave();
     await getUserChannels(userClient);
   };
   useEffect(async () => {
@@ -70,10 +67,10 @@ function UserChatsPage({ match, currentUsername, currentUserId, isLogged }) {
       <div className="userPage">
         <div className="grid-container">
           <aside className="userPage-aside">
-            <UserPageAside user={user} />
+            <UserPageAside user={username} />
           </aside>
           <div className="userPage-content">
-            {isLogged && currentUsername === user ? (
+            {isLogged && currentUsername === username ? (
               <h2>{t('Mis Conversaciones')}</h2>
             ) : null}
             <div className="userPage-chatswrapper flex-container">

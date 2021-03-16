@@ -51,7 +51,9 @@ function App() {
         <Route path="/user/:username" exact component={UserPage} />
         <Route path="/user/:username/favs" exact component={UserFavsPage} />
         <Route path="/user/:username/sold" exact component={UserSoldPage} />
-        <Route path="/user/:username/chats" exact component={UserChatsPage} />
+        <PrivateRoute path="/user/:username/chats" exact>
+          <UserChatsPage />
+        </PrivateRoute>
         <Route path="/user/edit/:username" exact component={EditUserPage} />
 
         <Route path="/404" exact>

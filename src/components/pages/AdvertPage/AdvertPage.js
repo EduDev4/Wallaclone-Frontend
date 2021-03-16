@@ -61,7 +61,8 @@ function AdvertPage({
       room,
       email: userId,
       adName: advert.name,
-      owner: advert.createdBy.username,
+      owner: advert.createdBy,
+      userToJoin: advert.createdBy._id,
     });
   };
 
