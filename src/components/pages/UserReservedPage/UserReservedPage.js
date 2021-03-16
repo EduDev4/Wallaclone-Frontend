@@ -11,18 +11,18 @@ import MainLayout from '../../layout/MainLayout';
 import '../UserPage/UserPage.css';
 import UserPageAside from '../UserPage/UserPageAside';
 
-function UserSoldPage({
+function UserReservedPage({
   currentUsername,
   isLogged,
   adverts,
-  onLoadSoldAdverts,
+  onLoadReservedAdverts,
 }) {
   const handleDelete = () => {};
   const { username } = useParams();
   const { t } = useTranslation(['userpage']);
 
   useEffect(() => {
-    onLoadSoldAdverts();
+    onLoadReservedAdverts();
   }, []);
 
   const renderAdverts = () => {
@@ -40,7 +40,7 @@ function UserSoldPage({
           <div className="userPage-content">
             {currentUsername === username ? (
               <>
-                <h2>{t('Mis Anuncios Vendidos')}</h2>
+                <h2>{t('Mis Anuncios Reservados')}</h2>
                 <div className="userPage-adswrapper flex-container">
                   {!adverts ? <p>no hay anuncios</p> : renderAdverts()}
                 </div>
@@ -55,7 +55,7 @@ function UserSoldPage({
   );
 }
 
-UserSoldPage.propTypes = {
+UserReservedPage.propTypes = {
   // eslint-disable-next-line react/require-default-props
 
   currentUsername: PropTypes.string,
@@ -67,14 +67,14 @@ UserSoldPage.propTypes = {
   //     username: PropTypes.string.isRequired,
   //   }),
   // }),
-  onLoadSoldAdverts: PropTypes.func.isRequired,
+  onLoadReservedAdverts: PropTypes.func.isRequired,
   adverts: PropTypes.arrayOf(PropTypes.object),
 };
 
-UserSoldPage.defaultProps = {
+UserReservedPage.defaultProps = {
   currentUsername: '',
   isLogged: false,
   adverts: null,
 };
 
-export default UserSoldPage;
+export default UserReservedPage;

@@ -23,9 +23,9 @@ const FavoriteButton = ({ initialValue, adId }) => {
       return;
     }
     try {
-      const { isFavBy } = await setUnsetFav(adId);
+      const { advert } = await setUnsetFav(adId);
       setFav(!fav);
-      dispatch(advertsSetAdFav(isFavBy));
+      dispatch(advertsSetAdFav(advert));
     } catch (err) {
       console.log(err);
     }

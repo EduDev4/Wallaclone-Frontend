@@ -32,8 +32,16 @@ function UserPageAside({
 }) {
   const { t } = useTranslation(['userpage']);
 
-  // TODO cambiar activo/inactivo la className des aside según donde estemos
   const { url } = useRouteMatch();
+  const classAdverts =
+    url.includes('favs') || url.includes('reserved') || url.includes('sold')
+      ? 'tab innactive'
+      : 'tab active';
+  const classReserved = url.includes('reserved')
+    ? 'tab active'
+    : 'tab innactive';
+  const classFavourites = url.includes('favs') ? 'tab active' : 'tab innactive';
+  const classSold = url.includes('sold') ? 'tab active' : 'tab innactive';
 
   const handleSubmit = params => {
     onLoadAdverts(`username=${user}&${params}`);
@@ -53,28 +61,25 @@ function UserPageAside({
             </Button>
           </Link>
 
-          <Link className="tab active adverts" to={`/user/${currentUsername}`}>
+          <Link className={classAdverts} to={`/user/${currentUsername}`}>
             Anuncios
           </Link>
 
           <Link
-            className="tab innactive reserved"
+            className={classReserved}
             to={`/user/${currentUsername}/reserved`}
           >
             Reservados
           </Link>
 
           <Link
-            className="tab innactive favorites"
+            className={classFavourites}
             to={`/user/${currentUsername}/favs`}
           >
             Favoritos
           </Link>
 
-          <Link
-            className="tab innactive sold"
-            to={`/user/${currentUsername}/sold`}
-          >
+          <Link className={classSold} to={`/user/${currentUsername}/sold`}>
             Vendidos
           </Link>
 
