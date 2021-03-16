@@ -79,3 +79,9 @@ export const getUserSoldAdverts = async () => {
   const response = await client.get(url);
   return response;
 };
+
+export const getUserReservedAdverts = async () => {
+  const url = `${usersBaseUrl}/reserved`;
+  const response = await client.get(url);
+  return response;
+};

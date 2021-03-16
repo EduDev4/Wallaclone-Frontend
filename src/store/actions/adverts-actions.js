@@ -106,9 +106,9 @@ export const advertsSetAdState = state => ({
   type: ADVERTS_SET_AD_STATE,
   payload: state,
 });
-export const advertsSetAdFav = isFavBy => ({
+export const advertsSetAdFav = ad => ({
   type: ADVERTS_SET_AD_FAV,
-  payload: isFavBy,
+  payload: ad,
 });
 
 export const loadAdvertDetail = advertId =>

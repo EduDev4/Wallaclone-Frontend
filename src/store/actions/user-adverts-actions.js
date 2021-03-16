@@ -5,6 +5,9 @@ import {
   USER_SOLD_ADVERTS_REQUEST,
   USER_SOLD_ADVERTS_SUCCESS,
   USER_SOLD_ADVERTS_FAILURE,
+  USER_RESERVED_ADVERTS_REQUEST,
+  USER_RESERVED_ADVERTS_SUCCESS,
+  USER_RESERVED_ADVERTS_FAILURE,
 } from '../constants/action-types';
 
 // USER ADVERTS
@@ -56,5 +59,30 @@ export const loadSoldAdverts = () =>
       dispatch(userSoldAdvertsLoadSuccess(adverts));
     } catch (error) {
       dispatch(userSoldAdvertsLoadFailure(error));
+    }
+  };
+
+export const userReservedAdvertsLoadRequest = () => ({
+  type: USER_RESERVED_ADVERTS_REQUEST,
+});
+export const userReservedAdvertsLoadSuccess = ads => ({
+  type: USER_RESERVED_ADVERTS_SUCCESS,
+  payload: ads,
+});
+export const userReservedAdvertsLoadFailure = error => ({
+  type: USER_RESERVED_ADVERTS_FAILURE,
+  error: true,
+  payload: error,
+});
+
+export const loadReservedAdverts = () =>
+  // eslint-disable-next-line func-names
+  async function (dispatch, getState, { api }) {
+    dispatch(userReservedAdvertsLoadRequest());
+    try {
+      const { adverts } = await api.users.getUserReservedAdverts();
+      dispatch(userReservedAdvertsLoadSuccess(adverts));
+    } catch (error) {
+      dispatch(userReservedAdvertsLoadFailure(error));
     }
   };
