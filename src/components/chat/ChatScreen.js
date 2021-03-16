@@ -16,6 +16,7 @@ import {
 } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Redirect } from 'react-router-dom';
 import ChatItem from './ChatItem';
 import { initChatClient } from '../../api/chat';
 
@@ -54,14 +55,9 @@ class ChatScreen extends React.Component {
     this._isMounted = true;
     const { location } = this.props;
     const { state } = location || {};
-    const {
-      email,
-      room,
-      owner: { _id },
-      userToJoin,
-    } = state || {};
+    const { email, room, userToJoin } = state || {};
 
-    if (!email || !room) {
+    if (!email || !room || !userToJoin) {
       this._isMounted = false;
       this.props.history.replace('/');
     }
@@ -155,11 +151,12 @@ class ChatScreen extends React.Component {
     const { loading, text, messages, channel } = this.state;
     const { location } = this.props;
     const { state } = location || {};
-    const {
-      email,
-      adName,
-      owner: { username },
-    } = state || {};
+    const { email, adName, owner } = state || {};
+
+    if (!email || !adName || !owner) {
+      this._isMounted = false;
+      return <Redirect to="/" />;
+    }
 
     return (
       <Container component="main" maxWidth="md">
@@ -177,7 +174,7 @@ class ChatScreen extends React.Component {
               }}
             >
               <Typography variant="h6">
-                {`Advert: ${adName}, Owner: ${username}`}
+                {`Advert: ${adName}, Owner: ${owner.username}`}
               </Typography>
               <IconButton onClick={this.previousPage}>
                 <ExitToAppIcon style={{ color: 'white' }} />
