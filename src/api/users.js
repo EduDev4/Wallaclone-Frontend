@@ -85,3 +85,8 @@ export const getUserReservedAdverts = async () => {
   const response = await client.get(url);
   return response;
 };
+export const getUserNameFromId = async userId => {
+  const url = `${usersBaseUrl}/${userId}`;
+  const response = await client.get(url);
+  return response;
+};

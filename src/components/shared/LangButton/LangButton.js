@@ -19,10 +19,12 @@ const LangButton = ({ initialLang }) => {
   const renderContent = () => (
     <img
       className="flag-icon"
+      width="20px"
+      height="20px"
       src={
         lang === 'es'
-          ? `${getPublicUrl()}/icons/lang-spanish-menu-20.png`
-          : `${getPublicUrl()}/icons/lang-english-menu-20.png`
+          ? `${getPublicUrl()}/icons/espana-icon.svg`
+          : `${getPublicUrl()}/icons/usa-icon.svg`
       }
       alt={lang === 'es' ? 'Spanish' : 'English'}
     />

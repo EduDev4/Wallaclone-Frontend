@@ -39,14 +39,14 @@ const AdvertsPage = ({ adverts, pages, loading, loadAdverts, location }) => {
   };
 
   return (
-    <MainLayout title="Anuncios">
+    <MainLayout title={t('Anuncios')}>
       <div className="advertsPage">
         <div className="grid-container">
           <aside className="advertsPage-aside">
             <FiltersForm onSubmit={handleSubmit} />
           </aside>
           <div className="advertsPage-content">
-            <h2>¿Qué estás buscando?</h2>
+            <h2>{t('¿Qué estás buscando?')}</h2>
             <div className="advertsPage-adswrapper flex-container">
               {loading ? <Spinner /> : renderContent()}
             </div>

@@ -37,5 +37,6 @@ module.exports = {
     'no-unused-vars': 'warn',
     'no-underscore-dangle': 'off',
     'func-names': 'off',
+    'import/no-unresolved': 'off',
   },
 };

@@ -1,72 +1,73 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Input, Button } from 'antd';
+import { useTranslation } from 'react-i18next';
+import { Input, Button, Alert } from 'antd';
 import { Link } from 'react-router-dom';
+
 import { forgotPasswd } from '../../../api/users';
 
+import useForm from '../../../hooks/useForm';
 import MainLayout from '../../layout/MainLayout';
 
 import './ForgotPassPage.css';
 
-class ForgotPassPage extends React.Component {
-  state = {
-    form: {
-      email: '',
-    },
-  };
+function ForgotPassPage({ error }) {
+  const [form, onChangeForm] = useForm({
+    email: '',
+  });
+  const { t } = useTranslation(['forgotpass']);
+  const { email } = form;
 
-  handleChange = event => {
-    this.setState(state => ({
-      form: { ...state.form, [event.target.name]: event.target.value },
-    }));
-  };
+  const IsSubmitting = () => email;
 
-  canSubmit = () => {
-    const {
-      form: { email },
-    } = this.state;
-    return email;
-  };
-
-  render() {
-    const {
-      form: { email },
-    } = this.state;
-
-    return (
-      <MainLayout title="Reset Password">
-        <div className="forgotPage">
-          <form className="forgot-form">
-            Introduce el email con el que te diste de alta para recuperar tu
-            contraseña:
-            <div className="form-field">
-              <Input
-                name="email"
-                type="email"
-                placeholder="Email"
-                value={email}
-                onChange={this.handleChange}
-              />
-            </div>
-            <div className="form-field centered">
-              <Button
-                as={Link}
-                to="/login"
-                type="primary"
-                onClick={() => forgotPasswd(email)}
-                disabled={!this.canSubmit(email)}
-              >
-                Submit
-              </Button>
-            </div>
-          </form>
-        </div>
-      </MainLayout>
-    );
-  }
+  return (
+    <MainLayout title={t('Cambiar Contraseña')}>
+      <div className="forgotPage">
+        <form className="forgot-form">
+          {t('Introduce el email de tu usario de wallaclone')}
+          <div className="form-field">
+            <Input
+              name="email"
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={onChangeForm}
+            />
+          </div>
+          <div className="form-field centered">
+            <Button
+              as={Link}
+              to="/login"
+              type="primary"
+              onClick={() => forgotPasswd(email)}
+              disabled={!IsSubmitting(email)}
+            >
+              {t('Enviar')}
+            </Button>
+          </div>
+        </form>
+        {error && (
+          <Alert
+            message="Error"
+            description={error.message}
+            type="error"
+            showIcon
+          />
+        )}
+      </div>
+    </MainLayout>
+  );
 }
 
 forgotPasswd.propTypes = {
   email: PropTypes.string,
+  error: PropTypes.objectOf(PropTypes.any),
+};
+
+ForgotPassPage.propTypes = {
+  error: PropTypes.objectOf(PropTypes.any),
+};
+ForgotPassPage.defaultProps = {
+  error: null,
 };
 export default ForgotPassPage;

@@ -20,6 +20,11 @@ function UserTools({ className, currentUser, ...props }) {
     <>
       <div className="usertools">
         <div className="imgwrapper">
+          <Link className="nav-button" to="/adverts">
+            <img src={`${getPublicUrl()}/icons/home-icon.svg`} alt="Home" />
+          </Link>
+        </div>
+        <div className="imgwrapper">
           <Link className="nav-button" to={`/user/${currentUser}`}>
             <img
               src={`${getPublicUrl()}/icons/noti-menu-hover-30.png`}
@@ -28,12 +33,12 @@ function UserTools({ className, currentUser, ...props }) {
           </Link>
         </div>
         <div className="imgwrapper">
-          <Link className="nav-button" to="/chat">
-            <img src={`${getPublicUrl()}/icons/chat-menu-30.png`} alt="Chat" />
+          <Link className="nav-button" to={`/user/${currentUser}/chats`}>
+            <img src={`${getPublicUrl()}/icons/chat-icon.svg`} alt="Chat" />
           </Link>
         </div>
         <div className="imgwrapper">
-          <Link className="nav-button" to={`/user/${currentUser}/favorites`}>
+          <Link className="nav-button" to={`/user/${currentUser}/favs`}>
             <img
               src={`${getPublicUrl()}/icons/fav-menu-hover-30.png`}
               alt="Favorites"

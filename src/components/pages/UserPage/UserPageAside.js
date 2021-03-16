@@ -61,31 +61,34 @@ function UserPageAside({
             </Button>
           </Link>
 
-          <Link className={classAdverts} to={`/user/${currentUsername}`}>
-            Anuncios
+          <Link className="tab active adverts" to={`/user/${currentUsername}`}>
+            {t('Anuncios')}
           </Link>
 
           <Link
             className={classReserved}
             to={`/user/${currentUsername}/reserved`}
           >
-            Reservados
+            {t('Reservados')}
           </Link>
 
           <Link
             className={classFavourites}
             to={`/user/${currentUsername}/favs`}
           >
-            Favoritos
+            {t('Favoritos')}
           </Link>
 
-          <Link className={classSold} to={`/user/${currentUsername}/sold`}>
-            Vendidos
+          <Link
+            className="tab innactive sold"
+            to={`/user/${currentUsername}/sold`}
+          >
+            {t('Vendidos')}
           </Link>
 
           <ConfirmButton
             className="delete-button"
-            acceptAction={onDeleteUser}
+            acceptAction={() => onDeleteUser()}
             confirmProps={{
               title: t('Eliminar Cuenta de Usuario'),
               message: t('¿Estás seguro de eliminar tu cuenta?'),

@@ -18,6 +18,7 @@ import {
 import { getIsLoggedUser } from '../selectors';
 import storage from '../../utils/storage';
 import { logout } from './auth-actions';
+import { showFlashAlert } from './ui-actions';
 
 /** USER ACTIONS */
 export const userDeleteRequest = () => ({
@@ -38,15 +39,17 @@ export const deleteUser = () =>
   async function (dispatch, getstate, { history, api }) {
     dispatch(userDeleteRequest());
     try {
-      const response = await api.users.deleteUser();
-      console.log(response);
+      await api.users.deleteUser();
+
       dispatch(userDeleteSuccess());
 
-      // TODO: Mensaje de borrado de usuario
+      dispatch(
+        showFlashAlert({ type: 'success', message: 'Cuenta Eliminada!' }),
+      );
       // eslint-disable-next-line no-use-before-define
       await dispatch(logout());
     } catch (error) {
-      console.log(error.message);
+      dispatch(showFlashAlert({ type: 'error', message: error.message }));
       dispatch(userDeleteFailure(error));
     }
   };
