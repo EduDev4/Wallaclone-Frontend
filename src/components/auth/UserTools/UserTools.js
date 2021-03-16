@@ -38,7 +38,7 @@ function UserTools({ className, currentUser, ...props }) {
           </Link>
         </div>
         <div className="imgwrapper">
-          <Link className="nav-button" to={`/user/${currentUser}/favorites`}>
+          <Link className="nav-button" to={`/user/${currentUser}/favs`}>
             <img
               src={`${getPublicUrl()}/icons/fav-menu-hover-30.png`}
               alt="Favorites"
