@@ -15,8 +15,8 @@ import {
   Typography,
 } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Redirect } from 'react-router-dom';
+import { Button } from 'antd';
 import ChatItem from './ChatItem';
 import { initChatClient } from '../../api/chat';
 import './ChatScreen.css';
@@ -170,7 +170,9 @@ class ChatScreen extends React.Component {
               <div className="chat-title">
                 <span className="chat-advert-name">{adName}</span>
                 <br />
-                <span className="chat-owner-name">Chat with {username}</span>
+                <span className="chat-owner-name">
+                  Chat with {owner.username}
+                </span>
               </div>
               <div className="chat-button-exit-container">
                 <Button
