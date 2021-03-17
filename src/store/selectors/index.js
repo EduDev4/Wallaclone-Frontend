@@ -8,6 +8,7 @@ export const getUserId = state => state.auth.currentUserId;
 export const getUi = state => state.ui;
 export const getUiLoading = state => state.ui.loading;
 export const getAdverts = state => state.adverts.ads;
+export const getPages = state => state.adverts.pages;
 
 export const getAdvertDetail = state => state.adverts.adDetail;
 export const getTags = state => state.adverts.tags;

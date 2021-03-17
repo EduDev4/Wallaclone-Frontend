@@ -19,6 +19,7 @@ import UserSoldPage from '../pages/UserSoldPage';
 import UserReservedPage from '../pages/UserReservedPage';
 import UserChatsPage from '../pages/UserChatsPage';
 import ChatScreen from '../chat/ChatScreen';
+import NotFoundPage from '../pages/NotFoundPage';
 
 function App() {
   return (
@@ -65,10 +66,7 @@ function App() {
         <Route path="/user/edit/:username" exact component={EditUserPage} />
 
         <Route path="/404" exact>
-          {/* <NotFoundPage /> */}
-          <div className="errornotfound">
-            <h1>404 - Not Found</h1>
-          </div>
+          <NotFoundPage />
         </Route>
         <Route>
           <Redirect to="/404" />
@@ -78,28 +76,4 @@ function App() {
   );
 }
 
-// App.propTypes = {
-//   authLoginD: PropTypes.func,
-//   authLogoutD: PropTypes.func,
-//   isLogged: PropTypes.bool,
-// };
-// App.defaultProps = {
-//   authLoginD: PropTypes.func,
-//   authLogoutD: PropTypes.func,
-//   isLogged: false,
-// };
-
-// const mapStateToProps = state => ({
-//   isLogged: getIsLoggedUser(state),
-//   username: getUsername(state),
-//   userEmail: getUserEmail(state),
-// });
-//
-// const mapDispatchToProps = {
-//   authLoginD: auhtLogin,
-//   authLogoutD: authLogout,
-// };
-// const ConnectedApp = connect(mapStateToProps, mapDispatchToProps)(App);
-//
-// export default ConnectedApp;
 export default App;

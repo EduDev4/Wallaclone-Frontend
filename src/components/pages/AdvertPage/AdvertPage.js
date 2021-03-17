@@ -115,7 +115,12 @@ function AdvertPage({
           </div>
         </div>
         <div className="advertpage-photo-container">
-          <img alt="ad_photo" src={`${getApiBaseUrl()}${advert.image}`} />
+          <img
+            alt="ad_photo"
+            src={`${getApiBaseUrl()}${
+              advert.image || '/img/adverts/noAdImage.jpg'
+            }`}
+          />
         </div>
         <div className="advertpage-reserved-sold">
           {advert.createdBy._id === userId ? (

@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
-import { useParams } from 'react-router-dom';
+import { Redirect, useParams } from 'react-router-dom';
 import MainLayout from '../../layout/MainLayout';
 import ChatCard from '../../chat/ChatCard';
 import { initChatClient } from '../../../api/chat';
@@ -39,9 +39,11 @@ function UserChatsPage({ currentUsername, currentUserId, isLogged }) {
     await getUserChannels(userClient);
   };
   useEffect(async () => {
-    const client = await initChatClient(currentUserId);
-    setUserClient(client);
-    getUserChannels(client);
+    if (currentUsername === username) {
+      const client = await initChatClient(currentUserId);
+      setUserClient(client);
+      getUserChannels(client);
+    }
   }, []);
 
   const renderChats = () => {
@@ -70,12 +72,16 @@ function UserChatsPage({ currentUsername, currentUserId, isLogged }) {
             <UserPageAside user={username} />
           </aside>
           <div className="userPage-content">
-            {isLogged && currentUsername === username ? (
-              <h2>{t('Mis Conversaciones')}</h2>
-            ) : null}
-            <div className="userPage-chatswrapper flex-container">
-              {loadingChats ? <Spinner /> : renderChats()}
-            </div>
+            {currentUsername === username ? (
+              <>
+                <h2>{t('Mis Conversaciones')}</h2>
+                <div className="userPage-chatswrapper flex-container">
+                  {loadingChats ? <Spinner /> : renderChats()}
+                </div>
+              </>
+            ) : (
+              <Redirect to={`/user/${username}`} />
+            )}
           </div>
         </div>
       </div>

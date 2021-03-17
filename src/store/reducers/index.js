@@ -9,6 +9,7 @@ export const initialState = {
   },
   adverts: {
     tags: [],
+    pages: 1,
     ads: [],
     adDetail: null,
   },
@@ -39,7 +40,7 @@ export const adverts = (state = initialState.adverts, action) => {
     case types.ADVERTS_TAGS_SUCCESS:
       return { ...state, tags: action.payload };
     case types.ADVERTS_LOAD_SUCCESS:
-      return { ...state, ads: action.payload };
+      return { ...state, pages: action.payload.pages, ads: action.payload.ads };
     case types.ADVERT_LOAD_SUCCESS:
       return { ...state, adDetail: action.payload };
     case types.ADVERTS_CREATE_SUCCESS:

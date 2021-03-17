@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Radio, Input, InputNumber, Button, Alert } from 'antd';
 import { useTranslation } from 'react-i18next';
@@ -17,6 +17,9 @@ const NewAdvertPage = ({ mode, initialForm, onCreate, onUpdate, loading }) => {
   const { TextArea } = Input;
   const [form, onChange] = useForm(initialForm);
 
+  useEffect(() => {
+    if (mode === 'new') form.file = null;
+  });
   const handleSubmit = async ev => {
     ev.preventDefault();
 
@@ -91,6 +94,7 @@ const NewAdvertPage = ({ mode, initialForm, onCreate, onUpdate, loading }) => {
               <div className="form-field">
                 <SelectTags
                   defaultTags={form.tags}
+                  val={form.tags}
                   placeholder={t('Selecciona tags')}
                   onChange={onChange}
                   size="large"

@@ -68,7 +68,7 @@ const ChatCard = ({ adId, otherUserId, room, onDelete }) => {
               className="chat-card-deletebutton"
               acceptAction={onDelete}
               confirmProps={{
-                title: t('Eliminar Anuncio'),
+                title: t('Eliminar Chat'),
                 message: t('¿Estás seguro de eliminar el chat?'),
               }}
               typeButton="primary"
