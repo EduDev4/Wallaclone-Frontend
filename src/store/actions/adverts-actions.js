@@ -82,9 +82,12 @@ export const advertLoadFailure = error => ({
   payload: error,
 });
 
-export const advertsLoadSuccess = ads => ({
+export const advertsLoadSuccess = (pages, ads) => ({
   type: ADVERTS_LOAD_SUCCESS,
-  payload: ads,
+  payload: {
+    pages,
+    ads,
+  },
 });
 export const advertsCreateSuccess = ad => ({
   type: ADVERTS_CREATE_SUCCESS,
@@ -129,8 +132,8 @@ export const loadAdverts = formFilter =>
   async function (dispatch, getState, { api }) {
     dispatch(advertsLoadRequest());
     try {
-      const { adverts } = await api.adverts.getAdverts(formFilter);
-      dispatch(advertsLoadSuccess(adverts));
+      const { pages, adverts } = await api.adverts.getAdverts(formFilter);
+      dispatch(advertsLoadSuccess(pages, adverts));
     } catch (error) {
       dispatch(advertsLoadFailure(error));
     }

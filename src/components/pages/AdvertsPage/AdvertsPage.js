@@ -71,7 +71,7 @@ const AdvertsPage = ({ adverts, pages, loading, loadAdverts, location }) => {
 };
 AdvertsPage.propTypes = {
   adverts: PropTypes.arrayOf(PropTypes.object),
-  pages: PropTypes.number,
+  pages: PropTypes.number.isRequired,
   initialForm: PropTypes.objectOf(PropTypes.any),
   loadAdverts: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
@@ -82,7 +82,6 @@ AdvertsPage.propTypes = {
 
 AdvertsPage.defaultProps = {
   adverts: null,
-  pages: 2,
   initialForm: {
     name: '',
     sale: '',
