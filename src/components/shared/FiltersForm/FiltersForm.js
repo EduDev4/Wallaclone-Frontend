@@ -8,7 +8,7 @@ import useForm from '../../../hooks/useForm';
 
 import SelectTags from '../SelectTags';
 
-const FiltersForm = ({ onSubmit, initialForm }) => {
+const FiltersForm = ({ onSubmit, initialForm, advert }) => {
   const { t } = useTranslation(['advertspage']);
   const [form, onChange] = useForm(initialForm);
 
@@ -24,9 +24,8 @@ const FiltersForm = ({ onSubmit, initialForm }) => {
     if (form.name) searchParams.append('name', form.name);
     if (form.price) searchParams.append('price', -form.price);
     if (form.sale !== '') searchParams.append('sale', form.sale);
-    if (form.sort) searchParams.append('sort', -form.sort);
+    if (form.sort) searchParams.append('sort', '-createdAt');
     if (form.tags.length !== 0) searchParams.append('tags', form.tags);
-
     onSubmit(searchParams.toString());
   };
 
@@ -76,8 +75,8 @@ const FiltersForm = ({ onSubmit, initialForm }) => {
       <div className="form-field-type">
         <span className="form-field--label">{t('Ordenar')}: </span>
         <Radio.Group name="sort" onChange={onChange} value={form.sort}>
-          <Radio value>{t('Ascendente')}</Radio>
-          <Radio value={false}>{t('Descendente')}</Radio>
+          <Radio value>{t('Descendente')}</Radio>
+          <Radio value={false}>{t('Ascendente')}</Radio>
         </Radio.Group>
       </div>
       <div className="form-field centered">
@@ -92,6 +91,7 @@ const FiltersForm = ({ onSubmit, initialForm }) => {
 FiltersForm.propTypes = {
   initialForm: PropTypes.objectOf(PropTypes.any),
   onSubmit: PropTypes.func.isRequired,
+  advert: PropTypes.objectOf(PropTypes.any),
 };
 
 FiltersForm.defaultProps = {
@@ -102,6 +102,7 @@ FiltersForm.defaultProps = {
     price: 0,
     sort: false,
   },
+  advert: {},
 };
 
 export default FiltersForm;

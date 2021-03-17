@@ -80,6 +80,11 @@ export const getUserSoldAdverts = async () => {
   return response;
 };
 
+export const getUserReservedAdverts = async () => {
+  const url = `${usersBaseUrl}/reserved`;
+  const response = await client.get(url);
+  return response;
+};
 export const getUserNameFromId = async userId => {
   const url = `${usersBaseUrl}/${userId}`;
   const response = await client.get(url);

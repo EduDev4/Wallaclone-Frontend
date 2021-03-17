@@ -62,7 +62,11 @@ export const adverts = (state = initialState.adverts, action) => {
     case types.ADVERTS_SET_AD_FAV:
       return {
         ...state,
-        adDetail: { ...state.adDetail, isFavBy: action.payload },
+        // ads: [
+        //   ...state,
+        //   (state.ads.find(ad => ad._id === action.payload._id): action.payload),
+        // ],
+        adDetail: action.payload,
       };
     case types.ADVERTS_DELETE_SUCCESS:
       if (!state.ads) return { ...state, adDetail: null };
@@ -74,6 +78,8 @@ export const adverts = (state = initialState.adverts, action) => {
     case types.USER_FAV_ADVERTS_SUCCESS:
       return { ...state, ads: action.payload };
     case types.USER_SOLD_ADVERTS_SUCCESS:
+      return { ...state, ads: action.payload };
+    case types.USER_RESERVED_ADVERTS_SUCCESS:
       return { ...state, ads: action.payload };
     default:
       return state;
