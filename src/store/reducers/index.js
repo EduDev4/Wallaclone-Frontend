@@ -62,10 +62,12 @@ export const adverts = (state = initialState.adverts, action) => {
     case types.ADVERTS_SET_AD_FAV:
       return {
         ...state,
-        // ads: [
-        //   ...state,
-        //   (state.ads.find(ad => ad._id === action.payload._id): action.payload),
-        // ],
+        ads: state.ads.map(ad => {
+          if (ad._id === action.payload._id) {
+            return action.payload;
+          }
+          return ad;
+        }),
         adDetail: action.payload,
       };
     case types.ADVERTS_DELETE_SUCCESS:
