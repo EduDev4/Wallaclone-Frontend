@@ -9,6 +9,8 @@ import haveSameData from '../../../utils/helpFunctions';
 
 import SelectTags from '../SelectTags';
 
+import './FiltersForm.css';
+
 const FiltersForm = ({ onSubmit, initialForm, advert }) => {
   const { t } = useTranslation(['advertspage']);
   const [form, onChange] = useForm(initialForm);
@@ -42,7 +44,9 @@ const FiltersForm = ({ onSubmit, initialForm, advert }) => {
         />
       </div>
       <div className="form-field">
-        <span className="form-field--label">{t('Precio')}: </span>
+        <span className="form-field--label">
+          {t('Precio')}: {form.price ? `hasta ${form.price} €` : null}
+        </span>
         <Slider
           min={0}
           max={6000}

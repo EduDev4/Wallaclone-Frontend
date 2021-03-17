@@ -2,7 +2,7 @@
 import React, { useEffect } from 'react';
 
 import PropTypes from 'prop-types';
-import { Link, useParams, Redirect } from 'react-router-dom';
+import { useParams, Redirect } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import AdvertCard from '../../adverts';
 
@@ -13,12 +13,10 @@ import UserPageAside from '../UserPage/UserPageAside';
 
 function UserFavsPage({
   currentUsername,
-  isLogged,
   adverts,
   onLoadFavAdverts,
   favsAdverts,
 }) {
-  const handleDelete = () => {};
   const { username } = useParams();
   const { t } = useTranslation(['userpage']);
 
@@ -36,7 +34,7 @@ function UserFavsPage({
       <div className="userPage">
         <div className="grid-container">
           <aside className="userPage-aside">
-            <UserPageAside user={username} onDelete={handleDelete} />
+            <UserPageAside user={username} />
           </aside>
           <div className="userPage-content">
             {currentUsername === username ? (
@@ -57,27 +55,16 @@ function UserFavsPage({
 }
 
 UserFavsPage.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-
   currentUsername: PropTypes.string,
-  // currentUserEmail: PropTypes.string,
-  isLogged: PropTypes.bool,
-  // eslint-disable-next-line react/require-default-props
-  // match: PropTypes.shape({
-  //   params: PropTypes.shape({
-  //     username: PropTypes.string.isRequired,
-  //   }),
-  // }),
   onLoadFavAdverts: PropTypes.func.isRequired,
   adverts: PropTypes.arrayOf(PropTypes.object),
-  favsAdverts: PropTypes.string,
+  favsAdverts: PropTypes.objectOf(PropTypes.any),
 };
 
 UserFavsPage.defaultProps = {
   currentUsername: '',
-  isLogged: false,
   adverts: null,
-  favsAdverts: '',
+  favsAdverts: {},
 };
 
 export default UserFavsPage;

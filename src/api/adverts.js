@@ -24,9 +24,9 @@ export const getAdvertDetail = advertId => {
   return client.get(url);
 };
 
-export const getAdverts = filterObject => {
-  if (filterObject) {
-    return client.get(`${adverstUrl}?${filterObject}`);
+export const getAdverts = queryString => {
+  if (queryString) {
+    return client.get(`${adverstUrl}?${queryString}`);
   }
   return client.get(adverstUrl);
 };
