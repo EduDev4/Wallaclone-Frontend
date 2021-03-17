@@ -52,19 +52,19 @@ function UserPageAside({
   };
   return (
     <>
-      <span className="username">{user}</span>
+      <div className="username">{user}</div>
 
       {isLogged && currentUsername === user ? (
         <>
-          <p>{currentUserEmail}</p>
-
-          <Link className="edit-link" to={`/user/edit/${currentUsername}`}>
-            <Button type="primary" className="edit-button">
-              {t('Editar mis datos')}
-              <EditOutlined className="site-form-item-icon" />
-            </Button>
-          </Link>
-
+          <div className="current-username-email">{currentUserEmail}</div>
+          <div className="button-container">
+            <Link className="edit-link" to={`/user/edit/${currentUsername}`}>
+              <Button type="primary" className="edit-button">
+                {t('Editar mis datos')}
+                <EditOutlined className="site-form-item-icon" />
+              </Button>
+            </Link>
+          </div>
           <Link className={classAdverts} to={`/user/${currentUsername}`}>
             {t('Anuncios')}
           </Link>
@@ -86,20 +86,21 @@ function UserPageAside({
           <Link className={classSold} to={`/user/${currentUsername}/sold`}>
             {t('Vendidos')}
           </Link>
-
-          <ConfirmButton
-            className="delete-button"
-            acceptAction={() => onDeleteUser()}
-            confirmProps={{
-              title: t('Eliminar Cuenta de Usuario'),
-              message: t('¿Estás seguro de eliminar tu cuenta?'),
-            }}
-            typeButton="dashed"
-            danger
-            icon={<DeleteOutlined className="site-form-item-icon" />}
-          >
-            {t('Eliminar Cuenta')}
-          </ConfirmButton>
+          <div className="button-container">
+            <ConfirmButton
+              className="delete-button"
+              acceptAction={() => onDeleteUser()}
+              confirmProps={{
+                title: t('Eliminar Cuenta de Usuario'),
+                message: t('¿Estás seguro de eliminar tu cuenta?'),
+              }}
+              typeButton="dashed"
+              danger
+              icon={<DeleteOutlined className="site-form-item-icon" />}
+            >
+              {t('Eliminar Cuenta')}
+            </ConfirmButton>
+          </div>
         </>
       ) : (
         <FiltersForm onSubmit={handleSubmit} />
