@@ -13,20 +13,22 @@ import FiltersForm from '../../shared/FiltersForm';
 const AdvertsPage = ({ adverts, pages, loading, loadAdverts, location }) => {
   const { t } = useTranslation(['advertspage']);
 
-  const querySearch = location.search.substring(1);
+  const [querySearch, setQuerySearch] = useState(location.search.substring(1));
 
-  const [pageCount] = useState(pages);
-
-  const handlePageClick = async e => {
+  const handlePageClick = e => {
     const selectedPage = e.selected;
-    const selectAdverts = new URLSearchParams();
     const start = selectedPage + 1;
-    selectAdverts.append('start', start);
-    await loadAdverts(selectAdverts.toString());
+    const searchParams = new URLSearchParams(querySearch);
+    if (searchParams.has('start')) {
+      searchParams.set('start', start);
+    } else {
+      searchParams.append('start', start);
+    }
+    setQuerySearch(searchParams.toString());
   };
 
   const handleSubmit = async params => {
-    await loadAdverts(params);
+    setQuerySearch(params);
   };
 
   useEffect(() => {
@@ -55,7 +57,7 @@ const AdvertsPage = ({ adverts, pages, loading, loadAdverts, location }) => {
               nextLabel=">>"
               breakLabel="..."
               breakClassName="break-me"
-              pageCount={pageCount}
+              pageCount={pages}
               marginPagesDisplayed={2}
               pageRangeDisplayed={5}
               onPageChange={handlePageClick}

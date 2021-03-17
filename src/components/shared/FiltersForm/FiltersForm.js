@@ -1,25 +1,22 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useTranslation } from 'react-i18next';
 
 import { Slider, Input, Button, Radio } from 'antd';
 
 import useForm from '../../../hooks/useForm';
+import haveSameData from '../../../utils/helpFunctions';
 
 import SelectTags from '../SelectTags';
 
 const FiltersForm = ({ onSubmit, initialForm, advert }) => {
   const { t } = useTranslation(['advertspage']);
   const [form, onChange] = useForm(initialForm);
+  const [resetButton, setResetButton] = useState(false);
 
   const handleSubmit = event => {
     event.preventDefault();
 
-    const formData = new FormData();
-    Object.keys(form).forEach(key => {
-      if (key === 'tags') form[key].forEach(val => formData.append(key, val));
-      else formData.append(key, form[key]);
-    });
     const searchParams = new URLSearchParams();
     if (form.name) searchParams.append('name', form.name);
     if (form.price) searchParams.append('price', -form.price);
@@ -27,6 +24,7 @@ const FiltersForm = ({ onSubmit, initialForm, advert }) => {
     if (form.sort) searchParams.append('sort', '-createdAt');
     if (form.tags.length !== 0) searchParams.append('tags', form.tags);
     onSubmit(searchParams.toString());
+    setResetButton(true);
   };
 
   return (
@@ -59,6 +57,7 @@ const FiltersForm = ({ onSubmit, initialForm, advert }) => {
       <div className="form-field">
         <SelectTags
           defaultTags={form.tags}
+          val={form.tags}
           placeholder={t('Etiquetas')}
           onChange={onChange}
           size="large"
@@ -84,6 +83,28 @@ const FiltersForm = ({ onSubmit, initialForm, advert }) => {
           {t('Buscar')}
         </Button>
       </div>
+      {!haveSameData(form, initialForm) && resetButton && (
+        <div className="form-field centered">
+          <Button
+            htmlType="button"
+            onClick={() => {
+              onSubmit('');
+              setResetButton(false);
+              Object.keys(form).forEach(key => {
+                if (key === 'tags') {
+                  form[key] = [];
+                } else {
+                  form[key] = initialForm[key];
+                }
+              });
+            }}
+            type="primary"
+            danger
+          >
+            {t('Resetear Filtro')}
+          </Button>
+        </div>
+      )}
     </form>
   );
 };

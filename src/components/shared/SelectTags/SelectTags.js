@@ -13,6 +13,7 @@ function SelectTags({
   onChange,
   defaultTags,
   placeholder,
+  val,
 }) {
   const { Option } = Select;
 
@@ -28,6 +29,7 @@ function SelectTags({
       }}
       mode="tags"
       style={{ width: '100%' }}
+      value={val}
       defaultValue={defaultTags}
       placeholder={
         <>
@@ -49,6 +51,7 @@ SelectTags.propTypes = {
   defaultTags: PropTypes.arrayOf(PropTypes.string),
   placeholder: PropTypes.string,
   size: PropTypes.string,
+  val: PropTypes.arrayOf(PropTypes.string),
 };
 
 SelectTags.defaultProps = {
@@ -56,6 +59,7 @@ SelectTags.defaultProps = {
   tags: [],
   defaultTags: [],
   size: 'middle',
+  val: [],
 };
 
 export default SelectTags;

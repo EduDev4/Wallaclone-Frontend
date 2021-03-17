@@ -94,6 +94,7 @@ const NewAdvertPage = ({ mode, initialForm, onCreate, onUpdate, loading }) => {
               <div className="form-field">
                 <SelectTags
                   defaultTags={form.tags}
+                  val={form.tags}
                   placeholder={t('Selecciona tags')}
                   onChange={onChange}
                   size="large"
