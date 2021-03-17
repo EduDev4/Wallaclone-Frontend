@@ -19,6 +19,7 @@ import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Redirect } from 'react-router-dom';
 import ChatItem from './ChatItem';
 import { initChatClient } from '../../api/chat';
+import './ChatScreen.css';
 
 const styles = {
   textField: { width: '100%', borderWidth: 0, borderColor: 'transparent' },
@@ -27,7 +28,7 @@ const styles = {
   gridItemChatList: { overflow: 'auto', height: '70vh' },
   gridItemMessage: { marginTop: 12, marginBottom: 12 },
   sendButton: { backgroundColor: '#475a9e' },
-  sendIcon: { color: 'white' },
+  sendIcon: { color: 'white', cursor: 'pointer' },
   mainGrid: { paddingTop: 100, borderWidth: 1 },
 };
 
@@ -159,82 +160,86 @@ class ChatScreen extends React.Component {
     }
 
     return (
-      <Container component="main" maxWidth="md">
-        <Backdrop open={loading} style={{ zIndex: 99999 }}>
-          <CircularProgress style={{ color: 'white' }} />
-        </Backdrop>
-        <AppBar elevation={10}>
-          <Toolbar>
-            <div
-              style={{
-                width: '100%',
-                display: 'flex',
-                justifyContent: 'flex-end',
-                alignItems: 'center',
-              }}
-            >
-              <Typography variant="h6">
-                {`Advert: ${adName}, Owner: ${owner.username}`}
-              </Typography>
-              <IconButton onClick={this.previousPage}>
-                <ExitToAppIcon style={{ color: 'white' }} />
-              </IconButton>
-            </div>
-          </Toolbar>
-        </AppBar>
-        <CssBaseline />
-        <Grid container direction="column" style={styles.mainGrid}>
-          <Grid item style={styles.gridItemChatList} ref={this.scrollDiv}>
-            <List dense>
-              {messages &&
-                messages.map(message => (
-                  <ChatItem
-                    key={message.index}
-                    message={message}
-                    email={email}
-                  />
-                ))}
-            </List>
-            <div
-              style={{ float: 'left', clear: 'both' }}
-              ref={this.messagesEndRef}
-            />
-          </Grid>
-          <Grid item style={styles.gridItemMessage}>
-            <Grid
-              container
-              direction="row"
-              justify="center"
-              alignItems="center"
-            >
-              <Grid item style={styles.textFieldContainer}>
-                <TextField
-                  required
-                  style={styles.textField}
-                  placeholder="Enter message"
-                  variant="outlined"
-                  multiline
-                  rows={2}
-                  value={text}
-                  disabled={!channel}
-                  onChange={event =>
-                    this.setState({ text: event.target.value })
-                  }
-                />
-              </Grid>
-              <Grid item>
-                <IconButton
-                  style={styles.sendButton}
-                  onClick={this.sendMessage}
-                  disabled={!channel || !text}
+      <>
+        <div className="chat-main-content">
+          <Backdrop open={loading} style={{ zIndex: 999 }}>
+            <CircularProgress style={{ color: 'white' }} />
+          </Backdrop>
+          <div className="chat-header">
+            <div className="wrapper">
+              <div className="chat-title">
+                <span className="chat-advert-name">{adName}</span>
+                <br />
+                <span className="chat-owner-name">Chat with {username}</span>
+              </div>
+              <div className="chat-button-exit-container">
+                <Button
+                  onClick={this.previousPage}
+                  className="chat-exit-button"
                 >
-                  <Send style={styles.sendIcon} />
-                </IconButton>
+                  Cerrar
+                </Button>
+              </div>
+            </div>
+          </div>
+
+          <div className="chat-content">
+            <div className="wrapper">
+              <Grid container direction="column" style={styles.mainGrid}>
+                <Grid item style={styles.gridItemChatList} ref={this.scrollDiv}>
+                  <List dense>
+                    {messages &&
+                      messages.map(message => (
+                        <ChatItem
+                          key={message.index}
+                          message={message}
+                          email={email}
+                        />
+                      ))}
+                  </List>
+                  <div
+                    style={{ float: 'left', clear: 'both' }}
+                    ref={this.messagesEndRef}
+                  />
+                </Grid>
+                <Grid item style={styles.gridItemMessage}>
+                  <Grid
+                    container
+                    direction="row"
+                    justify="center"
+                    alignItems="center"
+                  >
+                    <Grid item style={styles.textFieldContainer}>
+                      <TextField
+                        required
+                        style={styles.textField}
+                        placeholder="Enter message"
+                        variant="outlined"
+                        multiline
+                        rows={2}
+                        value={text}
+                        disabled={!channel}
+                        onChange={event =>
+                          this.setState({ text: event.target.value })
+                        }
+                      />
+                    </Grid>
+                    <Grid item>
+                      <IconButton
+                        style={styles.sendButton}
+                        onClick={this.sendMessage}
+                        disabled={!channel || !text}
+                      >
+                        <Send style={styles.sendIcon} />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                </Grid>
               </Grid>
-            </Grid>
-          </Grid>
-        </Grid>
-      </Container>
+            </div>
+          </div>
+        </div>
+      </>
     );
   }
 }
