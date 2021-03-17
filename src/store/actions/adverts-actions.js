@@ -117,6 +117,10 @@ export const advertsSetAdFav = ad => ({
 export const loadAdvertDetail = advertId =>
   // eslint-disable-next-line func-names
   async function (dispatch, getState, { api }) {
+    const { adverts } = getState();
+    if (adverts.adDetail && adverts.adDetail._id === advertId) {
+      return;
+    }
     dispatch(advertLoadRequest());
     try {
       const { advert } = await api.adverts.getAdvertDetail(advertId);

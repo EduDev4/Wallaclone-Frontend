@@ -15,5 +15,5 @@ export const getTags = state => state.adverts.tags;
 
 export const getIsFavAdvert = state => {
   if (state.adverts.adDetail) return state.adverts.adDetail.isFavBy;
-  return '';
+  return null;
 };
