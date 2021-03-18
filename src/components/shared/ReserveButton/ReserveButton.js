@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
 
+import { useTranslation } from 'react-i18next';
 import { advertsSetAdState } from '../../../store/actions/adverts-actions';
 import { getPublicUrl } from '../../../config/envConfig';
 import { setUnsetReserved } from '../../../api/users';
@@ -9,6 +10,8 @@ import './ReserveButton.css';
 
 const ReserveButton = ({ initialValue, adId }) => {
   const [reserved, setReserved] = useState(initialValue);
+  const { t } = useTranslation(['advertdetails']);
+
   const dispatch = useDispatch();
 
   const handleClick = async e => {
@@ -22,7 +25,7 @@ const ReserveButton = ({ initialValue, adId }) => {
     }
   };
   const renderContent = () => (
-    <span>{reserved ? 'Poner disponible' : 'Reservar'}</span>
+    <span>{reserved ? t('Poner disponible') : t('Reservar')}</span>
   );
 
   return (

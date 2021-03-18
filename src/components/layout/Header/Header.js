@@ -90,12 +90,12 @@ function Header({
                 <img alt="O" src={`${getPublicUrl()}/icons/search-icon.svg`} />
               </div>
               <input
+                className="searchBox"
                 type="text"
                 placeholder={t('Buscar-puntos')}
                 name="search"
                 value={search}
                 onChange={ev => setSearch(ev.target.value)}
-                className="searchBox"
               />
               <input
                 type="submit"

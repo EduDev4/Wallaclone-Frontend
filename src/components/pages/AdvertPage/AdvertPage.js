@@ -37,7 +37,7 @@ function AdvertPage({
 }) {
   const { id } = match.params;
   const history = useHistory();
-  const { t } = useTranslation(['advertpage']);
+  const { t } = useTranslation(['advertdetails']);
 
   const userId = useSelector(getUserId);
   const isFav = dataObj => {
@@ -155,7 +155,7 @@ function AdvertPage({
                   src={`${getPublicUrl()}/icons/reserved-30.png`}
                   alt={advert.state}
                 />{' '}
-                Reservado{' '}
+                {t('Reservado')}{' '}
               </>
             ) : (
               ''
@@ -167,11 +167,12 @@ function AdvertPage({
                   src={`${getPublicUrl()}/icons/sold-x-30.png`}
                   alt={advert.state}
                 />{' '}
-                {advert.sale ? 'Vendido' : 'Encontrado'}{' '}
+                {advert.sale ? t('Vendido') : t('Encontrado')}{' '}
               </>
             ) : (
               ''
             )}
+            {advert.state === 'Available' ? t('Disponible') : ''}
           </div>
         </div>
         <div className="advertpage-title-price">
@@ -200,14 +201,14 @@ function AdvertPage({
         <div className="advertpage-footer">
           {advert.state !== 'Sold' ? (
             <div className={advert.sale ? 'advertpage-sell' : 'advertpage-buy'}>
-              {advert.sale ? 'Se vende' : 'Se busca'}
+              {advert.sale ? t('Se vende') : t('Se busca')}
             </div>
           ) : (
             <div
-              title={advert.sale ? 'Vendido' : 'Encontrado'}
+              title={advert.sale ? t('Vendido') : t('Encontrado')}
               className="advertpage-sold-footer"
             >
-              {advert.sale ? 'Vendido' : 'Encontrado'}
+              {advert.sale ? t('Vendido') : t('Encontrado')}
             </div>
           )}
 
