@@ -19,14 +19,15 @@
 }
 .pagination > .active > a {
   background-color: var(--bg-button-main);
+  border-radius: 50%;
   border-color: var(--bg-button-main);
   color: #fff;
 }
 .pagination > li > a {
-  border: 1px solid var(--bg-button-main);
   padding: 5px 10px;
   outline: none;
   cursor: pointer;
+  margin: 0 0.5rem;
 }
 .pagination > .active > a,
 .pagination > .active > span,
@@ -36,7 +37,12 @@
 .pagination > .active > span:focus {
   background-color: var(--bg-button-main);
   border-color: var(--bg-button-main);
+  border-radius: 50%;
   outline: none;
+}
+.pagination > li > a:hover {
+  background-color: var(--bg-solid-color);
+  border-radius: 50%;
 }
 .pagination > li > a,
 .pagination > li > span {
@@ -47,6 +53,9 @@
 .pagination > li:last-child > a,
 .pagination > li:last-child > span {
   border-radius: unset;
+  border: none;
+  outline: none;
+  border-radius: 5px;
 }
 
 .filter-form {
