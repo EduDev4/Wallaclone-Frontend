@@ -11,6 +11,7 @@ import useForm from '../../../hooks/useForm';
 import './LoginPage.css';
 
 function LoginPage({ onLogin, loading, error }) {
+  const { t } = useTranslation(['loginpage']);
   const [form, onChangeForm] = useForm({
     username: '',
     passwd: '',
@@ -18,7 +19,6 @@ function LoginPage({ onLogin, loading, error }) {
   });
 
   const { username, passwd, remember } = form;
-  const { t, i18n } = useTranslation(['login']);
 
   const handleSubmit = event => {
     event.preventDefault();
@@ -46,7 +46,7 @@ function LoginPage({ onLogin, loading, error }) {
             <Input
               prefix={<LockOutlined className="site-form-item-icon" />}
               type="password"
-              placeholder="Contraseña"
+              placeholder={t('Contraseña')}
               name="passwd"
               value={passwd}
               onChange={onChangeForm}
