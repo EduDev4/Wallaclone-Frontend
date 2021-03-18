@@ -1,8 +1,7 @@
 {
-    "Nueva Contraseña": "New Password",
-    "Enviar": "Submit",
-    "Contraseña": "Password",
-    "Confirma Contraseña": "Confirm Password",
-    "Contraseñas tienen que ser iguales(min 6 car)": "Passwords must de equal(min 6 char.)"
-  
-  }
+  "Nueva Contraseña": "New Password",
+  "Enviar": "Submit",
+  "Contraseña": "Password",
+  "Confirma Contraseña": "Confirm Password",
+  "Contraseñas tienen que ser iguales(min 6 car)": "Passwords must be the same (at least 6 char.)"
+}
