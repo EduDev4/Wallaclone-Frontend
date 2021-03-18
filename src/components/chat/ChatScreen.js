@@ -170,9 +170,7 @@ class ChatScreen extends React.Component {
               <div className="chat-title">
                 <span className="chat-advert-name">{adName}</span>
                 <br />
-                <span className="chat-owner-name">
-                  Chat with {owner.username}
-                </span>
+                <span className="chat-owner-name">by {owner.username}</span>
               </div>
               <div className="chat-button-exit-container">
                 <Button
@@ -188,6 +186,11 @@ class ChatScreen extends React.Component {
           <div className="chat-content">
             <div className="wrapper">
               <Grid container direction="column" style={styles.mainGrid}>
+                <div className="chat-advice">
+                  <div className="chat-advice-content">
+                    Por razones de seguridad, nunca compartas datos privados
+                  </div>
+                </div>
                 <Grid item style={styles.gridItemChatList} ref={this.scrollDiv}>
                   <List dense>
                     {messages &&

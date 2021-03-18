@@ -25,6 +25,29 @@
   height: 100%;
   top: 0;
 }
+
+.chat-advice {
+  position: absolute;
+  top: 80px;
+  padding-top: 1rem;
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  width: 900px;
+  margin-left: -2rem;
+}
+.chat-advice-content {
+  width: fit-content;
+  justify-content: center;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 30px;
+  background-color: rgba(255, 178, 71, 0.5);
+  padding: 0.2rem 2rem;
+  color: rgb(175, 120, 43);
+  flex: 1;
+  margin: 0 2rem;
+}
 .chat-header .chat-title {
   display: flex;
   flex-direction: row;
