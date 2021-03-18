@@ -112,7 +112,7 @@
   margin-top: 1rem;
 }
 .advertpage-status-Available::after {
-  content: 'Disponible';
+  /*content: 'Disponible';*/
 }
 .advertpage-status-Available {
   border-radius: 1rem;

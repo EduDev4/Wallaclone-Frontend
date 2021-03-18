@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 
 import { advertsSetAdState } from '../../../store/actions/adverts-actions';
 import soldEmptyIcon from '../../../assets/sold-empty-advert-50.png';
@@ -11,6 +12,7 @@ import './SoldButton.css';
 
 const SoldButton = ({ initialValue, adId }) => {
   const [sold, setSold] = useState(initialValue);
+  const { t } = useTranslation(['advertdetails']);
   const dispatch = useDispatch();
 
   const handleClick = async e => {
@@ -24,7 +26,7 @@ const SoldButton = ({ initialValue, adId }) => {
     }
   };
   const renderContent = () => (
-    <span>{sold ? 'Poner a la venta' : 'Vendido'}</span>
+    <span>{sold ? t('Poner a la venta') : t('Marcar como vendido')}</span>
   );
 
   return (

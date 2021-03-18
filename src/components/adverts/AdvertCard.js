@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 import { Link, useHistory } from 'react-router-dom';
@@ -26,6 +27,7 @@ const AdvertCard = ({
 }) => {
   const isLogged = useSelector(getIsLoggedUser);
   const userId = useSelector(getUserId);
+  const { t } = useTranslation(['advertdetails']);
   const history = useHistory();
   const isFav = dataObj => {
     if (dataObj) {
@@ -40,7 +42,7 @@ const AdvertCard = ({
     if (state === 'Reserved') {
       return (
         <img
-          title="Reservado"
+          title={t('Reservado')}
           src={`${getPublicUrl()}/icons/reserved-30.png`}
           alt="Reserved"
         />
@@ -49,7 +51,7 @@ const AdvertCard = ({
     if (state === 'Sold') {
       return (
         <img
-          title="Vendido"
+          title={t('Vendido')}
           src={`${getPublicUrl()}/icons/sold-x-30.png`}
           alt="Sold"
         />
@@ -132,17 +134,17 @@ const AdvertCard = ({
               </div>
               {state !== 'Sold' ? (
                 <div
-                  title={sale ? 'Se vende' : 'Se busca'}
+                  title={sale ? t('Se vende') : t('Se busca')}
                   className={sale ? 'advert-sell' : 'advert-buy'}
                 >
-                  {sale ? 'Se vende' : 'Se busca'}
+                  {sale ? t('Se vende') : t('Se busca')}
                 </div>
               ) : (
                 <div
-                  title={sale ? 'Vendido' : 'Encontrado'}
+                  title={sale ? t('Vendido') : t('Encontrado')}
                   className="advert-sold"
                 >
-                  {sale ? 'Vendido' : 'Encontrado'}
+                  {sale ? t('Vendido') : t('Encontrado')}
                 </div>
               )}
               <div className="advert-created">{createdAtText}</div>
