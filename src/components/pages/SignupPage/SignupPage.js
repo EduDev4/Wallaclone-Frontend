@@ -26,6 +26,7 @@ const SignupPage = ({
     passwd: '',
     passwd2: '',
   });
+  const { t } = useTranslation(['loginpage']);
 
   const { username, email, passwd, passwd2 } = form;
 
@@ -39,7 +40,7 @@ const SignupPage = ({
   const IsSubmitting = () => !loading && username && passwd && passwd2 && email;
 
   return (
-    <MainLayout title="Sign up">
+    <MainLayout title={t('Regístrate')}>
       <div className="signupPage">
         {currentUserEmail ? (
           <div className="form-field">
@@ -77,7 +78,7 @@ const SignupPage = ({
             <div className="form-field">
               <Input.Password
                 type="password"
-                placeholder="Contraseña"
+                placeholder={t('Contraseña')}
                 name="passwd"
                 value={passwd}
                 onChange={onChangeForm}
@@ -87,7 +88,7 @@ const SignupPage = ({
             <div className="form-field">
               <Input.Password
                 type="password"
-                placeholder="Confirma contraseña"
+                placeholder={t('Confirma Contraseña')}
                 name="passwd2"
                 value={passwd2}
                 onChange={onChangeForm}
@@ -100,7 +101,7 @@ const SignupPage = ({
                 htmlType="submit"
                 disabled={!IsSubmitting()}
               >
-                Sing up
+                {t('Registrarse')}
               </Button>
             </div>
           </form>
