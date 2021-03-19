@@ -12,11 +12,12 @@ import {
 import { loadAdverts } from '../../../store/actions/adverts-actions';
 
 const mapStateToProps = state => ({
-  getUi,
   currentUsername: getUsername(state),
   currentUserEmail: getUserEmail(state),
   isLogged: getIsLoggedUser(state),
   adverts: getAdverts(state),
+  loading: getUi(state).loading,
+  error: getUi(state).error,
 });
 
 const mapDispatchToProps = dispatch => ({

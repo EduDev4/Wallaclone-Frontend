@@ -10,8 +10,17 @@ import MainLayout from '../../layout/MainLayout';
 
 import './UserPage.css';
 import UserPageAside from './UserPageAside';
+import Empty from '../../shared/Empty';
+import Spinner from '../../shared/Spinner';
 
-function UserPage({ currentUsername, isLogged, adverts, loadAdverts, mode }) {
+function UserPage({
+  currentUsername,
+  isLogged,
+  loading,
+  adverts,
+  loadAdverts,
+  mode,
+}) {
   const { username } = useParams();
   const { t } = useTranslation(['userpage']);
 
@@ -20,7 +29,7 @@ function UserPage({ currentUsername, isLogged, adverts, loadAdverts, mode }) {
   }, [username]);
 
   const renderAdverts = () => {
-    if (!adverts) return null;
+    if (adverts.length < 1) return <Empty />;
     return adverts.map(ad => <AdvertCard key={ad._id} {...ad} />);
   };
 
@@ -36,7 +45,7 @@ function UserPage({ currentUsername, isLogged, adverts, loadAdverts, mode }) {
               <h2>{t('Mis Anuncios')}</h2>
             ) : null}
             <div className="userPage-adswrapper flex-container">
-              {!adverts ? <p>no hay anuncios</p> : renderAdverts()}
+              {loading ? <Spinner /> : renderAdverts()}
             </div>
           </div>
         </div>
@@ -58,6 +67,7 @@ UserPage.propTypes = {
   // match: PropTypes.objectOf(PropTypes.any).isRequired,
   loadAdverts: PropTypes.func.isRequired,
   adverts: PropTypes.arrayOf(PropTypes.object),
+  loading: PropTypes.bool.isRequired,
   mode: PropTypes.string,
 };
 

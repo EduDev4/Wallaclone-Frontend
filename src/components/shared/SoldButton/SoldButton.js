@@ -26,7 +26,7 @@ const SoldButton = ({ initialValue, adId }) => {
     }
   };
   const renderContent = () => (
-    <span>{sold ? t('Poner a la venta') : t('Marcar como vendido')}</span>
+    <span>{sold ? t('Reactivar') : t('Marcar como vendido')}</span>
   );
 
   return (
