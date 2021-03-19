@@ -44,8 +44,9 @@ function Header({
     if (search !== '') {
       history.push(`/adverts?name=${search}`);
     } else {
-      history.push(`/adverts`);
+      history.push('/adverts');
     }
+    setSearch('');
   };
 
   const { t, i18n } = useTranslation(['header']);
@@ -76,11 +77,7 @@ function Header({
     <header className={classNames('header', className)}>
       <div className="header-wrapper">
         <Link to="/" className="header-logo">
-          {isSmall ? (
-            <h1 className="walla-logo">Wallaclone</h1>
-          ) : (
-            <h1 className="walla-logo">W</h1>
-          )}
+          <h1 className="walla-logo">{isSmall ? 'Wallaclone' : 'W'}</h1>
         </Link>
 
         <div className="header-search-input-wrapper">
@@ -95,7 +92,9 @@ function Header({
                 placeholder={t('Buscar-puntos')}
                 name="search"
                 value={search}
-                onChange={ev => setSearch(ev.target.value)}
+                onChange={ev => {
+                  setSearch(ev.target.value);
+                }}
               />
               <input
                 type="submit"

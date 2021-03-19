@@ -6,15 +6,12 @@ import classNames from 'classnames';
 import { Button } from 'antd';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
-import { useTranslation } from 'react-i18next';
 import { getIsLoggedUser, getUsername } from '../../../store/selectors';
 
 import './UserTools.css';
 import { getPublicUrl } from '../../../config/envConfig';
 
 function UserTools({ className, currentUser, ...props }) {
-  const { t, i18n } = useTranslation(['header']);
-
   return (
     // TODO COMPONENTE CON LOS ENLACES DE NOTIFICACIONES QUE SE LLAMARÁ DESDE HEADER Y FOOTER
     <>
