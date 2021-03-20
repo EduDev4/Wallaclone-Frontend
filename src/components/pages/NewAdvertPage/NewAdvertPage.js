@@ -19,7 +19,8 @@ const NewAdvertPage = ({ mode, initialForm, onCreate, onUpdate, loading }) => {
 
   useEffect(() => {
     if (mode === 'new') form.file = null;
-  });
+  }, []);
+
   const handleSubmit = async ev => {
     ev.preventDefault();
 
