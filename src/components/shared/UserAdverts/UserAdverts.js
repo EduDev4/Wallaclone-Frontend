@@ -1,19 +1,18 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
-
 import PropTypes from 'prop-types';
-import { Redirect, useLocation, useParams } from 'react-router-dom';
+import { useParams, Redirect, useLocation } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+
 import AdvertCard from '../../adverts';
-
 import MainLayout from '../../layout/MainLayout';
+import Spinner from '../Spinner';
+import Empty from '../Empty';
 
-import './UserPage.css';
-import UserPageAside from './UserPageAside';
-import Empty from '../../shared/Empty';
-import Spinner from '../../shared/Spinner';
+import '../../pages/UserPage/UserPage.css';
+import UserPageAside from '../../pages/UserPage/UserPageAside';
 
-function UserPage({
+function UserAdverts({
   mode,
   loading,
   currentUsername,
@@ -32,6 +31,7 @@ function UserPage({
   useEffect(() => {
     if (mode === 'userAdverts') {
       if (currentUsername === username) setSectionTitle(t('Mis Anuncios'));
+
       loadAdverts(`username=${username}`);
     }
     if (mode === 'reserved') {
@@ -81,7 +81,7 @@ function UserPage({
   );
 }
 
-UserPage.propTypes = {
+UserAdverts.propTypes = {
   mode: PropTypes.string.isRequired,
   currentUsername: PropTypes.string,
   onLoadFavAdverts: PropTypes.func.isRequired,
@@ -93,10 +93,10 @@ UserPage.propTypes = {
   loadAdverts: PropTypes.func.isRequired,
 };
 
-UserPage.defaultProps = {
+UserAdverts.defaultProps = {
   currentUsername: '',
   adverts: null,
   favsAdverts: {},
 };
 
-export default UserPage;
+export default UserAdverts;

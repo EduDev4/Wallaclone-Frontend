@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 
-import UserPage from './UserPage';
+import UserAdverts from './UserAdverts';
 import {
   getUi,
   getUsername,
@@ -34,4 +34,4 @@ const mapDispatchToProps = {
   loadAdverts: form => loadAdverts(form),
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserPage);
+export default connect(mapStateToProps, mapDispatchToProps)(UserAdverts);

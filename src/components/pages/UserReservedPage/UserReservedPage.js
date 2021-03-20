@@ -17,7 +17,6 @@ function UserReservedPage({
   adverts,
   onLoadReservedAdverts,
 }) {
-  const handleDelete = () => {};
   const { username } = useParams();
   const { t } = useTranslation(['userpage']);
 
@@ -35,7 +34,7 @@ function UserReservedPage({
       <div className="userPage">
         <div className="grid-container">
           <aside className="userPage-aside">
-            <UserPageAside user={username} onDelete={handleDelete} />
+            <UserPageAside user={username} />
           </aside>
           <div className="userPage-content">
             {currentUsername === username ? (
