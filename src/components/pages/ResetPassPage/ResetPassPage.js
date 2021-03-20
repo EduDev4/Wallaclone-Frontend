@@ -2,20 +2,24 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Input, Button, Alert } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { resetPasswd } from '../../../api/users';
 import useForm from '../../../hooks/useForm';
 import MainLayout from '../../layout/MainLayout';
+import { showFlashAlert } from '../../../store/actions/ui-actions';
 
 import './ResetPassPage.css';
 
-function ResetPassPage({ match, error }) {
+function ResetPassPage({ error }) {
   const [form, onChangeForm] = useForm({
     passwd: '',
     passwd1: '',
   });
+  const { hash } = useParams();
+  const dispatch = useDispatch();
 
   const { t } = useTranslation(['resetpass']);
   const { passwd, passwd1 } = form;
@@ -23,8 +27,14 @@ function ResetPassPage({ match, error }) {
   const IsSubmitting = () =>
     passwd.length > 0 && passwd1.length > 0 && passwd === passwd1;
 
-  // eslint-disable-next-line react/destructuring-assignment
-  const { hash } = match.params;
+  const handleClick = async () => {
+    try {
+      const { message } = await resetPasswd(passwd, hash);
+      dispatch(showFlashAlert({ type: 'success', message }));
+    } catch (err) {
+      dispatch(showFlashAlert({ type: 'error', message: err.message }));
+    }
+  };
 
   return (
     <MainLayout title={t('Nueva Contraseña')}>
@@ -54,7 +64,7 @@ function ResetPassPage({ match, error }) {
               as={Link}
               to="/login"
               type="primary"
-              onClick={() => resetPasswd(passwd, hash)}
+              onClick={handleClick}
               disabled={!IsSubmitting(passwd, passwd1)}
             >
               {t('Enviar')}
@@ -85,10 +95,5 @@ resetPasswd.propTypes = {
   passwd1: PropTypes.string,
   canSubmit: PropTypes.func,
   handleChange: PropTypes.func,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      hash: PropTypes.string.isRequired,
-    }),
-  }),
 };
 export default ResetPassPage;
