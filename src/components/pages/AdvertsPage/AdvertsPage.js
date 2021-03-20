@@ -14,7 +14,7 @@ import FiltersForm from '../../shared/FiltersForm';
 const AdvertsPage = ({ adverts, pages, loading, loadAdverts, location }) => {
   const { t } = useTranslation(['advertspage']);
 
-  const [querySearch, setQuerySearch] = useState(location.search.substring(1));
+  const [querySearch, setQuerySearch] = useState('');
 
   const handlePageClick = e => {
     const selectedPage = e.selected;
@@ -31,6 +31,10 @@ const AdvertsPage = ({ adverts, pages, loading, loadAdverts, location }) => {
   const handleSubmit = async params => {
     setQuerySearch(params);
   };
+
+  useEffect(() => {
+    setQuerySearch(location.search?.substring(1) || '');
+  }, [location.search]);
 
   useEffect(() => {
     loadAdverts(querySearch);
@@ -79,9 +83,7 @@ AdvertsPage.propTypes = {
   initialForm: PropTypes.objectOf(PropTypes.any),
   loadAdverts: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  location: PropTypes.shape({
-    search: PropTypes.string,
-  }),
+  location: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 AdvertsPage.defaultProps = {
@@ -93,9 +95,6 @@ AdvertsPage.defaultProps = {
     price: 0,
     sort: false,
   },
-  location: PropTypes.shape({
-    search: '',
-  }),
 };
 
 export default AdvertsPage;

@@ -77,7 +77,16 @@ export const logout = () =>
       .logout()
       .then(() => {
         dispatch(authLogoutSuccess());
+        dispatch(
+          showFlashAlert({
+            type: 'success',
+            message: 'Hasta pronto!',
+          }),
+        );
         history.push('/');
       })
-      .catch(error => dispatch(authLogoutFailure(error)));
+      .catch(error => {
+        dispatch(authLogoutFailure(error));
+        dispatch(showFlashAlert({ type: 'error', message: error.message }));
+      });
   };

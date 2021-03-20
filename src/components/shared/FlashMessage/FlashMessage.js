@@ -2,6 +2,7 @@ import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import PropTypes from 'prop-types';
 import { Alert } from 'antd';
+import { useTranslation } from 'react-i18next';
 
 const popanimation = keyframes`
     0% {
@@ -43,11 +44,12 @@ const FlashMessage = ({ alert }) => {
   if (!alert) return null;
 
   const { type, message } = alert;
+  const { t } = useTranslation(['flashalert']);
   return (
     <AlertContainer>
       <Alert
         message={type.toUpperCase()}
-        description={message}
+        description={t(message)}
         type={type}
         showIcon
       />

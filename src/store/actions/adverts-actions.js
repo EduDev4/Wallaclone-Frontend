@@ -25,7 +25,6 @@ import { getUsername } from '../selectors';
 import { showFlashAlert } from './ui-actions';
 
 /** ADVERT ACTIONS */
-// TODO: crear acciones de anuncios
 export const advertsLoadRequest = () => ({
   type: ADVERTS_LOAD_REQUEST,
 });
