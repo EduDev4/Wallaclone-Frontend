@@ -30,12 +30,9 @@ function UserAdverts({
 
   useEffect(() => {
     if (mode === 'userAdverts') {
-      setSectionTitle(t('Mis Anuncios'));
+      if (currentUsername === username) setSectionTitle(t('Mis Anuncios'));
+
       loadAdverts(`username=${username}`);
-    }
-    if (mode === 'favs') {
-      setSectionTitle(t('Mis Anuncios Favoritos'));
-      onLoadFavAdverts();
     }
     if (mode === 'reserved') {
       setSectionTitle(t('Mis Anuncios Reservados'));
@@ -45,7 +42,14 @@ function UserAdverts({
       setSectionTitle(t('Mis Anuncios Vendidos'));
       onLoadSoldAdverts();
     }
-  }, [favsAdverts, pathname, username]);
+  }, [pathname, username]);
+
+  useEffect(() => {
+    if (mode === 'favs') {
+      setSectionTitle(t('Mis Anuncios Favoritos'));
+      onLoadFavAdverts();
+    }
+  }, [favsAdverts, pathname]);
 
   const renderAdverts = () => {
     if (adverts.length < 1) return <Empty />;
@@ -60,10 +64,16 @@ function UserAdverts({
             <UserPageAside user={username} />
           </aside>
           <div className="userPage-content">
-            {currentUsername === username ? <h2>{sectionTitle}</h2> : null}
-            <div className="userPage-adswrapper flex-container">
-              {loading ? <Spinner /> : renderAdverts()}
-            </div>
+            {mode === 'userAdverts' || currentUsername === username ? (
+              <>
+                <h2>{sectionTitle}</h2>
+                <div className="userPage-adswrapper flex-container">
+                  {loading ? <Spinner /> : renderAdverts()}
+                </div>
+              </>
+            ) : (
+              <Redirect to={`/user/${username}`} />
+            )}
           </div>
         </div>
       </div>
