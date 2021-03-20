@@ -6,6 +6,7 @@ import ReactPaginate from 'react-paginate';
 import MainLayout from '../../layout/MainLayout';
 import AdvertCard from '../../adverts';
 import Spinner from '../../shared/Spinner';
+import Empty from '../../shared/Empty';
 import './AdvertsPage.css';
 
 import FiltersForm from '../../shared/FiltersForm';
@@ -40,7 +41,8 @@ const AdvertsPage = ({ adverts, pages, loading, loadAdverts, location }) => {
   }, [querySearch]);
 
   const renderContent = () => {
-    if (!adverts) return null;
+    if (adverts.length < 1) return <Empty />;
+
     return adverts.map(ad => <AdvertCard key={ad._id} {...ad} />);
   };
 

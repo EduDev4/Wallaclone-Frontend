@@ -7,20 +7,31 @@ import {
   getUserEmail,
   getIsLoggedUser,
   getAdverts,
+  getIsFavAdvert,
 } from '../../../store/selectors';
 
 import { loadAdverts } from '../../../store/actions/adverts-actions';
+import {
+  loadFavAdverts,
+  loadReservedAdverts,
+  loadSoldAdverts,
+} from '../../../store/actions/user-adverts-actions';
 
 const mapStateToProps = state => ({
-  getUi,
   currentUsername: getUsername(state),
   currentUserEmail: getUserEmail(state),
   isLogged: getIsLoggedUser(state),
   adverts: getAdverts(state),
+  favsAdverts: getIsFavAdvert(state),
+  loading: getUi(state).loading,
+  error: getUi(state).error,
 });
 
-const mapDispatchToProps = dispatch => ({
-  loadAdverts: form => dispatch(loadAdverts(form)),
-});
+const mapDispatchToProps = {
+  onLoadFavAdverts: loadFavAdverts,
+  onLoadReservedAdverts: loadReservedAdverts,
+  onLoadSoldAdverts: loadSoldAdverts,
+  loadAdverts: form => loadAdverts(form),
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserPage);

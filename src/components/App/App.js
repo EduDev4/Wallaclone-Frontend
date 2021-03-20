@@ -14,9 +14,6 @@ import ForgotPassPage from '../pages/ForgotPassPage';
 import ResetPassPage from '../pages/ResetPassPage';
 import UserPage from '../pages/UserPage';
 import EditUserPage from '../pages/EditUserPage';
-import UserFavsPage from '../pages/UserFavsPage';
-import UserSoldPage from '../pages/UserSoldPage';
-import UserReservedPage from '../pages/UserReservedPage';
 import UserChatsPage from '../pages/UserChatsPage';
 import ChatScreen from '../chat/ChatScreen';
 import NotFoundPage from '../pages/NotFoundPage';
@@ -50,15 +47,18 @@ function App() {
         </PrivateRoute>
         <Route exact path="/chat" component={ChatScreen} />
 
-        <Route path="/user/:username" exact component={UserPage} />
+        <Route path="/user/:username" exact>
+          <UserPage mode="userAdverts" />
+        </Route>
+
         <PrivateRoute path="/user/:username/favs" exact>
-          <UserFavsPage />
+          <UserPage mode="favs" />
         </PrivateRoute>
         <PrivateRoute path="/user/:username/reserved" exact>
-          <UserReservedPage />
+          <UserPage mode="reserved" />
         </PrivateRoute>
         <PrivateRoute path="/user/:username/sold" exact>
-          <UserSoldPage />
+          <UserPage mode="sold" />
         </PrivateRoute>
         <PrivateRoute path="/user/:username/chats" exact>
           <UserChatsPage />
