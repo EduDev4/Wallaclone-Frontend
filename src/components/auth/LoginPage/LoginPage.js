@@ -65,7 +65,7 @@ function LoginPage({ onLogin, loading, error }) {
           <div className="form-field">
             <p>
               <Link to="/forgotpass" className="link">
-                {t('Olvidate tu contraseña?')}{' '}
+                {t('Olvidaste tu contraseña?')}{' '}
               </Link>
             </p>
 

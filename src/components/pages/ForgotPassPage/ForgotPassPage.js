@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { useDispatch } from 'react-redux';
 import { useTranslation } from 'react-i18next';
 import { Input, Button, Alert } from 'antd';
 import { Link } from 'react-router-dom';
@@ -10,14 +11,24 @@ import useForm from '../../../hooks/useForm';
 import MainLayout from '../../layout/MainLayout';
 
 import './ForgotPassPage.css';
+import { showFlashAlert } from '../../../store/actions/ui-actions';
 
 function ForgotPassPage({ error }) {
   const [form, onChangeForm] = useForm({
     email: '',
   });
   const { t } = useTranslation(['forgotpass']);
+  const dispatch = useDispatch();
   const { email } = form;
 
+  const handleClick = async () => {
+    try {
+      const { message } = await forgotPasswd(email);
+      dispatch(showFlashAlert({ type: 'success', message }));
+    } catch (err) {
+      dispatch(showFlashAlert({ type: 'error', message: err.message }));
+    }
+  };
   const IsSubmitting = () => email;
 
   return (
@@ -39,7 +50,7 @@ function ForgotPassPage({ error }) {
               as={Link}
               to="/login"
               type="primary"
-              onClick={() => forgotPasswd(email)}
+              onClick={handleClick}
               disabled={!IsSubmitting(email)}
             >
               {t('Enviar')}
