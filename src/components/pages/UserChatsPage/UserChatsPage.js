@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-props-no-spreading */
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 
@@ -15,7 +14,7 @@ import '../UserPage/UserPage.css';
 import UserPageAside from '../UserPage/UserPageAside';
 import Spinner from '../../shared/Spinner';
 
-function UserChatsPage({ currentUsername, currentUserId, isLogged }) {
+function UserChatsPage({ currentUsername, currentUserId }) {
   const [userChannels, setUserChannels] = useState([]);
   const [loadingChats, setLoadingChats] = useState(true);
   const [userClient, setUserClient] = useState(null);
@@ -90,23 +89,12 @@ function UserChatsPage({ currentUsername, currentUserId, isLogged }) {
 }
 
 UserChatsPage.propTypes = {
-  // eslint-disable-next-line react/require-default-props
-
   currentUsername: PropTypes.string,
   currentUserId: PropTypes.string.isRequired,
-  // currentUserEmail: PropTypes.string,
-  isLogged: PropTypes.bool,
-  // eslint-disable-next-line react/require-default-props
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      username: PropTypes.string.isRequired,
-    }),
-  }),
 };
 
 UserChatsPage.defaultProps = {
   currentUsername: '',
-  isLogged: false,
 };
 
 export default UserChatsPage;

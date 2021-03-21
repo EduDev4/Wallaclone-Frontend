@@ -2,17 +2,12 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import {
-  AppBar,
   Backdrop,
   CircularProgress,
-  Container,
-  CssBaseline,
   Grid,
   IconButton,
   List,
   TextField,
-  Toolbar,
-  Typography,
 } from '@material-ui/core';
 import { Send } from '@material-ui/icons';
 import { Redirect } from 'react-router-dom';
@@ -86,11 +81,11 @@ class ChatScreen extends React.Component {
           const channelToJoin = await clientToJoin.getChannelByUniqueName(room);
           if (channelToJoin.channelState.status !== 'joined') {
             await channelToJoin.join();
-            console.log(`${userToJoin} unido de nuevo al canal`);
+            // console.log(`${userToJoin} unido de nuevo al canal`);
           }
         }
 
-        console.log('Canal encontrado:', channel);
+        // console.log('Canal encontrado:', channel);
         this.setState({ channel, loading: false });
       } catch {
         try {
@@ -105,9 +100,9 @@ class ChatScreen extends React.Component {
               room,
             );
             await channelToJoin.join();
-            console.log(`${userToJoin} unido al canal`);
+            // console.log(`${userToJoin} unido al canal`);
           }
-          console.log('Canal creado:', channel);
+          // console.log('Canal creado:', channel);
           this.setState({ channel, loading: false });
         } catch {
           throw new Error('unable to create channel, please reload this page');

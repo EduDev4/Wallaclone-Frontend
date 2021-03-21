@@ -28,7 +28,6 @@ import { getApiBaseUrl, getPublicUrl } from '../../../config/envConfig';
 
 function AdvertPage({
   match,
-  currentUsername,
   isLogged,
   advert,
   onDelete,
@@ -255,7 +254,6 @@ function AdvertPage({
 }
 
 AdvertPage.propTypes = {
-  currentUsername: PropTypes.string,
   isLogged: PropTypes.bool,
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -269,7 +267,6 @@ AdvertPage.propTypes = {
 };
 
 AdvertPage.defaultProps = {
-  currentUsername: '',
   isLogged: false,
   match: [],
   advert: {},

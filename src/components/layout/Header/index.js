@@ -1,23 +1,15 @@
 import { connect } from 'react-redux';
 import Header from './Header';
-import {
-  getUi,
-  getAdverts,
-  getIsLoggedUser,
-  getUsername,
-} from '../../../store/selectors';
+import { getIsLoggedUser, getUsername } from '../../../store/selectors';
 import { logout } from '../../../store/actions/auth-actions';
-import { loadAdverts } from '../../../store/actions/adverts-actions';
 
 const mapStateToProps = state => ({
   isLogged: getIsLoggedUser(state),
   currentUser: getUsername(state),
-  adverts: getAdverts(state),
 });
 
 const mapDispatchToProps = dispatch => ({
-  onLogout: () => dispatch(logout()),
-  loadAdverts: form => dispatch(loadAdverts(form)),
+  onLogout: () => dispatch(logout(true)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

@@ -70,11 +70,6 @@ function ForgotPassPage({ error }) {
   );
 }
 
-forgotPasswd.propTypes = {
-  email: PropTypes.string,
-  error: PropTypes.objectOf(PropTypes.any),
-};
-
 ForgotPassPage.propTypes = {
   error: PropTypes.objectOf(PropTypes.any),
 };

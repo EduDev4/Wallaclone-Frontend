@@ -2,16 +2,12 @@
 /* eslint-disable react/style-prop-object */
 import React from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import { Button } from 'antd';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { getIsLoggedUser, getUsername } from '../../../store/selectors';
-
-import './UserTools.css';
 import { getPublicUrl } from '../../../config/envConfig';
 
-function UserTools({ className, currentUser, ...props }) {
+import './UserTools.css';
+
+function UserTools({ currentUser }) {
   return (
     // TODO COMPONENTE CON LOS ENLACES DE NOTIFICACIONES QUE SE LLAMARÁ DESDE HEADER Y FOOTER
     <>
@@ -53,23 +49,10 @@ function UserTools({ className, currentUser, ...props }) {
 }
 
 UserTools.propTypes = {
-  className: PropTypes.string,
   currentUser: PropTypes.string,
 };
 UserTools.defaultProps = {
-  className: 'layout-header',
   currentUser: '',
 };
 
-const mapStateToProps = state => ({
-  isLogged: getIsLoggedUser(state),
-  currentUser: getUsername(state),
-});
-
-// const mapDispatchToProps = {
-//   onLogout: logout,
-// };
-
-const ConnectedUserTools = connect(mapStateToProps, null)(UserTools);
-
-export default ConnectedUserTools;
+export default UserTools;

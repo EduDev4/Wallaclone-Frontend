@@ -1,9 +1,8 @@
 import React from 'react';
-import { BrowserRouter, Router } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 import { Provider } from 'react-redux';
-// import { ConnectedRouter } from 'connected-react-router';
 
 const Root = ({ children, store, history }) => (
   <Provider store={store}>

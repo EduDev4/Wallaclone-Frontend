@@ -7,7 +7,7 @@ import Footer from '../Footer';
 
 import './MainLayout.css';
 
-const MainLayout = ({ children, title }) => (
+const MainLayout = ({ title, children }) => (
   <div className="layout">
     <Header className="layout-header" />
     <FlashMessage />

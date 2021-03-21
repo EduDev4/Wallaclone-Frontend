@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import AdvertPage from './AdvertPage';
 import {
   getUiLoading,
-  getUsername,
   getUserEmail,
   getIsLoggedUser,
   getAdvertDetail,
@@ -16,7 +15,6 @@ import {
 
 const mapStateToProps = state => ({
   loading: getUiLoading(state),
-  currentUsername: getUsername(state),
   currentUserEmail: getUserEmail(state),
   isLogged: getIsLoggedUser(state),
   advert: getAdvertDetail(state),

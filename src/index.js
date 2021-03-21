@@ -1,4 +1,3 @@
-// TODO: Crear logo del proyecto, favicon y sustituir por el de CRA
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom';
 import { createBrowserHistory } from 'history';
@@ -19,10 +18,7 @@ const auth = storage.get('auth') || {
 
 configureClient(auth.tokenJWT);
 setLocaleLanguageHeader('es');
-// console.log('auth en index:', auth);
-//
-// const logueado = auth.tokenJWT ? !!auth.tokenJWT : false;
-// console.log('logueado:', logueado);
+
 const preloadedState = {
   auth: {
     isLogged: !!auth.tokenJWT,
@@ -32,13 +28,8 @@ const preloadedState = {
   },
 };
 const history = createBrowserHistory();
-//
-// console.log('history:', history);
-// console.log('preloadedState:', preloadedState);
 
 const store = configureStore(preloadedState, { history });
-
-// console.log('getState:', store.getState());
 
 const render = () => {
   ReactDOM.render(

@@ -6,7 +6,7 @@ import { Button } from 'antd';
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 
-import ConfirmButton from '../../shared/ConfirmButton';
+import ConfirmButton from '../../shared/ConfirmButton/ConfirmButton';
 import FiltersForm from '../../shared/FiltersForm';
 
 import {
@@ -21,8 +21,6 @@ import { deleteUser } from '../../../store/actions/user-actions';
 import { loadAdverts } from '../../../store/actions/adverts-actions';
 
 function UserPageAside({
-  loading,
-  error,
   currentUsername,
   currentUserEmail,
   isLogged,
@@ -111,8 +109,6 @@ function UserPageAside({
 
 UserPageAside.propTypes = {
   user: PropTypes.string.isRequired,
-  loading: PropTypes.bool,
-  error: PropTypes.bool,
   currentUsername: PropTypes.string,
   currentUserEmail: PropTypes.string,
   isLogged: PropTypes.bool,
@@ -121,8 +117,6 @@ UserPageAside.propTypes = {
 };
 
 UserPageAside.defaultProps = {
-  loading: false,
-  error: null,
   currentUsername: '',
   currentUserEmail: '',
   isLogged: false,
