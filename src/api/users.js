@@ -4,8 +4,8 @@ const usersBaseUrl = '/apiv1/users';
 
 export const resetPasswd = (passwd, hash) => {
   const url = `${usersBaseUrl}/forgotPass/confirmation`;
-  console.log(hash);
-  console.log(passwd);
+  // console.log(hash);
+  // console.log(passwd);
   const params = JSON.stringify({
     passwd,
     hash,
@@ -33,14 +33,14 @@ export const signup = async data => {
   const url = `${usersBaseUrl}`;
   const headers = { 'Content-Type': 'multipart/form-data' };
   const response = await client.post(url, data, headers);
-  console.log(response);
+  // console.log(response);
   return response;
 };
 
 export const signupConfirm = async data => {
   const url = `${usersBaseUrl}/confirm/${data}`;
   const response = await client.get(url);
-  console.log(response);
+  // console.log(response);
   return response;
 };
 

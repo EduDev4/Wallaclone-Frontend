@@ -4,7 +4,6 @@ import { useDispatch } from 'react-redux';
 
 import { useTranslation } from 'react-i18next';
 import { advertsSetAdState } from '../../../store/actions/adverts-actions';
-import { getPublicUrl } from '../../../config/envConfig';
 import { setUnsetReserved } from '../../../api/users';
 import './ReserveButton.css';
 

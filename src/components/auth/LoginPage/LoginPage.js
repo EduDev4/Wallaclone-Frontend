@@ -10,7 +10,7 @@ import useForm from '../../../hooks/useForm';
 
 import './LoginPage.css';
 
-function LoginPage({ onLogin, loading, error }) {
+function LoginPage({ onLogin, loading }) {
   const { t } = useTranslation(['loginpage']);
   const [form, onChangeForm] = useForm({
     username: '',
@@ -88,13 +88,7 @@ function LoginPage({ onLogin, loading, error }) {
 
 LoginPage.propTypes = {
   onLogin: PropTypes.func.isRequired,
-  loading: PropTypes.bool,
-  error: PropTypes.objectOf(PropTypes.any),
-};
-
-LoginPage.defaultProps = {
-  loading: false,
-  error: null,
+  loading: PropTypes.bool.isRequired,
 };
 
 export default LoginPage;

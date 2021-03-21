@@ -90,10 +90,4 @@ ResetPassPage.defaultProps = {
   error: null,
 };
 
-resetPasswd.propTypes = {
-  passwd: PropTypes.string,
-  passwd1: PropTypes.string,
-  canSubmit: PropTypes.func,
-  handleChange: PropTypes.func,
-};
 export default ResetPassPage;

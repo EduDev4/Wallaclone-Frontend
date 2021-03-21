@@ -3,25 +3,18 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
-import { Button, Menu, Dropdown } from 'antd';
+import { Menu, Dropdown } from 'antd';
 import { Link, useHistory } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 
 import { getPublicUrl } from '../../../config/envConfig';
-import ConfirmButton from '../../shared/ConfirmButton';
+import ConfirmButton from '../../shared/ConfirmButton/ConfirmButton';
 import LangButton from '../../shared/LangButton';
 import UserTools from '../../auth/UserTools';
 
 import './Header.css';
 
-function Header({
-  className,
-  isLogged,
-  onLogout,
-  currentUser,
-  loadAdverts,
-  ...props
-}) {
+function Header({ className, isLogged, onLogout, currentUser }) {
   const [isMobile, setMobile] = useState(window.innerWidth < 768);
   const [isSmall, setSmall] = useState(window.innerWidth > 450);
 
@@ -151,7 +144,6 @@ Header.propTypes = {
   isLogged: PropTypes.bool,
   onLogout: PropTypes.func,
   currentUser: PropTypes.string,
-  loadAdverts: PropTypes.func.isRequired,
 };
 Header.defaultProps = {
   className: 'layout-header',
