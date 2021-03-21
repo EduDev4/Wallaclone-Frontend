@@ -85,7 +85,7 @@ function UserPage({
           <div className="userPage-content">
             {mode === 'userAdverts' || currentUsername === username ? (
               <>
-                <h2>{sectionTitle}</h2>
+                <h2>{t(sectionTitle)}</h2>
                 <div className="userPage-adswrapper flex-container">
                   {loading ? <Spinner /> : renderAdverts()}
                 </div>
