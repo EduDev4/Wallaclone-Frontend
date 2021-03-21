@@ -9,7 +9,7 @@ import {
   TwitterIcon,
   WhatsappIcon,
 } from 'react-share';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import { useSelector } from 'react-redux';
 import { Button } from 'antd';
@@ -71,7 +71,11 @@ function AdvertPage({
     return (
       <div className="advertpage-container">
         <div className="advertpage-advert-header">
-          <div className="advertpage-author">{advert.createdBy.username}</div>
+          <div className="advertpage-author">
+            <Link to={`/user/${advert.createdBy.username}`}>
+              {advert.createdBy.username}
+            </Link>
+          </div>
 
           <div className="advertpage-actions">
             <div className="advertpage-favorite">
