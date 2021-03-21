@@ -8,6 +8,7 @@ import {
   getIsLoggedUser,
   getAdverts,
   getIsFavAdvert,
+  getPages,
 } from '../../../store/selectors';
 
 import { loadAdverts } from '../../../store/actions/adverts-actions';
@@ -25,6 +26,7 @@ const mapStateToProps = state => ({
   favsAdverts: getIsFavAdvert(state),
   loading: getUi(state).loading,
   error: getUi(state).error,
+  pages: getPages(state),
 });
 
 const mapDispatchToProps = {

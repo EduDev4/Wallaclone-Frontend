@@ -15,12 +15,8 @@ const AdvertsPage = ({ adverts, pages, loading, loadAdverts, location }) => {
   const { t } = useTranslation(['advertspage']);
 
   const [querySearch, setQuerySearch] = useState('');
-  const scrollToTop = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
 
   const handlePageClick = e => {
-    scrollToTop();
     const selectedPage = e.selected;
     const start = selectedPage + 1;
     const searchParams = new URLSearchParams(querySearch);

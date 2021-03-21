@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import React, { useState, useEffect } from 'react';
-
+import ReactPaginate from 'react-paginate';
 import PropTypes from 'prop-types';
 import { Redirect, useLocation, useParams } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
@@ -23,11 +23,30 @@ function UserPage({
   onLoadReservedAdverts,
   onLoadSoldAdverts,
   loadAdverts,
+  pages,
 }) {
   const { username } = useParams();
   const { pathname } = useLocation();
   const { t } = useTranslation(['userpage']);
   const [sectionTitle, setSectionTitle] = useState('');
+
+  const [querySearch, setQuerySearch] = useState('');
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handlePageClick = e => {
+    scrollToTop();
+    const selectedPage = e.selected;
+    const start = selectedPage + 1;
+    const searchParams = new URLSearchParams(querySearch);
+    if (searchParams.has('start')) {
+      searchParams.set('start', start);
+    } else {
+      searchParams.append('start', start);
+    }
+    setQuerySearch(searchParams.toString());
+  };
 
   useEffect(() => {
     if (mode === 'userAdverts') {
@@ -74,6 +93,19 @@ function UserPage({
             ) : (
               <Redirect to={`/user/${username}`} />
             )}
+            <ReactPaginate
+              previousLabel="<<"
+              nextLabel=">>"
+              breakLabel="..."
+              breakClassName="break-me"
+              pageCount={pages}
+              marginPagesDisplayed={2}
+              pageRangeDisplayed={5}
+              onPageChange={handlePageClick}
+              containerClassName="pagination"
+              subContainerClassName="pages pagination"
+              activeClassName="active"
+            />
           </div>
         </div>
       </div>
@@ -91,6 +123,7 @@ UserPage.propTypes = {
   onLoadReservedAdverts: PropTypes.func.isRequired,
   onLoadSoldAdverts: PropTypes.func.isRequired,
   loadAdverts: PropTypes.func.isRequired,
+  pages: PropTypes.number.isRequired,
 };
 
 UserPage.defaultProps = {
