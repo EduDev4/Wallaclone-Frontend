@@ -45,7 +45,7 @@ const FiltersForm = ({ onSubmit, initialForm, advert }) => {
       </div>
       <div className="form-field">
         <span className="form-field--label">
-          {t('Precio')}: {form.price ? `hasta ${form.price} €` : null}
+          {t('Precio')}: {form.price ? `${t('hasta')} ${form.price} €` : null}
         </span>
         <Slider
           min={0}
