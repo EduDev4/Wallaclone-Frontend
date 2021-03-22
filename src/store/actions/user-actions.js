@@ -159,13 +159,21 @@ export const editUser = (currentUsername, dataForUpdate) =>
         dataForUpdate,
       );
 
-      dispatch(userEditSuccess(isLogged, username, userEmail));
+      dispatch(userEditSuccess(isLogged, username, _id, userEmail));
 
       const auth = { tokenJWT, username, userEmail, _id };
       storage.set('auth', auth);
 
+      dispatch(
+        showFlashAlert({
+          type: 'success',
+          message: 'Tus datos han sido actualizados',
+        }),
+      );
+
       history.push(`/user/${username}`);
     } catch (error) {
+      dispatch(showFlashAlert({ type: 'error', message: error.message }));
       dispatch(userEditFailure(error));
     }
   };

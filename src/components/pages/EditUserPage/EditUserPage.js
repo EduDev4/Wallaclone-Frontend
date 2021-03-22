@@ -27,6 +27,7 @@ function EditUserPage({
   const handleSubmit = event => {
     event.preventDefault();
     const dataForUpdate = form;
+    console.log('dataForUpdate:', dataForUpdate);
 
     onEditUser(currentUsername, dataForUpdate);
   };
