@@ -15,7 +15,7 @@ import {
   USER_DELETE_FAILURE,
 } from '../constants/action-types';
 
-import { getIsLoggedUser } from '../selectors';
+import { getIsLoggedUser, getUserId } from '../selectors';
 import storage from '../../utils/storage';
 import { logout } from './auth-actions';
 import { showFlashAlert } from './ui-actions';
@@ -149,8 +149,9 @@ export const editUser = (currentUsername, dataForUpdate) =>
   async function (dispatch, getstate, { history, api }) {
     const state = getstate();
     const isLogged = getIsLoggedUser(state);
+    const userId = getUserId(state);
     dispatch(userEditRequest());
-    const { tokenJWT, _id } = storage.get('auth');
+    const storageData = storage.get('auth');
 
     try {
       const { username, userEmail } = await api.users.updateUser(
@@ -158,10 +159,12 @@ export const editUser = (currentUsername, dataForUpdate) =>
         dataForUpdate,
       );
 
-      dispatch(userEditSuccess(isLogged, username, _id, userEmail));
-
-      const auth = { tokenJWT, username, userEmail, _id };
-      storage.set('auth', auth);
+      dispatch(userEditSuccess(isLogged, username, userId, userEmail));
+      if (storageData) {
+        const { tokenJWT } = storageData;
+        const auth = { tokenJWT, username, userEmail, userId };
+        storage.set('auth', auth);
+      }
 
       dispatch(
         showFlashAlert({
