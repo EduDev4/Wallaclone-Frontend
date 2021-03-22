@@ -35,7 +35,7 @@ function EditUserPage({
     !loading && (newUsername || newUserEmail || newPasswd);
 
   return (
-    <MainLayout title="My Profile">
+    <MainLayout title={t('Mi Perfil')}>
       <div className="userPage ">
         <div className="grid-container">
           <aside className="userPage-aside ">
