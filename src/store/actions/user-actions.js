@@ -80,7 +80,6 @@ export const signup = data =>
     dispatch(usersSignupRequest());
     try {
       const response = await api.users.signup(data);
-      console.log(response);
       const { user } = response;
       dispatch(usersSignupSuccess(user.username, user.email));
       // TODO generar página estática solicitando que revise correo para verificar email

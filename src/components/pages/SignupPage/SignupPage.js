@@ -34,7 +34,6 @@ const SignupPage = ({
     event.preventDefault();
     const formData = form;
     onSignup(formData);
-    console.log(formData);
   };
 
   const IsSubmitting = () => !loading && username && passwd && passwd2 && email;
