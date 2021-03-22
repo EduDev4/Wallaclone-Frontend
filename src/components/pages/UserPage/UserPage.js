@@ -50,22 +50,22 @@ function UserPage({
 
   useEffect(() => {
     if (mode === 'userAdverts') {
-      if (currentUsername === username) setSectionTitle(t('Mis Anuncios'));
+      if (currentUsername === username) setSectionTitle('Mis Anuncios');
       loadAdverts(`username=${username}`);
     }
     if (mode === 'reserved') {
-      setSectionTitle(t('Mis Anuncios Reservados'));
+      setSectionTitle('Mis Anuncios Reservados');
       onLoadReservedAdverts();
     }
     if (mode === 'sold') {
-      setSectionTitle(t('Mis Anuncios Vendidos'));
+      setSectionTitle('Mis Anuncios Vendidos');
       onLoadSoldAdverts();
     }
   }, [pathname, username]);
 
   useEffect(() => {
     if (mode === 'favs') {
-      setSectionTitle(t('Mis Anuncios Favoritos'));
+      setSectionTitle('Mis Anuncios Favoritos');
       onLoadFavAdverts();
     }
   }, [favsAdverts, pathname]);
