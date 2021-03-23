@@ -8,14 +8,13 @@ Wallaclone is the final project for the Keepcoding IX Fullstack Web Development 
 This project is based in the following architecture and features:
 
 - MERN Stack (Mongodb, Express, React and Node)
-- Frontend: Single Page Application (SPA) using React
-- REDUX
+- Frontend: Single Page Application (SPA) using React and Redux
 - Responsive design
 - Backend: API Rest using Node, Express and Mongodb
 - Push notifications using web-push/rabitmq and email using Sendgrid API. This system is used to notify users regarding changes in their favorites articles.
 - Real time chat integrated using Twilio Programable Chat API.
 - API secured with json web token authentication.
-- Microservices running in backend as thumbnail and email notifier.
+- Microservices running in backend as thumbnail and email notification.
 - Application deployed in AWS.
 
 ## CONTENTS
@@ -34,10 +33,9 @@ This project is based in the following architecture and features:
   - [EXAMPLES](#examples)
     - [Login screens/animations](#login-screensanimations)
     - [Advert lists](#advert-lists)
-    - [Adverts](#adverts)
-    - [Notifications](#notifications)
-    - [Emails](#emails)
-    - [Chat](#chat)
+    - [Advert Detail](#advert-detail)
+    - [Emails notifications](#emails-notifications)
+    - [User Panel and Chat](#user-panel-and-chat)
 
 ## DEPENDENCIES
 
@@ -203,30 +201,24 @@ Find below some screenshots/animations from wallaclone:
 
 ### Login screens/animations
 
-![alt text](http://wallapi.chitenavi-dev.com/img/screens/loginScreen.PNG)
+![alt text](https://github.com/chitenavi/public-assets/blob/main/screens/loginScreen.PNG)
 
-![alt text](http://wallapi.chitenavi-dev.com/img/gifs/Login.gif)
+![alt text](https://github.com/chitenavi/public-assets/blob/main/gifs/Login.gif)
 
 ### Advert lists
 
-![alt text]()
+![Advert list pagination and favs](https://github.com/chitenavi/public-assets/blob/main/gifs/advertDetail.gif)
 
-![alt text]()
+### Advert Detail
 
-### Adverts
+![Advert detail and actions](https://github.com/chitenavi/public-assets/blob/main/gifs/advertDetail.gif)
 
-![alt text]()
+### Emails notifications
 
-![alt text]()
+![Advert change state notification](https://github.com/chitenavi/public-assets/blob/main/screens/emailNotifScreen.PNG)
 
-### Notifications
+![Advert change price notification](https://github.com/chitenavi/public-assets/blob/main/screens/changePriceScreen.PNG)
 
-![alt text]()
+### User Panel and Chat
 
-![alt text]()
-
-### Emails
-
-### Chat
-
-![alt text]()
+![User Panel and chat](https://github.com/chitenavi/public-assets/blob/main/gifs/UserPanelChats.gif)
