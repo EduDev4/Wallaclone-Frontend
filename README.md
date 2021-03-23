@@ -2,15 +2,16 @@
 
 Wallaclone is the final project for the Keepcoding IX Fullstack Web Development Bootcamp. Wallaclone is a platform which allows you to buy and sell second hand articles, similar as the Wallapop one.
 
-- [Link to the web](http://wallaclone.chitenavi-dev.com)
+- [Link to the main web](http://wallaclone.chitenavi-dev.com)
 - [Link to the API documentation](http://wallapi.chitenavi-dev.com)
 
 This project is based in the following architecture and features:
 
 - MERN Stack (Mongodb, Express, React and Node)
 - Frontend: Single Page Application (SPA) using React and Redux
-- Responsive design
-- Backend: API Rest using Node, Express and Mongodb
+- Responsive design, layout from scratch using CSS3
+- Use components from [Ant library](https://ant.design/components/overview/), buttons, data entry and data display. With customize colors
+- Backend: API Rest using Node, Express and Mongodb. Documented with [APIDOC](https://apidocjs.com/)
 - Push notifications using web-push/rabitmq and email using Sendgrid API. This system is used to notify users regarding changes in their favorites articles.
 - Real time chat integrated using Twilio Programable Chat API.
 - API secured with json web token authentication.
@@ -32,7 +33,7 @@ This project is based in the following architecture and features:
     - [Start application](#start-application)
   - [EXAMPLES](#examples)
     - [Login screens/animations](#login-screensanimations)
-    - [Advert lists](#advert-lists)
+    - [Advert lists and pagination](#advert-lists-and-pagination)
     - [Advert Detail](#advert-detail)
     - [Emails notifications](#emails-notifications)
     - [User Panel and Chat](#user-panel-and-chat)
@@ -150,21 +151,20 @@ Before starting the app you need to create one .env file for each backend and fr
 
 **_BACKEND_**
 
-MONGODB_CONNECTION_STRING_LOCAL=mongodb://localhost/dbname
+MONGODB_CONNECTION_STRING_LOCAL=mongodb://localhost:27017/<dbname>
+MONGODB_CONNECTION_STRING_PRODUCTION=mongodb://<user>:<pass>@localhost:27017/<dbname>
 
 PORT=3003
 
 DOMAIN=http://localhost:3000
 
-DOMAIN_NODE=http://localhost:3003
-
 DOMAIN_PROD=http://<URL_PROD>
 
-JWT_SECRET=1234
+JWT_SECRET=<Your secret code>
 
 AMQP_CONNECTION_STRING=amqps://user:pass@host/instance
 
-SG_KEY=''
+SG_KEY=<Sengrid key>
 
 PUBLIC_VAPID_KEY=\*\*\*
 
@@ -172,11 +172,11 @@ PRIVATE_VAPID_KEY=\*\*\*\*
 
 **_FRONTEND_**
 
-REACT_APP_API_BASE_URL_PROD=<Api Url>
+REACT_APP_API_BASE_URL_PROD=<Api Url production>
 
-REACT_APP_CHAT_BASE_URL=http://chat.chitenavi-dev.com
+REACT_APP_CHAT_BASE_URL=<twilio-chat api url>
 
-REACT_APP_API_BASE_URL_DEV=http://localhost:3003
+REACT_APP_API_BASE_URL_DEV=<api url development> (http://localhost:3003)
 
 ### Start application
 
@@ -188,6 +188,8 @@ node ./services/thumbnailServ.js
 node ./services/notifyEmailserv.js
 
 ```
+
+For chat service, you need to run [Twilio SDK Starter Application](https://github.com/TwilioDevEd/sdk-starter-node) with your data and write the url in .env frontend file.
 
 Then we can start the frontend
 
@@ -201,13 +203,13 @@ Find below some screenshots/animations from wallaclone:
 
 ### Login screens/animations
 
-![alt text](https://github.com/chitenavi/public-assets/blob/main/screens/loginScreen.PNG)
+![Login Screen](https://github.com/chitenavi/public-assets/blob/main/screens/loginScreen.PNG)
 
-![alt text](https://github.com/chitenavi/public-assets/blob/main/gifs/Login.gif)
+![Login action animation](https://github.com/chitenavi/public-assets/blob/main/gifs/Login.gif)
 
-### Advert lists
+### Advert lists and pagination
 
-![Advert list pagination and favs](https://github.com/chitenavi/public-assets/blob/main/gifs/advertDetail.gif)
+![Advert list pagination and favs](https://github.com/chitenavi/public-assets/blob/main/gifs/advertsList.gif)
 
 ### Advert Detail
 
